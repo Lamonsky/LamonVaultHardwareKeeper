@@ -1,4 +1,5 @@
-﻿using Data.Computers.CreateEditVMs;
+﻿using Data;
+using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using DatabaseRestApi.Models;
 using DatabaseRestApi.Models.Contexts;
@@ -12,7 +13,7 @@ namespace DatabaseRestApi.Controllers
 {
     public class ComputerController : Controller
     {
-        [Route("/computers")]
+        [Route(URLs.COMPUTERS)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -40,7 +41,7 @@ namespace DatabaseRestApi.Controllers
             return Json(computerVMs);
         }
 
-        [Route("/computers")]
+        [Route(URLs.COMPUTERS)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ComputersCreateEditVM computersCreateEditVM)
         {
@@ -68,7 +69,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/computers/{id}")]
+        [Route(URLs.COMPUTERS_ID)]
         [HttpPut]
         public async Task<IActionResult> Edit(int id, [FromBody] ComputersCreateEditVM computersCreateEditVM)
         {
@@ -98,7 +99,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/computers/{id}")]
+        [Route(URLs.COMPUTERS_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] ComputersCreateEditVM computersCreateEditVM)
         {

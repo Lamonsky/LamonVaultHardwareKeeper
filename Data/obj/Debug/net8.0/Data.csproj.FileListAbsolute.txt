@@ -9,3 +9,4 @@ C:\Users\damia\Documents\Studia\LamonVaultHardwareKeeper\Data\obj\Debug\net8.0\D
 C:\Users\damia\Documents\Studia\LamonVaultHardwareKeeper\Data\obj\Debug\net8.0\refint\Data.dll
 C:\Users\damia\Documents\Studia\LamonVaultHardwareKeeper\Data\obj\Debug\net8.0\Data.pdb
 C:\Users\damia\Documents\Studia\LamonVaultHardwareKeeper\Data\obj\Debug\net8.0\ref\Data.dll
+C:\Users\damia\Documents\Studia\LamonVaultHardwareKeeper\Data\obj\Debug\net8.0\Data.sourcelink.json

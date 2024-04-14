@@ -1,0 +1,71 @@
+﻿<Window x:Class="AdministrationApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdministrationApp"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        Height="900" Width="1600">
+
+    <Window.Resources>
+        <ResourceDictionary Source="Resources/ViewResources.xaml"/>
+    </Window.Resources>
+
+
+    <Border CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Lamon - Vault Hardware Keeper" Grid.Column="0"/>
+                <Menu Grid.Column="1">
+                    <MenuItem Header="_System"/>
+                </Menu>
+            </Grid>
+            
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TreeView Style="{StaticResource MaterialDesignTreeView}">
+                        <TreeViewItem Header="Zasoby">
+                            <Button Content="Komputery" Command="{Binding ShowComputersCommand}"/>
+                        </TreeViewItem>
+                    </TreeView>
+                    
+                </StackPanel>
+                
+                <HeaderedContentControl
+                    Grid.Column="1"
+                    Header="Przestrzeń robocza"
+                    Background="Aqua"
+                    Content="{Binding Workspaces}"
+                    ContentTemplate="{StaticResource WorkspacesTemplate}"
+                    Style="{StaticResource MainHCCStyle}"/>
+                
+            </Grid>
+            <StatusBar Grid.Row="2">
+                <StatusBarItem>
+                    <TextBlock>WSB-NLU Damian Lamonski</TextBlock>
+                </StatusBarItem>
+                <StatusBarItem  HorizontalAlignment="Right">
+                    <TextBlock x:FieldModifier="private" x:Name="myDateTime"/>
+                </StatusBarItem>
+            </StatusBar>
+        </Grid>
+    </Border>
+    
+    
+</Window>

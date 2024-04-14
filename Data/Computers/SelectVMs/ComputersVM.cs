@@ -13,15 +13,15 @@ namespace Data.Computers.SelectVMs
         public int Id { get; set; }
         [JsonPropertyName("name")]
         public string? Name { get; set; }
-        [JsonPropertyName("manufacturername")]
+        [JsonPropertyName("manufacturerName")]
         public string? ManufacturerName { get; set; }
         [JsonPropertyName("location")]
         public string? Location { get; set; }
         [JsonPropertyName("status")]
         public string? Status { get; set; }
-        [JsonPropertyName("computertype")]
+        [JsonPropertyName("computerType")]
         public string? ComputerType { get; set; }
-        [JsonPropertyName("computermodel")]
+        [JsonPropertyName("computerModel")]
         public string? ComputerModel { get; set; }
         [JsonPropertyName("processor")]
         public string? Processor { get; set; }
@@ -29,13 +29,13 @@ namespace Data.Computers.SelectVMs
         public string? Ram { get; set; }
         [JsonPropertyName("disk")]
         public string? Disk { get; set; }
-        [JsonPropertyName("graphicscard")]
+        [JsonPropertyName("graphicsCard")]
         public string? GraphicsCard { get; set; }
-        [JsonPropertyName("operatingsystem")]
+        [JsonPropertyName("operatingSystem")]
         public string? OperatingSystem { get; set; }
-        [JsonPropertyName("serialnumber")]
+        [JsonPropertyName("serialNumber")]
         public string? SerialNumber { get; set; }
-        [JsonPropertyName("inventorynumber")]
+        [JsonPropertyName("inventoryNumber")]
         public string? InventoryNumber { get; set; }
         [JsonPropertyName("user")]
         public string? User { get; set; }
