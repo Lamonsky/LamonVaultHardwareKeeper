@@ -20,7 +20,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Background="LightBlue">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
@@ -28,6 +28,7 @@
                 <TextBlock Text="Lamon - Vault Hardware Keeper" Grid.Column="0"/>
                 <Menu Grid.Column="1">
                     <MenuItem Header="_System"/>
+                    <MenuItem Header="Podsumowanie" Command="{Binding ShowSummaryCommand}"/>
                 </Menu>
             </Grid>
             
@@ -38,10 +39,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0">
+                <StackPanel Grid.Column="0" Background="LightBlue">
                     <TreeView Style="{StaticResource MaterialDesignTreeView}">
-                        <TreeViewItem Header="Zasoby">
+                        <TreeViewItem Header="Zasoby" IsExpanded="True">
                             <Button Content="Komputery" Command="{Binding ShowComputersCommand}"/>
+                            <Button Content="Monitory" Command="{Binding ShowMonitorsCommand}"/>
+                            <Button Content="Użytkownicy" Command="{Binding ShowUserCommand}"/>
                         </TreeViewItem>
                     </TreeView>
                     
@@ -50,13 +53,13 @@
                 <HeaderedContentControl
                     Grid.Column="1"
                     Header="Przestrzeń robocza"
-                    Background="Aqua"
+                    Background="LightCoral" 
                     Content="{Binding Workspaces}"
                     ContentTemplate="{StaticResource WorkspacesTemplate}"
                     Style="{StaticResource MainHCCStyle}"/>
                 
             </Grid>
-            <StatusBar Grid.Row="2">
+            <StatusBar Grid.Row="2" Background="LightBlue">
                 <StatusBarItem>
                     <TextBlock>WSB-NLU Damian Lamonski</TextBlock>
                 </StatusBarItem>

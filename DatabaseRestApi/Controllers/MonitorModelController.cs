@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class MonitorModelController : Controller
     {
-        [Route("/monitormodel")]
+        [Route(URLs.MONITORMODEL)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(monitorModelVM);
         }
-        [Route("/monitormodel")]
+        [Route(URLs.MONITORMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] MonitorModelCreateEditVM monitorModelCreateEditVM)
         {
@@ -42,7 +43,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/monitormodel/{id}")]
+        [Route(URLs.MONITORMODEL_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] MonitorModelCreateEditVM monitorModelCreateEditVM)
         {
@@ -60,7 +61,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/monitormodel/{id}")]
+        [Route(URLs.MONITORMODEL_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] MonitorModelCreateEditVM monitorModelCreateEditVM)
         {

@@ -5,12 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class UserController : Controller
     {
-        [Route("/user")]
+        [Route(URLs.USER)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -33,7 +34,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(userVM);
         }
-        [Route("/user")]
+        [Route(URLs.USER)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserCreateEditVM userCreateEditVM)
         {
@@ -58,7 +59,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/user/{id}")]
+        [Route(URLs.USER_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] UserCreateEditVM userCreateEditVM)
         {
@@ -84,7 +85,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/user/{id}")]
+        [Route(URLs.USER_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] UserCreateEditVM userCreateEditVM)
         {

@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class StatusController : Controller
     {
-        [Route("/status")]
+        [Route(URLs.STATUS)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -24,7 +25,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(statusVM);
         }
-        [Route("/status")]
+        [Route(URLs.STATUS)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] StatusCreateEditVM statusCreateEditVM)
         {
@@ -40,7 +41,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/status/{id}")]
+        [Route(URLs.STATUS_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] StatusCreateEditVM statusCreateEditVM)
         {
@@ -57,7 +58,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/status/{id}")]
+        [Route(URLs.STATUS_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] StatusCreateEditVM statusCreateEditVM)
         {

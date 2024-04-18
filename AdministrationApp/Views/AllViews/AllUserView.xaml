@@ -1,0 +1,23 @@
+﻿<local:WszystkieViewBase x:Class="AdministrationApp.Views.AllViews.AllUserView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdministrationApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+    <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding Path=ChosenUser}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+            <DataGridTextColumn Header="Nazwa użytkownika" Binding="{Binding Usersname}"/>
+            <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}"/>
+            <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}"/>
+            <DataGridTextColumn Header="Lokalizacja użytkownika" Binding="{Binding Location}"/>
+            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+            <DataGridTextColumn Header="Nr telefonu" Binding="{Binding Phone1}"/>
+            <DataGridTextColumn Header="Nr telefonu 2" Binding="{Binding Phone2}"/>
+            <DataGridTextColumn Header="Numer wewnętrzny" Binding="{Binding InternalNumber}"/>
+            <DataGridTextColumn Header="Stanowisko" Binding="{Binding Position}"/>
+        </DataGrid.Columns>
+    </DataGrid>
+</local:WszystkieViewBase>

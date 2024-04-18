@@ -73,7 +73,7 @@ namespace AdministrationApp.Helpers
         }
 
         public static async Task SendRequestAsync(string url, HttpMethod method, string? token)
-        {
+        {   
             HttpClient client = new()
             {
                 BaseAddress = new(API_URL)

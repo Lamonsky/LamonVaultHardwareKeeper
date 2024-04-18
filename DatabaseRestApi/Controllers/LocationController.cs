@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
 using System.Net;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class LocationController : Controller
     {
-        [Route("/location")]
+        [Route(URLs.LOCATION)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -32,7 +33,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(locationVM);
         }
-        [Route("/location")]
+        [Route(URLs.LOCATION)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] LocationCreateEditVM locationCreateEditVM)
         {
@@ -54,7 +55,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/location/{id}")]
+        [Route(URLs.LOCATION_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] LocationCreateEditVM locationCreateEditVM)
         {
@@ -77,7 +78,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/location/{id}")]
+        [Route(URLs.LOCATION_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] LocationCreateEditVM locationCreateEditVM)
         {

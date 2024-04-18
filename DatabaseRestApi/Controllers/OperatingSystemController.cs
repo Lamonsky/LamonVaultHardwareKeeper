@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class OperatingSystemController : Controller
     {
-        [Route("/operaingsystem")]
+        [Route(URLs.OS)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(operaingSystemVM);
         }
-        [Route("/operaingsystem")]
+        [Route(URLs.OS)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] OperatingSystemCreateEditVM operaingSystemCreateEditVM)
         {
@@ -42,7 +43,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/operaingsystem/{id}")]
+        [Route(URLs.OS_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] OperatingSystemCreateEditVM operaingSystemCreateEditVM)
         {
@@ -60,7 +61,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/operaingsystem/{id}")]
+        [Route(URLs.OS_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] OperatingSystemCreateEditVM operaingSystemCreateEditVM)
         {

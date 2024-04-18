@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class ComputerModelController : Controller
     {
-        [Route("/computermodel")]
+        [Route(URLs.COMPUTERMODEL)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -24,7 +25,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(computerModelVM);
         }
-        [Route("/computermodel")]
+        [Route(URLs.COMPUTERMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ComputerModelCreateEditVM computerModelCreateEditVM)
         {
@@ -41,7 +42,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/computermodel/{id}")]
+        [Route(URLs.COMPUTERMODEL_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] ComputerModelCreateEditVM computerModelCreateEditVM)
         {
@@ -59,7 +60,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/computermodel/{id}")]
+        [Route(URLs.COMPUTERMODEL_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] ComputerModelCreateEditVM computerModelCreateEditVM)
         {

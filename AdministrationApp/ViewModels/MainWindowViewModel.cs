@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using AdministrationApp.Helpers;
+using AdministrationApp.ViewModels.AllViewModel;
+using AdministrationApp.ViewModels.NewViewModel;
 using AdministrationApp.Views;
+using AdministrationApp.Views.AllWindows;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace AdministrationApp.ViewModels
@@ -77,25 +80,62 @@ namespace AdministrationApp.ViewModels
         }
         #endregion
         #region Commands
-        private List<CommandViewModel> CreateCommand()
+        public MainWindowViewModel()
         {
             Messenger.Default.Register<string>(this, open);
-            return new List<CommandViewModel>();
         }
         private void open(string name)
         {
             switch (name)
             {
+                case "KomputeryAdd":
+                    CreateComputer(); 
+                    break;
+                case "MonitoryAdd":
+                    CreateMonitor();
+                    break;
+                case "UżytkownicyAdd":
+                    CreateUser();
+                    break;
                 case "ShowComputers":
                     ShowComputers();
                     break;
-                
+                case "ShowMonitors":
+                    ShowMonitors();
+                    break;
+                case "ShowLocations":
+                    ShowLocationWindow();
+                    break;
+                case "ShowUsers":
+                    ShowUsers();
+                    break;
+                case "ChooseStatus":
+                    ShowStatusWindow();
+                    break;
+                case "ChooseUser":
+                    ShowUsersWindow();
+                    break;
+                case "ChooseLocation":
+                    ShowLocationWindow();
+                    break;
+
             }
         }
         #endregion
 
         #region Komendy do Buttonow
-        private BaseCommand _ShowComputersCommand;
+        private BaseCommand _ShowSummaryCommand;
+        public ICommand ShowSummaryCommand
+        {
+            get
+            {
+                if(_ShowSummaryCommand == null)
+                {
+                    _ShowSummaryCommand = new BaseCommand(() => ShowSummary());
+                }
+                return _ShowSummaryCommand;
+            }
+        }private BaseCommand _ShowComputersCommand;
         public ICommand ShowComputersCommand
         {
             get
@@ -107,30 +147,92 @@ namespace AdministrationApp.ViewModels
                 return _ShowComputersCommand;
             }
         }
-        private BaseCommand _DodajKategorieCommand;
-        public ICommand DodajKategorieCommand
+        private BaseCommand _ShowMonitorsCommand;
+        public ICommand ShowMonitorsCommand
         {
             get
             {
-                if (_DodajKategorieCommand == null)
+                if (_ShowMonitorsCommand == null)
                 {
-                    //_DodajKategorieCommand = new BaseCommand(() => Messenger.Default.Send("KategorieAdd"));
+                    _ShowMonitorsCommand = new BaseCommand(() => ShowMonitors());
                 }
-                return _DodajKategorieCommand;
+                return _ShowMonitorsCommand;
             }
         }
+        private BaseCommand _ShowUserCommand;
+        public ICommand ShowUserCommand
+        {
+            get
+            {
+                if (_ShowUserCommand == null)
+                {
+                    _ShowUserCommand = new BaseCommand(() => ShowUsers());
+                }
+                return _ShowUserCommand;
+            }
+        }
+        private BaseCommand _CreateComputersCommand;
+        public ICommand CreateComputersCommand
+        {
+            get
+            {
+                if (_CreateComputersCommand == null)
+                {
+                    _CreateComputersCommand = new BaseCommand(() => CreateComputer());
+                }
+                return _CreateComputersCommand;
+            }
+        }
+
         
         #endregion
         #region Funkcje wywolujace okna
-        private void CreateDostawca()
+        private void CreateComputer()
         {
-            //CreateWorkspace<NowyDostawcaViewModel>();
+            CreateWorkspace<NewComputerViewModel>();
+        }
+        private void CreateMonitor()
+        {
+            CreateWorkspace<NewMonitorViewModel>();
+        }
+        private void CreateUser()
+        {
+            CreateWorkspace<NewUserViewModel>();
         }
         private void ShowComputers()
         {
             ShowAllWorkspace<AllComputerViewModel>();
         }
+        private void ShowSummary()
+        {
+            ShowAllWorkspace<SummaryViewModel>();
+        }
+        private void ShowMonitors()
+        {
+            ShowAllWorkspace<AllMonitorViewModel>();
+        }
+        private void ShowUsers()
+        {
+            ShowAllWorkspace<AllUserViewModel>();
+        }
+        private void ShowStatusWindow()
+        {
+            AllStatusWindow allStatusWindow = new AllStatusWindow();
+            allStatusWindow.Show();
 
+        }
+        private void ShowUsersWindow()
+        {
+            AllUsersWindow allUsersWindow = new AllUsersWindow();
+            allUsersWindow.Show();
+
+        }
+        private void ShowLocationWindow()
+        {
+            AllLocationsWindow allLocationsWindow = new AllLocationsWindow();
+            allLocationsWindow.Show();
+
+        }
         #endregion
     }
 }

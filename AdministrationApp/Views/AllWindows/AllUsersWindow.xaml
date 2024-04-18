@@ -1,0 +1,26 @@
+﻿<Window
+        xmlns:vma="clr-namespace:AdministrationApp.ViewModels.AllViewModel"
+        x:Class="AdministrationApp.Views.AllWindows.AllUsersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdministrationApp.Views.AllWindows"
+        mc:Ignorable="d"
+        Height="450" Width="800">
+
+        <DataGrid ItemsSource="{Binding List}" AutoGenerateColumns="False" SelectedItem="{Binding Path=ChosenUser, Mode=TwoWay}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+                <DataGridTextColumn Header="Nazwa Użytkownika" Binding="{Binding Path=Usersname}"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Path=FirstName}"/>
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Path=LastName}"/>
+                <DataGridTextColumn Header="Lokalizacja" Binding="{Binding Path=Location}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"/>
+                <DataGridTextColumn Header="Numer telefonu" Binding="{Binding Path=Phone1}"/>
+                <DataGridTextColumn Header="Numer telefonu 2" Binding="{Binding Path=Phone2}"/>
+                <DataGridTextColumn Header="Numer wewnętrzny" Binding="{Binding Path=InternalNumber}"/>
+                <DataGridTextColumn Header="Stanowisko" Binding="{Binding Path=Position}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+</Window>

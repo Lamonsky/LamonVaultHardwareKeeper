@@ -1,4 +1,5 @@
-﻿using Data.Computers.CreateEditVMs;
+﻿using Data;
+using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using DatabaseRestApi.Models;
 using DatabaseRestApi.Models.Contexts;
@@ -12,7 +13,7 @@ namespace DatabaseRestApi.Controllers
 {
     public class MonitorController : Controller
     {
-        [Route("/monitors")]
+        [Route(URLs.MONITORS)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -35,7 +36,7 @@ namespace DatabaseRestApi.Controllers
             return Json(monitorsVMs);
         }
 
-        [Route("/monitors")]
+        [Route(URLs.MONITORS)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] MonitorsCreateEditVM monitorsCreateEditVM)
         {
@@ -58,7 +59,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/monitors/{id}")]
+        [Route(URLs.MONITORS_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] MonitorsCreateEditVM monitorsCreateEditVM)
         {
@@ -82,7 +83,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/monitors/{id}")]
+        [Route(URLs.MONITORS_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] MonitorsCreateEditVM monitorsCreateEditVM)
         {

@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class ComputerTypeController : Controller
     {
-        [Route("/computertype")]
+        [Route(URLs.COMPUTERTYPE)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(computerTypeVM);
         }
-        [Route("/computertype")]
+        [Route(URLs.COMPUTERTYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ComputerTypeCreateEditVM computerTypeCreateEditVM)
         {
@@ -42,7 +43,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/computertype/{id}")]
+        [Route(URLs.COMPUTERTYPE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] ComputerTypeCreateEditVM computerTypeCreateEditVM)
         {
@@ -60,7 +61,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/computertype/{id}")]
+        [Route(URLs.COMPUTERTYPE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] ComputerTypeCreateEditVM computerTypeCreateEditVM)
         {

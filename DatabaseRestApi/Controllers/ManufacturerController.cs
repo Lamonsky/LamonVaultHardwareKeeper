@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class ManufacturerController : Controller
     {
-        [Route("/manufacturer")]
+        [Route(URLs.MANUFACTURER)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(manufacturerVM);
         }
-        [Route("/manufacturer")]
+        [Route(URLs.MANUFACTURER)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ManufacturerCreateEditVM manufacturerCreateEditVM)
         {
@@ -42,7 +43,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/manufacturer/{id}")]
+        [Route(URLs.MANUFACTURER_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] ManufacturerCreateEditVM manufacturerCreateEditVM)
         {
@@ -60,7 +61,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/manufacturer/{id}")]
+        [Route(URLs.MANUFACTURER_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] ManufacturerCreateEditVM manufacturerCreateEditVM)
         {
