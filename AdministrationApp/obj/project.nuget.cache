@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "M0x1ez0pD/9lZs4Owz4aF29wn/ak6heevo/2f3fdNXDqmOYDelQWOkbBUXJziJRXAZ1RKf4VEjjUE8fuFtB4nQ==",
+  "dgSpecHash": "hcVRirt5WzQzKUgbjX7/Q+C9zFt//1YisabAm538CXjhy1wAkD7fukRKqZzr9PcEyCVsI0VQqrUpo2ga+PFp/g==",
   "success": true,
   "projectFilePath": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\AdministrationApp\\AdministrationApp.csproj",
   "expectedPackageFiles": [
@@ -127,7 +127,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Pakiet „MvvmLightLibs 5.4.1.1” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net8.0-windows7.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
+      "message": "Package 'MvvmLightLibs 5.4.1.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "MvvmLightLibs",
       "targetGraphs": [
         "net8.0-windows7.0"

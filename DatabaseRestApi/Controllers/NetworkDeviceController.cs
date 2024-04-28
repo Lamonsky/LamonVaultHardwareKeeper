@@ -10,7 +10,7 @@ using System.Runtime.Intrinsics.Arm;
 using System.Security.Policy;
 
 namespace DatabaseRestApi.Controllers
-{
+{   
     public class NetworkDeviceController : Controller
     {
         [Route("/networkdevice")]

@@ -3,6 +3,7 @@ using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using DatabaseRestApi.Models;
 using DatabaseRestApi.Models.Contexts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,7 @@ namespace DatabaseRestApi.Controllers
             return Json(computerVMs);
         }
 
+        [Authorize]
         [Route(URLs.COMPUTERS)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ComputersCreateEditVM computersCreateEditVM)

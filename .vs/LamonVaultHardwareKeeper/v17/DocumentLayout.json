@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9EA29042-201D-4A5F-B7F1-5F026F41F87D}|AdministrationApp\\AdministrationApp.csproj|c:\\users\\damia\\documents\\studia\\lamonvaulthardwarekeeper\\administrationapp\\views\\newviews\\newuserview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{9EA29042-201D-4A5F-B7F1-5F026F41F87D}|AdministrationApp\\AdministrationApp.csproj|solutionrelative:administrationapp\\views\\newviews\\newuserview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Migrations\\20240428175722_InitIdentityContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DatabaseRestApi\\Migrations\\20240428175722_InitIdentityContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9EA29042-201D-4A5F-B7F1-5F026F41F87D}|AdministrationApp\\AdministrationApp.csproj|c:\\users\\damia\\documents\\studia\\lamonvaulthardwarekeeper\\administrationapp\\viewmodels\\newviewmodel\\newuserviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9EA29042-201D-4A5F-B7F1-5F026F41F87D}|AdministrationApp\\AdministrationApp.csproj|solutionrelative:administrationapp\\viewmodels\\newviewmodel\\newuserviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DA53B4C3-0B76-4349-A0F0-95B25A7F28DC}|DatabaseRestApi\\DatabaseRestApi.csproj|c:\\users\\damia\\documents\\studia\\lamonvaulthardwarekeeper\\databaserestapi\\models\\contexts\\identitycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA53B4C3-0B76-4349-A0F0-95B25A7F28DC}|DatabaseRestApi\\DatabaseRestApi.csproj|solutionrelative:databaserestapi\\models\\contexts\\identitycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9EA29042-201D-4A5F-B7F1-5F026F41F87D}|AdministrationApp\\AdministrationApp.csproj|c:\\users\\damia\\documents\\studia\\lamonvaulthardwarekeeper\\administrationapp\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9EA29042-201D-4A5F-B7F1-5F026F41F87D}|AdministrationApp\\AdministrationApp.csproj|solutionrelative:administrationapp\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DA53B4C3-0B76-4349-A0F0-95B25A7F28DC}|DatabaseRestApi\\DatabaseRestApi.csproj|c:\\users\\damia\\documents\\studia\\lamonvaulthardwarekeeper\\databaserestapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA53B4C3-0B76-4349-A0F0-95B25A7F28DC}|DatabaseRestApi\\DatabaseRestApi.csproj|solutionrelative:databaserestapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA53B4C3-0B76-4349-A0F0-95B25A7F28DC}|DatabaseRestApi\\DatabaseRestApi.csproj|c:\\users\\damia\\documents\\studia\\lamonvaulthardwarekeeper\\databaserestapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DA53B4C3-0B76-4349-A0F0-95B25A7F28DC}|DatabaseRestApi\\DatabaseRestApi.csproj|solutionrelative:databaserestapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,50 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindowViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\AdministrationApp\\ViewModels\\MainWindowViewModel.cs",
-              "RelativeDocumentMoniker": "AdministrationApp\\ViewModels\\MainWindowViewModel.cs",
-              "ToolTip": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\AdministrationApp\\ViewModels\\MainWindowViewModel.cs",
-              "RelativeToolTip": "AdministrationApp\\ViewModels\\MainWindowViewModel.cs",
-              "ViewState": "AQIAALAAAAAAAAAAAAAcwMcAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T17:45:53.999Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NewUserView.xaml",
-              "DocumentMoniker": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\AdministrationApp\\Views\\NewViews\\NewUserView.xaml",
-              "RelativeDocumentMoniker": "AdministrationApp\\Views\\NewViews\\NewUserView.xaml",
-              "ToolTip": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\AdministrationApp\\Views\\NewViews\\NewUserView.xaml",
-              "RelativeToolTip": "AdministrationApp\\Views\\NewViews\\NewUserView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-18T17:12:47.082Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "NewUserViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\AdministrationApp\\ViewModels\\NewViewModel\\NewUserViewModel.cs",
-              "RelativeDocumentMoniker": "AdministrationApp\\ViewModels\\NewViewModel\\NewUserViewModel.cs",
-              "ToolTip": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\AdministrationApp\\ViewModels\\NewViewModel\\NewUserViewModel.cs",
-              "RelativeToolTip": "AdministrationApp\\ViewModels\\NewViewModel\\NewUserViewModel.cs",
-              "ViewState": "AQIAAD0AAAAAAAAAAAAcwDwAAAAhAAAA",
+              "DocumentIndex": 0,
+              "Title": "20240428175722_InitIdentityContext.cs",
+              "DocumentMoniker": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Migrations\\20240428175722_InitIdentityContext.cs",
+              "RelativeDocumentMoniker": "DatabaseRestApi\\Migrations\\20240428175722_InitIdentityContext.cs",
+              "ToolTip": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Migrations\\20240428175722_InitIdentityContext.cs",
+              "RelativeToolTip": "DatabaseRestApi\\Migrations\\20240428175722_InitIdentityContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T17:25:40.182Z",
+              "WhenOpened": "2024-04-28T17:57:22.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\appsettings.json",
+              "RelativeDocumentMoniker": "DatabaseRestApi\\appsettings.json",
+              "ToolTip": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\appsettings.json",
+              "RelativeToolTip": "DatabaseRestApi\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-28T17:27:38.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Program.cs",
+              "RelativeDocumentMoniker": "DatabaseRestApi\\Program.cs",
+              "ToolTip": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Program.cs",
+              "RelativeToolTip": "DatabaseRestApi\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-28T17:15:06.003Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IdentityContext.cs",
+              "DocumentMoniker": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Models\\Contexts\\IdentityContext.cs",
+              "RelativeDocumentMoniker": "DatabaseRestApi\\Models\\Contexts\\IdentityContext.cs",
+              "ToolTip": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Models\\Contexts\\IdentityContext.cs",
+              "RelativeToolTip": "DatabaseRestApi\\Models\\Contexts\\IdentityContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-28T17:13:03.485Z",
               "EditorCaption": ""
             }
           ]

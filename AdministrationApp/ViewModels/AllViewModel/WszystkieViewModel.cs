@@ -101,18 +101,26 @@ namespace AdministrationApp.ViewModels.AllViewModel
             }
         }
         #endregion
-        #region Kolekcja
+        #region Kolekcja 
+        private bool _IsLoading;
+        public bool IsLoading
+        {
+            get
+            {
+                return _IsLoading;
+            }
+            set
+            {
+                _IsLoading = value;
+                OnPropertyChanged(() => IsLoading);
+            }
+        }
         //tu ....
         private List<T> _List;
         public List<T> List
         {
             get
             {
-                //jak lista....
-                if (_List == null)
-                {
-                    load();
-                }
                 return _List;
             }
             set
@@ -125,8 +133,10 @@ namespace AdministrationApp.ViewModels.AllViewModel
         #region Konstruktor
         public WszystkieViewModel(string displayName)
         {
-            DisplayName = displayName;//to jest ustawienie nazwy zkładki
-            //tworze obiekt dostepowy do BD
+            IsLoading = false;
+            DisplayName = displayName;
+            load();
+            IsLoading = true;
         }
         #endregion
         #region Pomocniczy

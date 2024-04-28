@@ -50,6 +50,5 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
         #endregion
 
-
     }
 }

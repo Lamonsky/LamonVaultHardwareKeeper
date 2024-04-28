@@ -14,7 +14,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Margin="0,2,0,2" Background="Transparent">
-                            <Grid>
+                            <Grid IsEnabled="{Binding IsLoading}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
