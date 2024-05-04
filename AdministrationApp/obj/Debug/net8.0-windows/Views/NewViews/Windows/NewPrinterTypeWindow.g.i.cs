@@ -65,7 +65,8 @@ namespace AdministrationApp.Views.NewViews.Windows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AdministrationApp;component/views/newviews/windows/newprintertypewindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AdministrationApp;V1.0.0.0;component/views/newviews/windows/newprintertypewindow" +
+                    ".xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Views\NewViews\Windows\NewPrinterTypeWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

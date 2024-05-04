@@ -57,7 +57,7 @@ namespace AdministrationApp.Views.AllWindows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AdministrationApp;component/views/allwindows/allprintertypewindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AdministrationApp;V1.0.0.0;component/views/allwindows/allprintertypewindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\AllWindows\AllPrinterTypeWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
