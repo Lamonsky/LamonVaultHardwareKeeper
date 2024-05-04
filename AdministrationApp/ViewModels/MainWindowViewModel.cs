@@ -14,12 +14,16 @@ using AdministrationApp.ViewModels.AllViewModel;
 using AdministrationApp.ViewModels.NewViewModel;
 using AdministrationApp.Views;
 using AdministrationApp.Views.AllWindows;
+using AdministrationApp.Views.NewViews.Windows;
+using Data.Helpers;
 using GalaSoft.MvvmLight.Messaging;
+using MaterialDesignThemes.Wpf;
 
 namespace AdministrationApp.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
+
         #region Workspaces
         //
         private ObservableCollection<WorkspaceViewModel> _Workspaces;
@@ -97,26 +101,41 @@ namespace AdministrationApp.ViewModels
                 case "UżytkownicyAdd":
                     CreateUser();
                     break;
-                case "ShowComputers":
-                    ShowComputers();
+                case "OprogramowanieAdd":
+                    CreateSoftware();
                     break;
-                case "ShowMonitors":
-                    ShowMonitors();
+                case "Urządzenia siecioweAdd":
+                    CreateNetworkDevice();
                     break;
-                case "ShowLocations":
-                    ShowLocationWindow();
+                case "UrządzeniaAdd":
+                    CreateDevice();
                     break;
-                case "ShowUsers":
-                    ShowUsers();
+                case "DrukarkiAdd":
+                    CreatePrinter();
                     break;
-                case "ChooseStatus":
-                    ShowStatusWindow();
+                case "TelefonyAdd":
+                    CreatePhone();
+                    break;
+                case "Szafy RackAdd":
+                    CreateRackCabinet();
+                    break;
+                case "Karty SimAdd":
+                    CreateSimCard();
+                    break;
+                case "Rodzaje drukarekAdd":
+                    CreatePrinterTypeWindow();
                     break;
                 case "ChooseUser":
                     ShowUsersWindow();
                     break;
                 case "ChooseLocation":
                     ShowLocationWindow();
+                    break;
+                case "ChooseSimCard":
+                    ShowSimCardWindow();
+                    break;
+                case "ChoosePrinterType":
+                    ShowPrinterTypeWindow();
                     break;
 
             }
@@ -135,7 +154,8 @@ namespace AdministrationApp.ViewModels
                 }
                 return _ShowSummaryCommand;
             }
-        }private BaseCommand _ShowComputersCommand;
+        }
+        private BaseCommand _ShowComputersCommand;
         public ICommand ShowComputersCommand
         {
             get
@@ -171,20 +191,106 @@ namespace AdministrationApp.ViewModels
                 return _ShowUserCommand;
             }
         }
-        private BaseCommand _CreateComputersCommand;
-        public ICommand CreateComputersCommand
+        private BaseCommand _ShowSoftwareCommand;
+        public ICommand ShowSoftwareCommand
         {
             get
             {
-                if (_CreateComputersCommand == null)
+                if (_ShowSoftwareCommand == null)
                 {
-                    _CreateComputersCommand = new BaseCommand(() => CreateComputer());
+                    _ShowSoftwareCommand = new BaseCommand(() => ShowSoftware());
                 }
-                return _CreateComputersCommand;
+                return _ShowSoftwareCommand;
+            }
+        }
+        private BaseCommand _ShowNetworkDeviceCommand;
+        public ICommand ShowNetworkDeviceCommand
+        {
+            get
+            {
+                if (_ShowNetworkDeviceCommand == null)
+                {
+                    _ShowNetworkDeviceCommand = new BaseCommand(() => ShowNetworkDevice());
+                }
+                return _ShowNetworkDeviceCommand;
+            }
+        }
+        private BaseCommand _ShowDeviceCommand;
+        public ICommand ShowDeviceCommand
+        {
+            get
+            {
+                if (_ShowDeviceCommand == null)
+                {
+                    _ShowDeviceCommand = new BaseCommand(() => ShowDevice());
+                }
+                return _ShowDeviceCommand;
+            }
+        }
+        private BaseCommand _ShowPrinterCommand;
+        public ICommand ShowPrinterCommand
+        {
+            get
+            {
+                if (_ShowPrinterCommand == null)
+                {
+                    _ShowPrinterCommand = new BaseCommand(() => ShowPrinter());
+                }
+                return _ShowPrinterCommand;
+            }
+        }
+        private BaseCommand _ShowPhoneCommand;
+        public ICommand ShowPhoneCommand
+        {
+            get
+            {
+                if (_ShowPhoneCommand == null)
+                {
+                    _ShowPhoneCommand = new BaseCommand(() => ShowPhone());
+                }
+                return _ShowPhoneCommand;
+            }
+        }
+        private BaseCommand _ShowRackCabinetCommand;
+        public ICommand ShowRackCabinetCommand
+        {
+            get
+            {
+                if (_ShowRackCabinetCommand == null)
+                {
+                    _ShowRackCabinetCommand = new BaseCommand(() => ShowRackCabinet());
+                }
+                return _ShowRackCabinetCommand;
+            }
+        }
+        private BaseCommand _ShowSimCardCommand;
+        public ICommand ShowSimCardCommand
+        {
+            get
+            {
+                if (_ShowSimCardCommand == null)
+                {
+                    _ShowSimCardCommand = new BaseCommand(() => ShowSimCard());
+                }
+                return _ShowSimCardCommand;
             }
         }
 
-        
+
+        private BaseCommand _ShowPrinterTypeCommand;
+        public ICommand ShowPrinterTypeCommand
+        {
+            get
+            {
+                if (_ShowPrinterTypeCommand == null)
+                {
+                    _ShowPrinterTypeCommand = new BaseCommand(() => ShowPrinterTypeWindow());
+                }
+                return _ShowPrinterTypeCommand;
+            }
+        }
+
+
         #endregion
         #region Funkcje wywolujace okna
         private void CreateComputer()
@@ -199,9 +305,45 @@ namespace AdministrationApp.ViewModels
         {
             CreateWorkspace<NewUserViewModel>();
         }
+        private void CreateSoftware()
+        {
+            CreateWorkspace<NewSoftwareViewModel>();
+        }
+        private void CreateDevice()
+        {
+            CreateWorkspace<NewDeviceViewModel>();
+        }
+        private void CreateNetworkDevice()
+        {
+            CreateWorkspace<NewNetworkDeviceViewModel>();
+        }
+        private void CreatePrinter()
+        {
+            CreateWorkspace<NewPrinterViewModel>();
+        }
+        private void CreatePhone()
+        {
+            CreateWorkspace<NewPhoneViewModel>();
+        }
+        private void CreateRackCabinet()
+        {
+            CreateWorkspace<NewRackCabinetViewModel>();
+        }
+        private void CreateSimCard()
+        {
+            CreateWorkspace<NewSimCardViewModel>();
+        }
         private void ShowComputers()
         {
             ShowAllWorkspace<AllComputerViewModel>();
+        }
+        private void ShowNetworkDevice()
+        {
+            ShowAllWorkspace<AllNetworkDeviceViewModel>();
+        }
+        private void ShowDevice()
+        {
+            ShowAllWorkspace<AllDeviceViewModel>();
         }
         private void ShowSummary()
         {
@@ -215,6 +357,36 @@ namespace AdministrationApp.ViewModels
         {
             ShowAllWorkspace<AllUserViewModel>();
         }
+        private void ShowSoftware()
+        {
+            ShowAllWorkspace<AllSoftwareViewModel>();
+        }
+        private void ShowPrinter()
+        {
+            ShowAllWorkspace<AllPrinterViewModel>();
+        }
+        private void ShowPhone()
+        {
+            ShowAllWorkspace<AllPhoneViewModel>();
+        }
+        private void ShowRackCabinet()
+        {
+            ShowAllWorkspace<AllRackCabinetViewModel>();
+        }
+        private void ShowSimCard()
+        {
+            ShowAllWorkspace<AllSimCardViewModel>();
+        }
+        private void ShowPrinterTypeWindow()
+        {
+            AllPrinterTypeWindow allPrinterTypeWindow= new AllPrinterTypeWindow();
+            allPrinterTypeWindow.Show();
+        }
+        private void CreatePrinterTypeWindow()
+        {
+            NewPrinterTypeWindow newPrinterTypeWindow = new NewPrinterTypeWindow();
+            newPrinterTypeWindow.Show();
+        }
         private void ShowStatusWindow()
         {
             AllStatusWindow allStatusWindow = new AllStatusWindow();
@@ -225,14 +397,20 @@ namespace AdministrationApp.ViewModels
         {
             AllUsersWindow allUsersWindow = new AllUsersWindow();
             allUsersWindow.Show();
-
         }
         private void ShowLocationWindow()
         {
             AllLocationsWindow allLocationsWindow = new AllLocationsWindow();
             allLocationsWindow.Show();
-
         }
+        private void ShowSimCardWindow()
+        {
+            AllSimCardWindow allSimCardWindow = new AllSimCardWindow();
+            allSimCardWindow.Show();
+        }
+
+        
+        
         #endregion
     }
 }

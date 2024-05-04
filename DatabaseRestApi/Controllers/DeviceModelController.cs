@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class DeviceModelController : Controller
     {
-        [Route("/devicemodel")]
+        [Route(URLs.DEVICEMODEL)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(deviceModelVM);
         }
-        [Route("/devicemodel")]
+        [Route(URLs.DEVICEMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] DeviceModelCreateEditVM deviceModelCreateEditVM)
         {
@@ -42,7 +43,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/devicemodel/{id}")]
+        [Route(URLs.DEVICEMODEL_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] DeviceModelCreateEditVM deviceModelCreateEditVM)
         {
@@ -60,7 +61,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/devicemodel/{id}")]
+        [Route(URLs.DEVICEMODEL_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] DeviceModelCreateEditVM deviceModelCreateEditVM)
         {

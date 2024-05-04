@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class SimComponentTypeController : Controller
     {
-        [Route("/simcomponenttype")]
+        [Route(URLs.SIMCOMPONENTTYPE)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(simcomponentTypeVM);
         }
-        [Route("/simcomponenttype")]
+        [Route(URLs.SIMCOMPONENTTYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SimComponentTypeCreateEditVM simcomponentTypeCreateEditVM)
         {
@@ -42,7 +43,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/simcomponenttype/{id}")]
+        [Route(URLs.SIMCOMPONENTTYPE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] SimComponentTypeCreateEditVM simcomponentTypeCreateEditVM)
         {
@@ -60,7 +61,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/simcomponenttype/{id}")]
+        [Route(URLs.SIMCOMPONENTTYPE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] SimComponentTypeCreateEditVM simcomponentTypeCreateEditVM)
         {

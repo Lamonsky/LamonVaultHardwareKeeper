@@ -1,4 +1,5 @@
-﻿using Data.Computers.CreateEditVMs;
+﻿using Data;
+using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using DatabaseRestApi.Models;
 using DatabaseRestApi.Models.Contexts;
@@ -12,7 +13,7 @@ namespace DatabaseRestApi.Controllers
 {
     public class DeviceController : Controller
     {
-        [Route("/devices")]
+        [Route(URLs.DEVICE)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -33,7 +34,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(devicesVMs);
         }
-        [Route("/devices")]
+        [Route(URLs.DEVICE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] DevicesCreateEditVM devicesCreateEditVm)
         {
@@ -55,7 +56,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/devices/{id}")]
+        [Route(URLs.DEVICE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] DevicesCreateEditVM devicesCreateEditVm)
         {
@@ -78,7 +79,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/devices/{id}")]
+        [Route(URLs.DEVICE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] DevicesCreateEditVM devicesCreateEditVm)
         {

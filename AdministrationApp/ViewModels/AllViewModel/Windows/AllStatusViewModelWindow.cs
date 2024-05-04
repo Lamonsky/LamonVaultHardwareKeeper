@@ -90,5 +90,10 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
         {
             throw new NotImplementedException();
         }
+
+        public override void send()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

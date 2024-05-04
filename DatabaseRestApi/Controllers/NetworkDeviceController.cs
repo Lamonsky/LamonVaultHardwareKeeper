@@ -1,4 +1,5 @@
-﻿using Data.Computers.CreateEditVMs;
+﻿using Data;
+using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using DatabaseRestApi.Models;
 using DatabaseRestApi.Models.Contexts;
@@ -13,7 +14,7 @@ namespace DatabaseRestApi.Controllers
 {   
     public class NetworkDeviceController : Controller
     {
-        [Route("/networkdevice")]
+        [Route(URLs.NETWORKDEVICE)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -37,7 +38,7 @@ namespace DatabaseRestApi.Controllers
             return Json(networkdeviceVM);
         }
 
-        [Route("/networkdevice")]
+        [Route(URLs.NETWORKDEVICE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] NetworkDeviceCreateEditVM NetworkDeviceCreateEditVM)
         {
@@ -61,7 +62,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/networkdevice/{id}")]
+        [Route(URLs.NETWORKDEVICE_ID)]
         [HttpPut]
         public async Task<IActionResult> Edit(int id, [FromBody] NetworkDeviceCreateEditVM NetworkDeviceCreateEditVM)
         {
@@ -86,7 +87,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/networkdevice/{id}")]
+        [Route(URLs.NETWORKDEVICE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] NetworkDeviceCreateEditVM NetworkDeviceCreateEditVM)
         {

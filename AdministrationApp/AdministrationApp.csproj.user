@@ -10,7 +10,25 @@
     <Compile Update="Views\AllViews\AllComputerView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AllViews\AllDeviceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AllViews\AllMonitorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AllViews\AllNetworkDeviceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AllViews\AllPhoneView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AllViews\AllRackCabinetView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AllViews\AllSimCardView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AllViews\AllSoftwareView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\AllViews\AllUserView.xaml.cs">
@@ -19,16 +37,52 @@
     <Compile Update="Views\AllViews\SummaryView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AllWindows\AllSimCardWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AllWindows\AllStatusWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AllViews\AllPrinterView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AllWindows\AllPrinterTypeWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\NewViews\NewComputerView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\NewViews\NewDeviceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\NewViews\NewMonitorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\NewViews\NewNetworkDeviceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewViews\NewPhoneView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewViews\NewPrinterView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewViews\NewRackCabinetView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewViews\NewSimCardView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewViews\NewSoftwareView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\NewViews\NewUserView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewViews\Windows\NewPrinterTypeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -39,13 +93,34 @@
     <Page Update="Views\AllViews\AllComputerView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AllViews\AllDeviceView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AllViews\AllMonitorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllViews\AllNetworkDeviceView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllViews\AllPhoneView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllViews\AllRackCabinetView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllViews\AllSimCardView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllViews\AllSoftwareView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllViews\AllUserView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllViews\SummaryView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllWindows\AllSimCardWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllWindows\AllUsersWindow.xaml">
@@ -57,16 +132,49 @@
     <Page Update="Views\AllWindows\AllStatusWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AllWindows\AllPrinterTypeWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllViews\AllPrinterView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\NewViews\NewComputerView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\NewViews\NewDeviceView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\NewViews\NewMonitorView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\NewViews\NewNetworkDeviceView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\NewPhoneView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\NewPrinterView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\NewRackCabinetView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\NewSimCardView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\NewSoftwareView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\NewViews\NewUserView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\Windows\NewPrinterTypeWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Resources\ViewResources.xaml">

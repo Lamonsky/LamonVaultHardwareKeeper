@@ -195,6 +195,11 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             throw new NotImplementedException();
         }
+
+        public override void send()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

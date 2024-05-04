@@ -19,6 +19,6 @@
                 <DataGridTextColumn Header="Kraj" Binding="{Binding Path=Country}"/>
                 <DataGridTextColumn Header="Numer budynku" Binding="{Binding Path=BuildingNumber}"/>
                 <DataGridTextColumn Header="Numer pokoju" Binding="{Binding Path=RoomNumber}"/>
-        </DataGrid.Columns>
+            </DataGrid.Columns>
         </DataGrid>
 </Window>

@@ -4,17 +4,19 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class PrinterTypeController : Controller
     {
-        [Route("/printertype")]
+        [Route(URLs.PRINTERTYPE)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             DatabaseContext database = new();
             List<PrinterTypeVM> printerTypeVM = await database.PrinterTypes
+                .Where(item => item.Status != 99)
                 .Select(item => new PrinterTypeVM
                 {
                     Id = item.Id,
@@ -25,7 +27,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(printerTypeVM);
         }
-        [Route("/printertype")]
+        [Route(URLs.PRINTERTYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PrinterTypeCreateEditVM printerTypeCreateEditVM)
         {
@@ -42,7 +44,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/printertype/{id}")]
+        [Route(URLs.PRINTERTYPE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] PrinterTypeCreateEditVM printerTypeCreateEditVM)
         {
@@ -60,7 +62,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/printertype/{id}")]
+        [Route(URLs.PRINTERTYPE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] PrinterTypeCreateEditVM printerTypeCreateEditVM)
         {

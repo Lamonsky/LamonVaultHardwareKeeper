@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class PhoneController : Controller
     {
-        [Route("/phones")]
+        [Route(URLs.PHONE)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,12 +26,15 @@ namespace DatabaseRestApi.Controllers
                     Manufacturer = item.ManufacturerNavigation.Name,
                     Model = item.ModelNavigation.Name,
                     SerialNumber = item.SerialNumber,
+                    Location = item.Location.Name,
                     InventoryNumber = item.InventoryNumber,
+                    SimCard1 = item.SimCard1Navigation.PhoneNumber + " " + item.SimCard1Navigation.SerialNumber + " " + item.SimCard1Navigation.InventoryNumber,
+                    SimCard2 = item.SimCard2Navigation.PhoneNumber + " " + item.SimCard2Navigation.SerialNumber + " " + item.SimCard2Navigation.InventoryNumber,
                     Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
                 }).ToListAsync();
             return Json(phonesVMs);
         }
-        [Route("/phones")]
+        [Route(URLs.PHONE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PhonesCreateEditVM phonesCreateEditVm)
         {
@@ -42,7 +46,10 @@ namespace DatabaseRestApi.Controllers
                 PhoneType = phonesCreateEditVm?.PhoneType,
                 Manufacturer = phonesCreateEditVm?.Manufacturer,
                 Model = phonesCreateEditVm?.Model,
+                LocationId = phonesCreateEditVm?.LocationId,
                 SerialNumber = phonesCreateEditVm?.SerialNumber,
+                SimCard1 = phonesCreateEditVm?.SimCard1,
+                SimCard2 = phonesCreateEditVm?.SimCard2,
                 InventoryNumber = phonesCreateEditVm?.InventoryNumber,
                 Users = phonesCreateEditVm.Users,
                 CreatedAt = DateTime.Now
@@ -52,7 +59,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/phones/{id}")]
+        [Route(URLs.PHONE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] PhonesCreateEditVM phonesCreateEditVm)
         {
@@ -67,15 +74,18 @@ namespace DatabaseRestApi.Controllers
             phone.PhoneType = phonesCreateEditVm?.PhoneType;
             phone.Manufacturer = phonesCreateEditVm?.Manufacturer;
             phone.Model = phonesCreateEditVm?.Model;
+            phone.LocationId = phonesCreateEditVm?.LocationId;
             phone.SerialNumber = phonesCreateEditVm?.SerialNumber;
             phone.InventoryNumber = phonesCreateEditVm?.InventoryNumber;
+            phone.SimCard1 = phonesCreateEditVm?.SimCard1;
+            phone.SimCard2 = phonesCreateEditVm?.SimCard2;
             phone.Users = phonesCreateEditVm.Users;
             phone.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();
         }
 
-        [Route("/phones/{id}")]
+        [Route(URLs.PHONE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] PhonesCreateEditVM phonesCreateEditVm)
         {

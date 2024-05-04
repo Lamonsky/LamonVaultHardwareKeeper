@@ -5,7 +5,8 @@
                     xmlns:vwa="clr-namespace:AdministrationApp.Views.AllViews"
                     xmlns:vmn="clr-namespace:AdministrationApp.ViewModels.NewViewModel"
                     xmlns:vwn="clr-namespace:AdministrationApp.Views.NewViews"
-                    xmlns:win="clr-namespace:AdministrationApp.Views.AllWindows"
+                    xmlns:winv="clr-namespace:AdministrationApp.Views.AllWindows"
+                    xmlns:winvm="clr-namespace:AdministrationApp.ViewModels.NewViewModel.Windows"
                     >
 
     <DataTemplate DataType="{x:Type vma:SummaryViewModel}">
@@ -20,6 +21,27 @@
     <DataTemplate DataType="{x:Type vma:AllUserViewModel}">
         <vwa:AllUserView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllSoftwareViewModel}">
+        <vwa:AllSoftwareView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllNetworkDeviceViewModel}">
+        <vwa:AllNetworkDeviceView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllDeviceViewModel}">
+        <vwa:AllDeviceView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllPrinterViewModel}">
+        <vwa:AllPrinterView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllPhoneViewModel}">
+        <vwa:AllPhoneView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllRackCabinetViewModel}">
+        <vwa:AllRackCabinetView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllSimCardViewModel}">
+        <vwa:AllSimCardView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vmn:NewComputerViewModel}">
         <vwn:NewComputerView/>
     </DataTemplate>
@@ -28,6 +50,27 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmn:NewUserViewModel}">
         <vwn:NewUserView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewSoftwareViewModel}">
+        <vwn:NewSoftwareView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewNetworkDeviceViewModel}">
+        <vwn:NewNetworkDeviceView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewDeviceViewModel}">
+        <vwn:NewDeviceView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewPrinterViewModel}">
+        <vwn:NewPrinterView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewPhoneViewModel}">
+        <vwn:NewPhoneView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewRackCabinetViewModel}">
+        <vwn:NewRackCabinetView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewSimCardViewModel}">
+        <vwn:NewSimCardView/>
     </DataTemplate>
 
     

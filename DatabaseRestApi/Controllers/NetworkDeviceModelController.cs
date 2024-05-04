@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class NetworkDeviceModelController : Controller
     {
-        [Route("/networkdevicemodel")]
+        [Route(URLs.NETWORKDEVICEMODEL)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(networkDeviceModelVM);
         }
-        [Route("/networkdevicemodel")]
+        [Route(URLs.NETWORKDEVICEMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] NetworkDeviceModelCreateEditVM networkDeviceModelCreateEditVM)
         {
@@ -42,7 +43,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/networkdevicemodel/{id}")]
+        [Route(URLs.NETWORKDEVICEMODEL_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] NetworkDeviceModelCreateEditVM networkDeviceModelCreateEditVM)
         {
@@ -60,7 +61,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/networkdevicemodel/{id}")]
+        [Route(URLs.NETWORKDEVICEMODEL_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] NetworkDeviceModelCreateEditVM networkDeviceModelCreateEditVM)
         {

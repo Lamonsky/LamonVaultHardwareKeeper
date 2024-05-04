@@ -77,5 +77,10 @@ namespace AdministrationApp.ViewModels.AllViewModel
             await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", ChosenUser.Id.ToString()), HttpMethod.Delete, ChosenUser, null);
             load();
         }
+
+        public override void send()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

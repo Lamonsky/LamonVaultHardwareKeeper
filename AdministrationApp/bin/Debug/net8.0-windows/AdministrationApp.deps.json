@@ -11,6 +11,7 @@
           "Data": "1.0.0",
           "MaterialDesignThemes": "4.9.0",
           "MvvmLight": "5.4.1.1",
+          "System.Windows.Interactivity.WPF": "2.0.20525",
           "WPF-UI": "3.0.4"
         },
         "runtime": {
@@ -1339,6 +1340,14 @@
           "System.Runtime": "4.1.0"
         }
       },
+      "System.Windows.Interactivity.WPF/2.0.20525": {
+        "runtime": {
+          "lib/net40/Microsoft.Expression.Interactions.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "2.0.20525.0"
+          }
+        }
+      },
       "System.Xml.ReaderWriter/4.0.11": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -2211,6 +2220,13 @@
       "sha512": "sha512-saGfUV8uqVW6LeURiqxcGhZ24PzuRNaUBtbhVeuUAvky1naH395A/1nY0P2bWvrw/BreRtIB/EzTDkGBpqCwEw==",
       "path": "system.threading.timer/4.0.1",
       "hashPath": "system.threading.timer.4.0.1.nupkg.sha512"
+    },
+    "System.Windows.Interactivity.WPF/2.0.20525": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0r+Le4E7hCm4zToUvBzjSUyTcuU3rFeoPa7JyTdWIzR/F7wH6+O/pWkjHIG40hIA0z1wvRdZayvoizA4wcK1dg==",
+      "path": "system.windows.interactivity.wpf/2.0.20525",
+      "hashPath": "system.windows.interactivity.wpf.2.0.20525.nupkg.sha512"
     },
     "System.Xml.ReaderWriter/4.0.11": {
       "type": "package",

@@ -1,0 +1,20 @@
+﻿<Window x:Class="AdministrationApp.Views.AllWindows.AllSimCardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdministrationApp.Views.AllWindows"
+        mc:Ignorable="d"
+        Title="AllSimCardWindow" Height="450" Width="800">
+    <DataGrid ItemsSource="{Binding List}" AutoGenerateColumns="False" SelectedItem="{Binding Path=ChosenItem, Mode=TwoWay}" IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
+            <DataGridTextColumn Header="Opis" Binding="{Binding Path=Component}"/>
+            <DataGridTextColumn Header="Numer Seryjny" Binding="{Binding Path=SerialNumber}"/>
+            <DataGridTextColumn Header="Numer inwentarzowy" Binding="{Binding Path=InventoryNumber}"/>
+            <DataGridTextColumn Header="Numer telefonu" Binding="{Binding Path=PhoneNumber}"/>
+            <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
+            <DataGridTextColumn Header="Użytkownik" Binding="{Binding Path=Users}"/>
+        </DataGrid.Columns>
+    </DataGrid>
+</Window>

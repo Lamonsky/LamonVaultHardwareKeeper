@@ -1,0 +1,22 @@
+﻿<local:WszystkieViewBase x:Class="AdministrationApp.Views.AllViews.AllDeviceView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdministrationApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+    <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding Path=ChosenItem}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+            <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}"/>
+            <DataGridTextColumn Header="Producent" Binding="{Binding Manufacturer}"/>
+            <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+            <DataGridTextColumn Header="Typ urządzenia" Binding="{Binding DeviceType}"/>
+            <DataGridTextColumn Header="Model" Binding="{Binding Model}"/>
+            <DataGridTextColumn Header="Numer seryjny" Binding="{Binding SerialNumber}"/>
+            <DataGridTextColumn Header="Numer inwentarzowy" Binding="{Binding InventoryNumber}"/>
+            <DataGridTextColumn Header="Użytkownik" Binding="{Binding Users}"/>
+        </DataGrid.Columns>
+    </DataGrid>
+</local:WszystkieViewBase>

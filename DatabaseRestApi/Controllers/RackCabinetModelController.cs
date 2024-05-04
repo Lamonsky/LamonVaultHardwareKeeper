@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class RackCabinetModelController : Controller
     {
-        [Route("/rackcabinetmodel")]
+        [Route(URLs.RACKCABINETMODEL)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(rackcabinetModelVM);
         }
-        [Route("/rackcabinetmodel")]
+        [Route(URLs.RACKCABINETMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] RackCabinetModelCreateEditVM rackcabinetModelCreateEditVM)
         {
@@ -42,7 +43,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/rackcabinetmodel/{id}")]
+        [Route(URLs.RACKCABINETMODEL_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] RackCabinetModelCreateEditVM rackcabinetModelCreateEditVM)
         {
@@ -60,7 +61,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/rackcabinetmodel/{id}")]
+        [Route(URLs.RACKCABINETMODEL_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] RackCabinetModelCreateEditVM rackcabinetModelCreateEditVM)
         {

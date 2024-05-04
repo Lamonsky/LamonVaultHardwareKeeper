@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using DatabaseRestApi.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +15,18 @@ public partial class DatabaseContext : DbContext
         : base(options)
     {
     }
+
+    public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+
+    public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; }
+
+    public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+
+    public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+
+    public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+
+    public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
 
     public virtual DbSet<Computer> Computers { get; set; }
 
@@ -120,13 +131,37 @@ public partial class DatabaseContext : DbContext
     public virtual DbSet<Vendor> Vendors { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    { 
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=localhost;User ID=lamonvaulthardwarekeeperapiuser;Password=restapi123;Database=LamonVault_Hardware_Keeper;TrustServerCertificate=True;Integrated Security=True");
-        optionsBuilder.LogTo(item => Debug.WriteLine(item));
-    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AspNetRole>(entity =>
+        {
+            entity.HasIndex(e => e.NormalizedName, "RoleNameIndex")
+                .IsUnique()
+                .HasFilter("([NormalizedName] IS NOT NULL)");
+        });
+
+        modelBuilder.Entity<AspNetUser>(entity =>
+        {
+            entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
+                .IsUnique()
+                .HasFilter("([NormalizedUserName] IS NOT NULL)");
+
+            entity.HasMany(d => d.Roles).WithMany(p => p.Users)
+                .UsingEntity<Dictionary<string, object>>(
+                    "AspNetUserRole",
+                    r => r.HasOne<AspNetRole>().WithMany().HasForeignKey("RoleId"),
+                    l => l.HasOne<AspNetUser>().WithMany().HasForeignKey("UserId"),
+                    j =>
+                    {
+                        j.HasKey("UserId", "RoleId");
+                        j.ToTable("AspNetUserRoles");
+                        j.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
+                    });
+        });
+
         modelBuilder.Entity<Computer>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Computer__3214EC271A5CD8D4");
@@ -204,19 +239,19 @@ public partial class DatabaseContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Devices__3214EC2745DF9BE0");
 
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.DeviceCreatedByNavigations).HasConstraintName("FK__Devices__Created__100C566E");
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.DeviceCreatedByNavigations).HasConstraintName("FK__Devices__Created__569ECEE8");
 
-            entity.HasOne(d => d.DeviceTypeNavigation).WithMany(p => p.Devices).HasConstraintName("FK__Devices__Device___0C3BC58A");
+            entity.HasOne(d => d.DeviceTypeNavigation).WithMany(p => p.Devices).HasConstraintName("FK__Devices__Device___52CE3E04");
 
-            entity.HasOne(d => d.ManufacturerNavigation).WithMany(p => p.Devices).HasConstraintName("FK__Devices__Manufac__0D2FE9C3");
+            entity.HasOne(d => d.ManufacturerNavigation).WithMany(p => p.Devices).HasConstraintName("FK__Devices__Manufac__53C2623D");
 
-            entity.HasOne(d => d.ModelNavigation).WithMany(p => p.Devices).HasConstraintName("FK__Devices__Model__0E240DFC");
+            entity.HasOne(d => d.ModelNavigation).WithMany(p => p.Devices).HasConstraintName("FK__Devices__Model__54B68676");
 
-            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.DeviceModifiedByNavigations).HasConstraintName("FK__Devices__Modifie__11007AA7");
+            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.DeviceModifiedByNavigations).HasConstraintName("FK__Devices__Modifie__5792F321");
 
-            entity.HasOne(d => d.Status).WithMany(p => p.Devices).HasConstraintName("FK__Devices__StatusI__0B47A151");
+            entity.HasOne(d => d.Status).WithMany(p => p.Devices).HasConstraintName("FK__Devices__StatusI__51DA19CB");
 
-            entity.HasOne(d => d.UsersNavigation).WithMany(p => p.DeviceUsersNavigations).HasConstraintName("FK__Devices__Users__0F183235");
+            entity.HasOne(d => d.UsersNavigation).WithMany(p => p.DeviceUsersNavigations).HasConstraintName("FK__Devices__Users__55AAAAAF");
         });
 
         modelBuilder.Entity<DeviceModel>(entity =>

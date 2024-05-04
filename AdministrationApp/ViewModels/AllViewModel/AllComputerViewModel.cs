@@ -13,7 +13,7 @@ using GalaSoft.MvvmLight.Messaging;
 
 namespace AdministrationApp.ViewModels.AllViewModel
 {
-    class AllComputerViewModel : WszystkieViewModel<ComputersVM>
+    public class AllComputerViewModel : WszystkieViewModel<ComputersVM>
     {
         
         public AllComputerViewModel() : base("Komputery")
@@ -22,7 +22,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         private void open(string name)
         {
-            if (name == "ComputersRefresh")
+            if (name == "KomputeryRefresh")
             {
                 load();
             }
@@ -78,6 +78,11 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {            
             await RequestHelper.SendRequestAsync(URLs.COMPUTERS_ID.Replace("{id}", ChosenComputer.Id.ToString()), HttpMethod.Delete, ChosenComputer, null);
             load();
+        }
+
+        public override void send()
+        {
+            throw new NotImplementedException();
         }
     }
 }

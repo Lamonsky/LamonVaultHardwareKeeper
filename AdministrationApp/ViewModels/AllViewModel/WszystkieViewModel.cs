@@ -100,6 +100,18 @@ namespace AdministrationApp.ViewModels.AllViewModel
                 return _FilterCommand;
             }
         }
+        private BaseCommand _SendCommand;
+        public ICommand SendCommand
+        {
+            get
+            {
+                if (_SendCommand == null)
+                {
+                    _SendCommand = new BaseCommand(() => send());
+                }
+                return _SendCommand;
+            }
+        }
         #endregion
         #region Kolekcja 
         private bool _IsLoading;
@@ -141,6 +153,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         #endregion
         #region Pomocniczy
         public abstract void load();
+        public abstract void send();
         private void add()
         {
             Messenger.Default.Send(DisplayName + "Add");

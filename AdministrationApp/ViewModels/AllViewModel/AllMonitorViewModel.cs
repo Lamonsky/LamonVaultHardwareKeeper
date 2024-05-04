@@ -78,5 +78,10 @@ namespace AdministrationApp.ViewModels.AllViewModel
             await RequestHelper.SendRequestAsync(URLs.MONITORS_ID.Replace("{id}", ChosenMonitor.Id.ToString()), HttpMethod.Delete, ChosenMonitor, null);
             load();
         }
+
+        public override void send()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class PrinterController : Controller
     {
-        [Route("/printer")]
+        [Route(URLs.PRINTER)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,6 +26,7 @@ namespace DatabaseRestApi.Controllers
                     Manufacturer = item.ManufacturerNavigation.Name,
                     Model = item.ModelNavigation.Name,
                     PrinterType = item.PrinterTypeNavigation.Name,
+                    IpAddress = item.IpAddress,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
                     Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
@@ -32,7 +34,7 @@ namespace DatabaseRestApi.Controllers
             return Json(PrintersVM);
         }
 
-        [Route("/printer")]
+        [Route(URLs.PRINTER)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PrintersCreateEditVM printerCreateEditVM)
         {
@@ -46,6 +48,7 @@ namespace DatabaseRestApi.Controllers
                 Model = printerCreateEditVM.Model,
                 PrinterType = printerCreateEditVM.PrinterType,
                 SerialNumber=printerCreateEditVM.SerialNumber,
+                IpAddress = printerCreateEditVM.IpAddress,
                 InventoryNumber = printerCreateEditVM.InventoryNumber,
                 Users = printerCreateEditVM.Users,
                 CreatedAt = DateTime.Now
@@ -55,7 +58,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/printer/{id}")]
+        [Route(URLs.PRINTER_ID)]
         [HttpPut]
         public async Task<IActionResult> Edit(int id, [FromBody] PrintersCreateEditVM printerCreateEditVM)
         {
@@ -73,13 +76,14 @@ namespace DatabaseRestApi.Controllers
             printer.PrinterType = printerCreateEditVM.PrinterType;
             printer.SerialNumber = printerCreateEditVM.SerialNumber;
             printer.InventoryNumber = printerCreateEditVM.InventoryNumber;
+            printer.IpAddress = printerCreateEditVM.IpAddress;
             printer.Users = printerCreateEditVM.Users;
             printer.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();
         }
 
-        [Route("/printer/{id}")]
+        [Route(URLs.PRINTER_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] PrintersCreateEditVM printerCreateEditVM)
         {

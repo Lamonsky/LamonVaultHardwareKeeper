@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\damia\Documents\Studia\LamonVaultHardwareKeeper\AdministrationApp\App.xaml
-13279356918
+311671297615
 
-341051821498
-208432114488
-Themes\Generic.xaml;Views\AllViews\AllComputerView.xaml;Views\AllViews\AllMonitorView.xaml;Views\AllViews\AllUserView.xaml;Views\AllViews\SummaryView.xaml;Views\AllWindows\AllLocationsWindow.xaml;Views\AllWindows\AllStatusWindow.xaml;Views\AllWindows\AllUsersWindow.xaml;Views\MainWindow.xaml;Views\NewViews\NewComputerView.xaml;Views\NewViews\NewMonitorView.xaml;Views\NewViews\NewUserView.xaml;Views\Resources\ViewResources.xaml;
+701629331646
+209-1396475298
+Themes\Generic.xaml;Views\AllViews\AllComputerView.xaml;Views\AllViews\AllDeviceView.xaml;Views\AllViews\AllMonitorView.xaml;Views\AllViews\AllNetworkDeviceView.xaml;Views\AllViews\AllPhoneView.xaml;Views\AllViews\AllPrinterView.xaml;Views\AllViews\AllRackCabinetView.xaml;Views\AllViews\AllSimCardView.xaml;Views\AllViews\AllSoftwareView.xaml;Views\AllViews\AllUserView.xaml;Views\AllViews\SummaryView.xaml;Views\AllWindows\AllLocationsWindow.xaml;Views\AllWindows\AllPrinterTypeWindow.xaml;Views\AllWindows\AllSimCardWindow.xaml;Views\AllWindows\AllStatusWindow.xaml;Views\AllWindows\AllUsersWindow.xaml;Views\LoginWindow.xaml;Views\MainWindow.xaml;Views\NewViews\NewComputerView.xaml;Views\NewViews\NewDeviceView.xaml;Views\NewViews\NewMonitorView.xaml;Views\NewViews\NewNetworkDeviceView.xaml;Views\NewViews\NewPhoneView.xaml;Views\NewViews\NewPrinterView.xaml;Views\NewViews\NewRackCabinetView.xaml;Views\NewViews\NewSimCardView.xaml;Views\NewViews\NewSoftwareView.xaml;Views\NewViews\NewUserView.xaml;Views\NewViews\Windows\NewPrinterTypeWindow.xaml;Views\Resources\ViewResources.xaml;
 
 False
 

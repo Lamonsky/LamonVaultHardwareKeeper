@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class SimComponentController : Controller
     {
-        [Route("/simcomponent")]
+        [Route(URLs.SIMCOMPONENT)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -25,7 +26,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(simcomponentVMs);
         }
-        [Route("/simcomponent")]
+        [Route(URLs.SIMCOMPONENT)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SimComponentCreateEditVM simComponentCreateEditVM)
         {
@@ -43,7 +44,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/simcomponent/{id}")]
+        [Route(URLs.SIMCOMPONENT_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] SimComponentCreateEditVM simComponentCreateEditVM)
         {
@@ -62,7 +63,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/simcomponent/{id}")]
+        [Route(URLs.SIMCOMPONENT_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] SimComponentCreateEditVM simComponentCreateEditVM)
         {
