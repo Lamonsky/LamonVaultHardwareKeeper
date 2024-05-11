@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DA53B4C3-0B76-4349-A0F0-95B25A7F28DC}|DatabaseRestApi\\DatabaseRestApi.csproj|c:\\users\\damia\\documents\\studia\\lamonvaulthardwarekeeper\\databaserestapi\\controllers\\computercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA53B4C3-0B76-4349-A0F0-95B25A7F28DC}|DatabaseRestApi\\DatabaseRestApi.csproj|solutionrelative:databaserestapi\\controllers\\computercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA53B4C3-0B76-4349-A0F0-95B25A7F28DC}|DatabaseRestApi\\DatabaseRestApi.csproj|c:\\users\\damia\\documents\\studia\\lamonvaulthardwarekeeper\\databaserestapi\\controllers\\computertypecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA53B4C3-0B76-4349-A0F0-95B25A7F28DC}|DatabaseRestApi\\DatabaseRestApi.csproj|solutionrelative:databaserestapi\\controllers\\computertypecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9EA29042-201D-4A5F-B7F1-5F026F41F87D}|AdministrationApp\\AdministrationApp.csproj|c:\\users\\damia\\documents\\studia\\lamonvaulthardwarekeeper\\administrationapp\\viewmodels\\allviewmodel\\alluserviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9EA29042-201D-4A5F-B7F1-5F026F41F87D}|AdministrationApp\\AdministrationApp.csproj|solutionrelative:administrationapp\\viewmodels\\allviewmodel\\alluserviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,27 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ComputerController.cs",
-              "DocumentMoniker": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Controllers\\ComputerController.cs",
-              "RelativeDocumentMoniker": "DatabaseRestApi\\Controllers\\ComputerController.cs",
-              "ToolTip": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Controllers\\ComputerController.cs",
-              "RelativeToolTip": "DatabaseRestApi\\Controllers\\ComputerController.cs",
-              "ViewState": "AQIAAFMAAAAAAAAAAAAwwGsAAAAtAAAA",
+              "Title": "AllUserViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\AdministrationApp\\ViewModels\\AllViewModel\\AllUserViewModel.cs",
+              "RelativeDocumentMoniker": "AdministrationApp\\ViewModels\\AllViewModel\\AllUserViewModel.cs",
+              "ToolTip": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\AdministrationApp\\ViewModels\\AllViewModel\\AllUserViewModel.cs",
+              "RelativeToolTip": "AdministrationApp\\ViewModels\\AllViewModel\\AllUserViewModel.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAuwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-04T18:22:30.269Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ComputerTypeController.cs",
-              "DocumentMoniker": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Controllers\\ComputerTypeController.cs",
-              "RelativeDocumentMoniker": "DatabaseRestApi\\Controllers\\ComputerTypeController.cs",
-              "ToolTip": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\Controllers\\ComputerTypeController.cs",
-              "RelativeToolTip": "DatabaseRestApi\\Controllers\\ComputerTypeController.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAgwBsAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-04T16:01:27.153Z",
+              "WhenOpened": "2024-05-07T19:00:57.312Z",
               "EditorCaption": ""
             }
           ]
