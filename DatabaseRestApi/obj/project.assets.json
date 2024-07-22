@@ -8461,11 +8461,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\DatabaseRestApi.csproj",
+      "projectUniqueName": "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\DatabaseRestApi\\DatabaseRestApi.csproj",
       "projectName": "DatabaseRestApi",
-      "projectPath": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\DatabaseRestApi.csproj",
+      "projectPath": "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\DatabaseRestApi\\DatabaseRestApi.csproj",
       "packagesPath": "C:\\Users\\damia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\DatabaseRestApi\\obj\\",
+      "outputPath": "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\DatabaseRestApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -8487,8 +8487,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\Data\\Data.csproj": {
-              "projectPath": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\Data\\Data.csproj"
+            "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\Data\\Data.csproj"
             }
           }
         }

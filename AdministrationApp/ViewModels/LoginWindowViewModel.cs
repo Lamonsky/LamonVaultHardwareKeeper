@@ -1,5 +1,6 @@
 ﻿using AdministrationApp.Helpers;
 using AdministrationApp.ViewModels.NewViewModel;
+using AdministrationApp.Views;
 using Data;
 using Data.Helpers;
 using GalaSoft.MvvmLight.Messaging;
@@ -11,14 +12,31 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels
 {
     public class LoginWindowViewModel : JedenViewModel<RestApiUsers>
     {
-        public LoginWindowViewModel() : base("Logowanie")
+        private Window _window;
+        public LoginWindowViewModel(Window window) : base("Logowanie")
         {
             item = new RestApiUsers();
+            _window = window;
+        }
+
+        private BaseCommand _LoginCommand;
+
+        public ICommand LoginCommand
+        {
+            get
+            {
+                if (_LoginCommand == null)
+                {
+                    _LoginCommand = new BaseCommand(() => Save());
+                }
+                return _LoginCommand;
+            }
         }
 
         public event EventHandler OnRequestClose;
@@ -57,13 +75,39 @@ namespace AdministrationApp.ViewModels
             }
         }
 
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(() => ErrorMessage);
+            }
+        }
         #endregion
 
         public async override void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.LOGIN, HttpMethod.Post, item, null);
-            Messenger.Default.Send(item);
+            try
+            {
+                LoggedUser user = await RequestHelper.SendRequestAsync<object, LoggedUser>(URLs.LOGIN, HttpMethod.Post, item, null);
+                if(user != null)
+                {
+                    MainWindow window = new MainWindow();
+                    var viewModel = new MainWindowViewModel();
+                    window.DataContext = viewModel;
+                    Messenger.Default.Send(item);
+                    window.Show();
+                    _window.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = "Błędne logowanie";
+            }
             
+
         }
     }
 }

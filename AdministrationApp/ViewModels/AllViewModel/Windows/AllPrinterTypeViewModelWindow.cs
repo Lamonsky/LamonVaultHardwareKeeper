@@ -9,14 +9,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 {
     class AllPrinterTypeViewModelWindow : WszystkieViewModel<PrinterTypeVM>
     {
-        public event EventHandler OnRequestClose;
-        public void CloseWindow(Window window)
-        {
-            if (window != null)
-            {
-                window.Close();
-            }
-        }
+        private Window _window;
         private PrinterTypeVM _ChosenItem;
         public PrinterTypeVM ChosenItem
         {
@@ -33,9 +26,11 @@ namespace AdministrationApp.ViewModels.AllViewModel
             }
         }
 
-        public AllPrinterTypeViewModelWindow() : base("Rodzaje drukarek")
+        public AllPrinterTypeViewModelWindow(Window window) : base("Rodzaje drukarek")
         {
             Messenger.Default.Register<string>(this, open);
+            _window = window;
+            window.Title = "Rodzaje drukarek";
         }
         private void open(string name)
         {
@@ -83,7 +78,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         public override void send()
         {
             Messenger.Default.Send(ChosenItem);
-            OnRequestClose(this, new EventArgs());
+            _window.Close();
         }
     }
 }

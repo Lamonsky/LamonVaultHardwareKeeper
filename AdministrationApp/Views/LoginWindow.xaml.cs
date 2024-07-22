@@ -1,5 +1,6 @@
 ﻿using AdministrationApp.ViewModels;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace AdministrationApp.Views
 {
@@ -11,9 +12,13 @@ namespace AdministrationApp.Views
         public LoginWindow()
         {
             InitializeComponent();
-            LoginWindowViewModel viewmodel = new LoginWindowViewModel();
-            DataContext = viewmodel;
-            viewmodel.OnRequestClose += (s, e) => this.Close();
+        }
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is LoginWindowViewModel viewModel)
+            {
+                viewModel.Password = (sender as PasswordBox)?.Password;
+            }
         }
     }
 }

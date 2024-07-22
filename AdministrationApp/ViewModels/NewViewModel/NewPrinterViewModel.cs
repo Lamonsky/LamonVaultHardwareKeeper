@@ -19,6 +19,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         private BaseCommand _ChooseLocationCommand;
         private BaseCommand _ChooseUserCommand;
         private BaseCommand _ChoosePrinterTypeCommand;
+        private BaseCommand _ChoosePrinterModelCommand;
 
         public ICommand ChooseLocationCommand
         {
@@ -40,6 +41,17 @@ namespace AdministrationApp.ViewModels.NewViewModel
                     _ChoosePrinterTypeCommand = new BaseCommand(() => Messenger.Default.Send("ChoosePrinterType"));
                 }
                 return _ChoosePrinterTypeCommand;
+            }
+        }
+        public ICommand ChoosePrinterModelCommand
+        {
+            get
+            {
+                if (_ChoosePrinterModelCommand == null)
+                {
+                    _ChoosePrinterModelCommand = new BaseCommand(() => Messenger.Default.Send("ChoosePrinterModel"));
+                }
+                return _ChoosePrinterModelCommand;
             }
         }
         public ICommand ChooseUserCommand

@@ -13,12 +13,15 @@ namespace AdministrationApp
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-            //łaczymy viewModel z View
-            MainWindow window = new MainWindow();
-            var viewModel = new MainWindowViewModel();
-            window.DataContext = viewModel;
+            base.OnStartup(e); 
+
+
+            LoginWindow window = new LoginWindow();
+            var loginviewmodel = new LoginWindowViewModel(window);
+            window.DataContext = loginviewmodel;
             window.Show();
+
+
         }
     }
 

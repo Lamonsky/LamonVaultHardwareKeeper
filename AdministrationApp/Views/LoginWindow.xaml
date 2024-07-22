@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdministrationApp.Views"
+        xmlns:passbox="clr-namespace:AdministrationApp.Login"
         mc:Ignorable="d"
         Title="Logowanie" Height="450" Width="800">
     <Grid>
@@ -18,16 +19,17 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="E-Mail: " HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="54"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=E-Mail}"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Hasło: " HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="54"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Password}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Email}"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Hasło: "  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="54"/>
+        <PasswordBox Grid.Row="2" Grid.Column="1" PasswordChanged="PasswordBox_PasswordChanged" />
         <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" HorizontalAlignment="Center" Command="{Binding RegisterCommand}" Content="Zarejestruj"/>
-            <Button Grid.Column="1" HorizontalAlignment="Center" Command="{Binding LoginCommand}" Content="Zaloguj"/>
+
+            <Label Grid.Column="0" Content="{Binding ErrorMessage}" Foreground="Red" />
+            <Button Grid.Column="1"  HorizontalAlignment="Left" Command="{Binding LoginCommand}" Content="Zaloguj"/>
         </Grid>
     </Grid>
 </Window>

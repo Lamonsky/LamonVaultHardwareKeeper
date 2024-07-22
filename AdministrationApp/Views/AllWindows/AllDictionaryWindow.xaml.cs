@@ -1,5 +1,5 @@
 ﻿using AdministrationApp.ViewModels.AllViewModel;
-using AdministrationApp.ViewModels.NewViewModel.Windows;
+using AdministrationApp.ViewModels.AllViewModel.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,19 +14,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace AdministrationApp.Views.NewViews.Windows
+namespace AdministrationApp.Views.AllWindows
 {
     /// <summary>
-    /// Interaction logic for NewPrinterTypeWindow.xaml
+    /// Interaction logic for DictionaryClassWindow.xaml
     /// </summary>
-    public partial class NewPrinterTypeWindow : Window
+    public partial class AllDictionaryWindow : AllDictionaryViewBase
     {
-        public NewPrinterTypeWindow()
+        public AllDictionaryWindow()
         {
             InitializeComponent();
-            NewPrinterTypeWindowViewModel viewmodel = new NewPrinterTypeWindowViewModel();
-            DataContext = viewmodel;
-            viewmodel.OnRequestClose += (s, e) => this.Close();
         }
     }
 }

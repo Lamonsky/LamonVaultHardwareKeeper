@@ -46,7 +46,7 @@
     <Compile Update="Views\AllViews\AllPrinterView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\AllWindows\AllPrinterTypeWindow.xaml.cs">
+    <Compile Update="Views\AllWindows\AllDictionaryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\LoginWindow.xaml.cs">
@@ -82,7 +82,7 @@
     <Compile Update="Views\NewViews\NewUserView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\NewViews\Windows\NewPrinterTypeWindow.xaml.cs">
+    <Compile Update="Views\NewViews\Windows\NewDictionaryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -132,7 +132,7 @@
     <Page Update="Views\AllWindows\AllStatusWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\AllWindows\AllPrinterTypeWindow.xaml">
+    <Page Update="Views\AllWindows\AllDictionaryWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\LoginWindow.xaml">
@@ -174,7 +174,7 @@
     <Page Update="Views\NewViews\NewUserView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\NewViews\Windows\NewPrinterTypeWindow.xaml">
+    <Page Update="Views\NewViews\Windows\NewDictionaryWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Resources\ViewResources.xaml">

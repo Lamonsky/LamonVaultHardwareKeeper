@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj": {}
+    "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj": {}
   },
   "projects": {
-    "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj": {
+    "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj",
+        "projectUniqueName": "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj",
         "projectName": "WebInterface",
-        "projectPath": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj",
+        "projectPath": "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj",
         "packagesPath": "C:\\Users\\damia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\WebInterface\\obj\\",
+        "outputPath": "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

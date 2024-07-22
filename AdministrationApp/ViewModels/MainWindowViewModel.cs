@@ -12,6 +12,7 @@ using System.Windows.Input;
 using AdministrationApp.Helpers;
 using AdministrationApp.ViewModels.AllViewModel;
 using AdministrationApp.ViewModels.NewViewModel;
+using AdministrationApp.ViewModels.NewViewModel.Windows;
 using AdministrationApp.Views;
 using AdministrationApp.Views.AllWindows;
 using AdministrationApp.Views.NewViews.Windows;
@@ -23,6 +24,21 @@ namespace AdministrationApp.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        private string _loggeduser;
+        public string LoggedUser
+        {
+            get
+            {
+                return _loggeduser;
+            }
+            set
+            {
+                if(value != _loggeduser)
+                {
+                    _loggeduser = value;
+                }
+            }
+        }
 
         #region Workspaces
         //
@@ -87,6 +103,12 @@ namespace AdministrationApp.ViewModels
         public MainWindowViewModel()
         {
             Messenger.Default.Register<string>(this, open);
+            Messenger.Default.Register<RestApiUsers>(this, loggeduser);
+
+        }
+        private void loggeduser(RestApiUsers user)
+        {
+            LoggedUser = user.Email;
         }
         private void open(string name)
         {
@@ -125,6 +147,9 @@ namespace AdministrationApp.ViewModels
                 case "Rodzaje drukarekAdd":
                     CreatePrinterTypeWindow();
                     break;
+                case "Modele drukarekAdd":
+                    CreatePrinterModelWindow();
+                    break;
                 case "ChooseUser":
                     ShowUsersWindow();
                     break;
@@ -137,7 +162,9 @@ namespace AdministrationApp.ViewModels
                 case "ChoosePrinterType":
                     ShowPrinterTypeWindow();
                     break;
-
+                case "ChoosePrinterModel":
+                    ShowPrinterModelWindow();
+                    break;
             }
         }
         #endregion
@@ -277,20 +304,6 @@ namespace AdministrationApp.ViewModels
         }
 
 
-        private BaseCommand _ShowPrinterTypeCommand;
-        public ICommand ShowPrinterTypeCommand
-        {
-            get
-            {
-                if (_ShowPrinterTypeCommand == null)
-                {
-                    _ShowPrinterTypeCommand = new BaseCommand(() => ShowPrinterTypeWindow());
-                }
-                return _ShowPrinterTypeCommand;
-            }
-        }
-
-
         #endregion
         #region Funkcje wywolujace okna
         private void CreateComputer()
@@ -379,13 +392,29 @@ namespace AdministrationApp.ViewModels
         }
         private void ShowPrinterTypeWindow()
         {
-            AllPrinterTypeWindow allPrinterTypeWindow= new AllPrinterTypeWindow();
-            allPrinterTypeWindow.Show();
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllPrinterTypeViewModelWindow(window);
+            window.Show();
         }
         private void CreatePrinterTypeWindow()
         {
-            NewPrinterTypeWindow newPrinterTypeWindow = new NewPrinterTypeWindow();
-            newPrinterTypeWindow.Show();
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewPrinterTypeWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowPrinterModelWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllPrinterModelViewModelWindow(window);
+            window.Title="Modele drukarek";
+            window.Show();
+        }
+        private void CreatePrinterModelWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewPrinterModelViewModel(window);
+            window.Title="Modele drukarek";
+            window.Show();
         }
         private void ShowStatusWindow()
         {
@@ -409,8 +438,7 @@ namespace AdministrationApp.ViewModels
             allSimCardWindow.Show();
         }
 
-        
-        
+
         #endregion
     }
 }

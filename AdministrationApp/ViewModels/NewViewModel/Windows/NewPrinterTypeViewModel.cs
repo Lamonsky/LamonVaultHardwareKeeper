@@ -10,23 +10,18 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
     public class NewPrinterTypeWindowViewModel : JedenViewModel<PrinterTypeCreateEditVM>
     {
-        public event EventHandler OnRequestClose;
-        public void CloseWindow(Window window)
-        {
-            if (window != null)
-            {
-                window.Close();
-            }
-        }
+        private Window _window;
         #region Konstruktor
-        public NewPrinterTypeWindowViewModel() : base("Nowy rodzaj drukarki")
+        public NewPrinterTypeWindowViewModel(Window window) : base("Nowy rodzaj drukarki")
         {
             item = new PrinterTypeCreateEditVM();
+            _window = window;
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.SIMCARD, HttpMethod.Post, item, null);
+            await RequestHelper.SendRequestAsync(URLs.PRINTERTYPE, HttpMethod.Post, item, null);
             Messenger.Default.Send("PrinterTypeRefresh");
+            _window.Close();
         }
         #endregion
         #region CommandsFunctions
@@ -86,7 +81,6 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         {
             get
             {
-                //jak lista....
                 if (_statusComboBoxItems == null)
                 {
                     getStatusItems();

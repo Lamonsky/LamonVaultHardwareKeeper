@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QaOwsbRV50/74rhPwmjRGJPj87gBlw19XYLjlAkbbBWTLivsTcC/saFl4vF91COjp2ncSCLpcUP06UD2OXpKNQ==",
+  "dgSpecHash": "XmpDZSboc2K4Bvr6aT+hPZBHhPRf6TZGxSzqlL+632GUDSTxavKA6z+o1IqmUI7GLr81Y6MAsOY/DCr49PuBvQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\damia\\Documents\\Studia\\LamonVaultHardwareKeeper\\AdministrationApp\\AdministrationApp.csproj",
+  "projectFilePath": "C:\\Users\\damia\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\AdministrationApp\\AdministrationApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\damia\\.nuget\\packages\\commonservicelocator\\2.0.2\\commonservicelocator.2.0.2.nupkg.sha512",
     "C:\\Users\\damia\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
