@@ -5,6 +5,9 @@ using Data;
 using GalaSoft.MvvmLight.Messaging;
 using System.Net.Http;
 using System.Windows;
+using System.Windows.Media.Media3D;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {

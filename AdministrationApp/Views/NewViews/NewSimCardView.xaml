@@ -33,8 +33,16 @@
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="Status:"/>
                 <ComboBox Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=statusComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=StatusId, Mode=TwoWay}"/>
                 <TextBlock Grid.Row="0" Grid.Column="4" Text="Komponent:"/>
-                <ComboBox Grid.Row="0" Grid.Column="5" ItemsSource="{Binding Path=componentComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Component, Mode=TwoWay}"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="Kod PIN:"/>
+				<Grid Grid.Row="0" Grid.Column="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3*"/>
+						<ColumnDefinition Width="1*"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0" Text="{Binding Path=SimComponentTypeName}"/>
+					<Button Grid.Column="1" Command="{Binding Path=ChooseSimComponentTypeCommand}">
+						<ui:SymbolIcon Symbol="LocationAdd16"/>
+					</Button>
+				</Grid>                <TextBlock Grid.Row="1" Grid.Column="1" Text="Kod PIN:"/>
                 <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Path=PinCode, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="Kod PUK:"/>
                 <TextBox Grid.Row="1" Grid.Column="5" Text="{Binding Path=PukCode, UpdateSourceTrigger=PropertyChanged}"/>

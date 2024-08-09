@@ -44,10 +44,28 @@
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Model:"/>
-                <ComboBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=modelComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Model, Mode=TwoWay}"/>
-                <TextBlock Grid.Row="1" Grid.Column="4" Text="Typ szafy:"/>
-                <ComboBox Grid.Row="1" Grid.Column="5" ItemsSource="{Binding Path=rackCabinetTypeComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=CabinetType, Mode=TwoWay}"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="Producent:"/>
+				<Grid Grid.Row="1" Grid.Column="2">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3*"/>
+						<ColumnDefinition Width="1*"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0" Text="{Binding Path=RackCabinetModelName}"/>
+					<Button Grid.Column="1" Command="{Binding Path=ChooseRackCabinetModelCommand}">
+						<ui:SymbolIcon Symbol="LocationAdd16"/>
+					</Button>
+				</Grid>                
+				<TextBlock Grid.Row="1" Grid.Column="4" Text="Typ szafy:"/>
+				<Grid Grid.Row="1" Grid.Column="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3*"/>
+						<ColumnDefinition Width="1*"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0" Text="{Binding Path=RackCabinetTypeName}"/>
+					<Button Grid.Column="1" Command="{Binding Path=ChooseRackCabinetTypeCommand}">
+						<ui:SymbolIcon Symbol="LocationAdd16"/>
+					</Button>
+				</Grid>                
+				<TextBlock Grid.Row="2" Grid.Column="1" Text="Producent:"/>
                 <ComboBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding Path=manufacturerComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Manufacturer, Mode=TwoWay}"/>
                 <TextBlock Grid.Row="2" Grid.Column="4" Text="Numer seryjny:"/>
                 <TextBox Grid.Row="2" Grid.Column="5" Text="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>

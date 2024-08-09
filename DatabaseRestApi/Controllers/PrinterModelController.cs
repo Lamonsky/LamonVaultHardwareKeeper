@@ -26,6 +26,22 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(printerModelVM);
         }
+        [Route(URLs.PRINTERMODELCEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> FindItem(int id)
+        {
+            DatabaseContext database = new();
+            PrinterModelCreateEditVM printerModelVM = await database.PrinterModels
+                .Where(item => item.Id == id)
+                .Select(item => new PrinterModelCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+                }).FirstAsync();
+            return Json(printerModelVM);
+        }
         [Route(URLs.PRINTERMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PrinterModelCreateEditVM printerModelCreateEditVM)

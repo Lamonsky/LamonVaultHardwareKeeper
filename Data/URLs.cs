@@ -29,6 +29,7 @@ namespace Data
         public const string PRINTER_ID = "/printer/{id}";
         public const string PRINTERMODEL = "/printermodel";
         public const string PRINTERMODEL_ID = "/printermodel/{id}";
+        public const string PRINTERMODELCEVM_ID = "/printermodelcevm/{id}";
         public const string PRINTERTYPE = "/printertype";
         public const string PRINTERTYPE_ID = "/printertype/{id}";
         public const string PHONE = "/phone";

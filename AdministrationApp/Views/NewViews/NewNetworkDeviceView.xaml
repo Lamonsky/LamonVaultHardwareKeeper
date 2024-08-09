@@ -46,12 +46,28 @@
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Status:"/>
                 <ComboBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=statusComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=StatusId, Mode=TwoWay}"/>
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="Typ Urządzenia:"/>
-                <ComboBox Grid.Row="1" Grid.Column="5" ItemsSource="{Binding Path=networkDeviceTypeComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=MonitorType, Mode=TwoWay}"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="Producent:"/>
+				<Grid Grid.Row="1" Grid.Column="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3*"/>
+						<ColumnDefinition Width="1*"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0" Text="{Binding Path=NetworkDeviceTypeName}"/>
+					<Button Grid.Column="1" Command="{Binding Path=ChooseNetworkDeviceTypeCommand}">
+						<ui:SymbolIcon Symbol="LocationAdd16"/>
+					</Button>
+				</Grid>                <TextBlock Grid.Row="2" Grid.Column="1" Text="Producent:"/>
                 <ComboBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding Path=manufacturerComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Manufacturer, Mode=TwoWay}"/>
                 <TextBlock Grid.Row="2" Grid.Column="4" Text="Model:"/>
-                <ComboBox Grid.Row="2" Grid.Column="5" ItemsSource="{Binding Path=networkDeviceModelComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Model, Mode=TwoWay}"/>
-                <TextBlock Grid.Row="3" Grid.Column="4" Text="Numer seryjny:"/>
+				<Grid Grid.Row="2" Grid.Column="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3*"/>
+						<ColumnDefinition Width="1*"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0" Text="{Binding Path=NetworkDeviceModelName}"/>
+					<Button Grid.Column="1" Command="{Binding Path=ChooseNetworkDeviceModelCommand}">
+						<ui:SymbolIcon Symbol="LocationAdd16"/>
+					</Button>
+				</Grid>                <TextBlock Grid.Row="3" Grid.Column="4" Text="Numer seryjny:"/>
                 <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="3" Grid.Column="1" Text="Numer inwentarzowy"/>
                 <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Path=InventoryNumber, UpdateSourceTrigger=PropertyChanged}"/>

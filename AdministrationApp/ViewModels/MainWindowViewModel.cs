@@ -165,6 +165,85 @@ namespace AdministrationApp.ViewModels
                 case "ChoosePrinterModel":
                     ShowPrinterModelWindow();
                     break;
+                case "ComputerModelAdd":
+                    CreateComputerModelWindow();
+                    break;
+                case "ChooseComputerModel":
+                    ShowComputerModelWindow();
+                    break;
+                case "ComputerTypeAdd":
+                    CreateComputerTypeWindow();
+                    break;
+                case "ChooseComputerType":
+                    ShowComputerTypeWindow();
+                    break;
+                case "DeviceModelAdd":
+                    CreateDeviceModelWindow();
+                    break;
+                case "ChooseDeviceModel":
+                    ShowDeviceModelWindow();
+                    break;
+                case "DeviceTypeAdd":
+                    CreateDeviceTypeWindow();
+                    break;
+                case "ChooseDeviceType":
+                    ShowDeviceTypeWindow();
+                    break;
+                case "MonitorModelAdd":
+                    CreateMonitorModelWindow();
+                    break;
+                case "ChooseMonitorModel":
+                    ShowMonitorModelWindow();
+                    break;
+                case "MonitorTypeAdd":
+                    CreateMonitorTypeWindow();
+                    break;
+                case "ChooseMonitorType":
+                    ShowMonitorTypeWindow();
+                    break;
+                case "NetworkDeviceModelAdd":
+                    CreateNetworkDeviceModelWindow();
+                    break;
+                case "ChooseNetworkDeviceModel":
+                    ShowNetworkDeviceModelWindow();
+                    break;
+                case "NetworkDeviceTypeAdd":
+                    CreateNetworkDeviceTypeWindow();
+                    break;
+                case "ChooseNetworkDeviceType":
+                    ShowNetworkDeviceTypeWindow();
+                    break;
+                case "PhoneModelAdd":
+                    CreatePhoneModelWindow();
+                    break;
+                case "ChoosePhoneModel":
+                    ShowPhoneModelWindow();
+                    break;
+                case "PhoneTypeAdd":
+                    CreatePhoneTypeWindow();
+                    break;
+                case "ChoosePhoneType":
+                    ShowPhoneTypeWindow();
+                    break;
+                case "RackCabinetModelAdd":
+                    CreateRackCabinetModelWindow();
+                    break;
+                case "ChooseRackCabinetModel":
+                    ShowRackCabinetModelWindow();
+                    break;
+                case "RackCabinetTypeAdd":
+                    CreateRackCabinetTypeWindow();
+                    break;
+                case "ChooseRackCabinetType":
+                    ShowRackCabinetTypeWindow();
+                    break;
+                case "SimComponentTypeAdd":
+                    CreateSimComponentTypeWindow();
+                    break;
+                case "ChooseSimComponentType":
+                    ShowSimComponentTypeWindow();
+                    break;
+
             }
         }
         #endregion
@@ -437,6 +516,163 @@ namespace AdministrationApp.ViewModels
             AllSimCardWindow allSimCardWindow = new AllSimCardWindow();
             allSimCardWindow.Show();
         }
+        private void ShowSimComponentTypeWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllSimComponentTypeViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateSimComponentTypeWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewSimComponentTypeWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowRackCabinetTypeWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllRackCabinetTypeViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateRackCabinetTypeWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewRackCabinetTypeWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowRackCabinetModelWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllRackCabinetModelViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateRackCabinetModelWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewRackCabinetModelWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowPhoneTypeWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllPhoneTypeViewModelWindow(window);
+            window.Show();
+        }
+        private void CreatePhoneTypeWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewPhoneTypeWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowPhoneModelWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllPhoneModelViewModelWindow(window);
+            window.Show();
+        }
+        private void CreatePhoneModelWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewPhoneModelWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowNetworkDeviceTypeWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllNetworkDeviceTypeViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateNetworkDeviceTypeWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewNetworkDeviceTypeWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowNetworkDeviceModelWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllNetworkDeviceModelViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateNetworkDeviceModelWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewNetworkDeviceModelWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowMonitorTypeWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllMonitorTypeViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateMonitorTypeWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewMonitorTypeWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowMonitorModelWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllMonitorModelViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateMonitorModelWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewMonitorModelWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowDeviceTypeWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllDeviceTypeViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateDeviceTypeWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewDeviceTypeWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowDeviceModelWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllDeviceModelViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateDeviceModelWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewDeviceModelWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowComputerTypeWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllComputerTypeViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateComputerTypeWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewComputerTypeWindowViewModel(window);
+            window.Show();
+        }
+        private void ShowComputerModelWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllComputerModelViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateComputerModelWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewComputerModelWindowViewModel(window);
+            window.Show();
+        }
+
 
 
         #endregion

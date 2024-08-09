@@ -1,5 +1,10 @@
 ﻿using AdministrationApp.Helpers;
+using AdministrationApp.ViewModels.NewViewModel.Windows;
+using AdministrationApp.Views;
+using AdministrationApp.Views.AllWindows;
+using AdministrationApp.Views.NewViews.Windows;
 using Data;
+using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using GalaSoft.MvvmLight.Messaging;
 using System.Net.Http;
