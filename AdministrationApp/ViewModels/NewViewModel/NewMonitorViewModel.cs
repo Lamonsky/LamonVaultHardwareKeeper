@@ -18,7 +18,55 @@ namespace AdministrationApp.ViewModels.NewViewModel
         #region Commands
         private BaseCommand _ChooseLocationCommand;
         private BaseCommand _ChooseUserCommand;
+        private BaseCommand _ChooseStatusCommand;
+        private BaseCommand _ChooseManufacturerCommand;
+        private BaseCommand _ChooseMonitorModelCommand;
+        private BaseCommand _ChooseMonitorTypeCommand;
 
+        public ICommand ChooseMonitorTypeCommand
+        {
+            get
+            {
+                if (_ChooseMonitorTypeCommand == null)
+                {
+                    _ChooseMonitorTypeCommand = new BaseCommand(() => Messenger.Default.Send("ChooseMonitorType"));
+                }
+                return _ChooseMonitorTypeCommand;
+            }
+        }
+        public ICommand ChooseMonitorModelCommand
+        {
+            get
+            {
+                if (_ChooseMonitorModelCommand == null)
+                {
+                    _ChooseMonitorModelCommand = new BaseCommand(() => Messenger.Default.Send("ChooseMonitorModel"));
+                }
+                return _ChooseMonitorModelCommand;
+            }
+        }
+        public ICommand ChooseManufacturerCommand
+        {
+            get
+            {
+                if (_ChooseManufacturerCommand == null)
+                {
+                    _ChooseManufacturerCommand = new BaseCommand(() => Messenger.Default.Send("ChooseManufacturer"));
+                }
+                return _ChooseManufacturerCommand;
+            }
+        }
+        public ICommand ChooseStatusCommand
+        {
+            get
+            {
+                if (_ChooseStatusCommand == null)
+                {
+                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
+                }
+                return _ChooseStatusCommand;
+            }
+        }
         public ICommand ChooseLocationCommand
         {
             get
@@ -48,6 +96,11 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item = new MonitorsCreateEditVM();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
+            Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
+            Messenger.Default.Register<StatusVM>(this, getStatus);
+            Messenger.Default.Register<MonitorModelVM>(this, getMonitorModel);
+            Messenger.Default.Register<MonitorTypeVM>(this, getMonitorType);
+
         }
         public override async void Save()
         {
@@ -56,31 +109,30 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         #endregion
         #region CommandsFunctions
+        private void getMonitorType(MonitorTypeVM vm)
+        {
+            item.MonitorType = vm.Id;
+            MonitorTypeName = vm.Name;
+        }
+        private void getMonitorModel(MonitorModelVM vm)
+        {
+            item.Model = vm.Id;
+            MonitorModelName = vm.Name;
+        }
+        private void getStatus(StatusVM vm)
+        {
+            item.StatusId = vm.Id;
+            StatusName = vm.Name;
+        }
         private void getChosenUser(UserVM vM)
         {
             item.Users = vM.Id;
             UserName = vM.FirstName + " " + vM.LastName + " " + vM.InternalNumber + " " + vM.Position;
         }
-
-        private async void getMonitorModelItems()
+        private void getManufacturer(ManufacturerVM vm)
         {
-            monitorModelComboBoxItems = await RequestHelper.SendRequestAsync<object, List<MonitorModelVM>>(URLs.MONITORMODEL, HttpMethod.Get, null, null);
-
-        }
-
-        private async void getMonitorTypeItems()
-        {
-            monitorTypeComboBoxItems = await RequestHelper.SendRequestAsync<object, List<MonitorTypeVM>>(URLs.MONITORTYPE, HttpMethod.Get, null, null);
-        }
-
-        private async void getStatusItems()
-        {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, null);
-        }
-
-        private async void getProducentItems()
-        {
-            manufacturerComboBoxItems = await RequestHelper.SendRequestAsync<object, List<ManufacturerVM>>(URLs.MANUFACTURER, HttpMethod.Get, null, null);
+            item.Manufacturer = vm.Id;
+            ManufacturerName = vm.Name;
         }
 
         private void getChosenLokacja(LocationVM vM)
@@ -91,6 +143,74 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
         #endregion
         #region Dane
+        private string _MonitorTypeName;
+        public string MonitorTypeName
+        {
+            get
+            {
+                return _MonitorTypeName;
+            }
+            set
+            {
+                if (_MonitorTypeName == null)
+                {
+                    _MonitorTypeName = value;
+                    OnPropertyChanged(() => MonitorTypeName);
+                }
+
+            }
+        }
+        private string _MonitorModelName;
+        public string MonitorModelName
+        {
+            get
+            {
+                return _MonitorModelName;
+            }
+            set
+            {
+                if (_MonitorModelName == null)
+                {
+                    _MonitorModelName = value;
+                    OnPropertyChanged(() => MonitorModelName);
+                }
+
+            }
+        }
+        private string _StatusName;
+        public string StatusName
+        {
+            get
+            {
+                return _StatusName;
+            }
+            set
+            {
+                if (_StatusName == null)
+                {
+                    _StatusName = value;
+                    OnPropertyChanged(() => StatusName);
+                }
+
+            }
+        }
+        private string _ManufacturerName;
+        public string ManufacturerName
+        {
+            get
+            {
+                return _ManufacturerName;
+            }
+            set
+            {
+                if (_ManufacturerName == null)
+                {
+                    _ManufacturerName = value;
+                    OnPropertyChanged(() => ManufacturerName);
+                }
+
+            }
+        }
         public int Id
         {
             get
@@ -236,80 +356,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
                     _UserName = value;
                     OnPropertyChanged(() => UserName);
                 }
-            }
-        }
-        #endregion
-        #region Foreign Keys
-        private List<ManufacturerVM> _manufacturerComboBoxItems;
-        public List<ManufacturerVM> manufacturerComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_manufacturerComboBoxItems == null)
-                {
-                    getProducentItems();
-                }
-                return _manufacturerComboBoxItems;
-            }
-            set
-            {
-                _manufacturerComboBoxItems = value;
-                OnPropertyChanged(() => manufacturerComboBoxItems);
-            }
-        }
-        private List<StatusVM> _statusComboBoxItems;
-        public List<StatusVM> statusComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_statusComboBoxItems == null)
-                {
-                    getStatusItems();
-                }
-                return _statusComboBoxItems;
-            }
-            set
-            {
-                _statusComboBoxItems = value;
-                OnPropertyChanged(() => statusComboBoxItems);
-            }
-        }
-        private List<MonitorTypeVM> _monitorTypeComboBoxItems;
-        public List<MonitorTypeVM> monitorTypeComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_monitorTypeComboBoxItems == null)
-                {
-                    getMonitorTypeItems();
-                }
-                return _monitorTypeComboBoxItems;
-            }
-            set
-            {
-                _monitorTypeComboBoxItems = value;
-                OnPropertyChanged(() => monitorTypeComboBoxItems);
-            }
-        }
-        private List<MonitorModelVM> _monitorModelComboBoxItems;
-        public List<MonitorModelVM> monitorModelComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_monitorModelComboBoxItems == null)
-                {
-                    getMonitorModelItems();
-                }
-                return _monitorModelComboBoxItems;
-            }
-            set
-            {
-                _monitorModelComboBoxItems = value;
-                OnPropertyChanged(() => monitorModelComboBoxItems);
             }
         }
         #endregion

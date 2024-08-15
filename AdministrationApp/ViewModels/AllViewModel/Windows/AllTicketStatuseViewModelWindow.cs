@@ -8,12 +8,12 @@ using System.Windows;
 
 namespace AdministrationApp.ViewModels.AllViewModel
 {
-    class AllTicketStatuseViewModelWindow : WszystkieViewModel<TicketStatuseVM>
+    class AllTicketStatuseViewModelWindow : WszystkieViewModel<TicketStatusVM>
     {
         private Window _window;
 
-        private TicketStatuseVM _ChosenItem;
-        public TicketStatuseVM ChosenItem
+        private TicketStatusVM _ChosenItem;
+        public TicketStatusVM ChosenItem
         {
             set
             {
@@ -62,12 +62,12 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<TicketStatuseVM>>(URLs.TICKETSTATUSE, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<TicketStatusVM>>(URLs.TICKETSTATUS, HttpMethod.Get, null, null);
         }
 
         public async override void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.TICKETSTATUSE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
+            await RequestHelper.SendRequestAsync(URLs.TICKETSTATUS_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
         }
 

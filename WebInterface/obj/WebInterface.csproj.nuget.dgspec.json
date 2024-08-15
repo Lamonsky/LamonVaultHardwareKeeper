@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj": {}
+    "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj": {
+    "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj",
+        "projectUniqueName": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj",
         "projectName": "WebInterface",
-        "projectPath": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj",
+        "projectPath": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj",
         "packagesPath": "C:\\Users\\dlamonski\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\obj\\",
+        "outputPath": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dlamonski\\AppData\\Roaming\\NuGet\\NuGet.Config",

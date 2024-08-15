@@ -20,7 +20,55 @@ namespace AdministrationApp.ViewModels.NewViewModel
         private BaseCommand _ChooseUserCommand;
         private BaseCommand _ChooseSimCard1Command;
         private BaseCommand _ChooseSimCard2Command;
+        private BaseCommand _ChooseStatusCommand;
+        private BaseCommand _ChooseManufacturerCommand;
+        private BaseCommand _ChoosePhoneModelCommand;
+        private BaseCommand _ChoosePhoneTypeCommand;
 
+        public ICommand ChoosePhoneTypeCommand
+        {
+            get
+            {
+                if (_ChoosePhoneTypeCommand == null)
+                {
+                    _ChoosePhoneTypeCommand = new BaseCommand(() => Messenger.Default.Send("ChoosePhoneType"));
+                }
+                return _ChoosePhoneTypeCommand;
+            }
+        }
+        public ICommand ChoosePhoneModelCommand
+        {
+            get
+            {
+                if (_ChoosePhoneModelCommand == null)
+                {
+                    _ChoosePhoneModelCommand = new BaseCommand(() => Messenger.Default.Send("ChoosePhoneModel"));
+                }
+                return _ChoosePhoneModelCommand;
+            }
+        }
+        public ICommand ChooseManufacturerCommand
+        {
+            get
+            {
+                if (_ChooseManufacturerCommand == null)
+                {
+                    _ChooseManufacturerCommand = new BaseCommand(() => Messenger.Default.Send("ChooseManufacturer"));
+                }
+                return _ChooseManufacturerCommand;
+            }
+        }
+        public ICommand ChooseStatusCommand
+        {
+            get
+            {
+                if (_ChooseStatusCommand == null)
+                {
+                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
+                }
+                return _ChooseStatusCommand;
+            }
+        }
         public ICommand ChooseLocationCommand
         {
             get
@@ -74,6 +122,9 @@ namespace AdministrationApp.ViewModels.NewViewModel
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<SimCardsVM>(this, getChosenSimCard1);
             Messenger.Default.Register<SimCardsVM>(this, getChosenSimCard2);
+            Messenger.Default.Register<StatusVM>(this, getStatus);
+            Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
+
         }
         public override async void Save()
         {
@@ -82,6 +133,16 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         #endregion
         #region CommandsFunctions
+        private void getManufacturer(ManufacturerVM vm)
+        {
+            item.Manufacturer = vm.Id;
+            ManufacturerName = vm.Name;
+        }
+        private void getStatus(StatusVM vm)
+        {
+            item.StatusId = vm.Id;
+            StatusName = vm.Name;
+        }
         private void getChosenUser(UserVM vM)
         {
             item.Users = vM.Id;
@@ -97,26 +158,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item.SimCard2 = scvm2.Id;
             SimCard2S = scvm2.PhoneNumber + " " + scvm2.InventoryNumber + " " + scvm2.SerialNumber;
         }
-        private async void getModelItems()
-        {
-            modelComboBoxItems = await RequestHelper.SendRequestAsync<object, List<PhoneModelVM>>(URLs.PHONEMODEL, HttpMethod.Get, null, null);
-
-        }
-
-        private async void getPhoneTypeItems()
-        {
-            phoneTypeComboBoxItems = await RequestHelper.SendRequestAsync<object, List<PhoneTypeVM>>(URLs.PHONETYPE, HttpMethod.Get, null, null);
-        }
-
-        private async void getStatusItems()
-        {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, null);
-        }
-
-        private async void getProducentItems()
-        {
-            manufacturerComboBoxItems = await RequestHelper.SendRequestAsync<object, List<ManufacturerVM>>(URLs.MANUFACTURER, HttpMethod.Get, null, null);
-        }
         private void getChosenLokacja(LocationVM vM)
         {
             item.LocationId = vM.Id;
@@ -130,6 +171,40 @@ namespace AdministrationApp.ViewModels.NewViewModel
             get
             {
                 return item.Id;
+            }
+        }
+        private string _ManufacturerName;
+        public string ManufacturerName
+        {
+            get
+            {
+                return _ManufacturerName;
+            }
+            set
+            {
+                if (_ManufacturerName == null)
+                {
+                    _ManufacturerName = value;
+                    OnPropertyChanged(() => ManufacturerName);
+                }
+
+            }
+        }
+        private string _StatusName;
+        public string StatusName
+        {
+            get
+            {
+                return _StatusName;
+            }
+            set
+            {
+                if (_StatusName == null)
+                {
+                    _StatusName = value;
+                    OnPropertyChanged(() => StatusName);
+                }
+
             }
         }
         public string? Name
@@ -320,80 +395,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
                     _UserName = value;
                     OnPropertyChanged(() => UserName);
                 }
-            }
-        }
-        #endregion
-        #region Foreign Keys
-        private List<ManufacturerVM> _manufacturerComboBoxItems;
-        public List<ManufacturerVM> manufacturerComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_manufacturerComboBoxItems == null)
-                {
-                    getProducentItems();
-                }
-                return _manufacturerComboBoxItems;
-            }
-            set
-            {
-                _manufacturerComboBoxItems = value;
-                OnPropertyChanged(() => manufacturerComboBoxItems);
-            }
-        }
-        private List<StatusVM> _statusComboBoxItems;
-        public List<StatusVM> statusComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_statusComboBoxItems == null)
-                {
-                    getStatusItems();
-                }
-                return _statusComboBoxItems;
-            }
-            set
-            {
-                _statusComboBoxItems = value;
-                OnPropertyChanged(() => statusComboBoxItems);
-            }
-        }
-        private List<PhoneTypeVM> _phoneTypeComboBoxItems;
-        public List<PhoneTypeVM> phoneTypeComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_phoneTypeComboBoxItems == null)
-                {
-                    getPhoneTypeItems();
-                }
-                return _phoneTypeComboBoxItems;
-            }
-            set
-            {
-                _phoneTypeComboBoxItems = value;
-                OnPropertyChanged(() => phoneTypeComboBoxItems);
-            }
-        }
-        private List<PhoneModelVM> _modelComboBoxItems;
-        public List<PhoneModelVM> modelComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_modelComboBoxItems == null)
-                {
-                    getModelItems();
-                }
-                return _modelComboBoxItems;
-            }
-            set
-            {
-                _modelComboBoxItems = value;
-                OnPropertyChanged(() => modelComboBoxItems);
             }
         }
         #endregion

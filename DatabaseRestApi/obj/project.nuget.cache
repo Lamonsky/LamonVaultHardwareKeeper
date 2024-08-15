@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s7+IWy80pByQ4KE5j5i9fE2FxwHwFmya8C5wSkPWVoveonnRuUooPB/L2yssDQKy9ASu18FvazcJjjZ3cmIfWg==",
+  "dgSpecHash": "B+JWC6PJFUQgg1686tzoXy0AgZDKOb9+QfcR/heSbaTr/c6igX52NmNFVxp/i89ShpF4++75v6ZIpGTTthMjPA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\DatabaseRestApi\\DatabaseRestApi.csproj",
+  "projectFilePath": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\DatabaseRestApi\\DatabaseRestApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dlamonski\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\dlamonski\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

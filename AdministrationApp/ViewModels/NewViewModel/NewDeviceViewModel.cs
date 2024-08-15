@@ -12,6 +12,55 @@ namespace AdministrationApp.ViewModels.NewViewModel
     {
         #region Commands
         private BaseCommand _ChooseUserCommand;
+        private BaseCommand _ChooseStatusCommand;
+        private BaseCommand _ChooseDeviceModelCommand;
+        private BaseCommand _ChooseDeviceTypeCommand;
+        private BaseCommand _ChooseManufacturerCommand;
+
+        public ICommand ChooseManufacturerCommand
+        {
+            get
+            {
+                if (_ChooseManufacturerCommand == null)
+                {
+                    _ChooseManufacturerCommand = new BaseCommand(() => Messenger.Default.Send("ChooseManufacturer"));
+                }
+                return _ChooseManufacturerCommand;
+            }
+        }
+        public ICommand ChooseDeviceTypeCommand
+        {
+            get
+            {
+                if (_ChooseDeviceTypeCommand == null)
+                {
+                    _ChooseDeviceTypeCommand = new BaseCommand(() => Messenger.Default.Send("ChooseDeviceType"));
+                }
+                return _ChooseDeviceTypeCommand;
+            }
+        }
+        public ICommand ChooseDeviceModelCommand
+        {
+            get
+            {
+                if (_ChooseDeviceModelCommand == null)
+                {
+                    _ChooseDeviceModelCommand = new BaseCommand(() => Messenger.Default.Send("ChooseDeviceModel"));
+                }
+                return _ChooseDeviceModelCommand;
+            }
+        }
+        public ICommand ChooseStatusCommand
+        {
+            get
+            {
+                if (_ChooseStatusCommand == null)
+                {
+                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
+                }
+                return _ChooseStatusCommand;
+            }
+        }
         public ICommand ChooseUserCommand
         {
             get
@@ -29,6 +78,10 @@ namespace AdministrationApp.ViewModels.NewViewModel
         {
             item = new DevicesCreateEditVM();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
+            Messenger.Default.Register<DeviceModelVM>(this, getDeviceModel);
+            Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
+            Messenger.Default.Register<StatusVM>(this, getStatus);
+
         }
         public override async void Save()
         {
@@ -37,40 +90,85 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         #endregion
         #region CommandsFunctions
+        private void getStatus(StatusVM vm)
+        {
+            item.StatusId = vm.Id;
+            StatusName = vm.Name;
+        }
         private void getChosenUser(UserVM vM)
         {
             item.Users = vM.Id;
             UserName = vM.FirstName + " " + vM.LastName + " " + vM.InternalNumber + " " + vM.Position;
         }
-
-        private async void getDeviceModelItems()
+        private void getManufacturer(ManufacturerVM vm)
         {
-            deviceModelComboBoxItems = await RequestHelper.SendRequestAsync<object, List<DeviceModelVM>>(URLs.DEVICEMODEL, HttpMethod.Get, null, null);
-
+            item.Manufacturer = vm.Id;
+            ManufacturerName = vm.Name;
         }
-
-        private async void getDeviceTypeItems()
+        private void getDeviceModel(DeviceModelVM vm)
         {
-            deviceTypeComboBoxItems = await RequestHelper.SendRequestAsync<object, List<DeviceTypeVM>>(URLs.DEVICETYPE, HttpMethod.Get, null, null);
-        }
-
-        private async void getStatusItems()
-        {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, null);
-        }
-
-        private async void getProducentItems()
-        {
-            manufacturerComboBoxItems = await RequestHelper.SendRequestAsync<object, List<ManufacturerVM>>(URLs.MANUFACTURER, HttpMethod.Get, null, null);
+            item.Model = vm.Id;
+            DeviceModelName = vm.Name;
         }
 
         #endregion
         #region Dane
+        private string _ManufacturerName;
+        public string ManufacturerName
+        {
+            get
+            {
+                return _ManufacturerName;
+            }
+            set
+            {
+                if (_ManufacturerName == null)
+                {
+                    _ManufacturerName = value;
+                    OnPropertyChanged(() => ManufacturerName);
+                }
+
+            }
+        }
+        private string _StatusName;
+        public string StatusName
+        {
+            get
+            {
+                return _StatusName;
+            }
+            set
+            {
+                if (_StatusName == null)
+                {
+                    _StatusName = value;
+                    OnPropertyChanged(() => StatusName);
+                }
+
+            }
+        }
         public int Id
         {
             get
             {
                 return item.Id;
+            }
+        }
+        private string _DeviceModelName;
+        public string DeviceModelName
+        {
+            get
+            {
+                return _DeviceModelName;
+            }
+            set
+            {
+                if (_DeviceModelName == null)
+                {
+                    _DeviceModelName = value;
+                    OnPropertyChanged(() => DeviceModelName);
+                }
+
             }
         }
         public string? Name
@@ -183,80 +281,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
                     _UserName = value;
                     OnPropertyChanged(() => UserName);
                 }
-            }
-        }
-        #endregion
-        #region Foreign Keys
-        private List<ManufacturerVM> _manufacturerComboBoxItems;
-        public List<ManufacturerVM> manufacturerComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_manufacturerComboBoxItems == null)
-                {
-                    getProducentItems();
-                }
-                return _manufacturerComboBoxItems;
-            }
-            set
-            {
-                _manufacturerComboBoxItems = value;
-                OnPropertyChanged(() => manufacturerComboBoxItems);
-            }
-        }
-        private List<StatusVM> _statusComboBoxItems;
-        public List<StatusVM> statusComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_statusComboBoxItems == null)
-                {
-                    getStatusItems();
-                }
-                return _statusComboBoxItems;
-            }
-            set
-            {
-                _statusComboBoxItems = value;
-                OnPropertyChanged(() => statusComboBoxItems);
-            }
-        }
-        private List<DeviceTypeVM> _deviceTypeComboBoxItems;
-        public List<DeviceTypeVM> deviceTypeComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_deviceTypeComboBoxItems == null)
-                {
-                    getDeviceTypeItems();
-                }
-                return _deviceTypeComboBoxItems;
-            }
-            set
-            {
-                _deviceTypeComboBoxItems = value;
-                OnPropertyChanged(() => deviceTypeComboBoxItems);
-            }
-        }
-        private List<DeviceModelVM> _deviceModelComboBoxItems;
-        public List<DeviceModelVM> deviceModelComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_deviceModelComboBoxItems == null)
-                {
-                    getDeviceModelItems();
-                }
-                return _deviceModelComboBoxItems;
-            }
-            set
-            {
-                _deviceModelComboBoxItems = value;
-                OnPropertyChanged(() => deviceModelComboBoxItems);
             }
         }
         #endregion

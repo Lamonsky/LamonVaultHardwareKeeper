@@ -44,7 +44,16 @@
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Status:"/>
-                <ComboBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=statusComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=StatusId, Mode=TwoWay}"/>
+                <Grid Grid.Row="1" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Path=StatusName}"/>
+                    <Button Grid.Column="1" Command="{Binding Path=ChooseStatusCommand}">
+                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                    </Button>
+                </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="Typ Urządzenia:"/>
 				<Grid Grid.Row="1" Grid.Column="5">
 					<Grid.ColumnDefinitions>
@@ -55,8 +64,18 @@
 					<Button Grid.Column="1" Command="{Binding Path=ChooseDeviceTypeCommand}">
 						<ui:SymbolIcon Symbol="LocationAdd16"/>
 					</Button>
-				</Grid>                <TextBlock Grid.Row="2" Grid.Column="1" Text="Producent:"/>
-                <ComboBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding Path=manufacturerComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Manufacturer, Mode=TwoWay}"/>
+				</Grid>                
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="Producent:"/>
+                <Grid Grid.Row="2" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Path=ManufacturerName}"/>
+                    <Button Grid.Column="1" Command="{Binding Path=ChooseManufacturerCommand}">
+                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                    </Button>
+                </Grid>
                 <TextBlock Grid.Row="2" Grid.Column="4" Text="Model:"/>
 				<Grid Grid.Row="2" Grid.Column="5">
 					<Grid.ColumnDefinitions>

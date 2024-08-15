@@ -18,7 +18,67 @@ namespace AdministrationApp.ViewModels.NewViewModel
         #region Commands
         private BaseCommand _ChooseLocationCommand;
         private BaseCommand _ChooseUserCommand;
+        private BaseCommand _ChooseStatusCommand;
+        private BaseCommand _ChooseManufacturerCommand;
+        private BaseCommand _ChooseNetworkDeviceModelCommand;
+        private BaseCommand _ChooseNetworkDeviceTypeCommand;
+        private BaseCommand _ChooseRackCabinetCommand;
 
+        public ICommand ChooseRackCabinetCommand
+        {
+            get
+            {
+                if (_ChooseRackCabinetCommand == null)
+                {
+                    _ChooseRackCabinetCommand = new BaseCommand(() => Messenger.Default.Send("ChooseRackCabinet"));
+                }
+                return _ChooseRackCabinetCommand;
+            }
+        }
+        public ICommand ChooseNetworkDeviceTypeCommand
+        {
+            get
+            {
+                if (_ChooseNetworkDeviceTypeCommand == null)
+                {
+                    _ChooseNetworkDeviceTypeCommand = new BaseCommand(() => Messenger.Default.Send("ChooseNetworkDeviceType"));
+                }
+                return _ChooseNetworkDeviceTypeCommand;
+            }
+        }
+        public ICommand ChooseNetworkDeviceModelCommand
+        {
+            get
+            {
+                if (_ChooseNetworkDeviceModelCommand == null)
+                {
+                    _ChooseNetworkDeviceModelCommand = new BaseCommand(() => Messenger.Default.Send("ChooseNetworkDeviceModel"));
+                }
+                return _ChooseNetworkDeviceModelCommand;
+            }
+        }
+        public ICommand ChooseManufacturerCommand
+        {
+            get
+            {
+                if (_ChooseManufacturerCommand == null)
+                {
+                    _ChooseManufacturerCommand = new BaseCommand(() => Messenger.Default.Send("ChooseManufacturer"));
+                }
+                return _ChooseManufacturerCommand;
+            }
+        }
+        public ICommand ChooseStatusCommand
+        {
+            get
+            {
+                if (_ChooseStatusCommand == null)
+                {
+                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
+                }
+                return _ChooseStatusCommand;
+            }
+        }
         public ICommand ChooseLocationCommand
         {
             get
@@ -48,6 +108,10 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item = new NetworkDeviceCreateEditVM();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
+            Messenger.Default.Register<StatusVM>(this, getStatus);
+            Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
+            Messenger.Default.Register<RackCabinetVM>(this, getRackCabinet);
+
         }
         public override async void Save()
         {
@@ -56,44 +120,84 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         #endregion
         #region CommandsFunctions
+        private void getStatus(StatusVM vm)
+        {
+            item.StatusId = vm.Id;
+            StatusName = vm.Name;
+        }
+        private void getRackCabinet(RackCabinetVM vm)
+        {
+            item.Rack = vm.Id;
+            RackCabinetName = vm.Manufacturer + " " + vm.Model + " " + vm.Location + " " + vm.InventoryNumber;
+        }
         private void getChosenUser(UserVM vM)
         {
             item.Users = vM.Id;
             UserName = vM.FirstName + " " + vM.LastName + " " + vM.InternalNumber + " " + vM.Position;
-        }
-
-        private async void getNetworkDeviceModelItems()
-        {
-            networkDeviceModelComboBoxItems = await RequestHelper.SendRequestAsync<object, List<NetworkDeviceModelVM>>(URLs.NETWORKDEVICEMODEL, HttpMethod.Get, null, null);
-
-        }
-
-        private async void getNetworkDeviceTypeItems()
-        {
-            networkDeviceTypeComboBoxItems = await RequestHelper.SendRequestAsync<object, List<NetworkDeviceTypeVM>>(URLs.NETWORKDEVICETYPE, HttpMethod.Get, null, null);
-        }
-
-        private async void getStatusItems()
-        {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, null);
-        }
-
-        private async void getProducentItems()
-        {
-            manufacturerComboBoxItems = await RequestHelper.SendRequestAsync<object, List<ManufacturerVM>>(URLs.MANUFACTURER, HttpMethod.Get, null, null);
-        }
-        private async void getRackItems()
-        {
-            rackComboBoxItems = await RequestHelper.SendRequestAsync<object, List<RackCabinetVM>>(URLs.RACKCABINET, HttpMethod.Get, null, null);
         }
         private void getChosenLokacja(LocationVM vM)
         {
             item.LocationId = vM.Id;
             LokacjaName = vM.Name;
         }
-
+        private void getManufacturer(ManufacturerVM vm)
+        {
+            item.Manufacturer = vm.Id;
+            ManufacturerName = vm.Name;
+        }
         #endregion
         #region Dane
+        private string _RackCabinetName;
+        public string RackCabinetName
+        {
+            get
+            {
+                return _RackCabinetName;
+            }
+            set
+            {
+                if (_RackCabinetName == null)
+                {
+                    _RackCabinetName = value;
+                    OnPropertyChanged(() => RackCabinetName);
+                }
+
+            }
+        }
+        private string _StatusName;
+        public string StatusName
+        {
+            get
+            {
+                return _StatusName;
+            }
+            set
+            {
+                if (_StatusName == null)
+                {
+                    _StatusName = value;
+                    OnPropertyChanged(() => StatusName);
+                }
+
+            }
+        }
+        private string _ManufacturerName;
+        public string ManufacturerName
+        {
+            get
+            {
+                return _ManufacturerName;
+            }
+            set
+            {
+                if (_ManufacturerName == null)
+                {
+                    _ManufacturerName = value;
+                    OnPropertyChanged(() => ManufacturerName);
+                }
+
+            }
+        }
         public int Id
         {
             get
@@ -251,98 +355,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
                     _UserName = value;
                     OnPropertyChanged(() => UserName);
                 }
-            }
-        }
-        #endregion
-        #region Foreign Keys
-        private List<ManufacturerVM> _manufacturerComboBoxItems;
-        public List<ManufacturerVM> manufacturerComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_manufacturerComboBoxItems == null)
-                {
-                    getProducentItems();
-                }
-                return _manufacturerComboBoxItems;
-            }
-            set
-            {
-                _manufacturerComboBoxItems = value;
-                OnPropertyChanged(() => manufacturerComboBoxItems);
-            }
-        }
-        private List<RackCabinetVM> _rackComboBoxItems;
-        public List<RackCabinetVM> rackComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_rackComboBoxItems == null)
-                {
-                    getProducentItems();
-                }
-                return _rackComboBoxItems;
-            }
-            set
-            {
-                _rackComboBoxItems = value;
-                OnPropertyChanged(() => rackComboBoxItems);
-            }
-        }
-        private List<StatusVM> _statusComboBoxItems;
-        public List<StatusVM> statusComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_statusComboBoxItems == null)
-                {
-                    getStatusItems();
-                }
-                return _statusComboBoxItems;
-            }
-            set
-            {
-                _statusComboBoxItems = value;
-                OnPropertyChanged(() => statusComboBoxItems);
-            }
-        }
-        private List<NetworkDeviceTypeVM> _networkDeviceTypeComboBoxItems;
-        public List<NetworkDeviceTypeVM> networkDeviceTypeComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_networkDeviceTypeComboBoxItems == null)
-                {
-                    getNetworkDeviceTypeItems();
-                }
-                return _networkDeviceTypeComboBoxItems;
-            }
-            set
-            {
-                _networkDeviceTypeComboBoxItems = value;
-                OnPropertyChanged(() => networkDeviceTypeComboBoxItems);
-            }
-        }
-        private List<NetworkDeviceModelVM> _networkDeviceModelComboBoxItems;
-        public List<NetworkDeviceModelVM> networkDeviceModelComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_networkDeviceModelComboBoxItems == null)
-                {
-                    getNetworkDeviceModelItems();
-                }
-                return _networkDeviceModelComboBoxItems;
-            }
-            set
-            {
-                _networkDeviceModelComboBoxItems = value;
-                OnPropertyChanged(() => networkDeviceModelComboBoxItems);
             }
         }
         #endregion

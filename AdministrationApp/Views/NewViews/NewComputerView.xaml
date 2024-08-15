@@ -47,7 +47,16 @@
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Status:"/>
-                <ComboBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=statusComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=StatusId, Mode=TwoWay}"/>
+                <Grid Grid.Row="1" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Path=StatusName}"/>
+                    <Button Grid.Column="1" Command="{Binding Path=ChooseStatusCommand}">
+                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                    </Button>
+                </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="Typ Komputera:"/>
 				<Grid Grid.Row="1" Grid.Column="5">
 					<Grid.ColumnDefinitions>
@@ -60,7 +69,16 @@
 					</Button>
 				</Grid>
 				<TextBlock Grid.Row="2" Grid.Column="1" Text="Producent:"/>
-                <ComboBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding Path=manufacturerComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=ManufacturerId, Mode=TwoWay}"/>
+                <Grid Grid.Row="2" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Path=ManufacturerName}"/>
+                    <Button Grid.Column="1" Command="{Binding Path=ChooseManufacturerCommand}">
+                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                    </Button>
+                </Grid>
                 <TextBlock Grid.Row="2" Grid.Column="4" Text="Model:"/>
 				<Grid Grid.Row="2" Grid.Column="5">
 					<Grid.ColumnDefinitions>
@@ -71,7 +89,8 @@
 					<Button Grid.Column="1" Command="{Binding Path=ChooseComputerModelCommand}">
 						<ui:SymbolIcon Symbol="LocationAdd16"/>
 					</Button>
-				</Grid>                <TextBlock Grid.Row="3" Grid.Column="1" Text="Procesor:"/>
+				</Grid>                
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="Procesor:"/>
                 <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Path=Processor, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="3" Grid.Column="4" Text="Pamięć RAM:"/>
                 <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding Path=Ram, UpdateSourceTrigger=PropertyChanged}"/>
@@ -80,7 +99,16 @@
                 <TextBlock Grid.Row="4" Grid.Column="4" Text="Karta Graficzna"/>
                 <TextBox Grid.Row="4" Grid.Column="5" Text="{Binding Path=GraphicsCard, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="5" Grid.Column="1" Text="System operacyjny"/>
-                <ComboBox Grid.Row="5" Grid.Column="2" ItemsSource="{Binding Path=osComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=OperatingSystemId, Mode=TwoWay}"/>
+                <Grid Grid.Row="5" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Path=OperatingSystemName}"/>
+                    <Button Grid.Column="1" Command="{Binding Path=ChooseOperatingSystemCommand}">
+                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                    </Button>
+                </Grid>
                 <TextBlock Grid.Row="5" Grid.Column="4" Text="Numer seryjny:"/>
                 <TextBox Grid.Row="5" Grid.Column="5" Text="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="6" Grid.Column="1" Text="Numer inwentarzowy"/>

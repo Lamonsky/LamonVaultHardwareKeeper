@@ -31,7 +31,16 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="Status:"/>
-                <ComboBox Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=statusComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=StatusId, Mode=TwoWay}"/>
+                <Grid Grid.Row="0" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Path=StatusName}"/>
+                    <Button Grid.Column="1" Command="{Binding Path=ChooseStatusCommand}">
+                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                    </Button>
+                </Grid>
                 <TextBlock Grid.Row="0" Grid.Column="4" Text="Komponent:"/>
 				<Grid Grid.Row="0" Grid.Column="5">
 					<Grid.ColumnDefinitions>

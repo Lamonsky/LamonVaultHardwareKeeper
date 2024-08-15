@@ -9,18 +9,18 @@ using System.Windows;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewGroupsTypeViewModel : JedenViewModel<NewGroupsTypeCreateEditVM>
+    public class NewGroupsTypeViewModel : JedenViewModel<GroupTypeCreateEditVM>
     {
         private Window _window;
         #region Konstruktor
         public NewGroupsTypeViewModel(Window window) : base("GroupsType")
         {
-            item = new GroupsTypeCreateEditVM();
+            item = new GroupTypeCreateEditVM();
             _window = window;
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.GROUPSTYPE, HttpMethod.Post, item, null);
+            await RequestHelper.SendRequestAsync(URLs.GROUPTYPE, HttpMethod.Post, item, null);
             Messenger.Default.Send("GroupsTypeRefresh");
             _window.Close();
         }

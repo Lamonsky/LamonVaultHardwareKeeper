@@ -20,7 +20,31 @@ namespace AdministrationApp.ViewModels.NewViewModel
         private BaseCommand _ChooseUserCommand;
         private BaseCommand _ChoosePrinterTypeCommand;
         private BaseCommand _ChoosePrinterModelCommand;
+        private BaseCommand _ChooseStatusCommand;
+        private BaseCommand _ChooseManufacturerCommand;
 
+        public ICommand ChooseManufacturerCommand
+        {
+            get
+            {
+                if (_ChooseManufacturerCommand == null)
+                {
+                    _ChooseManufacturerCommand = new BaseCommand(() => Messenger.Default.Send("ChooseManufacturer"));
+                }
+                return _ChooseManufacturerCommand;
+            }
+        }
+        public ICommand ChooseStatusCommand
+        {
+            get
+            {
+                if (_ChooseStatusCommand == null)
+                {
+                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
+                }
+                return _ChooseStatusCommand;
+            }
+        }
         public ICommand ChooseLocationCommand
         {
             get

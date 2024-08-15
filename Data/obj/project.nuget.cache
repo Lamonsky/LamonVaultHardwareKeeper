@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "apiXCn7fzHI1Ixp0Q8XiHPx/FWhhXMpwf44ypm70wIT678JZsDvaSKgOzTywwBAGwHtQro6TDKdXRPmkQs/SJQ==",
+  "dgSpecHash": "H5kmP5O9nLCUrEmjYeB5OdNmYuPESi5K80HwN8SQk0i8jQ9vJHWiSew7+WYkfC0O4CkJi2KowZEaKatrfVTd5w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\Data\\Data.csproj",
+  "projectFilePath": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\Data\\Data.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -8,12 +8,12 @@ using System.Windows;
 
 namespace AdministrationApp.ViewModels.AllViewModel
 {
-    class AllGroupsTypeViewModelWindow : WszystkieViewModel<GroupsTypeVM>
+    class AllGroupsTypeViewModelWindow : WszystkieViewModel<GroupTypeVM>
     {
         private Window _window;
 
-        private GroupsTypeVM _ChosenItem;
-        public GroupsTypeVM ChosenItem
+        private GroupTypeVM _ChosenItem;
+        public GroupTypeVM ChosenItem
         {
             set
             {
@@ -62,12 +62,12 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<GroupsTypeVM>>(URLs.GROUPSTYPE, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<GroupTypeVM>>(URLs.GROUPTYPE, HttpMethod.Get, null, null);
         }
 
         public async override void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.GROUPSTYPE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
+            await RequestHelper.SendRequestAsync(URLs.GROUPTYPE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
         }
 

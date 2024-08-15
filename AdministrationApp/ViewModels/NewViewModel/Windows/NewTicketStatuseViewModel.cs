@@ -9,18 +9,18 @@ using System.Windows;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewTicketStatuseViewModel : JedenViewModel<NewTicketStatuseCreateEditVM>
+    public class NewTicketStatuseViewModel : JedenViewModel<TicketStatusCreateEditVM>
     {
         private Window _window;
         #region Konstruktor
-        public NewTicketStatuseViewModel(Window window) : base("TicketStatuse")
+        public NewTicketStatuseViewModel(Window window) : base("TicketStatus")
         {
-            item = new TicketStatuseCreateEditVM();
+            item = new TicketStatusCreateEditVM();
             _window = window;
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.TICKETSTATUSE, HttpMethod.Post, item, null);
+            await RequestHelper.SendRequestAsync(URLs.TICKETSTATUS, HttpMethod.Post, item, null);
             Messenger.Default.Send("TicketStatuseRefresh");
             _window.Close();
         }

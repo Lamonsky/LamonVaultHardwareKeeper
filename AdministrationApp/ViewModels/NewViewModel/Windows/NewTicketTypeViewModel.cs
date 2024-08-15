@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewTicketTypeViewModel : JedenViewModel<NewTicketTypeCreateEditVM>
+    public class NewTicketTypeViewModel : JedenViewModel<TicketTypeCreateEditVM>
     {
         private Window _window;
         #region Konstruktor

@@ -243,7 +243,15 @@ namespace AdministrationApp.ViewModels
                 case "ChooseSimComponentType":
                     ShowSimComponentTypeWindow();
                     break;
-
+                case "ChooseStatus":
+                    ShowStatusWindow(); 
+                    break;
+                case "ChooseManufacturer":
+                    ShowManufacturerWindow();
+                    break;
+                case "ChooseOperatingSystem":
+                    ShowOperatingSystemWindow();
+                    break;
             }
         }
         #endregion
@@ -501,6 +509,13 @@ namespace AdministrationApp.ViewModels
             allStatusWindow.Show();
 
         }
+        private void ShowManufacturerWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllManufacturerViewModelWindow(window);
+            window.Show();
+
+        }
         private void ShowUsersWindow()
         {
             AllUsersWindow allUsersWindow = new AllUsersWindow();
@@ -525,7 +540,7 @@ namespace AdministrationApp.ViewModels
         private void CreateSimComponentTypeWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewSimComponentTypeWindowViewModel(window);
+            window.DataContext = new NewSimComponentTypeViewModel(window);
             window.Show();
         }
         private void ShowRackCabinetTypeWindow()
@@ -537,7 +552,7 @@ namespace AdministrationApp.ViewModels
         private void CreateRackCabinetTypeWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewRackCabinetTypeWindowViewModel(window);
+            window.DataContext = new NewRackCabinetTypeViewModel(window);
             window.Show();
         }
         private void ShowRackCabinetModelWindow()
@@ -549,7 +564,7 @@ namespace AdministrationApp.ViewModels
         private void CreateRackCabinetModelWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewRackCabinetModelWindowViewModel(window);
+            window.DataContext = new NewRackCabinetModelViewModel(window);
             window.Show();
         }
         private void ShowPhoneTypeWindow()
@@ -561,7 +576,7 @@ namespace AdministrationApp.ViewModels
         private void CreatePhoneTypeWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewPhoneTypeWindowViewModel(window);
+            window.DataContext = new NewPhoneTypeViewModel(window);
             window.Show();
         }
         private void ShowPhoneModelWindow()
@@ -573,7 +588,7 @@ namespace AdministrationApp.ViewModels
         private void CreatePhoneModelWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewPhoneModelWindowViewModel(window);
+            window.DataContext = new NewPhoneModelViewModel(window);
             window.Show();
         }
         private void ShowNetworkDeviceTypeWindow()
@@ -585,7 +600,7 @@ namespace AdministrationApp.ViewModels
         private void CreateNetworkDeviceTypeWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewNetworkDeviceTypeWindowViewModel(window);
+            window.DataContext = new NewNetworkDeviceTypeViewModel(window);
             window.Show();
         }
         private void ShowNetworkDeviceModelWindow()
@@ -597,7 +612,7 @@ namespace AdministrationApp.ViewModels
         private void CreateNetworkDeviceModelWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewNetworkDeviceModelWindowViewModel(window);
+            window.DataContext = new NewNetworkDeviceModelViewModel(window);
             window.Show();
         }
         private void ShowMonitorTypeWindow()
@@ -609,7 +624,7 @@ namespace AdministrationApp.ViewModels
         private void CreateMonitorTypeWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewMonitorTypeWindowViewModel(window);
+            window.DataContext = new NewMonitorTypeViewModel(window);
             window.Show();
         }
         private void ShowMonitorModelWindow()
@@ -621,7 +636,7 @@ namespace AdministrationApp.ViewModels
         private void CreateMonitorModelWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewMonitorModelWindowViewModel(window);
+            window.DataContext = new NewMonitorModelViewModel(window);
             window.Show();
         }
         private void ShowDeviceTypeWindow()
@@ -633,7 +648,7 @@ namespace AdministrationApp.ViewModels
         private void CreateDeviceTypeWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewDeviceTypeWindowViewModel(window);
+            window.DataContext = new NewDeviceTypeViewModel(window);
             window.Show();
         }
         private void ShowDeviceModelWindow()
@@ -645,7 +660,19 @@ namespace AdministrationApp.ViewModels
         private void CreateDeviceModelWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewDeviceModelWindowViewModel(window);
+            window.DataContext = new NewDeviceModelViewModel(window);
+            window.Show();
+        }
+        private void ShowOperatingSystemWindow()
+        {
+            AllDictionaryWindow window = new AllDictionaryWindow();
+            window.DataContext = new AllOperatingSystemViewModelWindow(window);
+            window.Show();
+        }
+        private void CreateOperatingSystemWindow()
+        {
+            NewDictionaryWindow window = new NewDictionaryWindow();
+            window.DataContext = new NewOperatingSystemViewModel(window);
             window.Show();
         }
         private void ShowComputerTypeWindow()
@@ -657,7 +684,7 @@ namespace AdministrationApp.ViewModels
         private void CreateComputerTypeWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewComputerTypeWindowViewModel(window);
+            window.DataContext = new NewComputerTypeViewModel(window);
             window.Show();
         }
         private void ShowComputerModelWindow()
@@ -669,7 +696,7 @@ namespace AdministrationApp.ViewModels
         private void CreateComputerModelWindow()
         {
             NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewComputerModelWindowViewModel(window);
+            window.DataContext = new NewComputerModelViewModel(window);
             window.Show();
         }
 

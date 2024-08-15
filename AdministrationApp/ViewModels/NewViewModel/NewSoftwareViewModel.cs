@@ -18,7 +18,31 @@ namespace AdministrationApp.ViewModels.NewViewModel
         #region Commands
         private BaseCommand _ChooseLocationCommand;
         private BaseCommand _ChooseUserCommand;
+        private BaseCommand _ChooseStatusCommand;
+        private BaseCommand _ChooseManufacturerCommand;
 
+        public ICommand ChooseManufacturerCommand
+        {
+            get
+            {
+                if (_ChooseManufacturerCommand == null)
+                {
+                    _ChooseManufacturerCommand = new BaseCommand(() => Messenger.Default.Send("ChooseManufacturer"));
+                }
+                return _ChooseManufacturerCommand;
+            }
+        }
+        public ICommand ChooseStatusCommand
+        {
+            get
+            {
+                if (_ChooseStatusCommand == null)
+                {
+                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
+                }
+                return _ChooseStatusCommand;
+            }
+        }
         public ICommand ChooseLocationCommand
         {
             get
@@ -48,6 +72,10 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item = new SoftwareCreateEditVM();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
+            Messenger.Default.Register<StatusVM>(this, getStatus);
+            Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
+
+
         }
         public override async void Save()
         {
@@ -62,23 +90,21 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item.Users = vM.Id;
             UserName = vM.FirstName + " " + vM.LastName + " " + vM.InternalNumber + " " + vM.Position;
         }
-
-        private async void getStatusItems()
+        private void getStatus(StatusVM vm)
         {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, null);
+            item.Status = vm.Id;
+            StatusName = vm.Name;
         }
-
-        private async void getProducentItems()
-        {
-            manufacturerComboBoxItems = await RequestHelper.SendRequestAsync<object, List<ManufacturerVM>>(URLs.MANUFACTURER, HttpMethod.Get, null, null);
-        }
-
         private void getChosenLokacja(LocationVM vM)
         {
             item.LocationId = vM.Id;
             LokacjaName = vM.Name;
         }
-
+        private void getManufacturer(ManufacturerVM vm)
+        {
+            item.Publisher = vm.Id;
+            ManufacturerName = vm.Name;
+        }
         #endregion
         #region Dane
         public int Id
@@ -86,6 +112,40 @@ namespace AdministrationApp.ViewModels.NewViewModel
             get
             {
                 return item.Id;
+            }
+        }
+        private string _ManufacturerName;
+        public string ManufacturerName
+        {
+            get
+            {
+                return _ManufacturerName;
+            }
+            set
+            {
+                if (_ManufacturerName == null)
+                {
+                    _ManufacturerName = value;
+                    OnPropertyChanged(() => ManufacturerName);
+                }
+
+            }
+        }
+        private string _StatusName;
+        public string StatusName
+        {
+            get
+            {
+                return _StatusName;
+            }
+            set
+            {
+                if (_StatusName == null)
+                {
+                    _StatusName = value;
+                    OnPropertyChanged(() => StatusName);
+                }
+
             }
         }
         public string? Name
@@ -178,44 +238,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
                     _UserName = value;
                     OnPropertyChanged(() => UserName);
                 }
-            }
-        }
-        #endregion
-        #region Foreign Keys
-        private List<ManufacturerVM> _manufacturerComboBoxItems;
-        public List<ManufacturerVM> manufacturerComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_manufacturerComboBoxItems == null)
-                {
-                    getProducentItems();
-                }
-                return _manufacturerComboBoxItems;
-            }
-            set
-            {
-                _manufacturerComboBoxItems = value;
-                OnPropertyChanged(() => manufacturerComboBoxItems);
-            }
-        }
-        private List<StatusVM> _statusComboBoxItems;
-        public List<StatusVM> statusComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_statusComboBoxItems == null)
-                {
-                    getStatusItems();
-                }
-                return _statusComboBoxItems;
-            }
-            set
-            {
-                _statusComboBoxItems = value;
-                OnPropertyChanged(() => statusComboBoxItems);
             }
         }
         #endregion

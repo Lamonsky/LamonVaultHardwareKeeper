@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewPhoneModelViewModel : JedenViewModel<NewPhoneModelCreateEditVM>
+    public class NewPhoneModelViewModel : JedenViewModel<PhoneModelCreateEditVM>
     {
         private Window _window;
         #region Konstruktor

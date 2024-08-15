@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewMonitorTypeViewModel : JedenViewModel<NewMonitorTypeCreateEditVM>
+    public class NewMonitorTypeViewModel : JedenViewModel<MonitorTypeCreateEditVM>
     {
         private Window _window;
         #region Konstruktor

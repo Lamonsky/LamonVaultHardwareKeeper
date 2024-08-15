@@ -17,6 +17,43 @@ namespace AdministrationApp.ViewModels.NewViewModel
     {
         #region Commands
         private BaseCommand _ChooseUserCommand;
+        private BaseCommand _ChooseStatusCommand;
+        private BaseCommand _ChooseManufacturerCommand;
+        private BaseCommand _ChooseSimComponentTypeCommand;
+
+        public ICommand ChooseSimComponentTypeCommand
+        {
+            get
+            {
+                if (_ChooseSimComponentTypeCommand == null)
+                {
+                    _ChooseSimComponentTypeCommand = new BaseCommand(() => Messenger.Default.Send("ChooseSimComponentType"));
+                }
+                return _ChooseSimComponentTypeCommand;
+            }
+        }
+        public ICommand ChooseManufacturerCommand
+        {
+            get
+            {
+                if (_ChooseManufacturerCommand == null)
+                {
+                    _ChooseManufacturerCommand = new BaseCommand(() => Messenger.Default.Send("ChooseManufacturer"));
+                }
+                return _ChooseManufacturerCommand;
+            }
+        }
+        public ICommand ChooseStatusCommand
+        {
+            get
+            {
+                if (_ChooseStatusCommand == null)
+                {
+                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
+                }
+                return _ChooseStatusCommand;
+            }
+        }
         public ICommand ChooseUserCommand
         {
             get
@@ -34,6 +71,8 @@ namespace AdministrationApp.ViewModels.NewViewModel
         {
             item = new SimCardsCreateEditVM();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
+            Messenger.Default.Register<StatusVM>(this, getStatus);
+
         }
         public override async void Save()
         {
@@ -47,17 +86,11 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item.Users = vM.Id;
             UserName = vM.FirstName + " " + vM.LastName + " " + vM.InternalNumber + " " + vM.Position;
         }
-        private async void getComponentItems()
+        private void getStatus(StatusVM vm)
         {
-            componentComboBoxItems = await RequestHelper.SendRequestAsync<object, List<SimComponentVM>>(URLs.SIMCOMPONENT, HttpMethod.Get, null, null);
-
+            item.StatusId = vm.Id;
+            StatusName = vm.Name;
         }
-
-        private async void getStatusItems()
-        {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, null);
-        }
-
         #endregion
         #region Dane
         public int Id
@@ -65,6 +98,23 @@ namespace AdministrationApp.ViewModels.NewViewModel
             get
             {
                 return item.Id;
+            }
+        }
+        private string _StatusName;
+        public string StatusName
+        {
+            get
+            {
+                return _StatusName;
+            }
+            set
+            {
+                if (_StatusName == null)
+                {
+                    _StatusName = value;
+                    OnPropertyChanged(() => StatusName);
+                }
+
             }
         }
         public int? StatusId
@@ -180,43 +230,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
         }
         #endregion
-        #region Foreign Keys
-        private List<StatusVM> _statusComboBoxItems;
-        public List<StatusVM> statusComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_statusComboBoxItems == null)
-                {
-                    getStatusItems();
-                }
-                return _statusComboBoxItems;
-            }
-            set
-            {
-                _statusComboBoxItems = value;
-                OnPropertyChanged(() => statusComboBoxItems);
-            }
-        }
-        private List<SimComponentVM> _componentComboBoxItems;
-        public List<SimComponentVM> componentComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_componentComboBoxItems == null)
-                {
-                    getComponentItems();
-                }
-                return _componentComboBoxItems;
-            }
-            set
-            {
-                _componentComboBoxItems = value;
-                OnPropertyChanged(() => componentComboBoxItems);
-            }
-        }
-        #endregion
+      
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eNMMtbNPSUnOiwULG6ZEoQKgmj7NNNe+VWg5Ljq/Mt67nL0nCABS9H/Md4b6tzjy/MWG/6tIugKL0kPO20dUjQ==",
+  "dgSpecHash": "S3v0X+svaKIqA/cvJHswwN+JylnPc3eLODwSY0Rf9nM4wK4WBxzFatcRx1QqBZCVczLQ2Wq89xPaKGPzb3xdRQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\AdministrationApp\\AdministrationApp.csproj",
+  "projectFilePath": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\AdministrationApp\\AdministrationApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dlamonski\\.nuget\\packages\\commonservicelocator\\2.0.2\\commonservicelocator.2.0.2.nupkg.sha512",
     "C:\\Users\\dlamonski\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",

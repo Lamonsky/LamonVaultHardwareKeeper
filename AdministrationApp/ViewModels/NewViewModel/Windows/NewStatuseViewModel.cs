@@ -9,18 +9,18 @@ using System.Windows;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewStatuseViewModel : JedenViewModel<NewStatuseCreateEditVM>
+    public class NewStatuseViewModel : JedenViewModel<StatusCreateEditVM>
     {
         private Window _window;
         #region Konstruktor
-        public NewStatuseViewModel(Window window) : base("Statuse")
+        public NewStatuseViewModel(Window window) : base("Status")
         {
-            item = new StatuseCreateEditVM();
+            item = new StatusCreateEditVM();
             _window = window;
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.STATUSE, HttpMethod.Post, item, null);
+            await RequestHelper.SendRequestAsync(URLs.STATUS, HttpMethod.Post, item, null);
             Messenger.Default.Send("StatuseRefresh");
             _window.Close();
         }
@@ -39,18 +39,6 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             get
             {
                 return item.Id;
-            }
-        }
-        public int? Status
-        {
-            get
-            {
-                return item.Status;
-            }
-            set
-            {
-                item.Status = value;
-                OnPropertyChanged(() => Status);
             }
         }
         public string? Comment

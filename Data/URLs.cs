@@ -72,10 +72,27 @@ namespace Data
         public const string LOCATION_ID = "/location/{id}";
         public const string USER = "/user";
         public const string USER_ID = "/user/{id}";
+        public const string GROUPTYPE = "/grouptype";
+        public const string GROUPTYPE_ID = "/grouptype/{id}";
+        public const string HARDDRIVEMODEL = "/harddrivemodel";
+        public const string HARDDRIVEMODEL_ID = "/harddrivemodel/{id}";
         public const string MAINWINDOW = "/mainwindowhelper";
         public const string POSITION = "/position";
         public const string POSITION_ID = "/position/{id}";
-
+        public const string CONTRACTTYPE = "/contracttype";
+        public const string CONTRACTTYPE_ID = "/contracttype/{id}";
+        public const string KNOWLEDGEBASECATEGORY = "/knowledgebasecategory";
+        public const string KNOWLEDGEBASECATEGORY_ID = "/knowledgebasecategory/{id}";
+        public const string LICENSETYPE = "/licensetype";
+        public const string LICENSETYPE_ID = "/licensetype/{id}";
+        public const string OPERATINGSYSTEM = "/operatingsystem";
+        public const string OPERATINGSYSTEM_ID = "/operatingsystem/{id}";
+        public const string TICKETCATEGORY = "/ticketcategory";
+        public const string TICKETCATEGORY_ID = "/ticketcategory/{id}";
+        public const string TICKETSTATUS = "/ticketstatus";
+        public const string TICKETSTATUS_ID = "/ticketstatus/{id}";
+        public const string TICKETTYPE = "/tickettype";
+        public const string TICKETTYPE_ID = "/tickettype/{id}";
 
     }
 }

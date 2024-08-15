@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewHardDriveModelViewModel : JedenViewModel<NewHardDriveModelCreateEditVM>
+    public class NewHardDriveModelViewModel : JedenViewModel<HardDriveModelCreateEditVM>
     {
         private Window _window;
         #region Konstruktor

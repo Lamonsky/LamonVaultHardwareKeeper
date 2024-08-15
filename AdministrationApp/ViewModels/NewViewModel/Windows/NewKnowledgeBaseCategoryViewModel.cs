@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewKnowledgeBaseCategoryViewModel : JedenViewModel<NewKnowledgeBaseCategoryCreateEditVM>
+    public class NewKnowledgeBaseCategoryViewModel : JedenViewModel<KnowledgeBaseCategoryCreateEditVM>
     {
         private Window _window;
         #region Konstruktor

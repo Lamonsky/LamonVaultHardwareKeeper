@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0LvW3lGsZV/p2zZFezKCmp13ZPUBtFfNrsIlmMduoVDp8ijetSnjm+3VXPVynWbgzfV9iPSLW7IZGy1CEEC6rQ==",
+  "dgSpecHash": "cUQN+rRgq61358HKEBE4cpVMjpbAQeqBRQzdg+aF3JWrGQjI4lGe24YKeUcb0u0TuDNMSWO6ouQzjbU4/zJIBg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj",
+  "projectFilePath": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\WebInterface\\WebInterface.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

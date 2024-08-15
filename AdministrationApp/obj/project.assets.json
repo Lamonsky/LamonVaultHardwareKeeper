@@ -7563,11 +7563,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\AdministrationApp\\AdministrationApp.csproj",
+      "projectUniqueName": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\AdministrationApp\\AdministrationApp.csproj",
       "projectName": "AdministrationApp",
-      "projectPath": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\AdministrationApp\\AdministrationApp.csproj",
+      "projectPath": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\AdministrationApp\\AdministrationApp.csproj",
       "packagesPath": "C:\\Users\\dlamonski\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\AdministrationApp\\obj\\",
+      "outputPath": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\AdministrationApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\dlamonski\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7584,8 +7584,8 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\Data\\Data.csproj": {
-              "projectPath": "C:\\Users\\dlamonski\\Source\\Repos\\Lamonsky\\LamonVaultHardwareKeeper\\Data\\Data.csproj"
+            "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\dlamonski\\source\\repos\\Lamonsky\\LamonVaultHardwareKeeper\\Data\\Data.csproj"
             }
           }
         }

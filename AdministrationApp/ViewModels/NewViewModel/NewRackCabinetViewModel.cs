@@ -18,7 +18,55 @@ namespace AdministrationApp.ViewModels.NewViewModel
         #region Commands
         private BaseCommand _ChooseLocationCommand;
         private BaseCommand _ChooseUserCommand;
+        private BaseCommand _ChooseStatusCommand;
+        private BaseCommand _ChooseManufacturerCommand;
+        private BaseCommand _ChooseRackCabinetModelCommand;
+        private BaseCommand _ChooseRackCabinetTypeCommand;
 
+        public ICommand ChooseRackCabinetTypeCommand
+        {
+            get
+            {
+                if (_ChooseRackCabinetTypeCommand == null)
+                {
+                    _ChooseRackCabinetTypeCommand = new BaseCommand(() => Messenger.Default.Send("ChooseRackCabinetType"));
+                }
+                return _ChooseRackCabinetTypeCommand;
+            }
+        }
+        public ICommand ChooseRackCabinetModelCommand
+        {
+            get
+            {
+                if (_ChooseRackCabinetModelCommand == null)
+                {
+                    _ChooseRackCabinetModelCommand = new BaseCommand(() => Messenger.Default.Send("ChooseRackCabinetModel"));
+                }
+                return _ChooseRackCabinetModelCommand;
+            }
+        }
+        public ICommand ChooseManufacturerCommand
+        {
+            get
+            {
+                if (_ChooseManufacturerCommand == null)
+                {
+                    _ChooseManufacturerCommand = new BaseCommand(() => Messenger.Default.Send("ChooseManufacturer"));
+                }
+                return _ChooseManufacturerCommand;
+            }
+        }
+        public ICommand ChooseStatusCommand
+        {
+            get
+            {
+                if (_ChooseStatusCommand == null)
+                {
+                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
+                }
+                return _ChooseStatusCommand;
+            }
+        }
         public ICommand ChooseLocationCommand
         {
             get
@@ -48,6 +96,11 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item = new RackCabinetCreateEditVM();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
+            Messenger.Default.Register<StatusVM>(this, getStatus);
+            Messenger.Default.Register<RackCabinetModelVM>(this, getRackCabinetModel);
+            Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
+            Messenger.Default.Register<RackCabinetTypeVM>(this, getRackCabinetType);
+
         }
         public override async void Save()
         {
@@ -56,37 +109,37 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         #endregion
         #region CommandsFunctions
+        private void getStatus(StatusVM vm)
+        {
+            item.StatusId = vm.Id;
+            StatusName = vm.Name;
+        }
         private void getChosenUser(UserVM vM)
         {
             item.Users = vM.Id;
             UserName = vM.FirstName + " " + vM.LastName + " " + vM.InternalNumber + " " + vM.Position;
         }
-        private async void getModelItems()
-        {
-            modelComboBoxItems = await RequestHelper.SendRequestAsync<object, List<RackCabinetModelVM>>(URLs.RACKCABINETMODEL, HttpMethod.Get, null, null);
 
-        }
-
-        private async void getRackCabinetTypeItems()
-        {
-            rackCabinetTypeComboBoxItems = await RequestHelper.SendRequestAsync<object, List<RackCabinetTypeVM>>(URLs.RACKCABINETTYPE, HttpMethod.Get, null, null);
-        }
-
-        private async void getStatusItems()
-        {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, null);
-        }
-
-        private async void getProducentItems()
-        {
-            manufacturerComboBoxItems = await RequestHelper.SendRequestAsync<object, List<ManufacturerVM>>(URLs.MANUFACTURER, HttpMethod.Get, null, null);
-        }
         private void getChosenLokacja(LocationVM vM)
         {
             item.LocationId = vM.Id;
             LokacjaName = vM.Name;
         }
-
+        private void getRackCabinetModel(RackCabinetModelVM vm)
+        {
+            item.Id = vm.Id;
+            RackCabinetModelName = vm.Name;
+        }
+        private void getManufacturer(ManufacturerVM vm)
+        {
+            item.Manufacturer = vm.Id;
+            ManufacturerName = vm.Name;
+        }
+        private void getRackCabinetType(RackCabinetTypeVM vm)
+        {
+            item.CabinetType = vm.Id;
+            RackCabinetTypeName = vm.Name;
+        }
         #endregion
         #region Dane
         public int Id
@@ -94,6 +147,74 @@ namespace AdministrationApp.ViewModels.NewViewModel
             get
             {
                 return item.Id;
+            }
+        }
+        private string _ManufacturerName;
+        public string ManufacturerName
+        {
+            get
+            {
+                return _ManufacturerName;
+            }
+            set
+            {
+                if (_ManufacturerName == null)
+                {
+                    _ManufacturerName = value;
+                    OnPropertyChanged(() => ManufacturerName);
+                }
+
+            }
+        }
+        private string _RackCabinetTypeName;
+        public string RackCabinetTypeName
+        {
+            get
+            {
+                return _RackCabinetTypeName;
+            }
+            set
+            {
+                if (_RackCabinetTypeName == null)
+                {
+                    _RackCabinetTypeName = value;
+                    OnPropertyChanged(() => RackCabinetTypeName);
+                }
+
+            }
+        }
+        private string _RackCabinetModelName;
+        public string RackCabinetModelName
+        {
+            get
+            {
+                return _RackCabinetModelName;
+            }
+            set
+            {
+                if (_RackCabinetModelName == null)
+                {
+                    _RackCabinetModelName = value;
+                    OnPropertyChanged(() => RackCabinetModelName);
+                }
+
+            }
+        }
+        private string _StatusName;
+        public string StatusName
+        {
+            get
+            {
+                return _StatusName;
+            }
+            set
+            {
+                if (_StatusName == null)
+                {
+                    _StatusName = value;
+                    OnPropertyChanged(() => StatusName);
+                }
+
             }
         }
         public int? LocationId
@@ -234,80 +355,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
                     _UserName = value;
                     OnPropertyChanged(() => UserName);
                 }
-            }
-        }
-        #endregion
-        #region Foreign Keys
-        private List<ManufacturerVM> _manufacturerComboBoxItems;
-        public List<ManufacturerVM> manufacturerComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_manufacturerComboBoxItems == null)
-                {
-                    getProducentItems();
-                }
-                return _manufacturerComboBoxItems;
-            }
-            set
-            {
-                _manufacturerComboBoxItems = value;
-                OnPropertyChanged(() => manufacturerComboBoxItems);
-            }
-        }
-        private List<StatusVM> _statusComboBoxItems;
-        public List<StatusVM> statusComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_statusComboBoxItems == null)
-                {
-                    getStatusItems();
-                }
-                return _statusComboBoxItems;
-            }
-            set
-            {
-                _statusComboBoxItems = value;
-                OnPropertyChanged(() => statusComboBoxItems);
-            }
-        }
-        private List<RackCabinetTypeVM> _rackCabinetTypeComboBoxItems;
-        public List<RackCabinetTypeVM> rackCabinetTypeComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_rackCabinetTypeComboBoxItems == null)
-                {
-                    getRackCabinetTypeItems();
-                }
-                return _rackCabinetTypeComboBoxItems;
-            }
-            set
-            {
-                _rackCabinetTypeComboBoxItems = value;
-                OnPropertyChanged(() => rackCabinetTypeComboBoxItems);
-            }
-        }
-        private List<RackCabinetModelVM> _modelComboBoxItems;
-        public List<RackCabinetModelVM> modelComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_modelComboBoxItems == null)
-                {
-                    getModelItems();
-                }
-                return _modelComboBoxItems;
-            }
-            set
-            {
-                _modelComboBoxItems = value;
-                OnPropertyChanged(() => modelComboBoxItems);
             }
         }
         #endregion
