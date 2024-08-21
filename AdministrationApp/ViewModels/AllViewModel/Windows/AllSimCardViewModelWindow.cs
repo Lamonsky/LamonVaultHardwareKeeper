@@ -9,6 +9,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 {
     class AllSimCardViewModelWindow : WszystkieViewModel<SimCardsVM>
     {
+        private Window _window;
         public event EventHandler OnRequestClose;
         public void CloseWindow(Window window)
         {
@@ -26,8 +27,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
                 if (_ChosenItem != value)
                 {
                     _ChosenItem = value;
-                    Messenger.Default.Send(_ChosenItem);
-                    OnRequestClose(this, new EventArgs());
                 }
             }
             get
@@ -39,6 +38,11 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
         public AllSimCardViewModelWindow() : base("Karty SIM")
         {
             Messenger.Default.Register<string>(this, open);
+        }
+        public AllSimCardViewModelWindow(Window window) : base("Karty SIM")
+        {
+            Messenger.Default.Register<string>(this, open);
+            _window = window;
         }
         private void open(string name)
         {
@@ -86,7 +90,8 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override void send()
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send(ChosenItem);
+            _window.Close();
         }
     }
 }

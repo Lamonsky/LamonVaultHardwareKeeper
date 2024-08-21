@@ -26,6 +26,23 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(manufacturerVM);
         }
+        [Route(URLs.MANUFACTURER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> Index(int id)
+        {
+            DatabaseContext database = new();
+            ManufacturerVM manufacturerVM = await database.Manufacturers
+                .Where(item => item.Id == id)
+                .Select(item => new ManufacturerVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstOrDefaultAsync();
+            return Json(manufacturerVM);
+        }
         [Route(URLs.MANUFACTURER)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ManufacturerCreateEditVM manufacturerCreateEditVM)

@@ -5,17 +5,23 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using AdministrationApp.Helpers;
 using AdministrationApp.ViewModels.AllViewModel;
+using AdministrationApp.ViewModels.AllViewModel.Windows;
 using AdministrationApp.ViewModels.NewViewModel;
 using AdministrationApp.ViewModels.NewViewModel.Windows;
 using AdministrationApp.Views;
 using AdministrationApp.Views.AllWindows;
 using AdministrationApp.Views.NewViews.Windows;
+using Data;
+using Data.Computers.CreateEditVMs;
 using Data.Helpers;
 using GalaSoft.MvvmLight.Messaging;
 using MaterialDesignThemes.Wpf;
@@ -24,8 +30,12 @@ namespace AdministrationApp.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private string _loggeduser;
-        public string LoggedUser
+
+
+        #region LoggedUser
+
+        private LoggedUser _loggeduser;
+        public LoggedUser LoggedUser
         {
             get
             {
@@ -33,12 +43,21 @@ namespace AdministrationApp.ViewModels
             }
             set
             {
-                if(value != _loggeduser)
+                if (value != _loggeduser)
                 {
                     _loggeduser = value;
                 }
             }
         }
+        public string EMail
+        {
+            get
+            {
+                return _loggeduser.Email;
+            }
+        }
+        #endregion
+
 
         #region Workspaces
         //
@@ -103,12 +122,13 @@ namespace AdministrationApp.ViewModels
         public MainWindowViewModel()
         {
             Messenger.Default.Register<string>(this, open);
-            Messenger.Default.Register<RestApiUsers>(this, loggeduser);
+            Messenger.Default.Register<LoggedUser>(this, loggeduser);
 
         }
-        private void loggeduser(RestApiUsers user)
+        private void loggeduser(LoggedUser user)
         {
-            LoggedUser = user.Email;
+            LoggedUser = user;
+            GlobalData.AccessToken = user.AccessToken;
         }
         private void open(string name)
         {
@@ -252,9 +272,23 @@ namespace AdministrationApp.ViewModels
                 case "ChooseOperatingSystem":
                     ShowOperatingSystemWindow();
                     break;
+                case string n when n.StartsWith("KomputeryEdit"):                 
+                    EditComputer(CutString(name));
+                    break;
             }
         }
         #endregion
+        private string CutString(string text)
+        {
+            int index = text.LastIndexOf("/");
+
+            if (index == -1)
+            {
+                return text;
+            }
+
+            return text.Substring(index + 1);
+        }
 
         #region Komendy do Buttonow
         private BaseCommand _ShowSummaryCommand;
@@ -397,6 +431,26 @@ namespace AdministrationApp.ViewModels
         {
             CreateWorkspace<NewComputerViewModel>();
         }
+        private async void EditComputer(string id)
+        {
+            try
+            {
+                string url = URLs.COMPUTERS_ID.Replace("{id}", id);
+                ComputersCreateEditVM vm = await RequestHelper.SendRequestAsync<object, ComputersCreateEditVM>(url, HttpMethod.Get, null, null);
+                if (vm != null)
+                {
+                    EditComputerViewModel workspace = new EditComputerViewModel(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+            
+        }
         private void CreateMonitor()
         {
             CreateWorkspace<NewMonitorViewModel>();
@@ -506,6 +560,7 @@ namespace AdministrationApp.ViewModels
         private void ShowStatusWindow()
         {
             AllStatusWindow allStatusWindow = new AllStatusWindow();
+            allStatusWindow.DataContext = new AllStatusViewModelWindow(allStatusWindow);
             allStatusWindow.Show();
 
         }
@@ -518,18 +573,21 @@ namespace AdministrationApp.ViewModels
         }
         private void ShowUsersWindow()
         {
-            AllUsersWindow allUsersWindow = new AllUsersWindow();
-            allUsersWindow.Show();
+            AllUsersWindow window = new AllUsersWindow();
+            window.DataContext = new AllUserViewModelWindow(window);
+            window.Show();
         }
         private void ShowLocationWindow()
         {
-            AllLocationsWindow allLocationsWindow = new AllLocationsWindow();
-            allLocationsWindow.Show();
+            AllLocationsWindow window = new AllLocationsWindow();
+            window.DataContext = new AllLocationsViewModelWindow(window);
+            window.Show();
         }
         private void ShowSimCardWindow()
         {
-            AllSimCardWindow allSimCardWindow = new AllSimCardWindow();
-            allSimCardWindow.Show();
+            AllSimCardWindow window = new AllSimCardWindow();
+            window.DataContext = new AllSimCardViewModelWindow(window);
+            window.Show();
         }
         private void ShowSimComponentTypeWindow()
         {

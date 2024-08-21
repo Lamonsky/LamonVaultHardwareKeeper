@@ -19,14 +19,11 @@ namespace AdministrationApp.Views.AllWindows
     /// <summary>
     /// Logika interakcji dla klasy AllStatusWindow.xaml
     /// </summary>
-    public partial class AllLocationsWindow : Window
+    public partial class AllLocationsWindow : AllDictionaryViewBase
     {
         public AllLocationsWindow()
         {
             InitializeComponent();
-            AllLocationsViewModelWindow allLocationsViewModelWindow = new AllLocationsViewModelWindow();
-            DataContext = allLocationsViewModelWindow;
-            allLocationsViewModelWindow.OnRequestClose += (s, e) => this.Close();
         }
     }
 }

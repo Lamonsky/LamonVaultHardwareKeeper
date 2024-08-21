@@ -16,6 +16,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 {
     class AllUserViewModelWindow : WszystkieViewModel<UserVM>
     {
+        private Window _window;
         public event EventHandler OnRequestClose;
         public void CloseWindow(Window window)
         {
@@ -33,8 +34,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
                 if (_ChosenUser != value)
                 {
                     _ChosenUser = value;
-                    Messenger.Default.Send(_ChosenUser);
-                    OnRequestClose(this, new EventArgs());
                 }
             }
             get
@@ -46,6 +45,11 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
         public AllUserViewModelWindow() : base("User")
         {
             Messenger.Default.Register<string>(this, open);
+        }
+        public AllUserViewModelWindow(Window window) : base("User")
+        {
+            Messenger.Default.Register<string>(this, open);
+            _window = window;
         }
         private void open(string name)
         {
@@ -93,7 +97,8 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override void send()
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send(ChosenUser);
+            _window.Close();
         }
     }
 }

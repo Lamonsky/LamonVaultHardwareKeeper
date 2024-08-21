@@ -33,6 +33,28 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(locationVM);
         }
+        [Route(URLs.LOCATION_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetLocation(int id)
+        {
+            DatabaseContext database = new();
+            LocationVM locationVM = await database.Locations
+                .Where(item => item.Id == id)
+                .Select(item => new LocationVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Address = item.Address,
+                    PostalCode = item.PostalCode,
+                    City = item.City,
+                    Country = item.Country,
+                    BuildingNumber = item.BuildingNumber,
+                    RoomNumber = item.RoomNumber,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstOrDefaultAsync();
+            return Json(locationVM);
+        }
         [Route(URLs.LOCATION)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] LocationCreateEditVM locationCreateEditVM)

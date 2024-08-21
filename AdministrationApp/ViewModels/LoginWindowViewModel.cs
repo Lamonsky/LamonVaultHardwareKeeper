@@ -94,10 +94,11 @@ namespace AdministrationApp.ViewModels
                 LoggedUser user = await RequestHelper.SendRequestAsync<object, LoggedUser>(URLs.LOGIN, HttpMethod.Post, item, null);
                 if(user != null)
                 {
+                    user.Email = item.Email;
                     MainWindow window = new MainWindow();
                     var viewModel = new MainWindowViewModel();
                     window.DataContext = viewModel;
-                    Messenger.Default.Send(item);
+                    Messenger.Default.Send(user);
                     window.Show();
                     _window.Close();
                 }

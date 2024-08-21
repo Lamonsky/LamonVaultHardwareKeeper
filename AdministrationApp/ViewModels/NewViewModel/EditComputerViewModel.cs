@@ -4,11 +4,12 @@ using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using GalaSoft.MvvmLight.Messaging;
 using System.Net.Http;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.NewViewModel
 {
-    public class NewComputerViewModel : JedenViewModel<ComputersCreateEditVM>
+    public class EditComputerViewModel : JedenViewModel<ComputersCreateEditVM>
     {
         #region Commands
         private BaseCommand? _ChooseLocationCommand;
@@ -98,9 +99,10 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         #endregion
         #region Konstruktor
-        public NewComputerViewModel() : base("Nowy komputer")
+        public EditComputerViewModel(ComputersCreateEditVM vm) : base("Edycja komputera")
         {
-            item = new ComputersCreateEditVM();
+            item = vm;
+            setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<ComputerTypeVM>(this, getComputerType);
@@ -110,10 +112,34 @@ namespace AdministrationApp.ViewModels.NewViewModel
             Messenger.Default.Register<OperatingSystemVM>(this, getOperatingSystem);
 
         }
+        public async void setForeignKeys()
+        {
+            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, null);
+            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, null);
+            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.UserId.ToString()), HttpMethod.Get, null, null);
+            ComputerTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, ComputerTypeVM>(URLs.COMPUTERTYPE_ID.Replace("{id}", item.ComputerTypeId.ToString()), HttpMethod.Get, null, null);
+            ComputerModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, ComputerModelVM>(URLs.COMPUTERMODEL_ID.Replace("{id}", item.ComputerModelId.ToString()), HttpMethod.Get, null, null);
+            ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.ManufacturerId.ToString()), HttpMethod.Get, null, null);
+            OperatingSystemVM osvm = await RequestHelper.SendRequestAsync<object, OperatingSystemVM>(URLs.OPERATINGSYSTEM_ID.Replace("{id}", item.OperatingSystemId.ToString()), HttpMethod.Get, null, null);
+            StatusName = statusvm.Name;
+            OperatingSystemName = osvm.Name;
+            LokacjaName = locationVM.Name;
+            UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+            ComputerTypeName = ctypevm.Name;
+            ManufacturerName = manufacturerVM.Name;
+            ComputerModelName = cmodelvm.Name;
+        }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.COMPUTERS, HttpMethod.Post, item, GlobalData.AccessToken);
-            Messenger.Default.Send("ComputersRefresh");
+            try
+            {
+                await RequestHelper.SendRequestAsync<ComputersCreateEditVM>(URLs.COMPUTERS_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
+                Messenger.Default.Send("ComputersRefresh");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }            
         }
         #endregion
         #region CommandsFunctions
@@ -173,7 +199,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_StatusName == null)
+                if (_StatusName != value)
                 {
                     _StatusName = value;
                     OnPropertyChanged(() => StatusName);
@@ -181,8 +207,8 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
             }
         }
-        private string _OperatingSystemName;
-        public string OperatingSystemName
+        private string? _OperatingSystemName;
+        public string? OperatingSystemName
         {
             get
             {
@@ -190,7 +216,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_OperatingSystemName == null)
+                if (_OperatingSystemName != value)
                 {
                     _OperatingSystemName = value;
                     OnPropertyChanged(() => OperatingSystemName);
@@ -327,7 +353,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_ManufacturerName == null)
+                if (_ManufacturerName != value)
                 {
                     _ManufacturerName = value;
                     OnPropertyChanged(() => ManufacturerName);
@@ -392,7 +418,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if( _LokacjaName == null)
+                if( _LokacjaName != value)
                 {
                     _LokacjaName = value;
                     OnPropertyChanged(() =>  LokacjaName);
@@ -408,7 +434,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if(_ComputerTypeName == null)
+                if(_ComputerTypeName != value)
                 {
                     _ComputerTypeName = value;
                     OnPropertyChanged(() => ComputerTypeName);
@@ -425,7 +451,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if(_ComputerModelName == null)
+                if(_ComputerModelName != value)
                 {
                     _ComputerModelName = value;
                     OnPropertyChanged(() => ComputerModelName);
@@ -442,7 +468,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);

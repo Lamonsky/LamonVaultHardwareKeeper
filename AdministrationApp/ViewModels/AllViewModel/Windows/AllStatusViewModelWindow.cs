@@ -16,6 +16,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 {
     class AllStatusViewModelWindow : WszystkieViewModel<StatusVM>
     {
+        private Window _window;
         public event EventHandler OnRequestClose;
         public void CloseWindow(Window window)
         {
@@ -25,27 +26,26 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
             }
         }
         #region Commands
-        private StatusVM _ChosenStatus;
-        public StatusVM ChosenStatus
+        private StatusVM _ChosenItem;
+        public StatusVM ChosenItem
         {
             set
             {
-                if (_ChosenStatus != value)
+                if (_ChosenItem != value)
                 {
-                    _ChosenStatus = value;
-                    Messenger.Default.Send(_ChosenStatus);
-                    OnRequestClose(this, new EventArgs());
+                    _ChosenItem = value;
                 }
             }
             get
             {
-                return _ChosenStatus;
+                return _ChosenItem;
             }
         }
         #endregion
-        public AllStatusViewModelWindow() : base("Status")
+        public AllStatusViewModelWindow(Window window) : base("Status")
         {
             Messenger.Default.Register<string>(this, open);
+            _window=window;
         }
         private void open(string name)
         {
@@ -86,14 +86,16 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
             throw new NotImplementedException();
         }
 
-        public override void Remove()
+        public override async void Remove()
         {
-            throw new NotImplementedException();
+            await RequestHelper.SendRequestAsync(URLs.STATUS_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
+            load();
         }
 
         public override void send()
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send(ChosenItem);
+            _window.Close();
         }
     }
 }

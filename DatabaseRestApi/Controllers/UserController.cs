@@ -34,6 +34,30 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(userVM);
         }
+        [Route(URLs.USER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetUser(int id)
+        {
+            DatabaseContext database = new();
+            UserVM userVM= await database.Users
+                .Where(item => item.Id == id)
+                .Select(item => new UserVM
+                {
+                    Id = item.Id,
+                    Usersname = item.Usersname,
+                    FirstName = item.FirstName,
+                    LastName = item.LastName,
+                    Email = item.Email,
+                    Location = item.Location.Name,
+                    IsActive = item.IsActive,
+                    Phone1 = item.Phone1,
+                    Phone2 = item.Phone2,
+                    InternalNumber = item.InternalNumber,
+                    Position = item.PositionNavigation.Name
+
+                }).FirstOrDefaultAsync();
+            return Json(userVM);
+        }
         [Route(URLs.USER)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserCreateEditVM userCreateEditVM)

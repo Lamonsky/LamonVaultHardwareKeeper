@@ -41,6 +41,34 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(computerVMs);
         }
+        [Route(URLs.COMPUTERS_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            ComputersCreateEditVM computerVMs = await database.Computers
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new ComputersCreateEditVM()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    ManufacturerId = item.Manufacturer,
+                    LocationId = item.LocationId,
+                    StatusId = item.StatusId,
+                    ComputerTypeId = item.ComputerType,
+                    ComputerModelId = item.Model,
+                    Processor = item.Processor,
+                    Ram = item.Ram,
+                    Disk = item.Disk,
+                    GraphicsCard = item.GraphicsCard,
+                    OperatingSystemId = item.OperatingSystem,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    UserId = item.Users
+                }).FirstAsync();
+            return Json(computerVMs);
+        }
 
         [Authorize]
         [Route(URLs.COMPUTERS)]

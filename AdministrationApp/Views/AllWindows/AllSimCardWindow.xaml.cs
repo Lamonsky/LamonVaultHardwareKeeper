@@ -18,14 +18,11 @@ namespace AdministrationApp.Views.AllWindows
     /// <summary>
     /// Interaction logic for AllSimCardWindow.xaml
     /// </summary>
-    public partial class AllSimCardWindow : Window
+    public partial class AllSimCardWindow : AllDictionaryViewBase
     {
         public AllSimCardWindow()
         {
             InitializeComponent();
-            AllSimCardViewModelWindow allSimCardViewModelWindow= new AllSimCardViewModelWindow();
-            DataContext = allSimCardViewModelWindow;
-            allSimCardViewModelWindow.OnRequestClose += (s, e) => this.Close();
         }
     }
 }

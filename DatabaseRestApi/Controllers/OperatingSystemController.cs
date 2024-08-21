@@ -26,6 +26,23 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(operaingSystemVM);
         }
+        [Route(URLs.OS_ID)]
+        [HttpGet]
+        public async Task<IActionResult> Index(int id)
+        {
+            DatabaseContext database = new();
+            OperatingSystemVM operaingSystemVM = await database.OperatingSystems
+                .Where(item => item.Id == id)
+                .Select(item => new OperatingSystemVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstOrDefaultAsync();
+            return Json(operaingSystemVM);
+        }
         [Route(URLs.OS)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] OperatingSystemCreateEditVM operaingSystemCreateEditVM)

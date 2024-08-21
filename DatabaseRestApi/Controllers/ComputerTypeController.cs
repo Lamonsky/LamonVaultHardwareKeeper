@@ -26,6 +26,23 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(computerTypeVM);
         }
+        [Route(URLs.COMPUTERTYPE_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetCType(int id)
+        {
+            DatabaseContext database = new();
+            ComputerTypeVM computerTypeVM = await database.ComputerTypes
+                .Where(item => item.Id == id)
+                .Select(item => new ComputerTypeVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstOrDefaultAsync();
+            return Json(computerTypeVM);
+        }
         [Route(URLs.COMPUTERTYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ComputerTypeCreateEditVM computerTypeCreateEditVM)

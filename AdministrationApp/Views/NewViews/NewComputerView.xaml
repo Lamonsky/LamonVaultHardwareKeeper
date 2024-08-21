@@ -52,7 +52,7 @@
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="{Binding Path=StatusName}"/>
+                    <TextBlock Grid.Column="0" Text="{Binding Path=StatusName, UpdateSourceTrigger=PropertyChanged}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseStatusCommand}">
                         <ui:SymbolIcon Symbol="LocationAdd16"/>
                     </Button>

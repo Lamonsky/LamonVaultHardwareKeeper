@@ -22,7 +22,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         private void open(string name)
         {
-            if (name == "KomputeryRefresh")
+            if (name == "ComputersRefresh")
             {
                 load();
             }
@@ -70,8 +70,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Edit()
         {
-            Messenger.Default.Send(DisplayName + "Edit");
-            Messenger.Default.Send(ChosenComputer);
+            Messenger.Default.Send(DisplayName + "Edit/" + ChosenComputer.Id);
         }
 
         public override async void Remove()

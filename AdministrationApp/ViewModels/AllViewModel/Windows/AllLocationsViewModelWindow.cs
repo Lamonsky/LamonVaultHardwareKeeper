@@ -16,6 +16,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 {
     class AllLocationsViewModelWindow : WszystkieViewModel<LocationVM>
     {
+        private Window _window;
         public event EventHandler OnRequestClose;
         public void CloseWindow(Window window)
         {
@@ -33,8 +34,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
                 if (_ChosenLocation != value)
                 {
                     _ChosenLocation = value;
-                    Messenger.Default.Send(_ChosenLocation);
-                    OnRequestClose(this, new EventArgs());
                 }
             }
             get
@@ -46,6 +45,11 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
         public AllLocationsViewModelWindow() : base("Lokalizacje")
         {
             Messenger.Default.Register<string>(this, open);
+        }
+        public AllLocationsViewModelWindow(Window window) : base("Lokalizacje")
+        {
+            Messenger.Default.Register<string>(this, open);
+            _window = window;
         }
         private void open(string name)
         {
@@ -93,7 +97,8 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override void send()
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send(ChosenLocation);
+            _window.Close();
         }
     }
 }

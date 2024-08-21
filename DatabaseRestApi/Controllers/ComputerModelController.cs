@@ -25,6 +25,22 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(computerModelVM);
         }
+        [Route(URLs.COMPUTERMODEL_ID)]
+        [HttpGet]
+        public async Task<IActionResult> Index(int id)
+        {
+            DatabaseContext database = new();
+            ComputerModelVM computerModelVM = await database.ComputerModels
+                .Where(item => item.Id == id)
+                .Select(item => new ComputerModelVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+                }).FirstOrDefaultAsync();
+            return Json(computerModelVM);
+        }
         [Route(URLs.COMPUTERMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ComputerModelCreateEditVM computerModelCreateEditVM)

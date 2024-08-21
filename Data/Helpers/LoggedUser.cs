@@ -11,5 +11,7 @@ namespace Data.Helpers
     {
         [JsonPropertyName("accessToken")]
         public string AccessToken { get; set; }
+        [JsonPropertyName("email")]
+        public string Email { get; set; }
     }
 }
