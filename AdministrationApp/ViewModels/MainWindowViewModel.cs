@@ -201,6 +201,45 @@ namespace AdministrationApp.ViewModels
         {
             switch (name)
             {
+                case "GroupsTypeAdd":
+                    CreateGroupsTypeWindow();
+                    break;
+                case "HardDriveModelAdd":
+                    CreateHardDriveModelWindow();
+                    break;
+                case "KnowledgeBaseCategoryAdd":
+                    CreateKnowledgeBaseCategoryWindow();
+                    break;
+                case "LicenseTypeAdd":
+                    CreateLicenseTypeWindow();
+                    break;
+                case "LocationsAdd":
+                    CreateLocationsWindow();
+                    break;
+                case "ManufacturerAdd":
+                    CreateManufacturerWindow();
+                    break;
+                case "OperatingSystemAdd":
+                    CreateOperatingSystemWindow();
+                    break;
+                case "PositionAdd":
+                    CreatePositionWindow();
+                    break;
+                case "PrinterModelAdd":
+                    CreatePrinterModelWindow();
+                    break;
+                case "PrinterTypeAdd":
+                    CreatePrinterTypeWindow();
+                    break;
+                case "TicketCategoryAdd":
+                    CreateTicketCategoryWindow();
+                    break;
+                case "TicketStatusAdd":
+                    CreateTicketStatusWindow();
+                    break;
+                case "TicketTypeAdd":
+                    CreateTicketTypeWindow();
+                    break;
                 // Kategoria: Komputery
                 case "KomputeryAdd":
                     CreateComputer();
@@ -901,6 +940,46 @@ namespace AdministrationApp.ViewModels
         private void CreateComputerModelWindow()
         {
             CreateWindows<NewDictionaryWindow, NewComputerModelViewModel>(window => new NewComputerModelViewModel(window));
+        }
+        private void CreateGroupsTypeWindow()
+        {
+            CreateWindows<NewDictionaryWindow, NewGroupsTypeViewModel>(window => new NewGroupsTypeViewModel(window));
+        }
+        private void CreateHardDriveModelWindow()
+        {
+            CreateWindows<NewDictionaryWindow, NewHardDriveModelViewModel>(window => new NewHardDriveModelViewModel(window));
+        }
+        private void CreateKnowledgeBaseCategoryWindow()
+        {
+            CreateWindows<NewDictionaryWindow, NewKnowledgeBaseCategoryViewModel>(window => new NewKnowledgeBaseCategoryViewModel(window));
+        }
+        private void CreateLicenseTypeWindow()
+        {
+            CreateWindows<NewDictionaryWindow, NewLicenseTypeViewModel>(window => new NewLicenseTypeViewModel(window));
+        }
+        private void CreateLocationsWindow()
+        {
+            //DO ZROBIENI
+        }
+        private void CreateManufacturerWindow()
+        {
+            CreateWindows<NewDictionaryWindow, NewManufacturerViewModel>(window => new NewManufacturerViewModel(window));
+        }
+        private void CreatePositionWindow()
+        {
+            CreateWindows<NewDictionaryWindow, NewPositionViewModel>(window => new NewPositionViewModel(window));
+        }
+        private void CreateTicketCategoryWindow()
+        {
+            CreateWindows<NewDictionaryWindow, NewTicketCategoryViewModel>(window => new NewTicketCategoryViewModel(window));
+        }
+        private void CreateTicketStatusWindow()
+        {
+            CreateWindows<NewDictionaryWindow, NewTicketStatuseViewModel>(window => new NewTicketStatuseViewModel(window));
+        }
+        private void CreateTicketTypeWindow()
+        {
+            CreateWindows<NewDictionaryWindow, NewTicketTypeViewModel>(window => new NewTicketTypeViewModel(window));
         }
 
         private async void EditComputer(string id)
