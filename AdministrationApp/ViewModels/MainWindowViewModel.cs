@@ -184,35 +184,108 @@ namespace AdministrationApp.ViewModels
         {
             switch (name)
             {
+                // Kategoria: Komputery
                 case "KomputeryAdd":
-                    CreateComputer(); 
+                    CreateComputer();
                     break;
+                case "ComputerModelAdd":
+                    CreateComputerModelWindow();
+                    break;
+                case "ComputerTypeAdd":
+                    CreateComputerTypeWindow();
+                    break;
+                case "ChooseComputerModel":
+                    ShowComputerModelWindow();
+                    break;
+                case "ChooseComputerType":
+                    ShowComputerTypeWindow();
+                    break;
+                case string n when n.StartsWith("KomputeryEdit"):
+                    EditComputer(CutString(name));
+                    break;
+
+                // Kategoria: Monitory
                 case "MonitoryAdd":
                     CreateMonitor();
                     break;
+                case "MonitorModelAdd":
+                    CreateMonitorModelWindow();
+                    break;
+                case "MonitorTypeAdd":
+                    CreateMonitorTypeWindow();
+                    break;
+                case "ChooseMonitorModel":
+                    ShowMonitorModelWindow();
+                    break;
+                case "ChooseMonitorType":
+                    ShowMonitorTypeWindow();
+                    break;
+                case string n when n.StartsWith("MonitoryEdit"):
+                    EditMonitor(CutString(name));
+                    break;
+
+                // Kategoria: Użytkownicy
                 case "UżytkownicyAdd":
                     CreateUser();
                     break;
+                case "ChooseUser":
+                    ShowUsersWindow();
+                    break;
+                case string n when n.StartsWith("UżytkownicyEdit"):
+                    EditUser(CutString(name));
+                    break;
+
+                // Kategoria: Oprogramowanie
                 case "OprogramowanieAdd":
                     CreateSoftware();
                     break;
+                case string n when n.StartsWith("OprogramowanieEdit"):
+                    EditSoftware(CutString(name));
+                    break;
+
+                // Kategoria: Urządzenia sieciowe
                 case "Urządzenia siecioweAdd":
                     CreateNetworkDevice();
                     break;
+                case "NetworkDeviceModelAdd":
+                    CreateNetworkDeviceModelWindow();
+                    break;
+                case "NetworkDeviceTypeAdd":
+                    CreateNetworkDeviceTypeWindow();
+                    break;
+                case "ChooseNetworkDeviceModel":
+                    ShowNetworkDeviceModelWindow();
+                    break;
+                case "ChooseNetworkDeviceType":
+                    ShowNetworkDeviceTypeWindow();
+                    break;
+                case string n when n.StartsWith("Urządzenia siecioweEdit"):
+                    EditNetworkDevice(CutString(name));
+                    break;
+
+                // Kategoria: Urządzenia
                 case "UrządzeniaAdd":
                     CreateDevice();
                     break;
+                case "DeviceModelAdd":
+                    CreateDeviceModelWindow();
+                    break;
+                case "DeviceTypeAdd":
+                    CreateDeviceTypeWindow();
+                    break;
+                case "ChooseDeviceModel":
+                    ShowDeviceModelWindow();
+                    break;
+                case "ChooseDeviceType":
+                    ShowDeviceTypeWindow();
+                    break;
+                case string n when n.StartsWith("UrządzeniaEdit"):
+                    EditDevice(CutString(name));
+                    break;
+
+                // Kategoria: Drukarki
                 case "DrukarkiAdd":
                     CreatePrinter();
-                    break;
-                case "TelefonyAdd":
-                    CreatePhone();
-                    break;
-                case "Szafy RackAdd":
-                    CreateRackCabinet();
-                    break;
-                case "Karty SimAdd":
-                    CreateSimCard();
                     break;
                 case "Rodzaje drukarekAdd":
                     CreatePrinterTypeWindow();
@@ -220,101 +293,79 @@ namespace AdministrationApp.ViewModels
                 case "Modele drukarekAdd":
                     CreatePrinterModelWindow();
                     break;
-                case "ChooseUser":
-                    ShowUsersWindow();
-                    break;
-                case "ChooseLocation":
-                    ShowLocationWindow();
-                    break;
-                case "ChooseSimCard":
-                    ShowSimCardWindow();
-                    break;
                 case "ChoosePrinterType":
                     ShowPrinterTypeWindow();
                     break;
                 case "ChoosePrinterModel":
                     ShowPrinterModelWindow();
                     break;
-                case "ComputerModelAdd":
-                    CreateComputerModelWindow();
+                case string n when n.StartsWith("DrukarkiEdit"):
+                    EditPrinter(CutString(name));
                     break;
-                case "ChooseComputerModel":
-                    ShowComputerModelWindow();
-                    break;
-                case "ComputerTypeAdd":
-                    CreateComputerTypeWindow();
-                    break;
-                case "ChooseComputerType":
-                    ShowComputerTypeWindow();
-                    break;
-                case "DeviceModelAdd":
-                    CreateDeviceModelWindow();
-                    break;
-                case "ChooseDeviceModel":
-                    ShowDeviceModelWindow();
-                    break;
-                case "DeviceTypeAdd":
-                    CreateDeviceTypeWindow();
-                    break;
-                case "ChooseDeviceType":
-                    ShowDeviceTypeWindow();
-                    break;
-                case "MonitorModelAdd":
-                    CreateMonitorModelWindow();
-                    break;
-                case "ChooseMonitorModel":
-                    ShowMonitorModelWindow();
-                    break;
-                case "MonitorTypeAdd":
-                    CreateMonitorTypeWindow();
-                    break;
-                case "ChooseMonitorType":
-                    ShowMonitorTypeWindow();
-                    break;
-                case "NetworkDeviceModelAdd":
-                    CreateNetworkDeviceModelWindow();
-                    break;
-                case "ChooseNetworkDeviceModel":
-                    ShowNetworkDeviceModelWindow();
-                    break;
-                case "NetworkDeviceTypeAdd":
-                    CreateNetworkDeviceTypeWindow();
-                    break;
-                case "ChooseNetworkDeviceType":
-                    ShowNetworkDeviceTypeWindow();
+
+                // Kategoria: Telefony
+                case "TelefonyAdd":
+                    CreatePhone();
                     break;
                 case "PhoneModelAdd":
                     CreatePhoneModelWindow();
                     break;
-                case "ChoosePhoneModel":
-                    ShowPhoneModelWindow();
-                    break;
                 case "PhoneTypeAdd":
                     CreatePhoneTypeWindow();
+                    break;
+                case "ChoosePhoneModel":
+                    ShowPhoneModelWindow();
                     break;
                 case "ChoosePhoneType":
                     ShowPhoneTypeWindow();
                     break;
+                case string n when n.StartsWith("TelefonyEdit"):
+                    EditPhone(CutString(name));
+                    break;
+
+                // Kategoria: Szafy Rack
+                case "Szafy RackAdd":
+                    CreateRackCabinet();
+                    break;
                 case "RackCabinetModelAdd":
                     CreateRackCabinetModelWindow();
-                    break;
-                case "ChooseRackCabinetModel":
-                    ShowRackCabinetModelWindow();
                     break;
                 case "RackCabinetTypeAdd":
                     CreateRackCabinetTypeWindow();
                     break;
+                case "ChooseRackCabinetModel":
+                    ShowRackCabinetModelWindow();
+                    break;
                 case "ChooseRackCabinetType":
                     ShowRackCabinetTypeWindow();
+                    break;
+                case string n when n.StartsWith("Szafy RackEdit"):
+                    EditRackCabinet(CutString(name));
+                    break;
+
+                // Kategoria: Karty Sim
+                case "Karty SimAdd":
+                    CreateSimCard();
                     break;
                 case "SimComponentTypeAdd":
                     CreateSimComponentTypeWindow();
                     break;
+                case "ChooseSimCard":
+                    ShowSimCardWindow();
+                    break;
                 case "ChooseSimComponentType":
                     ShowSimComponentTypeWindow();
                     break;
+                case string n when n.StartsWith("Karty SimEdit"):
+                    EditSimCard(CutString(name));
+                    break;
+
+                // Kategoria: Inne
+                case "ChooseLocation":
+                    ShowLocationWindow();
+                    break;
                 case "ChooseStatus":
-                    ShowStatusWindow(); 
+                    ShowStatusWindow();
                     break;
                 case "ChooseManufacturer":
                     ShowManufacturerWindow();
@@ -325,38 +376,9 @@ namespace AdministrationApp.ViewModels
                 case "StatusAdd":
                     CreateStatusWindow();
                     break;
-                case string n when n.StartsWith("KomputeryEdit"):                 
-                    EditComputer(CutString(name));
-                    break;
-                case string n when n.StartsWith("UrządzeniaEdit"):
-                    EditDevice(CutString(name));
-                    break;
-                case string n when n.StartsWith("MonitoryEdit"):
-                    EditMonitor(CutString(name));
-                    break;
-                case string n when n.StartsWith("Urządzenia siecioweEdit"):
-                    EditNetworkDevice(CutString(name));
-                    break;
-                case string n when n.StartsWith("TelefonyEdit"):
-                    EditPhone(CutString(name));
-                    break;
-                case string n when n.StartsWith("DrukarkiEdit"):
-                    EditPrinter(CutString(name));
-                    break;
-                case string n when n.StartsWith("Szafy RackEdit"):
-                    EditRackCabinet(CutString(name));
-                    break;
-                case string n when n.StartsWith("Karty SimEdit"):
-                    EditSimCard(CutString(name));
-                    break;
-                case string n when n.StartsWith("OprogramowanieEdit"):
-                    EditSoftware(CutString(name));
-                    break;
-                case string n when n.StartsWith("UżytkownicyEdit"):
-                    EditUser(CutString(name));
-                    break;
             }
         }
+
         #endregion
         private string CutString(string text)
         {
