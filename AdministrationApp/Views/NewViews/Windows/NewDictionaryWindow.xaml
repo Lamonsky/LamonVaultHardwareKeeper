@@ -30,7 +30,16 @@
             <TextBlock Grid.Row="0" Grid.Column="1" Text="Nazwa:"/>
             <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Grid.Row="0" Grid.Column="4" Text="Status:"/>
-            <ComboBox Grid.Row="0" Grid.Column="5" ItemsSource="{Binding Path=statusComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Status, Mode=TwoWay}"/>
+            <Grid Grid.Row="0" Grid.Column="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Path=StatusName, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Grid.Column="1" Command="{Binding Path=ChooseStatusCommand}">
+                    <ui:SymbolIcon Symbol="LocationAdd16"/>
+                </Button>
+            </Grid>
             <TextBlock Grid.Row="1" Grid.Column="1" Text="Opis"/>
             <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>

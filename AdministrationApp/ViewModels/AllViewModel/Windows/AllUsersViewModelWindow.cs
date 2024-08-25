@@ -87,7 +87,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override void Edit()
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send(DisplayName+"Edit/"+ChosenUser.Id.ToString());
         }
 
         public override void Remove()

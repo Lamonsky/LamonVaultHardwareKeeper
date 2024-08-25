@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
-using System.Printing;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -16,16 +10,15 @@ using AdministrationApp.Helpers;
 using AdministrationApp.ViewModels.AllViewModel;
 using AdministrationApp.ViewModels.AllViewModel.Windows;
 using AdministrationApp.ViewModels.EditViewModel;
+using AdministrationApp.ViewModels.EditViewModel.Windows;
 using AdministrationApp.ViewModels.NewViewModel;
 using AdministrationApp.ViewModels.NewViewModel.Windows;
-using AdministrationApp.Views;
 using AdministrationApp.Views.AllWindows;
 using AdministrationApp.Views.NewViews.Windows;
 using Data;
 using Data.Computers.CreateEditVMs;
 using Data.Helpers;
 using GalaSoft.MvvmLight.Messaging;
-using MaterialDesignThemes.Wpf;
 
 namespace AdministrationApp.ViewModels
 {
@@ -159,6 +152,30 @@ namespace AdministrationApp.ViewModels
                 Debug.WriteLine(ex.Message);
             }
         }
+        public async Task EditItemWindow<TViewModel, TEditViewModel>(string id, string urlTemplate,
+            Func<Window, TViewModel, TEditViewModel> createViewModel)
+            where TViewModel : class
+            where TEditViewModel : class
+        {
+            try
+            {
+                string url = urlTemplate.Replace("{id}", id);
+                TViewModel vm = await RequestHelper.SendRequestAsync<object, TViewModel>(url, HttpMethod.Get, null, GlobalData.AccessToken);
+
+                if (vm != null)
+                {
+                    Window window = new NewDictionaryWindow(); // Można to zmienić na bardziej uniwersalne okno
+                    TEditViewModel editViewModel = createViewModel(window, vm);
+                    window.DataContext = editViewModel;
+                    window.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+        }
         private void SetActiveWorkspace(WorkspaceViewModel workspace)
         {
             Debug.Assert(this.Workspaces.Contains(workspace));
@@ -202,6 +219,9 @@ namespace AdministrationApp.ViewModels
                     break;
                 case string n when n.StartsWith("KomputeryEdit"):
                     EditComputer(CutString(name));
+                    break;
+                case string n when n.StartsWith("ComputerModelEdit"):
+                    EditComputerModel(CutString(name));
                     break;
 
                 // Kategoria: Monitory
@@ -376,8 +396,88 @@ namespace AdministrationApp.ViewModels
                 case "StatusAdd":
                     CreateStatusWindow();
                     break;
+                // Pozostałe edycje
+                case string n when n.StartsWith("ComputerModelEdit"):
+                    EditComputerModel(CutString(name));
+                    break;
+                case string n when n.StartsWith("ComputerTypeEdit"):
+                    EditComputerType(CutString(name));
+                    break;
+                case string n when n.StartsWith("DeviceModelEdit"):
+                    EditDeviceModel(CutString(name));
+                    break;
+                case string n when n.StartsWith("GroupsTypeEdit"):
+                    EditGroupsType(CutString(name));
+                    break;
+                case string n when n.StartsWith("HardDriveModelEdit"):
+                    EditHardDriveModel(CutString(name));
+                    break;
+                case string n when n.StartsWith("KnowledgebaseCategoryEdit"):
+                    EditKnowledgebaseCategory(CutString(name));
+                    break;
+                case string n when n.StartsWith("LicenseTypeEdit"):
+                    EditLicenseType(CutString(name));
+                    break;
+                case string n when n.StartsWith("ManufacturerEdit"):
+                    EditManufacturer(CutString(name));
+                    break;
+                case string n when n.StartsWith("MonitorModelEdit"):
+                    EditMonitorModel(CutString(name));
+                    break;
+                case string n when n.StartsWith("MonitorTypeEdit"):
+                    EditMonitorType(CutString(name));
+                    break;
+                case string n when n.StartsWith("NetworkDevicemodelEdit"):
+                    EditNetworkDevicemodel(CutString(name));
+                    break;
+                case string n when n.StartsWith("NetworkDeviceTypeEdit"):
+                    EditNetworkDeviceType(CutString(name));
+                    break;
+                case string n when n.StartsWith("OperatingSystemEdit"):
+                    EditOperatingSystem(CutString(name));
+                    break;
+                case string n when n.StartsWith("PhonemodelEdit"):
+                    EditPhonemodel(CutString(name));
+                    break;
+                case string n when n.StartsWith("PhoneTypeEdit"):
+                    EditPhoneType(CutString(name));
+                    break;
+                case string n when n.StartsWith("PositionEdit"):
+                    EditPosition(CutString(name));
+                    break;
+                case string n when n.StartsWith("PrintermodelEdit"):
+                    EditPrintermodel(CutString(name));
+                    break;
+                case string n when n.StartsWith("PrintertypeEdit"):
+                    EditPrintertype(CutString(name));
+                    break;
+                case string n when n.StartsWith("RackCabinetModelEdit"):
+                    EditRackCabinetModel(CutString(name));
+                    break;
+                case string n when n.StartsWith("RackCabinetTypeEdit"):
+                    EditRackCabinetType(CutString(name));
+                    break;
+                case string n when n.StartsWith("SimComponentTypeEdit"):
+                    EditSimComponentType(CutString(name));
+                    break;
+                case string n when n.StartsWith("StatusEdit"):
+                    EditStatus(CutString(name));
+                    break;
+                case string n when n.StartsWith("TicketCategoryEdit"):
+                    EditTicketCategory(CutString(name));
+                    break;
+                case string n when n.StartsWith("TicketStatuseEdit"):
+                    EditTicketStatuse(CutString(name));
+                    break;
+                case string n when n.StartsWith("TicketTypeEdit"):
+                    EditTicketType(CutString(name));
+                    break;
+                case string n when n.StartsWith("DeviceTypeEdit"):
+                    EditDeviceType(CutString(name));
+                    break;
             }
         }
+
 
         #endregion
         private string CutString(string text)
@@ -807,194 +907,330 @@ namespace AdministrationApp.ViewModels
         {
             await EditItem<ComputersCreateEditVM, EditComputerViewModel>(id, URLs.COMPUTERS_CEVM_ID, vm => new EditComputerViewModel(vm));
         }
-
+        private async void EditComputerModel(string id)
+        {
+            await EditItemWindow<ComputerModelCreateEditVM, EditComputerModelViewModel>(
+                id,
+                URLs.COMPUTERMODEL_CEVM_ID,
+                (window, vm) => new EditComputerModelViewModel(window, vm)
+            );
+        }
         private async void EditDevice(string id)
         {
-            try
-            {
-                DevicesCreateEditVM vm = await RequestHelper.SendRequestAsync<object, DevicesCreateEditVM>(URLs.DEVICE_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
-                if (vm != null)
-                {
-                    EditDeviceViewModel workspace = new EditDeviceViewModel(vm);
-                    Workspaces.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message);
-            }
-
+            await EditItem<DevicesCreateEditVM, EditDeviceViewModel>(id, URLs.DEVICE_CEVM_ID, vm => new EditDeviceViewModel(vm));
         }
-
 
         private async void EditMonitor(string id)
         {
-            try
-            {
-                MonitorsCreateEditVM vm = await RequestHelper.SendRequestAsync<object, MonitorsCreateEditVM>(URLs.MONITORS_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
-                if (vm != null)
-                {
-                    EditMonitorViewModel workspace = new EditMonitorViewModel(vm);
-                    Workspaces.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message);
-            }
-
+            await EditItem<MonitorsCreateEditVM, EditMonitorViewModel>(id, URLs.MONITORS_CEVM_ID, vm => new EditMonitorViewModel(vm));
         }
-
 
         private async void EditNetworkDevice(string id)
         {
-            try
-            {
-                NetworkDeviceCreateEditVM vm = await RequestHelper.SendRequestAsync<object, NetworkDeviceCreateEditVM>(URLs.NETWORKDEVICE_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
-                if (vm != null)
-                {
-                    EditNetworkDeviceViewModel workspace = new EditNetworkDeviceViewModel(vm);
-                    Workspaces.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message);
-            }
-
+            await EditItem<NetworkDeviceCreateEditVM, EditNetworkDeviceViewModel>(id, URLs.NETWORKDEVICE_CEVM_ID, vm => new EditNetworkDeviceViewModel(vm));
         }
-
 
         private async void EditPhone(string id)
         {
-            try
-            {
-                PhonesCreateEditVM vm = await RequestHelper.SendRequestAsync<object, PhonesCreateEditVM>(URLs.PHONE_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
-                if (vm != null)
-                {
-                    EditPhoneViewModel workspace = new EditPhoneViewModel(vm);
-                    Workspaces.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message);
-            }
-
+            await EditItem<PhonesCreateEditVM, EditPhoneViewModel>(id, URLs.PHONE_CEVM_ID, vm => new EditPhoneViewModel(vm));
         }
-
 
         private async void EditPrinter(string id)
         {
-            try
-            {
-                PrintersCreateEditVM vm = await RequestHelper.SendRequestAsync<object, PrintersCreateEditVM>(URLs.PRINTER_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
-                if (vm != null)
-                {
-                    EditPrinterViewModel workspace = new EditPrinterViewModel(vm);
-                    Workspaces.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message);
-            }
-
+            await EditItem<PrintersCreateEditVM, EditPrinterViewModel>(id, URLs.PRINTER_CEVM_ID, vm => new EditPrinterViewModel(vm));
         }
-
 
         private async void EditRackCabinet(string id)
         {
-            try
-            {
-                RackCabinetCreateEditVM vm = await RequestHelper.SendRequestAsync<object, RackCabinetCreateEditVM>(URLs.RACKCABINET_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
-                if (vm != null)
-                {
-                    EditRackCabinetViewModel workspace = new EditRackCabinetViewModel(vm);
-                    Workspaces.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message);
-            }
-
+            await EditItem<RackCabinetCreateEditVM, EditRackCabinetViewModel>(id, URLs.RACKCABINET_CEVM_ID, vm => new EditRackCabinetViewModel(vm));
         }
-
 
         private async void EditSimCard(string id)
         {
-            try
-            {
-                SimCardsCreateEditVM vm = await RequestHelper.SendRequestAsync<object, SimCardsCreateEditVM>(URLs.SIMCARD_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
-                if (vm != null)
-                {
-                    EditSimCardViewModel workspace = new EditSimCardViewModel(vm);
-                    Workspaces.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message);
-            }
-
+            await EditItem<SimCardsCreateEditVM, EditSimCardViewModel>(id, URLs.SIMCARD_CEVM_ID, vm => new EditSimCardViewModel(vm));
         }
-
 
         private async void EditSoftware(string id)
         {
-            try
-            {
-                SoftwareCreateEditVM vm = await RequestHelper.SendRequestAsync<object, SoftwareCreateEditVM>(URLs.SOFTWARE_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
-                if (vm != null)
-                {
-                    EditSoftwareViewModel workspace = new EditSoftwareViewModel(vm);
-                    Workspaces.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message);
-            }
-
+            await EditItem<SoftwareCreateEditVM, EditSoftwareViewModel>(id, URLs.SOFTWARE_CEVM_ID, vm => new EditSoftwareViewModel(vm));
         }
-
 
         private async void EditUser(string id)
         {
-            try
-            {
-                UserCreateEditVM vm = await RequestHelper.SendRequestAsync<object, UserCreateEditVM>(URLs.USER_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
-                if (vm != null)
-                {
-                    EditUserViewModel workspace = new EditUserViewModel(vm);
-                    Workspaces.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message);
-            }
-
+            await EditItem<UserCreateEditVM, EditUserViewModel>(id, URLs.USER_CEVM_ID, vm => new EditUserViewModel(vm));
         }
+
+        private async void EditComputerType(string id)
+        {
+            await EditItemWindow<ComputerTypeCreateEditVM, EditComputerTypeViewModel>(
+                id,
+                URLs.COMPUTERTYPE_CEVM_ID,
+                (window, vm) => new EditComputerTypeViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditDeviceModel(string id)
+        {
+            await EditItemWindow<DeviceModelCreateEditVM, EditDeviceModelViewModel>(
+                id,
+                URLs.DEVICEMODEL_CEVM_ID,
+                (window, vm) => new EditDeviceModelViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditDeviceType(string id)
+        {
+            await EditItemWindow<DeviceTypeCreateEditVM, EditDeviceTypeViewModel>(
+                id,
+                URLs.DEVICETYPE_CEVM_ID,
+                (window, vm) => new EditDeviceTypeViewModel(window, vm)
+            );
+        }
+
+
+        private async void EditGroupsType(string id)
+        {
+            await EditItemWindow<GroupTypeCreateEditVM, EditGroupsTypeViewModel>(
+                id,
+                URLs.GROUPTYPE_CEVM_ID,
+                (window, vm) => new EditGroupsTypeViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditHardDriveModel(string id)
+        {
+            await EditItemWindow<HardDriveModelCreateEditVM, EditHardDriveModelViewModel>(
+                id,
+                URLs.HARDDRIVEMODEL_CEVM_ID,
+                (window, vm) => new EditHardDriveModelViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditKnowledgebaseCategory(string id)
+        {
+            await EditItemWindow<KnowledgeBaseCategoryCreateEditVM, EditKnowledgebaseCategoryViewModel>(
+                id,
+                URLs.KNOWLEDGEBASECATEGORY_CEVM_ID,
+                (window, vm) => new EditKnowledgebaseCategoryViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditLicenseType(string id)
+        {
+            await EditItemWindow<LicenseTypeCreateEditVM, EditLicenseTypeViewModel>(
+                id,
+                URLs.LICENSETYPE_CEVM_ID,
+                (window, vm) => new EditLicenseTypeViewModel(window, vm)
+            );
+        }
+
+
+        private async void EditManufacturer(string id)
+        {
+            await EditItemWindow<ManufacturerCreateEditVM, EditManufacturerViewModel>(
+                id,
+                URLs.MANUFACTURER_CEVM_ID,
+                (window, vm) => new EditManufacturerViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditMonitorModel(string id)
+        {
+            await EditItemWindow<MonitorModelCreateEditVM, EditMonitorModelViewModel>(
+                id,
+                URLs.MONITORMODEL_CEVM_ID,
+                (window, vm) => new EditMonitorModelViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditMonitorType(string id)
+        {
+            await EditItemWindow<MonitorTypeCreateEditVM, EditMonitorTypeViewModel>(
+                id,
+                URLs.MONITORTYPE_CEVM_ID,
+                (window, vm) => new EditMonitorTypeViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditNetworkDevicemodel(string id)
+        {
+            await EditItemWindow<NetworkDeviceModelCreateEditVM, EditNetworkDevicemodelViewModel>(
+                id,
+                URLs.NETWORKDEVICEMODEL_CEVM_ID,
+                (window, vm) => new EditNetworkDevicemodelViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditNetworkDeviceType(string id)
+        {
+            await EditItemWindow<NetworkDeviceTypeCreateEditVM, EditNetworkDeviceTypeViewModel>(
+                id,
+                URLs.NETWORKDEVICETYPE_CEVM_ID,
+                (window, vm) => new EditNetworkDeviceTypeViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditOperatingSystem(string id)
+        {
+            await EditItemWindow<OperatingSystemCreateEditVM, EditOperatingSystemViewModel>(
+                id,
+                URLs.OPERATINGSYSTEM_CEVM_ID,
+                (window, vm) => new EditOperatingSystemViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditPhonemodel(string id)
+        {
+            await EditItemWindow<PhoneModelCreateEditVM, EditPhonemodelViewModel>(
+                id,
+                URLs.PHONEMODEL_CEVM_ID,
+                (window, vm) => new EditPhonemodelViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditPhoneType(string id)
+        {
+            await EditItemWindow<PhoneTypeCreateEditVM, EditPhoneTypeViewModel>(
+                id,
+                URLs.PHONETYPE_CEVM_ID,
+                (window, vm) => new EditPhoneTypeViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditPosition(string id)
+        {
+            await EditItemWindow<PositionCreateEditVM, EditPositionViewModel>(
+                id,
+                URLs.POSITION_CEVM_ID,
+                (window, vm) => new EditPositionViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditPrintermodel(string id)
+        {
+            await EditItemWindow<PrinterModelCreateEditVM, EditPrintermodelViewModel>(
+                id,
+                URLs.PRINTERMODEL_CEVM_ID,
+                (window, vm) => new EditPrintermodelViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditPrintertype(string id)
+        {
+            await EditItemWindow<PrinterTypeCreateEditVM, EditPrintertypeViewModel>(
+                id,
+                URLs.PRINTERTYPE_CEVM_ID,
+                (window, vm) => new EditPrintertypeViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditRackCabinetModel(string id)
+        {
+            await EditItemWindow<RackCabinetModelCreateEditVM, EditRackCabinetModelViewModel>(
+                id,
+                URLs.RACKCABINETMODEL_CEVM_ID,
+                (window, vm) => new EditRackCabinetModelViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditRackCabinetType(string id)
+        {
+            await EditItemWindow<RackCabinetTypeCreateEditVM, EditRackCabinetTypeViewModel>(
+                id,
+                URLs.RACKCABINETTYPE_CEVM_ID,
+                (window, vm) => new EditRackCabinetTypeViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditSimComponentType(string id)
+        {
+            await EditItemWindow<SimComponentTypeCreateEditVM, EditSimComponentTypeViewModel>(
+                id,
+                URLs.SIMCOMPONENTTYPE_CEVM_ID,
+                (window, vm) => new EditSimComponentTypeViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditStatus(string id)
+        {
+            await EditItemWindow<StatusCreateEditVM, EditStatusViewModel>(
+                id,
+                URLs.STATUS_CEVM_ID,
+                (window, vm) => new EditStatusViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditTicketCategory(string id)
+        {
+            await EditItemWindow<TicketCategoryCreateEditVM, EditTicketCategoryViewModel>(
+                id,
+                URLs.TICKETCATEGORY_CEVM_ID,
+                (window, vm) => new EditTicketCategoryViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditTicketStatuse(string id)
+        {
+            await EditItemWindow<TicketStatusCreateEditVM, EditTicketStatuseViewModel>(
+                id,
+                URLs.TICKETSTATUS_CEVM_ID,
+                (window, vm) => new EditTicketStatuseViewModel(window, vm)
+            );
+        }
+
+
+
+        private async void EditTicketType(string id)
+        {
+            await EditItemWindow<TicketTypeCreateEditVM, EditTicketTypeViewModel>(
+                id,
+                URLs.TICKETTYPE_CEVM_ID,
+                (window, vm) => new EditTicketTypeViewModel(window, vm)
+            );
+        }
+
 
 
 

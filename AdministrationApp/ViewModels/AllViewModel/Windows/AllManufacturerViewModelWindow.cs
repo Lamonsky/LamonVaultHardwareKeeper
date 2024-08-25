@@ -42,7 +42,14 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Edit()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Messenger.Default.Send(DisplayName+"Edit/"+ChosenItem.Id.ToString());
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Nie wybrano obiektu");
+            }
         }
 
         public override void Filter()
