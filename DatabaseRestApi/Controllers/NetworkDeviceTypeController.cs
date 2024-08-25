@@ -5,6 +5,7 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Humanizer.Localisation.DateToOrdinalWords;
 
 namespace DatabaseRestApi.Controllers
 {
@@ -16,6 +17,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<NetworkDeviceTypeVM> networkDeviceTypeVM = await database.NetworkDeviceTypes
+                .Where(item => item.Status != 99)
                 .Select(item => new NetworkDeviceTypeVM
                 {
                     Id = item.Id,
@@ -24,6 +26,42 @@ namespace DatabaseRestApi.Controllers
                     Status = item.StatusNavigation.Name
 
                 }).ToListAsync();
+            return Json(networkDeviceTypeVM);
+        }
+        [Route(URLs.NETWORKDEVICETYPE_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            List<NetworkDeviceTypeVM> networkDeviceTypeVM = await database.NetworkDeviceTypes
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new NetworkDeviceTypeVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).ToListAsync();
+            return Json(networkDeviceTypeVM);
+        }
+        [Route(URLs.NETWORKDEVICETYPE_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            NetworkDeviceTypeCreateEditVM networkDeviceTypeVM = await database.NetworkDeviceTypes
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new NetworkDeviceTypeCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
             return Json(networkDeviceTypeVM);
         }
         [Route(URLs.NETWORKDEVICETYPE)]

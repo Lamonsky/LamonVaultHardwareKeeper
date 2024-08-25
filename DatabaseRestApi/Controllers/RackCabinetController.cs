@@ -32,6 +32,52 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(rackcabinetVM);
         }
+        [Route(URLs.RACKCABINET_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            RackCabinetVM rackcabinetVM = await database.RackCabinets
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new RackCabinetVM()
+                {
+                    Id = item.Id,
+                    Location = item.Location.Name,
+                    Status = item.Status.Name,
+                    Manufacturer = item.ManufacturerNavigation.Name,
+                    Model = item.ModelNavigation.Name,
+                    CabinetType = item.CabinetTypeNavigation.Name,
+                    SerialNumber = item.SerialNumber,
+                    Height = item.Height.ToString(),
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                }).FirstAsync();
+            return Json(rackcabinetVM);
+        }
+        [Route(URLs.RACKCABINET_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            RackCabinetCreateEditVM rackcabinetVM = await database.RackCabinets
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new RackCabinetCreateEditVM()
+                {
+                    Id = item.Id,
+                    LocationId = item.LocationId,
+                    StatusId = item.StatusId,
+                    Manufacturer = item.Manufacturer,
+                    Model = item.Model,
+                    CabinetType = item.CabinetType,
+                    SerialNumber = item.SerialNumber,
+                    Height = item.Height,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.Users
+                }).FirstAsync();
+            return Json(rackcabinetVM);
+        }
 
         [Route(URLs.RACKCABINET)]
         [HttpPost]

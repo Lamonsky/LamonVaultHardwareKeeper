@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<RackCabinetModelVM> rackcabinetModelVM = await database.RackCabinetModels
+                .Where(item => item.Status != 99)
                 .Select(item => new RackCabinetModelVM
                 {
                     Id = item.Id,
@@ -24,6 +25,42 @@ namespace DatabaseRestApi.Controllers
                     Status = item.StatusNavigation.Name
                     
                 }).ToListAsync();
+            return Json(rackcabinetModelVM);
+        }
+        [Route(URLs.RACKCABINETMODEL_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            RackCabinetModelVM rackcabinetModelVM = await database.RackCabinetModels
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new RackCabinetModelVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+                    
+                }).FirstAsync();
+            return Json(rackcabinetModelVM);
+        }
+        [Route(URLs.RACKCABINETMODEL_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            RackCabinetModelCreateEditVM rackcabinetModelVM = await database.RackCabinetModels
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new RackCabinetModelCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+                    
+                }).FirstAsync();
             return Json(rackcabinetModelVM);
         }
         [Route(URLs.RACKCABINETMODEL)]

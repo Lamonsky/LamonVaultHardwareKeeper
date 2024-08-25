@@ -5,6 +5,7 @@
                     xmlns:vwa="clr-namespace:AdministrationApp.Views.AllViews"
                     xmlns:vwaw="clr-namespace:AdministrationApp.Views.AllWindows"
                     xmlns:vmn="clr-namespace:AdministrationApp.ViewModels.NewViewModel"
+                    xmlns:vme="clr-namespace:AdministrationApp.ViewModels.EditViewModel"
                     xmlns:vmnw="clr-namespace:AdministrationApp.ViewModels.NewViewModel.Windows"
                     xmlns:vwn="clr-namespace:AdministrationApp.Views.NewViews"
                     xmlns:vwnw="clr-namespace:AdministrationApp.Views.NewViews.Windows">
@@ -72,8 +73,35 @@
     <DataTemplate DataType="{x:Type vmn:NewSimCardViewModel}">
         <vwn:NewSimCardView/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vmn:EditComputerViewModel}">
+    <DataTemplate DataType="{x:Type vme:EditComputerViewModel}">
         <vwn:NewComputerView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditDeviceViewModel}">
+        <vwn:NewDeviceView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditMonitorViewModel}">
+        <vwn:NewMonitorView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditNetworkDeviceViewModel}">
+        <vwn:NewNetworkDeviceView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditPhoneViewModel}">
+        <vwn:NewPhoneView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditPrinterViewModel}">
+        <vwn:NewPrinterView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditRackCabinetViewModel}">
+        <vwn:NewRackCabinetView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditSimCardViewModel}">
+        <vwn:NewSimCardView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditSoftwareViewModel}">
+        <vwn:NewSoftwareView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditUserViewModel}">
+        <vwn:NewUserView/>
     </DataTemplate>
 
 

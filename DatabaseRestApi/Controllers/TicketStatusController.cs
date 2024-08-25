@@ -4,17 +4,19 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class TicketStatusController : Controller
     {
-        [Route("/ticketstatus")]
+        [Route(URLs.TICKETSTATUS)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             DatabaseContext database = new();
             List<TicketStatusVM> ticketStatusVM = await database.TicketStatuses
+                .Where(item => item.Status != 99)
                 .Select(item => new TicketStatusVM
                 {
                     Id = item.Id,
@@ -25,7 +27,43 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(ticketStatusVM);
         }
-        [Route("/ticketstatus")]
+        [Route(URLs.TICKETSTATUS_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            TicketStatusVM ticketStatusVM = await database.TicketStatuses
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new TicketStatusVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstAsync();
+            return Json(ticketStatusVM);
+        }
+        [Route(URLs.TICKETSTATUS_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEdititem(int id)
+        {
+            DatabaseContext database = new();
+            TicketStatusCreateEditVM ticketStatusVM = await database.TicketStatuses
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new TicketStatusCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
+            return Json(ticketStatusVM);
+        }
+        [Route(URLs.TICKETSTATUS)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TicketStatusCreateEditVM ticketStatusCreateEditVM)
         {
@@ -42,7 +80,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/ticketstatus/{id}")]
+        [Route(URLs.TICKETSTATUS_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] TicketStatusCreateEditVM ticketStatusCreateEditVM)
         {
@@ -60,7 +98,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/ticketstatus/{id}")]
+        [Route(URLs.TICKETSTATUS_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] TicketStatusCreateEditVM ticketStatusCreateEditVM)
         {

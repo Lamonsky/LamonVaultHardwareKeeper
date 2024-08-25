@@ -31,6 +31,50 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(simcardsVMs);
         }
+        [Route(URLs.SIMCARD_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            SimCardsVM simcardsVMs = await database.SimCards
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new SimCardsVM
+                {
+                    Id = item.Id,
+                    PinCode = item.PinCode,
+                    PukCode = item.PukCode,
+                    Component = item.ComponentNavigation.Name,
+                    PhoneNumber = item.PhoneNumber,
+                    Status = item.Status.Name,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                }).FirstAsync();
+            return Json(simcardsVMs);
+        }
+        [Route(URLs.SIMCARD_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            SimCardsCreateEditVM simcardsVMs = await database.SimCards
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new SimCardsCreateEditVM
+                {
+                    Id = item.Id,
+                    PinCode = item.PinCode,
+                    PukCode = item.PukCode,
+                    Component = item.Component,
+                    PhoneNumber = item.PhoneNumber,
+                    StatusId = item.StatusId,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.Users
+                }).FirstAsync();
+            return Json(simcardsVMs);
+        }
         [Route(URLs.SIMCARD)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SimCardsCreateEditVM simCardsCreateEditVM)

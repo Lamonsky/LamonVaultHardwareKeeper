@@ -34,6 +34,55 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(phonesVMs);
         }
+        [Route(URLs.PHONE_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            PhonesVM phonesVMs = await database.Phones
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new PhonesVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Status = item.Status.Name,
+                    PhoneType = item.PhoneTypeNavigation.Name,
+                    Manufacturer = item.ManufacturerNavigation.Name,
+                    Model = item.ModelNavigation.Name,
+                    SerialNumber = item.SerialNumber,
+                    Location = item.Location.Name,
+                    InventoryNumber = item.InventoryNumber,
+                    SimCard1 = item.SimCard1Navigation.PhoneNumber + " " + item.SimCard1Navigation.SerialNumber + " " + item.SimCard1Navigation.InventoryNumber,
+                    SimCard2 = item.SimCard2Navigation.PhoneNumber + " " + item.SimCard2Navigation.SerialNumber + " " + item.SimCard2Navigation.InventoryNumber,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                }).FirstAsync();
+            return Json(phonesVMs);
+        }
+        [Route(URLs.PHONE_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            PhonesCreateEditVM phonesVMs = await database.Phones
+                .Where(item => item.StatusId != 99)
+                .Select(item => new PhonesCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    StatusId = item.StatusId,
+                    PhoneType = item.PhoneType,
+                    Manufacturer = item.Manufacturer,
+                    Model = item.Model,
+                    SerialNumber = item.SerialNumber,
+                    LocationId = item.LocationId,
+                    InventoryNumber = item.InventoryNumber,
+                    SimCard1 = item.SimCard1,
+                    SimCard2 = item.SimCard2,
+                    Users = item.Users
+                }).FirstAsync();
+            return Json(phonesVMs);
+        }
         [Route(URLs.PHONE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PhonesCreateEditVM phonesCreateEditVm)

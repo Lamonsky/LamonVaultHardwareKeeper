@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<MonitorModelVM> monitorModelVM = await database.MonitorModels
+                .Where(item => item.Status != 99)
                 .Select(item => new MonitorModelVM
                 {
                     Id = item.Id,
@@ -24,6 +25,42 @@ namespace DatabaseRestApi.Controllers
                     Status = item.StatusNavigation.Name
 
                 }).ToListAsync();
+            return Json(monitorModelVM);
+        }
+        [Route(URLs.MONITORMODEL_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            MonitorModelVM monitorModelVM = await database.MonitorModels
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new MonitorModelVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstAsync();
+            return Json(monitorModelVM);
+        }
+        [Route(URLs.MONITORMODEL_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            MonitorModelCreateEditVM monitorModelVM = await database.MonitorModels
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new MonitorModelCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
             return Json(monitorModelVM);
         }
         [Route(URLs.MONITORMODEL)]

@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<PositionVM> positionVM = await database.Positions
+                .Where(item => item.Status != 99)
                 .Select(item => new PositionVM
                 {
                     Id = item.Id,
@@ -24,6 +25,42 @@ namespace DatabaseRestApi.Controllers
                     Status = item.StatusNavigation.Name
 
                 }).ToListAsync();
+            return Json(positionVM);
+        }
+        [Route(URLs.POSITION_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            PositionVM positionVM = await database.Positions
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new PositionVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstAsync();
+            return Json(positionVM);
+        }
+        [Route(URLs.POSITION_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            PositionCreateEditVM positionVM = await database.Positions
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new PositionCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
             return Json(positionVM);
         }
         [Route(URLs.POSITION)]

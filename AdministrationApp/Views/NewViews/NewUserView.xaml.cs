@@ -25,10 +25,9 @@ namespace AdministrationApp.Views.NewViews
         {
             InitializeComponent();
         }
-
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if(DataContext is NewUserViewModel viewModel)
+            if (DataContext is NewUserViewModel viewModel)
             {
                 viewModel.Password = (sender as PasswordBox).Password;
             }

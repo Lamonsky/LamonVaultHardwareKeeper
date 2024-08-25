@@ -4,17 +4,19 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class TechnicianController : Controller
     {
-        [Route("/technician")]
+        [Route(URLs.TECHNICIAN)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             DatabaseContext database = new();
             List<TechnicianVM> technicianVMs = await database.Technicians
+                .Where(item => item.Status != 99)
                 .Select(item => new TechnicianVM
                 {
                     Id = item.Id,
@@ -23,7 +25,39 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(technicianVMs);
         }
-        [Route("/technician")]
+        [Route(URLs.TECHNICIAN_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            TechnicianVM technicianVMs = await database.Technicians
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new TechnicianVM
+                {
+                    Id = item.Id,
+                    Users = item.Users.FirstName + " " + item.Users.LastName + " " + item.Users.InternalNumber,
+                    Status = item.StatusNavigation.Name
+                }).FirstAsync();
+            return Json(technicianVMs);
+        }
+        [Route(URLs.TECHNICIAN_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            TechnicianCreateEditVM technicianVMs = await database.Technicians
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new TechnicianCreateEditVM
+                {
+                    Id = item.Id,
+                    UsersId = item.UsersId,
+                    Status = item.Status
+                }).FirstAsync();
+            return Json(technicianVMs);
+        }
+        [Route(URLs.TECHNICIAN)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TechnicianCreateEditVM technicianCreateEditVM)
         {
@@ -39,7 +73,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/technician/{id}")]
+        [Route(URLs.TECHNICIAN_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] TechnicianCreateEditVM technicianCreateEditVM)
         {
@@ -56,7 +90,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/technician/{id}")]
+        [Route(URLs.TECHNICIAN_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] TechnicianCreateEditVM technicianCreateEditVM)
         {

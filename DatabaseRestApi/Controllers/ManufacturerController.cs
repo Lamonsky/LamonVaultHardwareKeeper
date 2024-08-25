@@ -28,11 +28,10 @@ namespace DatabaseRestApi.Controllers
         }
         [Route(URLs.MANUFACTURER_ID)]
         [HttpGet]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> GetItem(int id)
         {
             DatabaseContext database = new();
             ManufacturerVM manufacturerVM = await database.Manufacturers
-                .Where(item => item.Id == id)
                 .Select(item => new ManufacturerVM
                 {
                     Id = item.Id,
@@ -40,7 +39,24 @@ namespace DatabaseRestApi.Controllers
                     Comment = item.Comment,
                     Status = item.StatusNavigation.Name
 
-                }).FirstOrDefaultAsync();
+                }).FirstAsync();
+            return Json(manufacturerVM);
+        }
+        [Route(URLs.MANUFACTURER_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            ManufacturerCreateEditVM manufacturerVM = await database.Manufacturers
+                .Where(item => item.Id == id)
+                .Select(item => new ManufacturerCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
             return Json(manufacturerVM);
         }
         [Route(URLs.MANUFACTURER)]

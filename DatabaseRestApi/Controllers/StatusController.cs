@@ -27,12 +27,27 @@ namespace DatabaseRestApi.Controllers
         }
         [Route(URLs.STATUS_ID)]
         [HttpGet]
-        public async Task<IActionResult> GetStatus(int id)
+        public async Task<IActionResult> GetItem(int id)
         {
             DatabaseContext database = new();
             StatusVM statusVM = await database.Statuses
-                .Where(item => item.Id == id)
                 .Select(item => new StatusVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment
+                    
+                }).FirstAsync();
+            return Json(statusVM);
+        }
+        [Route(URLs.STATUS_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetStatus(int id)
+        {
+            DatabaseContext database = new();
+            StatusCreateEditVM statusVM = await database.Statuses
+                .Where(item => item.Id == id)
+                .Select(item => new StatusCreateEditVM
                 {
                     Id = item.Id,
                     Name = item.Name,

@@ -4,17 +4,19 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class KnowledgeBaseCategoryController : Controller
     {
-        [Route("/knowledgebasecategory")]
+        [Route(URLs.KNOWLEDGEBASECATEGORY)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             DatabaseContext database = new();
             List<KnowledgeBaseCategoryVM> knowledgeBaseCategoryVM = await database.KnowledgeBaseCategories
+                .Where(item => item.Status != 99)
                 .Select(item => new KnowledgeBaseCategoryVM
                 {
                     Id = item.Id,
@@ -25,7 +27,43 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(knowledgeBaseCategoryVM);
         }
-        [Route("/knowledgebasecategory")]
+        [Route(URLs.KNOWLEDGEBASECATEGORY_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            KnowledgeBaseCategoryVM knowledgeBaseCategoryVM = await database.KnowledgeBaseCategories
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new KnowledgeBaseCategoryVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstAsync();
+            return Json(knowledgeBaseCategoryVM);
+        }
+        [Route(URLs.KNOWLEDGEBASECATEGORY_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            KnowledgeBaseCategoryCreateEditVM knowledgeBaseCategoryVM = await database.KnowledgeBaseCategories
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new KnowledgeBaseCategoryCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
+            return Json(knowledgeBaseCategoryVM);
+        }
+        [Route(URLs.KNOWLEDGEBASECATEGORY)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] KnowledgeBaseCategoryCreateEditVM knowledgeBaseCategoryCreateEditVM)
         {
@@ -42,7 +80,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/knowledgebasecategory/{id}")]
+        [Route(URLs.KNOWLEDGEBASECATEGORY_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] KnowledgeBaseCategoryCreateEditVM knowledgeBaseCategoryCreateEditVM)
         {
@@ -60,7 +98,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/knowledgebasecategory/{id}")]
+        [Route(URLs.KNOWLEDGEBASECATEGORY_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] KnowledgeBaseCategoryCreateEditVM knowledgeBaseCategoryCreateEditVM)
         {

@@ -17,6 +17,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<UserVM> userVM= await database.Users
+                .Where(item => item.IsActive == true)
                 .Select(item => new UserVM
                 {
                     Id = item.Id,
@@ -40,6 +41,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             UserVM userVM= await database.Users
+                .Where(item => item.IsActive == true)
                 .Where(item => item.Id == id)
                 .Select(item => new UserVM
                 {
@@ -55,7 +57,32 @@ namespace DatabaseRestApi.Controllers
                     InternalNumber = item.InternalNumber,
                     Position = item.PositionNavigation.Name
 
-                }).FirstOrDefaultAsync();
+                }).FirstAsync();
+            return Json(userVM);
+        }
+        [Route(URLs.USER_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditUser(int id)
+        {
+            DatabaseContext database = new();
+            UserCreateEditVM userVM= await database.Users
+                .Where(item => item.IsActive == true)
+                .Where(item => item.Id == id)
+                .Select(item => new UserCreateEditVM
+                {
+                    Id = item.Id,
+                    Usersname = item.Usersname,
+                    FirstName = item.FirstName,
+                    LastName = item.LastName,
+                    Email = item.Email,
+                    LocationId = item.LocationId,
+                    IsActive = item.IsActive,
+                    Phone1 = item.Phone1,
+                    Phone2 = item.Phone2,
+                    InternalNumber = item.InternalNumber,
+                    Position = item.Position
+
+                }).FirstAsync();
             return Json(userVM);
         }
         [Route(URLs.USER)]

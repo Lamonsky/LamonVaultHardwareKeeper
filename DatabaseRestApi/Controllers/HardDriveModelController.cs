@@ -4,17 +4,19 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class HardDriveModelController : Controller
     {
-        [Route("/harddrivemodel")]
+        [Route(URLs.HARDDRIVEMODEL)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             DatabaseContext database = new();
             List<HardDriveModelVM> hardDriveModelVM = await database.HardDriveModels
+                .Where(item => item.Status != 99)                
                 .Select(item => new HardDriveModelVM
                 {
                     Id = item.Id,
@@ -25,7 +27,43 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(hardDriveModelVM);
         }
-        [Route("/harddrivemodel")]
+        [Route(URLs.HARDDRIVEMODEL_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            HardDriveModelVM hardDriveModelVM = await database.HardDriveModels
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new HardDriveModelVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstAsync();
+            return Json(hardDriveModelVM);
+        }
+        [Route(URLs.HARDDRIVEMODEL_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            HardDriveModelCreateEditVM hardDriveModelVM = await database.HardDriveModels
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new HardDriveModelCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
+            return Json(hardDriveModelVM);
+        }
+        [Route(URLs.HARDDRIVEMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] HardDriveModelCreateEditVM hardDriveModelCreateEditVM)
         {
@@ -42,7 +80,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/harddrivemodel/{id}")]
+        [Route(URLs.HARDDRIVEMODEL_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] HardDriveModelCreateEditVM hardDriveModelCreateEditVM)
         {
@@ -60,7 +98,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/harddrivemodel/{id}")]
+        [Route(URLs.HARDDRIVEMODEL_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] HardDriveModelCreateEditVM hardDriveModelCreateEditVM)
         {

@@ -28,7 +28,7 @@ namespace DatabaseRestApi.Controllers
         }
         [Route(URLs.OS_ID)]
         [HttpGet]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> GetItem(int id)
         {
             DatabaseContext database = new();
             OperatingSystemVM operaingSystemVM = await database.OperatingSystems
@@ -40,7 +40,24 @@ namespace DatabaseRestApi.Controllers
                     Comment = item.Comment,
                     Status = item.StatusNavigation.Name
 
-                }).FirstOrDefaultAsync();
+                }).FirstAsync();
+            return Json(operaingSystemVM);
+        }
+        [Route(URLs.OS_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            OperatingSystemCreateEditVM operaingSystemVM = await database.OperatingSystems
+                .Where(item => item.Id == id)
+                .Select(item => new OperatingSystemCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
             return Json(operaingSystemVM);
         }
         [Route(URLs.OS)]

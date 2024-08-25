@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<ComputerModelVM> computerModelVM = await database.ComputerModels
+                .Where(item => item.Status != 99)
                 .Select(item => new ComputerModelVM
                 {
                     Id = item.Id,
@@ -27,10 +28,11 @@ namespace DatabaseRestApi.Controllers
         }
         [Route(URLs.COMPUTERMODEL_ID)]
         [HttpGet]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> GetItem(int id)
         {
             DatabaseContext database = new();
             ComputerModelVM computerModelVM = await database.ComputerModels
+                .Where(item => item.Status != 99)
                 .Where(item => item.Id == id)
                 .Select(item => new ComputerModelVM
                 {
@@ -39,6 +41,23 @@ namespace DatabaseRestApi.Controllers
                     Comment = item.Comment,
                     Status = item.StatusNavigation.Name
                 }).FirstOrDefaultAsync();
+            return Json(computerModelVM);
+        }
+        [Route(URLs.COMPUTERMODEL_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            ComputerModelCreateEditVM computerModelVM = await database.ComputerModels
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new ComputerModelCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+                }).FirstAsync();
             return Json(computerModelVM);
         }
         [Route(URLs.COMPUTERMODEL)]

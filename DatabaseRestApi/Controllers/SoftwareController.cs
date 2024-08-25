@@ -20,6 +20,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<SoftwaresVM> softwareVM = await database.Softwares
+                .Where(item => item.Status != 99)
                 .Select(item => new SoftwaresVM()
                 {
                     Id = item.Id,
@@ -29,6 +30,43 @@ namespace DatabaseRestApi.Controllers
                     Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
                     Status = item.StatusNavigation.Name,
                 }).ToListAsync();
+            return Json(softwareVM);
+        }
+        [Route(URLs.SOFTWARE_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            SoftwaresVM softwareVM = await database.Softwares
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new SoftwaresVM()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Location = item.Location.Name,
+                    Publisher = item.PublisherNavigation.Name,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    Status = item.StatusNavigation.Name,
+                }).FirstAsync();
+            return Json(softwareVM);
+        }
+        [Route(URLs.SOFTWARE_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            SoftwareCreateEditVM softwareVM = await database.Softwares
+                .Where(item => item.Status != 99)
+                .Select(item => new SoftwareCreateEditVM()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    LocationId = item.LocationId,
+                    Publisher = item.Publisher,
+                    Users = item.Users,
+                    Status = item.Status,
+                }).FirstAsync();
             return Json(softwareVM);
         }
 

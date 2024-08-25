@@ -41,8 +41,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Edit()
         {
-            Messenger.Default.Send(DisplayName + "Edit");
-            Messenger.Default.Send(ChosenNetworkDevice);
+            Messenger.Default.Send(DisplayName + "Edit/" + ChosenNetworkDevice.Id);
         }
         public override void Filter()
         {

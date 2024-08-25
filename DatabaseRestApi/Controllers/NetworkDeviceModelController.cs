@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<NetworkDeviceModelVM> networkDeviceModelVM = await database.NetworkDeviceModels
+                .Where(item => item.Status != 99)
                 .Select(item => new NetworkDeviceModelVM
                 {
                     Id = item.Id,
@@ -24,6 +25,42 @@ namespace DatabaseRestApi.Controllers
                     Status = item.StatusNavigation.Name
 
                 }).ToListAsync();
+            return Json(networkDeviceModelVM);
+        }
+        [Route(URLs.NETWORKDEVICEMODEL_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            NetworkDeviceModelVM networkDeviceModelVM = await database.NetworkDeviceModels
+                .Where(item => item.Id == id)
+                .Where(item => item.Status != 99)
+                .Select(item => new NetworkDeviceModelVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstAsync();
+            return Json(networkDeviceModelVM);
+        }
+        [Route(URLs.NETWORKDEVICEMODEL_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            NetworkDeviceModelCreateEditVM networkDeviceModelVM = await database.NetworkDeviceModels
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new NetworkDeviceModelCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
             return Json(networkDeviceModelVM);
         }
         [Route(URLs.NETWORKDEVICEMODEL)]

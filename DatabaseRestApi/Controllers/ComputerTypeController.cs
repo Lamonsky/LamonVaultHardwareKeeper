@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<ComputerTypeVM> computerTypeVM = await database.ComputerTypes
+                .Where(item => item.Status != 99)
                 .Select(item => new ComputerTypeVM
                 {
                     Id = item.Id,
@@ -28,10 +29,11 @@ namespace DatabaseRestApi.Controllers
         }
         [Route(URLs.COMPUTERTYPE_ID)]
         [HttpGet]
-        public async Task<IActionResult> GetCType(int id)
+        public async Task<IActionResult> GetItem(int id)
         {
             DatabaseContext database = new();
             ComputerTypeVM computerTypeVM = await database.ComputerTypes
+                .Where(item => item.Status != 99)
                 .Where(item => item.Id == id)
                 .Select(item => new ComputerTypeVM
                 {
@@ -39,6 +41,23 @@ namespace DatabaseRestApi.Controllers
                     Name = item.Name,
                     Comment = item.Comment,
                     Status = item.StatusNavigation.Name
+
+                }).FirstAsync();
+            return Json(computerTypeVM);
+        }
+        [Route(URLs.COMPUTERTYPE_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            ComputerTypeCreateEditVM computerTypeVM = await database.ComputerTypes
+                .Where(item => item.Id == id)
+                .Select(item => new ComputerTypeCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
 
                 }).FirstOrDefaultAsync();
             return Json(computerTypeVM);

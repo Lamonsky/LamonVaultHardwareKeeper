@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<SimComponentTypeVM> simcomponentTypeVM = await database.SimComponentTypes
+                .Where(item => item.Status != 99)
                 .Select(item => new SimComponentTypeVM
                 {
                     Id = item.Id,
@@ -24,6 +25,42 @@ namespace DatabaseRestApi.Controllers
                     Status = item.StatusNavigation.Name,
                     
                 }).ToListAsync();
+            return Json(simcomponentTypeVM);
+        }
+        [Route(URLs.SIMCOMPONENTTYPE_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            SimComponentTypeVM simcomponentTypeVM = await database.SimComponentTypes
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new SimComponentTypeVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name,
+                    
+                }).FirstAsync();
+            return Json(simcomponentTypeVM);
+        }
+        [Route(URLs.SIMCOMPONENTTYPE_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            SimComponentTypeCreateEditVM simcomponentTypeVM = await database.SimComponentTypes
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new SimComponentTypeCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status,
+                    
+                }).FirstAsync();
             return Json(simcomponentTypeVM);
         }
         [Route(URLs.SIMCOMPONENTTYPE)]

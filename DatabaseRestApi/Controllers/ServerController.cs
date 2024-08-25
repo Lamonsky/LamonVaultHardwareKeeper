@@ -6,17 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Runtime.Intrinsics.Arm;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class ServerController : Controller
     {
-        [Route("/server")]
+        [Route(URLs.SERVER)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             DatabaseContext database = new();
             List<ServerVM> serverVM = await database.Servers
+                .Where(item => item.StatusId != 99)
                 .Select(item => new ServerVM
                 {
                     Id = item.Id,
@@ -35,7 +37,59 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(serverVM);
         }
-        [Route("/server")]
+        [Route(URLs.SERVER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            ServerVM serverVM = await database.Servers
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new ServerVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Location = item.Location.Name,
+                    Status = item.Status.Name,
+                    Manufacturer = item.ManufacturerNavigation.Name,
+                    Model = item.ModelNavigation.Name,
+                    Processor = item.Processor,
+                    Ram = item.Ram,
+                    OperatingSystem = item.OperatingSystemNavigation.Name,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+
+                }).FirstAsync();
+            return Json(serverVM);
+        }
+        [Route(URLs.SERVER_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            ServerCreateEditVM serverVM = await database.Servers
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new ServerCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    LocationId = item.LocationId,
+                    StatusId = item.StatusId,
+                    Manufacturer = item.Manufacturer,
+                    Model = item.Model,
+                    Processor = item.Processor,
+                    Ram = item.Ram,
+                    OperatingSystem = item.OperatingSystem,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.Users
+
+                }).FirstAsync();
+            return Json(serverVM);
+        }
+        [Route(URLs.SERVER)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ServerCreateEditVM serverCreateEditVM)
         {
@@ -60,7 +114,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/server/{id}")]
+        [Route(URLs.SERVER_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] ServerCreateEditVM serverCreateEditVM)
         {
@@ -86,7 +140,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/server/{id}")]
+        [Route(URLs.SERVER_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] ServerCreateEditVM serverCreateEditVM)
         {

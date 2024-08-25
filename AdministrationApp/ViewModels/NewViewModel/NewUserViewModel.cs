@@ -47,6 +47,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         {
             item = new UserCreateEditVM();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
+            Messenger.Default.Register<PositionVM>(this, getPosition);
         }
         public override async void Save()
         {
@@ -56,10 +57,10 @@ namespace AdministrationApp.ViewModels.NewViewModel
         #endregion
         #region CommandsFunctions
 
-        private async void getPositionItems()
+        private void getPosition(PositionVM vM)
         {
-            positionComboBoxItems = await RequestHelper.SendRequestAsync<object, List<PositionVM>>(URLs.POSITION, HttpMethod.Get, null, null);
-
+            item.Position = vM.Id;
+            PositionName = vM.Name;
         }
 
         private void getChosenLokacja(LocationVM vM)
@@ -70,6 +71,22 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
         #endregion
         #region Dane
+        private string _PositionName;
+        public string PositionName
+        {
+            get
+            {
+                return _PositionName;
+            }
+            set
+            {
+                if (_PositionName != value)
+                {
+                    _PositionName = value;
+                    OnPropertyChanged(() => PositionName);
+                }
+            }
+        }
         public int Id
         {
             get
@@ -223,26 +240,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
                     _LokacjaName = value;
                     OnPropertyChanged(() => LokacjaName);
                 }
-            }
-        }
-        #endregion
-        #region Foreign Keys
-        private List<PositionVM> _positionComboBoxItems;
-        public List<PositionVM> positionComboBoxItems
-        {
-            get
-            {
-                //jak lista....
-                if (_positionComboBoxItems == null)
-                {
-                    getPositionItems();
-                }
-                return _positionComboBoxItems;
-            }
-            set
-            {
-                _positionComboBoxItems = value;
-                OnPropertyChanged(() => positionComboBoxItems);
             }
         }
         #endregion

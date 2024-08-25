@@ -6,17 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.WebEncoders.Testing;
 using System.Security.Policy;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class LicenseController : Controller
     {
-        [Route("/license")]
+        [Route(URLs.LICENSE)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             DatabaseContext database = new();
             List<LicenseVM> licenseVM = await database.Licenses
+                .Where(item => item.StatusId != 99)
                 .Select(item => new LicenseVM
                 {
                     Id = item.Id,
@@ -34,7 +36,57 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(licenseVM);
         }
-        [Route("/license")]
+        [Route(URLs.LICENSE_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            LicenseVM licenseVM = await database.Licenses
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new LicenseVM
+                {
+                    Id = item.Id,
+                    Software = item.SoftwareNavigation.Name,
+                    Name = item.Name,
+                    LicenseType = item.LicenseTypeNavigation.Name,
+                    Publisher = item.PublisherNavigation.Name,
+                    Status = item.Status.Name,
+                    Location = item.Location.Name,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    ExpiryDate = item.ExpiryDate,
+                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName + " " + item.UsersNavigation.InternalNumber
+
+                }).FirstAsync();
+            return Json(licenseVM);
+        }
+        [Route(URLs.LICENSE_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            LicenseCreateEditVM licenseVM = await database.Licenses
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new LicenseCreateEditVM
+                {
+                    Id = item.Id,
+                    Software = item.Software,
+                    Name = item.Name,
+                    LicenseType = item.LicenseType,
+                    Publisher = item.Publisher,
+                    StatusId = item.StatusId,
+                    LocationId = item.LocationId,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    ExpiryDate = item.ExpiryDate,
+                    Users = item.Users
+
+                }).FirstAsync();
+            return Json(licenseVM);
+        }
+        [Route(URLs.LICENSE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] LicenseCreateEditVM licenseCreateEditVM)
         {
@@ -59,7 +111,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/license/{id}")]
+        [Route(URLs.LICENSE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] LicenseCreateEditVM licenseCreateEditVM)
         {
@@ -84,7 +136,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/license/{id}")]
+        [Route(URLs.LICENSE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] LicenseCreateEditVM licenseCreateEditVM)
         {

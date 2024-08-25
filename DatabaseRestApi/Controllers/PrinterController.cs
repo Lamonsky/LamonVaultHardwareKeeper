@@ -33,6 +33,54 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(PrintersVM);
         }
+        [Route(URLs.PRINTER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            PrintersVM PrintersVM = await database.Printers
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new PrintersVM()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Location = item.Location.Name,
+                    Status = item.Status.Name,
+                    Manufacturer = item.ManufacturerNavigation.Name,
+                    Model = item.ModelNavigation.Name,
+                    PrinterType = item.PrinterTypeNavigation.Name,
+                    IpAddress = item.IpAddress,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                }).FirstAsync();
+            return Json(PrintersVM);
+        }
+        [Route(URLs.PRINTER_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            PrintersCreateEditVM PrintersVM = await database.Printers
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new PrintersCreateEditVM()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    LocationId = item.LocationId,
+                    StatusId = item.StatusId,
+                    Manufacturer = item.Manufacturer,
+                    Model = item.Model,
+                    PrinterType = item.PrinterType,
+                    IpAddress = item.IpAddress,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.Users
+                }).FirstAsync();
+            return Json(PrintersVM);
+        }
 
         [Route(URLs.PRINTER)]
         [HttpPost]

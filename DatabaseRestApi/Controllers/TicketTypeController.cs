@@ -4,12 +4,13 @@ using DatabaseRestApi.Models.Contexts;
 using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Data;
 
 namespace DatabaseRestApi.Controllers
 {
     public class TicketTypeController : Controller
     {
-        [Route("/tickettype")]
+        [Route(URLs.TICKETTYPE)]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -24,8 +25,41 @@ namespace DatabaseRestApi.Controllers
 
                 }).ToListAsync();
             return Json(ticketTypeVM);
+        }[Route(URLs.TICKETTYPE_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            TicketTypeVM ticketTypeVM = await database.TicketTypes
+                .Where(item => item.Id == id)
+                .Select(item => new TicketTypeVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstAsync();
+            return Json(ticketTypeVM);
         }
-        [Route("/tickettype")]
+        [Route(URLs.TICKETTYPE_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            TicketTypeCreateEditVM ticketTypeVM = await database.TicketTypes
+                .Where(item => item.Id == id)
+                .Select(item => new TicketTypeCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
+            return Json(ticketTypeVM);
+        }
+        [Route(URLs.TICKETTYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TicketTypeCreateEditVM ticketTypeCreateEditVM)
         {
@@ -42,7 +76,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/tickettype/{id}")]
+        [Route(URLs.TICKETTYPE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] TicketTypeCreateEditVM ticketTypeCreateEditVM)
         {
@@ -60,7 +94,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
-        [Route("/tickettype/{id}")]
+        [Route(URLs.TICKETTYPE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] TicketTypeCreateEditVM ticketTypeCreateEditVM)
         {

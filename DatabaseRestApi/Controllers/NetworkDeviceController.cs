@@ -37,6 +37,54 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(networkdeviceVM);
         }
+        [Route(URLs.NETWORKDEVICE_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            List<NetworkDeviceVM> networkdeviceVM = await database.NetworkDevices
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new NetworkDeviceVM()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Location = item.Location.Name,
+                    Status = item.Status.Name,
+                    Manufacturer = item.ManufacturerNavigation.Name,
+                    Model = item.ModelNavigation.Name,
+                    DeviceType = item.DeviceTypeNavigation.Name,
+                    Rack = item.RackNavigation.Manufacturer + " " + item.RackNavigation.ModelNavigation.Name + " " + item.RackNavigation.Location.Name,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                }).ToListAsync();
+            return Json(networkdeviceVM);
+        }
+        [Route(URLs.NETWORKDEVICE_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            NetworkDeviceCreateEditVM networkdeviceVM = await database.NetworkDevices
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new NetworkDeviceCreateEditVM()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    LocationId = item.LocationId,
+                    StatusId = item.StatusId,
+                    Manufacturer = item.Manufacturer,
+                    Model = item.Model,
+                    DeviceType = item.DeviceType,
+                    Rack = item.Rack,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.Users
+                }).FirstAsync();
+            return Json(networkdeviceVM);
+        }
 
         [Route(URLs.NETWORKDEVICE)]
         [HttpPost]

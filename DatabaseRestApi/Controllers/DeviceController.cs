@@ -34,6 +34,50 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(devicesVMs);
         }
+        [Route(URLs.DEVICE_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            DevicesVM devicesVMs = await database.Devices
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new DevicesVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Status = item.Status.Name,
+                    DeviceType = item.DeviceTypeNavigation.Name,
+                    Manufacturer = item.ManufacturerNavigation.Name,
+                    Model = item.ModelNavigation.Name,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                }).FirstAsync();
+            return Json(devicesVMs);
+        }
+        [Route(URLs.DEVICE_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            DevicesCreateEditVM devicesVMs = await database.Devices
+                .Where(item => item.Id == id)
+                .Where(item => item.StatusId != 99)
+                .Select(item => new DevicesCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    StatusId = item.StatusId,
+                    DeviceType = item.DeviceType,
+                    Manufacturer = item.Manufacturer,
+                    Model = item.Model,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.Users
+                }).FirstAsync();
+            return Json(devicesVMs);
+        }
         [Route(URLs.DEVICE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] DevicesCreateEditVM devicesCreateEditVm)

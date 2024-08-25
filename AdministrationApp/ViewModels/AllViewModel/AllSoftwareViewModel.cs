@@ -41,8 +41,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Edit()
         {
-            Messenger.Default.Send(DisplayName + "Edit");
-            Messenger.Default.Send(ChosenSoftware);
+            Messenger.Default.Send(DisplayName + "Edit/" + ChosenSoftware.Id);
         }
 
         public override void Filter()

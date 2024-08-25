@@ -59,6 +59,7 @@ namespace DatabaseRestApi.Controllers
                 PostalCode = vendorCreateEditVM.PostalCode,
                 Country = vendorCreateEditVM.Country,
                 Users = vendorCreateEditVM.Users,
+                IsActive = true,
                 CreatedAt = DateTime.Now
             });
 
@@ -87,6 +88,7 @@ namespace DatabaseRestApi.Controllers
             vendor.PostalCode = vendorCreateEditVM.PostalCode;
             vendor.Country = vendorCreateEditVM.Country;
             vendor.Users = vendorCreateEditVM.Users;
+            vendor.IsActive = vendorCreateEditVM.IsActive;
             vendor.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();

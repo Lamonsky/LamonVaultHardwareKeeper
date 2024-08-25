@@ -15,6 +15,7 @@ using System.Windows.Input;
 using AdministrationApp.Helpers;
 using AdministrationApp.ViewModels.AllViewModel;
 using AdministrationApp.ViewModels.AllViewModel.Windows;
+using AdministrationApp.ViewModels.EditViewModel;
 using AdministrationApp.ViewModels.NewViewModel;
 using AdministrationApp.ViewModels.NewViewModel.Windows;
 using AdministrationApp.Views;
@@ -110,6 +111,54 @@ namespace AdministrationApp.ViewModels
             }
             SetActiveWorkspace(workspace);
         }
+        private void CreateWindows<W, VM>(Func<W, VM> viewModelFactory)
+        where W : Window, new()
+        where VM : class
+        {
+            // Sprawdzenie, czy okno już istnieje w otwartych oknach aplikacji.
+            W existingWindow = Application.Current.Windows.OfType<W>().FirstOrDefault();
+
+            if (existingWindow != null)
+            {
+                // Jeśli okno już istnieje, aktywujemy je i ustawiamy na wierzchu.
+                existingWindow.Activate();
+                existingWindow.Focus();
+            }
+            else
+            {
+                // Tworzenie nowego okna.
+                W window = new W();
+
+                // Tworzenie ViewModelu z użyciem fabryki, która przyjmuje instancję okna.
+                VM viewModel = viewModelFactory(window);
+
+                // Przypisanie ViewModelu do DataContext okna.
+                window.DataContext = viewModel;
+
+                window.Show();
+            }
+        }
+        private async Task EditItem<TViewModel, TWorkspace>(string id, string urlTemplate, Func<TViewModel, TWorkspace> createWorkspace)
+        where TWorkspace : WorkspaceViewModel
+        {
+            try
+            {
+                string url = urlTemplate.Replace("{id}", id);
+                TViewModel vm = await RequestHelper.SendRequestAsync<object, TViewModel>(url, HttpMethod.Get, null, null);
+
+                if (vm != null)
+                {
+                    TWorkspace workspace = createWorkspace(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+        }
         private void SetActiveWorkspace(WorkspaceViewModel workspace)
         {
             Debug.Assert(this.Workspaces.Contains(workspace));
@@ -130,6 +179,7 @@ namespace AdministrationApp.ViewModels
             LoggedUser = user;
             GlobalData.AccessToken = user.AccessToken;
         }
+
         private void open(string name)
         {
             switch (name)
@@ -272,8 +322,38 @@ namespace AdministrationApp.ViewModels
                 case "ChooseOperatingSystem":
                     ShowOperatingSystemWindow();
                     break;
+                case "StatusAdd":
+                    CreateStatusWindow();
+                    break;
                 case string n when n.StartsWith("KomputeryEdit"):                 
                     EditComputer(CutString(name));
+                    break;
+                case string n when n.StartsWith("UrządzeniaEdit"):
+                    EditDevice(CutString(name));
+                    break;
+                case string n when n.StartsWith("MonitoryEdit"):
+                    EditMonitor(CutString(name));
+                    break;
+                case string n when n.StartsWith("Urządzenia siecioweEdit"):
+                    EditNetworkDevice(CutString(name));
+                    break;
+                case string n when n.StartsWith("TelefonyEdit"):
+                    EditPhone(CutString(name));
+                    break;
+                case string n when n.StartsWith("DrukarkiEdit"):
+                    EditPrinter(CutString(name));
+                    break;
+                case string n when n.StartsWith("Szafy RackEdit"):
+                    EditRackCabinet(CutString(name));
+                    break;
+                case string n when n.StartsWith("Karty SimEdit"):
+                    EditSimCard(CutString(name));
+                    break;
+                case string n when n.StartsWith("OprogramowanieEdit"):
+                    EditSoftware(CutString(name));
+                    break;
+                case string n when n.StartsWith("UżytkownicyEdit"):
+                    EditUser(CutString(name));
                     break;
             }
         }
@@ -430,27 +510,7 @@ namespace AdministrationApp.ViewModels
         private void CreateComputer()
         {
             CreateWorkspace<NewComputerViewModel>();
-        }
-        private async void EditComputer(string id)
-        {
-            try
-            {
-                string url = URLs.COMPUTERS_ID.Replace("{id}", id);
-                ComputersCreateEditVM vm = await RequestHelper.SendRequestAsync<object, ComputersCreateEditVM>(url, HttpMethod.Get, null, null);
-                if (vm != null)
-                {
-                    EditComputerViewModel workspace = new EditComputerViewModel(vm);
-                    Workspaces.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Debug.WriteLine(ex.Message);
-            }
-            
-        }
+        }        
         private void CreateMonitor()
         {
             CreateWorkspace<NewMonitorViewModel>();
@@ -533,230 +593,387 @@ namespace AdministrationApp.ViewModels
         }
         private void ShowPrinterTypeWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllPrinterTypeViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllPrinterTypeViewModelWindow>(window => new AllPrinterTypeViewModelWindow(window));
         }
+        
+        private void CreateStatusWindow()
+        {
+            CreateWindows<NewDictionaryWindow, NewStatuseViewModel>(window => new NewStatuseViewModel(window));
+        }
+
         private void CreatePrinterTypeWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewPrinterTypeWindowViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewPrinterTypeWindowViewModel>(window => new NewPrinterTypeWindowViewModel(window));
         }
+
         private void ShowPrinterModelWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllPrinterModelViewModelWindow(window);
-            window.Title="Modele drukarek";
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllPrinterModelViewModelWindow>(window => new AllPrinterModelViewModelWindow(window));
         }
+
         private void CreatePrinterModelWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewPrinterModelViewModel(window);
-            window.Title="Modele drukarek";
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewPrinterModelViewModel>(window => new NewPrinterModelViewModel(window));       
         }
+
         private void ShowStatusWindow()
         {
-            AllStatusWindow allStatusWindow = new AllStatusWindow();
-            allStatusWindow.DataContext = new AllStatusViewModelWindow(allStatusWindow);
-            allStatusWindow.Show();
-
+            CreateWindows<AllStatusWindow, AllStatusViewModelWindow>(window => new AllStatusViewModelWindow(window));
         }
+
         private void ShowManufacturerWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllManufacturerViewModelWindow(window);
-            window.Show();
-
+            CreateWindows<AllDictionaryWindow, AllManufacturerViewModelWindow>(window => new AllManufacturerViewModelWindow(window));
         }
+
         private void ShowUsersWindow()
         {
-            AllUsersWindow window = new AllUsersWindow();
-            window.DataContext = new AllUserViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllUsersWindow, AllUserViewModelWindow>(window => new AllUserViewModelWindow(window));
         }
+
         private void ShowLocationWindow()
         {
-            AllLocationsWindow window = new AllLocationsWindow();
-            window.DataContext = new AllLocationsViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllLocationsWindow, AllLocationsViewModelWindow>(window => new AllLocationsViewModelWindow(window));
         }
+
         private void ShowSimCardWindow()
         {
-            AllSimCardWindow window = new AllSimCardWindow();
-            window.DataContext = new AllSimCardViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllSimCardWindow, AllSimCardViewModelWindow>(window => new AllSimCardViewModelWindow(window));
         }
+
         private void ShowSimComponentTypeWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllSimComponentTypeViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllSimComponentTypeViewModelWindow>(window => new AllSimComponentTypeViewModelWindow(window));
         }
+
         private void CreateSimComponentTypeWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewSimComponentTypeViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewSimComponentTypeViewModel>(window => new NewSimComponentTypeViewModel(window));
         }
+
         private void ShowRackCabinetTypeWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllRackCabinetTypeViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllRackCabinetTypeViewModelWindow>(window => new AllRackCabinetTypeViewModelWindow(window));
         }
+
         private void CreateRackCabinetTypeWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewRackCabinetTypeViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewRackCabinetTypeViewModel>(window => new NewRackCabinetTypeViewModel(window));
         }
+
         private void ShowRackCabinetModelWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllRackCabinetModelViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllRackCabinetModelViewModelWindow>(window => new AllRackCabinetModelViewModelWindow(window));
         }
+
         private void CreateRackCabinetModelWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewRackCabinetModelViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewRackCabinetModelViewModel>(window => new NewRackCabinetModelViewModel(window));
         }
+
         private void ShowPhoneTypeWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllPhoneTypeViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllPhoneTypeViewModelWindow>(window => new AllPhoneTypeViewModelWindow(window));
         }
+
         private void CreatePhoneTypeWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewPhoneTypeViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewPhoneTypeViewModel>(window => new NewPhoneTypeViewModel(window));
         }
+
         private void ShowPhoneModelWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllPhoneModelViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllPhoneModelViewModelWindow>(window => new AllPhoneModelViewModelWindow(window));
         }
+
         private void CreatePhoneModelWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewPhoneModelViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewPhoneModelViewModel>(window => new NewPhoneModelViewModel(window));
         }
+
         private void ShowNetworkDeviceTypeWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllNetworkDeviceTypeViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllNetworkDeviceTypeViewModelWindow>(window => new AllNetworkDeviceTypeViewModelWindow(window));
         }
+
         private void CreateNetworkDeviceTypeWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewNetworkDeviceTypeViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewNetworkDeviceTypeViewModel>(window => new NewNetworkDeviceTypeViewModel(window));
         }
+
         private void ShowNetworkDeviceModelWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllNetworkDeviceModelViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllNetworkDeviceModelViewModelWindow>(window => new AllNetworkDeviceModelViewModelWindow(window));
         }
+
         private void CreateNetworkDeviceModelWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewNetworkDeviceModelViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewNetworkDeviceModelViewModel>(window => new NewNetworkDeviceModelViewModel(window));
         }
+
         private void ShowMonitorTypeWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllMonitorTypeViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllMonitorTypeViewModelWindow>(window => new AllMonitorTypeViewModelWindow(window));
         }
+
         private void CreateMonitorTypeWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewMonitorTypeViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewMonitorTypeViewModel>(window => new NewMonitorTypeViewModel(window));
         }
+
         private void ShowMonitorModelWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllMonitorModelViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllMonitorModelViewModelWindow>(window => new AllMonitorModelViewModelWindow(window));
         }
+
         private void CreateMonitorModelWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewMonitorModelViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewMonitorModelViewModel>(window => new NewMonitorModelViewModel(window));
         }
+
         private void ShowDeviceTypeWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllDeviceTypeViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllDeviceTypeViewModelWindow>(window => new AllDeviceTypeViewModelWindow(window));
         }
+
         private void CreateDeviceTypeWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewDeviceTypeViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewDeviceTypeViewModel>(window => new NewDeviceTypeViewModel(window));
         }
+
         private void ShowDeviceModelWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllDeviceModelViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllDeviceModelViewModelWindow>(window => new AllDeviceModelViewModelWindow(window));
         }
+
         private void CreateDeviceModelWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewDeviceModelViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewDeviceModelViewModel>(window => new NewDeviceModelViewModel(window));
         }
+
         private void ShowOperatingSystemWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllOperatingSystemViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllOperatingSystemViewModelWindow>(window => new AllOperatingSystemViewModelWindow(window));
         }
+
         private void CreateOperatingSystemWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewOperatingSystemViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewOperatingSystemViewModel>(window => new NewOperatingSystemViewModel(window));
         }
+
         private void ShowComputerTypeWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllComputerTypeViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllComputerTypeViewModelWindow>(window => new AllComputerTypeViewModelWindow(window));
         }
+
         private void CreateComputerTypeWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewComputerTypeViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewComputerTypeViewModel>(window => new NewComputerTypeViewModel(window));
         }
+
         private void ShowComputerModelWindow()
         {
-            AllDictionaryWindow window = new AllDictionaryWindow();
-            window.DataContext = new AllComputerModelViewModelWindow(window);
-            window.Show();
+            CreateWindows<AllDictionaryWindow, AllComputerModelViewModelWindow>(window => new AllComputerModelViewModelWindow(window));
         }
+
         private void CreateComputerModelWindow()
         {
-            NewDictionaryWindow window = new NewDictionaryWindow();
-            window.DataContext = new NewComputerModelViewModel(window);
-            window.Show();
+            CreateWindows<NewDictionaryWindow, NewComputerModelViewModel>(window => new NewComputerModelViewModel(window));
         }
+
+        private async void EditComputer(string id)
+        {
+            await EditItem<ComputersCreateEditVM, EditComputerViewModel>(id, URLs.COMPUTERS_CEVM_ID, vm => new EditComputerViewModel(vm));
+        }
+
+        private async void EditDevice(string id)
+        {
+            try
+            {
+                DevicesCreateEditVM vm = await RequestHelper.SendRequestAsync<object, DevicesCreateEditVM>(URLs.DEVICE_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
+                if (vm != null)
+                {
+                    EditDeviceViewModel workspace = new EditDeviceViewModel(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+
+        private async void EditMonitor(string id)
+        {
+            try
+            {
+                MonitorsCreateEditVM vm = await RequestHelper.SendRequestAsync<object, MonitorsCreateEditVM>(URLs.MONITORS_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
+                if (vm != null)
+                {
+                    EditMonitorViewModel workspace = new EditMonitorViewModel(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+
+        private async void EditNetworkDevice(string id)
+        {
+            try
+            {
+                NetworkDeviceCreateEditVM vm = await RequestHelper.SendRequestAsync<object, NetworkDeviceCreateEditVM>(URLs.NETWORKDEVICE_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
+                if (vm != null)
+                {
+                    EditNetworkDeviceViewModel workspace = new EditNetworkDeviceViewModel(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+
+        private async void EditPhone(string id)
+        {
+            try
+            {
+                PhonesCreateEditVM vm = await RequestHelper.SendRequestAsync<object, PhonesCreateEditVM>(URLs.PHONE_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
+                if (vm != null)
+                {
+                    EditPhoneViewModel workspace = new EditPhoneViewModel(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+
+        private async void EditPrinter(string id)
+        {
+            try
+            {
+                PrintersCreateEditVM vm = await RequestHelper.SendRequestAsync<object, PrintersCreateEditVM>(URLs.PRINTER_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
+                if (vm != null)
+                {
+                    EditPrinterViewModel workspace = new EditPrinterViewModel(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+
+        private async void EditRackCabinet(string id)
+        {
+            try
+            {
+                RackCabinetCreateEditVM vm = await RequestHelper.SendRequestAsync<object, RackCabinetCreateEditVM>(URLs.RACKCABINET_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
+                if (vm != null)
+                {
+                    EditRackCabinetViewModel workspace = new EditRackCabinetViewModel(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+
+        private async void EditSimCard(string id)
+        {
+            try
+            {
+                SimCardsCreateEditVM vm = await RequestHelper.SendRequestAsync<object, SimCardsCreateEditVM>(URLs.SIMCARD_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
+                if (vm != null)
+                {
+                    EditSimCardViewModel workspace = new EditSimCardViewModel(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+
+        private async void EditSoftware(string id)
+        {
+            try
+            {
+                SoftwareCreateEditVM vm = await RequestHelper.SendRequestAsync<object, SoftwareCreateEditVM>(URLs.SOFTWARE_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
+                if (vm != null)
+                {
+                    EditSoftwareViewModel workspace = new EditSoftwareViewModel(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+
+        private async void EditUser(string id)
+        {
+            try
+            {
+                UserCreateEditVM vm = await RequestHelper.SendRequestAsync<object, UserCreateEditVM>(URLs.USER_CEVM_ID.Replace("{id}", id), HttpMethod.Get, null, null);
+                if (vm != null)
+                {
+                    EditUserViewModel workspace = new EditUserViewModel(vm);
+                    Workspaces.Add(workspace);
+                    SetActiveWorkspace(workspace);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
 
 
 

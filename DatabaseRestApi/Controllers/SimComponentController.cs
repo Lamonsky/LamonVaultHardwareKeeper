@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<SimComponentVM> simcomponentVMs = await database.SimComponents
+                .Where(item => item.Status != 99)
                 .Select(item => new SimComponentVM
                 {
                     Id = item.Id,
@@ -24,6 +25,42 @@ namespace DatabaseRestApi.Controllers
                     Type = item.TypeNavigation.Name,
                     Status = item.StatusNavigation.Name
                 }).ToListAsync();
+            return Json(simcomponentVMs);
+        }
+        [Route(URLs.SIMCOMPONENT_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            SimComponentVM simcomponentVMs = await database.SimComponents
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new SimComponentVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Manufacturer = item.ManufacturerNavigation.Name,
+                    Type = item.TypeNavigation.Name,
+                    Status = item.StatusNavigation.Name
+                }).FirstAsync();
+            return Json(simcomponentVMs);
+        }
+        [Route(URLs.SIMCOMPONENT_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            SimComponentCreateEditVM simcomponentVMs = await database.SimComponents
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new SimComponentCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Manufacturer = item.Manufacturer,
+                    Type = item.Type,
+                    Status = item.Status
+                }).FirstAsync();
             return Json(simcomponentVMs);
         }
         [Route(URLs.SIMCOMPONENT)]

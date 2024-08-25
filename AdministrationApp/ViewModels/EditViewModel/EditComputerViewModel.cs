@@ -1,4 +1,5 @@
 ﻿using AdministrationApp.Helpers;
+using AdministrationApp.ViewModels.NewViewModel;
 using Data;
 using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
@@ -7,7 +8,7 @@ using System.Net.Http;
 using System.Windows;
 using System.Windows.Input;
 
-namespace AdministrationApp.ViewModels.NewViewModel
+namespace AdministrationApp.ViewModels.EditViewModel
 {
     public class EditComputerViewModel : JedenViewModel<ComputersCreateEditVM>
     {
@@ -133,13 +134,13 @@ namespace AdministrationApp.ViewModels.NewViewModel
         {
             try
             {
-                await RequestHelper.SendRequestAsync<ComputersCreateEditVM>(URLs.COMPUTERS_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
+                await RequestHelper.SendRequestAsync(URLs.COMPUTERS_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
                 Messenger.Default.Send("ComputersRefresh");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }            
+            }
         }
         #endregion
         #region CommandsFunctions
@@ -169,7 +170,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item.ManufacturerId = vm.Id;
             ManufacturerName = vm.Name;
         }
-        
+
         private void getChosenLokacja(LocationVM vM)
         {
             item.LocationId = vM.Id;
@@ -418,10 +419,10 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if( _LokacjaName != value)
+                if (_LokacjaName != value)
                 {
                     _LokacjaName = value;
-                    OnPropertyChanged(() =>  LokacjaName);
+                    OnPropertyChanged(() => LokacjaName);
                 }
             }
         }
@@ -434,12 +435,12 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if(_ComputerTypeName != value)
+                if (_ComputerTypeName != value)
                 {
                     _ComputerTypeName = value;
                     OnPropertyChanged(() => ComputerTypeName);
                 }
-                
+
             }
         }
         private string _ComputerModelName;
@@ -451,12 +452,12 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if(_ComputerModelName != value)
+                if (_ComputerModelName != value)
                 {
                     _ComputerModelName = value;
                     OnPropertyChanged(() => ComputerModelName);
                 }
-                
+
             }
         }
         private string _UserName;

@@ -18,6 +18,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<LocationVM> locationVM = await database.Locations
+                .Where(item => item.Status != 99)             
                 .Select(item => new LocationVM
                 {
                     Id = item.Id,
@@ -35,10 +36,11 @@ namespace DatabaseRestApi.Controllers
         }
         [Route(URLs.LOCATION_ID)]
         [HttpGet]
-        public async Task<IActionResult> GetLocation(int id)
+        public async Task<IActionResult> GetItem(int id)
         {
             DatabaseContext database = new();
             LocationVM locationVM = await database.Locations
+                .Where(item => item.Status != 99)
                 .Where(item => item.Id == id)
                 .Select(item => new LocationVM
                 {
@@ -52,7 +54,30 @@ namespace DatabaseRestApi.Controllers
                     RoomNumber = item.RoomNumber,
                     Status = item.StatusNavigation.Name
 
-                }).FirstOrDefaultAsync();
+                }).FirstAsync();
+            return Json(locationVM);
+        }
+        [Route(URLs.LOCATION_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            LocationCreateEditVM locationVM = await database.Locations
+                .Where(item => item.Status != 99)             
+                .Where(item => item.Id == id)
+                .Select(item => new LocationCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Address = item.Address,
+                    PostalCode = item.PostalCode,
+                    City = item.City,
+                    Country = item.Country,
+                    BuildingNumber = item.BuildingNumber,
+                    RoomNumber = item.RoomNumber,
+                    Status = item.Status
+
+                }).FirstAsync();
             return Json(locationVM);
         }
         [Route(URLs.LOCATION)]

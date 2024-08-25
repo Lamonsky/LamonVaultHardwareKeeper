@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<PhoneModelVM> phoneModelVM = await database.PhoneModels
+                .Where(item => item.Status != 99)
                 .Select(item => new PhoneModelVM
                 {
                     Id = item.Id,
@@ -24,6 +25,41 @@ namespace DatabaseRestApi.Controllers
                     Status = item.StatusNavigation.Name
 
                 }).ToListAsync();
+            return Json(phoneModelVM);
+        }
+        [Route(URLs.PHONEMODEL_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            List<PhoneModelVM> phoneModelVM = await database.PhoneModels
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new PhoneModelVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).ToListAsync();
+            return Json(phoneModelVM);
+        }
+        [Route(URLs.PHONEMODEL_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            PhoneModelCreateEditVM phoneModelVM = await database.PhoneModels
+                .Where(item => item.Status != 99)
+                .Select(item => new PhoneModelCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
             return Json(phoneModelVM);
         }
         [Route(URLs.PHONEMODEL)]

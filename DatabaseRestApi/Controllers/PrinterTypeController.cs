@@ -27,6 +27,42 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(printerTypeVM);
         }
+        [Route(URLs.PRINTERTYPE_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItem(int id)
+        {
+            DatabaseContext database = new();
+            PrinterTypeVM printerTypeVM = await database.PrinterTypes
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new PrinterTypeVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.StatusNavigation.Name
+
+                }).FirstAsync();
+            return Json(printerTypeVM);
+        }
+        [Route(URLs.PRINTERTYPE_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
+            PrinterTypeCreateEditVM printerTypeVM = await database.PrinterTypes
+                .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new PrinterTypeCreateEditVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Comment = item.Comment,
+                    Status = item.Status
+
+                }).FirstAsync();
+            return Json(printerTypeVM);
+        }
         [Route(URLs.PRINTERTYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PrinterTypeCreateEditVM printerTypeCreateEditVM)

@@ -46,6 +46,34 @@ namespace DatabaseRestApi.Controllers
         public async Task<IActionResult> GetItem(int id)
         {
             DatabaseContext database = new();
+            ComputersVM computerVMs = await database.Computers
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
+                .Select(item => new ComputersVM()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    ManufacturerName = item.ManufacturerNavigation.Name,
+                    Location = item.Location.Name,
+                    Status = item.Status.Name,
+                    ComputerType = item.ComputerTypeNavigation.Name,
+                    ComputerModel = item.ModelNavigation.Name,
+                    Processor = item.Processor,
+                    Ram = item.Ram,
+                    Disk = item.Disk,
+                    GraphicsCard = item.GraphicsCard,
+                    OperatingSystem = item.OperatingSystemNavigation.Name,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                }).FirstAsync();
+            return Json(computerVMs);
+        }
+        [Route(URLs.COMPUTERS_CEVM_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetEditItem(int id)
+        {
+            DatabaseContext database = new();
             ComputersCreateEditVM computerVMs = await database.Computers
                 .Where(item => item.StatusId != 99)
                 .Where(item => item.Id == id)
