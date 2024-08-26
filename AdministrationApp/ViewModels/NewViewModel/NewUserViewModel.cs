@@ -10,6 +10,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Data.Helpers;
+using System.Windows;
+using System.Runtime.CompilerServices;
 
 namespace AdministrationApp.ViewModels.NewViewModel
 {
@@ -48,10 +51,48 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item = new UserCreateEditVM();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<PositionVM>(this, getPosition);
+            IsActive = true;
+            _IsValid = false;
+        }
+        private bool _IsValid;
+        public bool IsValid
+        {
+            get
+            {
+                return _IsValid;
+            }
+            set
+            {
+                if(_IsValid != value)
+                {
+                    _IsValid = value;
+                    OnPropertyChanged(() => IsValid);
+                }
+            }
+        }
+        private void ValidatePassword()
+        {
+            IsValid = PasswordValidator.ValidatePassword(Password);
+            if(!IsValid)
+            {
+                ErrorMessage = ("Nie wystarczająco silne hasło. Wymagania: conajmniej 8 znaków, conajmniej 1 mała litera, conajmniej 1 wielka litera, conajmniej 1 znak specjalny");
+            }
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.USER, HttpMethod.Post, item, null);
+            RestApiUsers user = new();
+            user.Email = item.Email;
+            user.Password = item.Password;
+            try
+            {
+                await RequestHelper.SendRequestAsync(URLs.REGISTER, HttpMethod.Post, user, GlobalData.AccessToken);
+                await RequestHelper.SendRequestAsync(URLs.USER, HttpMethod.Post, item, GlobalData.AccessToken);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
             Messenger.Default.Send("UsersRefresh");
         }
         #endregion
@@ -71,6 +112,16 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
         #endregion
         #region Dane
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(() => ErrorMessage);
+            }
+        }
         private string _PositionName;
         public string PositionName
         {
@@ -164,6 +215,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             {
                 item.Password = value;
                 OnPropertyChanged(() => Password);
+                ValidatePassword();
             }
         }
         public string? Email

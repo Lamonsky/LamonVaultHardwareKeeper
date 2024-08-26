@@ -69,6 +69,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(computerVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERS_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)

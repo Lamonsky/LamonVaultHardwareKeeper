@@ -77,11 +77,8 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Content="SaveAndClose" x:Name="SaveAndCloseButton" Command="{Binding SaveAndCloseCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
-                                    
-                                </Button>
-                                <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
-                                    
+                                <Button Grid.Column="0" Content="SaveAndClose" IsEnabled="{Binding Path=IsValid}" Command="{Binding SaveAndCloseCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
+
                                 </Button>
                             </Grid>
                         </StackPanel>

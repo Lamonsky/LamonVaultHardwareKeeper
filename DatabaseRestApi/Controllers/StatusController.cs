@@ -31,6 +31,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             StatusVM statusVM = await database.Statuses
+                .Where(item => item.Id == id)
                 .Select(item => new StatusVM
                 {
                     Id = item.Id,

@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AllViews\AllServersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AllWindows\AllUsersWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

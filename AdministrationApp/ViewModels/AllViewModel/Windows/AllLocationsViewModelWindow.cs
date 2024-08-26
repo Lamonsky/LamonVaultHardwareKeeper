@@ -42,11 +42,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
             }
         }
         #endregion
-        public AllLocationsViewModelWindow() : base("Lokalizacje")
-        {
-            Messenger.Default.Register<string>(this, open);
-        }
-        public AllLocationsViewModelWindow(Window window) : base("Lokalizacje")
+        public AllLocationsViewModelWindow(Window window) : base("Location")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;
@@ -66,7 +62,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
         public override List<string> GetComboBoxFilterList()
         {
             //throw new NotImplementedException();
-            return new List<string>();
+            return new List<string> { "Nazwa", "Adres", "Kod pocztowy", "Miasto", "Kraj", "Numer budynku", "Numer pokoju" };
         }
 
         public override List<string> GetComboBoxSortList()
@@ -77,7 +73,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<LocationVM>>(URLs.LOCATION, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<LocationVM>>(URLs.LOCATION, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         public override void Sort()
@@ -90,9 +86,10 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
             Messenger.Default.Send(DisplayName+"Edit/"+ChosenLocation.Id.ToString());
         }
 
-        public override void Remove()
+        public override async void Remove()
         {
-            throw new NotImplementedException();
+            await RequestHelper.SendRequestAsync(URLs.LOCATION_ID.Replace("{id}", ChosenLocation.Id.ToString()), HttpMethod.Delete, ChosenLocation, GlobalData.AccessToken);
+            load();
         }
 
         public override void send()

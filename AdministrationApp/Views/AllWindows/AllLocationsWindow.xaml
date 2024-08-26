@@ -19,6 +19,7 @@
                 <DataGridTextColumn Header="Kraj" Binding="{Binding Path=Country}"/>
                 <DataGridTextColumn Header="Numer budynku" Binding="{Binding Path=BuildingNumber}"/>
                 <DataGridTextColumn Header="Numer pokoju" Binding="{Binding Path=RoomNumber}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
             </DataGrid.Columns>
         </DataGrid>
 </local:AllDictionaryViewBase>

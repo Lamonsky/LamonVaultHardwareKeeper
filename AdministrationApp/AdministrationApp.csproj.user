@@ -85,9 +85,15 @@
     <Compile Update="Views\NewViews\Windows\NewDictionaryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\NewViews\Windows\NewLocationWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllViews\AllServersView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllViews\AllComputerView.xaml">
@@ -175,6 +181,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\NewViews\Windows\NewDictionaryWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\Windows\NewLocationWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Resources\ViewResources.xaml">

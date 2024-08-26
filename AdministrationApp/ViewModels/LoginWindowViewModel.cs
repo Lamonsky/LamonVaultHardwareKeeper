@@ -2,10 +2,12 @@
 using AdministrationApp.ViewModels.NewViewModel;
 using AdministrationApp.Views;
 using Data;
+using Data.Computers.SelectVMs;
 using Data.Helpers;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -91,16 +93,24 @@ namespace AdministrationApp.ViewModels
         {
             try
             {
-                LoggedUser user = await RequestHelper.SendRequestAsync<object, LoggedUser>(URLs.LOGIN, HttpMethod.Post, item, null);
-                if(user != null)
+                LoggedUser user = await RequestHelper.SendRequestAsync<object, LoggedUser>(URLs.LOGIN, HttpMethod.Post, item, GlobalData.AccessToken);
+                UserInAdminRole adminuser = await RequestHelper.SendRequestAsync<object, UserInAdminRole>(URLs.IDENTITY_CHECK_USER_ADMIN_ROLE.Replace("{email}", item.Email), HttpMethod.Get, null, GlobalData.AccessToken);
+                if (adminuser.IsInRole)
                 {
-                    user.Email = item.Email;
+                    GlobalData.AccessToken = user.AccessToken;
+                    GlobalData.Email = item.Email;
+                    List<UserVM> userVMs = await RequestHelper.SendRequestAsync<object, List<UserVM>>(URLs.USER, HttpMethod.Get, null, GlobalData.AccessToken);
+                    UserVM loggeduser = userVMs.Where(item => item.Email == GlobalData.Email).First();
+                    GlobalData.UserId = loggeduser.Id;
                     MainWindow window = new MainWindow();
                     var viewModel = new MainWindowViewModel();
                     window.DataContext = viewModel;
-                    Messenger.Default.Send(user);
                     window.Show();
                     _window.Close();
+                }
+                else
+                {
+                    ErrorMessage = "Nie masz uprawnień do zalogowania. Skontaktuj się z administratorem";
                 }
             }
             catch (Exception ex)

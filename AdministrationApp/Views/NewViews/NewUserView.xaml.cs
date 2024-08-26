@@ -1,4 +1,5 @@
-﻿using AdministrationApp.ViewModels.NewViewModel;
+﻿using AdministrationApp.Helpers;
+using AdministrationApp.ViewModels.NewViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace AdministrationApp.Views.NewViews
         public NewUserView()
         {
             InitializeComponent();
-        }
+        }        
+
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is NewUserViewModel viewModel)

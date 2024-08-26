@@ -51,9 +51,13 @@
                             <Button Content="Drukarki" Command="{Binding ShowPrinterCommand}"/>
                             <Button Content="Telefony" Command="{Binding ShowPhoneCommand}"/>
                             <Button Content="Szafy Rack" Command="{Binding ShowRackCabinetCommand}"/>
+                            <Button Content="Serwery" Command="{Binding ShowServersCommand}"/>
                             <Button Content="Karty Sim" Command="{Binding ShowSimCardCommand}"/>
                             <Button Content="Użytkownicy" Command="{Binding ShowUserCommand}"/>
-                            <Button Content="Test Okien" Command="{Binding TestOkienCommand}"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Zgłoszenia" IsExpanded="True">
+                            <Button Content="Wszystkie zgłoszenia" Command="{Binding AllTicketsCommand}"/>
+                            <Button Content="Moje zgłoszenia" Command="{Binding MyTicketsCommand}"/>
                         </TreeViewItem>
                     </TreeView>
                     

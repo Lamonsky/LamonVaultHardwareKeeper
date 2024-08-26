@@ -27,27 +27,11 @@ namespace AdministrationApp.ViewModels
 
 
         #region LoggedUser
-
-        private LoggedUser _loggeduser;
-        public LoggedUser LoggedUser
-        {
-            get
-            {
-                return _loggeduser;
-            }
-            set
-            {
-                if (value != _loggeduser)
-                {
-                    _loggeduser = value;
-                }
-            }
-        }
         public string EMail
         {
             get
             {
-                return _loggeduser.Email;
+                return GlobalData.Email;
             }
         }
         #endregion
@@ -97,7 +81,7 @@ namespace AdministrationApp.ViewModels
         private void ShowAllWorkspace<T>() where T : WorkspaceViewModel, new()
         {
             T workspace = Workspaces.FirstOrDefault(vm => vm is T) as T;
-            if(workspace == null)
+            if (workspace == null)
             {
                 workspace = new T();
                 Workspaces.Add(workspace);
@@ -152,10 +136,11 @@ namespace AdministrationApp.ViewModels
                 Debug.WriteLine(ex.Message);
             }
         }
-        public async Task EditItemWindow<TViewModel, TEditViewModel>(string id, string urlTemplate,
+        public async Task EditItemWindow<TViewModel, TEditViewModel, TWindow>(string id, string urlTemplate,
             Func<Window, TViewModel, TEditViewModel> createViewModel)
             where TViewModel : class
             where TEditViewModel : class
+            where TWindow : Window, new()
         {
             try
             {
@@ -164,7 +149,7 @@ namespace AdministrationApp.ViewModels
 
                 if (vm != null)
                 {
-                    Window window = new NewDictionaryWindow(); // Można to zmienić na bardziej uniwersalne okno
+                    TWindow window = new TWindow(); // Można to zmienić na bardziej uniwersalne okno
                     TEditViewModel editViewModel = createViewModel(window, vm);
                     window.DataContext = editViewModel;
                     window.Show();
@@ -188,13 +173,7 @@ namespace AdministrationApp.ViewModels
         public MainWindowViewModel()
         {
             Messenger.Default.Register<string>(this, open);
-            Messenger.Default.Register<LoggedUser>(this, loggeduser);
 
-        }
-        private void loggeduser(LoggedUser user)
-        {
-            LoggedUser = user;
-            GlobalData.AccessToken = user.AccessToken;
         }
 
         private void open(string name)
@@ -341,6 +320,9 @@ namespace AdministrationApp.ViewModels
                 case string n when n.StartsWith("UrządzeniaEdit"):
                     EditDevice(CutString(name));
                     break;
+                case string n when n.StartsWith("LocationEdit"):
+                    EditLocation(CutString(name));
+                    break;
 
                 // Kategoria: Drukarki
                 case "DrukarkiAdd":
@@ -422,6 +404,9 @@ namespace AdministrationApp.ViewModels
                 // Kategoria: Inne
                 case "ChooseLocation":
                     ShowLocationWindow();
+                    break;
+                case "LocationAdd":
+                    CreateLocationsWindow();
                     break;
                 case "ChooseStatus":
                     ShowStatusWindow();
@@ -537,7 +522,7 @@ namespace AdministrationApp.ViewModels
         {
             get
             {
-                if(_ShowSummaryCommand == null)
+                if (_ShowSummaryCommand == null)
                 {
                     _ShowSummaryCommand = new BaseCommand(() => ShowSummary());
                 }
@@ -549,7 +534,7 @@ namespace AdministrationApp.ViewModels
         {
             get
             {
-                if(_ShowComputersCommand == null)
+                if (_ShowComputersCommand == null)
                 {
                     _ShowComputersCommand = new BaseCommand(() => ShowComputers());
                 }
@@ -616,6 +601,19 @@ namespace AdministrationApp.ViewModels
                 return _ShowDeviceCommand;
             }
         }
+        private BaseCommand _ShowServersCommand;
+        public ICommand ShowServersCommand
+        {
+            get
+            {
+                if (_ShowServersCommand == null)
+                {
+                    _ShowServersCommand = new BaseCommand(() => ShowServers());
+                }
+                return _ShowServersCommand;
+
+            }
+        }
         private BaseCommand _ShowPrinterCommand;
         public ICommand ShowPrinterCommand
         {
@@ -662,6 +660,18 @@ namespace AdministrationApp.ViewModels
                     _ShowSimCardCommand = new BaseCommand(() => ShowSimCard());
                 }
                 return _ShowSimCardCommand;
+            }
+        }
+        private BaseCommand _ShowLocationWindowCommand;
+        public ICommand ShowLocationWindowCommand
+        {
+            get
+            {
+                if (_ShowLocationWindowCommand == null)
+                {
+                    _ShowLocationWindowCommand = new BaseCommand(() => ShowLocationWindow());
+                }
+                return _ShowLocationWindowCommand;
             }
         }
 
@@ -719,6 +729,10 @@ namespace AdministrationApp.ViewModels
         private void ShowDevice()
         {
             ShowAllWorkspace<AllDeviceViewModel>();
+        }
+        private void ShowServers()
+        {
+            ShowAllWorkspace<AllServersViewModel>();
         }
         private void ShowSummary()
         {
@@ -959,7 +973,7 @@ namespace AdministrationApp.ViewModels
         }
         private void CreateLocationsWindow()
         {
-            //DO ZROBIENI
+            CreateWindows<NewLocationWindow, NewLocationViewModel>(window => new NewLocationViewModel(window));
         }
         private void CreateManufacturerWindow()
         {
@@ -988,7 +1002,7 @@ namespace AdministrationApp.ViewModels
         }
         private async void EditComputerModel(string id)
         {
-            await EditItemWindow<ComputerModelCreateEditVM, EditComputerModelViewModel>(
+            await EditItemWindow<ComputerModelCreateEditVM, EditComputerModelViewModel, NewDictionaryWindow>(
                 id,
                 URLs.COMPUTERMODEL_CEVM_ID,
                 (window, vm) => new EditComputerModelViewModel(window, vm)
@@ -1041,21 +1055,27 @@ namespace AdministrationApp.ViewModels
 
         private async void EditComputerType(string id)
         {
-            await EditItemWindow<ComputerTypeCreateEditVM, EditComputerTypeViewModel>(
+            await EditItemWindow<ComputerTypeCreateEditVM, EditComputerTypeViewModel, NewDictionaryWindow>(
                 id,
                 URLs.COMPUTERTYPE_CEVM_ID,
                 (window, vm) => new EditComputerTypeViewModel(window, vm)
             );
         }
 
-
-
         private async void EditDeviceModel(string id)
         {
-            await EditItemWindow<DeviceModelCreateEditVM, EditDeviceModelViewModel>(
+            await EditItemWindow<DeviceModelCreateEditVM, EditDeviceModelViewModel, NewDictionaryWindow>(
                 id,
                 URLs.DEVICEMODEL_CEVM_ID,
                 (window, vm) => new EditDeviceModelViewModel(window, vm)
+            );
+        }
+        private async void EditLocation(string id)
+        {
+            await EditItemWindow<LocationCreateEditVM, EditLocationViewModel, NewLocationWindow>(
+                id,
+                URLs.LOCATION_CEVM_ID,
+                (window, vm) => new EditLocationViewModel(window, vm)
             );
         }
 
@@ -1063,7 +1083,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditDeviceType(string id)
         {
-            await EditItemWindow<DeviceTypeCreateEditVM, EditDeviceTypeViewModel>(
+            await EditItemWindow<DeviceTypeCreateEditVM, EditDeviceTypeViewModel, NewDictionaryWindow>(
                 id,
                 URLs.DEVICETYPE_CEVM_ID,
                 (window, vm) => new EditDeviceTypeViewModel(window, vm)
@@ -1073,7 +1093,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditGroupsType(string id)
         {
-            await EditItemWindow<GroupTypeCreateEditVM, EditGroupsTypeViewModel>(
+            await EditItemWindow<GroupTypeCreateEditVM, EditGroupsTypeViewModel, NewDictionaryWindow>(
                 id,
                 URLs.GROUPTYPE_CEVM_ID,
                 (window, vm) => new EditGroupsTypeViewModel(window, vm)
@@ -1084,7 +1104,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditHardDriveModel(string id)
         {
-            await EditItemWindow<HardDriveModelCreateEditVM, EditHardDriveModelViewModel>(
+            await EditItemWindow<HardDriveModelCreateEditVM, EditHardDriveModelViewModel, NewDictionaryWindow>(
                 id,
                 URLs.HARDDRIVEMODEL_CEVM_ID,
                 (window, vm) => new EditHardDriveModelViewModel(window, vm)
@@ -1095,7 +1115,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditKnowledgebaseCategory(string id)
         {
-            await EditItemWindow<KnowledgeBaseCategoryCreateEditVM, EditKnowledgebaseCategoryViewModel>(
+            await EditItemWindow<KnowledgeBaseCategoryCreateEditVM, EditKnowledgebaseCategoryViewModel, NewDictionaryWindow>(
                 id,
                 URLs.KNOWLEDGEBASECATEGORY_CEVM_ID,
                 (window, vm) => new EditKnowledgebaseCategoryViewModel(window, vm)
@@ -1106,7 +1126,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditLicenseType(string id)
         {
-            await EditItemWindow<LicenseTypeCreateEditVM, EditLicenseTypeViewModel>(
+            await EditItemWindow<LicenseTypeCreateEditVM, EditLicenseTypeViewModel, NewDictionaryWindow>(
                 id,
                 URLs.LICENSETYPE_CEVM_ID,
                 (window, vm) => new EditLicenseTypeViewModel(window, vm)
@@ -1116,7 +1136,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditManufacturer(string id)
         {
-            await EditItemWindow<ManufacturerCreateEditVM, EditManufacturerViewModel>(
+            await EditItemWindow<ManufacturerCreateEditVM, EditManufacturerViewModel, NewDictionaryWindow>(
                 id,
                 URLs.MANUFACTURER_CEVM_ID,
                 (window, vm) => new EditManufacturerViewModel(window, vm)
@@ -1127,7 +1147,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditMonitorModel(string id)
         {
-            await EditItemWindow<MonitorModelCreateEditVM, EditMonitorModelViewModel>(
+            await EditItemWindow<MonitorModelCreateEditVM, EditMonitorModelViewModel, NewDictionaryWindow>(
                 id,
                 URLs.MONITORMODEL_CEVM_ID,
                 (window, vm) => new EditMonitorModelViewModel(window, vm)
@@ -1138,7 +1158,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditMonitorType(string id)
         {
-            await EditItemWindow<MonitorTypeCreateEditVM, EditMonitorTypeViewModel>(
+            await EditItemWindow<MonitorTypeCreateEditVM, EditMonitorTypeViewModel, NewDictionaryWindow >(
                 id,
                 URLs.MONITORTYPE_CEVM_ID,
                 (window, vm) => new EditMonitorTypeViewModel(window, vm)
@@ -1149,7 +1169,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditNetworkDevicemodel(string id)
         {
-            await EditItemWindow<NetworkDeviceModelCreateEditVM, EditNetworkDevicemodelViewModel>(
+            await EditItemWindow<NetworkDeviceModelCreateEditVM, EditNetworkDevicemodelViewModel, NewDictionaryWindow>(
                 id,
                 URLs.NETWORKDEVICEMODEL_CEVM_ID,
                 (window, vm) => new EditNetworkDevicemodelViewModel(window, vm)
@@ -1160,7 +1180,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditNetworkDeviceType(string id)
         {
-            await EditItemWindow<NetworkDeviceTypeCreateEditVM, EditNetworkDeviceTypeViewModel>(
+            await EditItemWindow<NetworkDeviceTypeCreateEditVM, EditNetworkDeviceTypeViewModel, NewDictionaryWindow>(
                 id,
                 URLs.NETWORKDEVICETYPE_CEVM_ID,
                 (window, vm) => new EditNetworkDeviceTypeViewModel(window, vm)
@@ -1171,7 +1191,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditOperatingSystem(string id)
         {
-            await EditItemWindow<OperatingSystemCreateEditVM, EditOperatingSystemViewModel>(
+            await EditItemWindow<OperatingSystemCreateEditVM, EditOperatingSystemViewModel, NewDictionaryWindow>(
                 id,
                 URLs.OPERATINGSYSTEM_CEVM_ID,
                 (window, vm) => new EditOperatingSystemViewModel(window, vm)
@@ -1182,7 +1202,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditPhonemodel(string id)
         {
-            await EditItemWindow<PhoneModelCreateEditVM, EditPhonemodelViewModel>(
+            await EditItemWindow<PhoneModelCreateEditVM, EditPhonemodelViewModel, NewDictionaryWindow>(
                 id,
                 URLs.PHONEMODEL_CEVM_ID,
                 (window, vm) => new EditPhonemodelViewModel(window, vm)
@@ -1193,7 +1213,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditPhoneType(string id)
         {
-            await EditItemWindow<PhoneTypeCreateEditVM, EditPhoneTypeViewModel>(
+            await EditItemWindow<PhoneTypeCreateEditVM, EditPhoneTypeViewModel, NewDictionaryWindow>(
                 id,
                 URLs.PHONETYPE_CEVM_ID,
                 (window, vm) => new EditPhoneTypeViewModel(window, vm)
@@ -1204,7 +1224,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditPosition(string id)
         {
-            await EditItemWindow<PositionCreateEditVM, EditPositionViewModel>(
+            await EditItemWindow<PositionCreateEditVM, EditPositionViewModel, NewDictionaryWindow>(
                 id,
                 URLs.POSITION_CEVM_ID,
                 (window, vm) => new EditPositionViewModel(window, vm)
@@ -1215,7 +1235,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditPrintermodel(string id)
         {
-            await EditItemWindow<PrinterModelCreateEditVM, EditPrintermodelViewModel>(
+            await EditItemWindow<PrinterModelCreateEditVM, EditPrintermodelViewModel, NewDictionaryWindow>(
                 id,
                 URLs.PRINTERMODEL_CEVM_ID,
                 (window, vm) => new EditPrintermodelViewModel(window, vm)
@@ -1226,7 +1246,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditPrintertype(string id)
         {
-            await EditItemWindow<PrinterTypeCreateEditVM, EditPrintertypeViewModel>(
+            await EditItemWindow<PrinterTypeCreateEditVM, EditPrintertypeViewModel, NewDictionaryWindow>(
                 id,
                 URLs.PRINTERTYPE_CEVM_ID,
                 (window, vm) => new EditPrintertypeViewModel(window, vm)
@@ -1237,7 +1257,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditRackCabinetModel(string id)
         {
-            await EditItemWindow<RackCabinetModelCreateEditVM, EditRackCabinetModelViewModel>(
+            await EditItemWindow<RackCabinetModelCreateEditVM, EditRackCabinetModelViewModel, NewDictionaryWindow>(
                 id,
                 URLs.RACKCABINETMODEL_CEVM_ID,
                 (window, vm) => new EditRackCabinetModelViewModel(window, vm)
@@ -1248,7 +1268,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditRackCabinetType(string id)
         {
-            await EditItemWindow<RackCabinetTypeCreateEditVM, EditRackCabinetTypeViewModel>(
+            await EditItemWindow<RackCabinetTypeCreateEditVM, EditRackCabinetTypeViewModel, NewDictionaryWindow>(
                 id,
                 URLs.RACKCABINETTYPE_CEVM_ID,
                 (window, vm) => new EditRackCabinetTypeViewModel(window, vm)
@@ -1259,7 +1279,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditSimComponentType(string id)
         {
-            await EditItemWindow<SimComponentTypeCreateEditVM, EditSimComponentTypeViewModel>(
+            await EditItemWindow<SimComponentTypeCreateEditVM, EditSimComponentTypeViewModel, NewDictionaryWindow>(
                 id,
                 URLs.SIMCOMPONENTTYPE_CEVM_ID,
                 (window, vm) => new EditSimComponentTypeViewModel(window, vm)
@@ -1270,7 +1290,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditStatus(string id)
         {
-            await EditItemWindow<StatusCreateEditVM, EditStatusViewModel>(
+            await EditItemWindow<StatusCreateEditVM, EditStatusViewModel, NewDictionaryWindow>(
                 id,
                 URLs.STATUS_CEVM_ID,
                 (window, vm) => new EditStatusViewModel(window, vm)
@@ -1281,7 +1301,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditTicketCategory(string id)
         {
-            await EditItemWindow<TicketCategoryCreateEditVM, EditTicketCategoryViewModel>(
+            await EditItemWindow<TicketCategoryCreateEditVM, EditTicketCategoryViewModel, NewDictionaryWindow>(
                 id,
                 URLs.TICKETCATEGORY_CEVM_ID,
                 (window, vm) => new EditTicketCategoryViewModel(window, vm)
@@ -1292,7 +1312,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditTicketStatuse(string id)
         {
-            await EditItemWindow<TicketStatusCreateEditVM, EditTicketStatuseViewModel>(
+            await EditItemWindow<TicketStatusCreateEditVM, EditTicketStatuseViewModel, NewDictionaryWindow>(
                 id,
                 URLs.TICKETSTATUS_CEVM_ID,
                 (window, vm) => new EditTicketStatuseViewModel(window, vm)
@@ -1303,7 +1323,7 @@ namespace AdministrationApp.ViewModels
 
         private async void EditTicketType(string id)
         {
-            await EditItemWindow<TicketTypeCreateEditVM, EditTicketTypeViewModel>(
+            await EditItemWindow<TicketTypeCreateEditVM, EditTicketTypeViewModel, NewDictionaryWindow>(
                 id,
                 URLs.TICKETTYPE_CEVM_ID,
                 (window, vm) => new EditTicketTypeViewModel(window, vm)
