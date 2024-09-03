@@ -5,6 +5,7 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
@@ -106,6 +107,7 @@ namespace DatabaseRestApi.Controllers
         }
         [Route(URLs.TICKET)]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] TicketCreateEditVM ticketCreateEditVM)
         {
             DatabaseContext database = new();
@@ -126,6 +128,7 @@ namespace DatabaseRestApi.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TICKET_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] TicketCreateEditVM ticketCreateEditVM)
@@ -151,6 +154,7 @@ namespace DatabaseRestApi.Controllers
 
         [Route(URLs.TICKET_ID)]
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id, [FromBody] TicketCreateEditVM ticketCreateEditVM)
         {
             DatabaseContext database = new();

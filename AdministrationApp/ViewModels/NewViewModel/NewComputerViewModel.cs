@@ -113,8 +113,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         public override async void Save()
         {
             item.CreatedAt = DateTime.Now;
-            item.CreatedBy = GlobalData.UserId;
-            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            item.CreatedBy = GlobalData.UserId;            
             await RequestHelper.SendRequestAsync(URLs.COMPUTERS, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("ComputersRefresh");
         }

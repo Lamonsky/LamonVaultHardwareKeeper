@@ -23,7 +23,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
             await RequestHelper.SendRequestAsync(URLs.TICKETTYPE, HttpMethod.Post, item, GlobalData.AccessToken);
-            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            
             Messenger.Default.Send("TicketTypeRefresh");
             _window.Close();
         }

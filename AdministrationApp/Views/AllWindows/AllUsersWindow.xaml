@@ -21,6 +21,10 @@
                 <DataGridTextColumn Header="Numer telefonu 2" Binding="{Binding Path=Phone2}"/>
                 <DataGridTextColumn Header="Numer wewnętrzny" Binding="{Binding Path=InternalNumber}"/>
                 <DataGridTextColumn Header="Stanowisko" Binding="{Binding Path=Position}"/>
-            </DataGrid.Columns>
+            <DataGridTextColumn Header="Utworzone przez" Binding="{Binding CreatedBy}"/>
+            <DataGridTextColumn Header="Data utworzenia" Binding="{Binding CreatedAt}"/>
+            <DataGridTextColumn Header="Zmodyfikowane przez" Binding="{Binding ModifiedBy}"/>
+            <DataGridTextColumn Header="Data modyfikacji" Binding="{Binding ModifiedAt}"/>
+        </DataGrid.Columns>
         </DataGrid>
 </local:AllDictionaryViewBase>

@@ -10,7 +10,7 @@
     <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding Path=ChosenItem}" AutoGenerateColumns="False" IsReadOnly="True">
         <DataGrid.Columns>
             <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-            <DataGridTextColumn Header="Numer zgłoszenia" Binding="{Binding Name}"/>
+            <DataGridTextColumn Header="Treść zgłoszenia" Binding="{Binding Name}"/>
             <DataGridTextColumn Header="Typ zgłoszenia" Binding="{Binding Type}"/>
             <DataGridTextColumn Header="Kategoria" Binding="{Binding Category}"/>
             <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
@@ -18,6 +18,10 @@
             <DataGridTextColumn Header="Użytkownik" Binding="{Binding User}"/>
             <DataGridTextColumn Header="E-Mail" Binding="{Binding Email}"/>
             <DataGridTextColumn Header="Właściciel" Binding="{Binding Owner}"/>
+            <DataGridTextColumn Header="Utworzone przez" Binding="{Binding CreatedBy}"/>
+            <DataGridTextColumn Header="Data utworzenia" Binding="{Binding CreatedAt}"/>
+            <DataGridTextColumn Header="Zmodyfikowane przez" Binding="{Binding ModifiedBy}"/>
+            <DataGridTextColumn Header="Data modyfikacji" Binding="{Binding ModifiedAt}"/>
         </DataGrid.Columns>
     </DataGrid>
 </local:WszystkieViewBase>

@@ -20,6 +20,10 @@
                 <DataGridTextColumn Header="Numer budynku" Binding="{Binding Path=BuildingNumber}"/>
                 <DataGridTextColumn Header="Numer pokoju" Binding="{Binding Path=RoomNumber}"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
-            </DataGrid.Columns>
+            <DataGridTextColumn Header="Utworzone przez" Binding="{Binding CreatedBy}"/>
+            <DataGridTextColumn Header="Data utworzenia" Binding="{Binding CreatedAt}"/>
+            <DataGridTextColumn Header="Zmodyfikowane przez" Binding="{Binding ModifiedBy}"/>
+            <DataGridTextColumn Header="Data modyfikacji" Binding="{Binding ModifiedAt}"/>
+        </DataGrid.Columns>
         </DataGrid>
 </local:AllDictionaryViewBase>

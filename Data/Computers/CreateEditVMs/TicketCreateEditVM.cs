@@ -23,10 +23,10 @@ namespace Data.Computers.CreateEditVMs
         [JsonPropertyName("category")]
         public int? Category { get; set; }
 
-        [JsonPropertyName("statusid")]
+        [JsonPropertyName("statusId")]
         public int? StatusId { get; set; }
 
-        [JsonPropertyName("locationid")]
+        [JsonPropertyName("locationId")]
         public int? LocationId { get; set; }
 
         [JsonPropertyName("user")]
@@ -35,16 +35,16 @@ namespace Data.Computers.CreateEditVMs
         [JsonPropertyName("owner")]
         public int? Owner { get; set; }
 
-        [JsonPropertyName("createdat")]
+        [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; }
 
-        [JsonPropertyName("createdby")]
+        [JsonPropertyName("createdBy")]
         public int? CreatedBy { get; set; }
 
-        [JsonPropertyName("modifiedat")]
+        [JsonPropertyName("modifiedAt")]
         public DateTime? ModifiedAt { get; set; }
 
-        [JsonPropertyName("modifiedby")]
+        [JsonPropertyName("modifiedBy")]
         public int? ModifiedBy { get; set; }
     }
 }

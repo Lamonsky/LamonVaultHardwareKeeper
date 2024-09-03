@@ -1,7 +1,10 @@
 ﻿using AdministrationApp.Helpers;
+using Data;
+using Data.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +15,25 @@ namespace AdministrationApp.ViewModels.NewViewModel
     //
     public abstract class JedenViewModel<T> : WorkspaceViewModel
     {
+        #region Dane
+        private bool _IsValid;
+        public bool IsValid
+        {
+            get
+            {
+                return _IsValid;
+            }
+            set
+            {
+                if (_IsValid != value)
+                {
+                    _IsValid = value;
+                    OnPropertyChanged(() => IsValid);
 
+                }
+            }
+        }
+        #endregion
         #region Command
         private BaseCommand _SaveAndCloseCommand;
         //ta komenda bedzie podpieta pod przycisk Zapisz i Zamknik
@@ -40,12 +61,18 @@ namespace AdministrationApp.ViewModels.NewViewModel
         private void SaveAndClose()
         {
             //dodać wysyłanie do api jsona
-            Save();
+            Save();            
             OnRequestClose();
-
+            RefreshToken();
 
         }
-
+        private async void RefreshToken()
+        {
+            RefreshTokenModel refreshToken = new(GlobalData.RefreshToken);
+            RefreshTokenModel newuser = await RequestHelper.SendRequestAsync<object, RefreshTokenModel>(URLs.REFRESH, HttpMethod.Post, refreshToken, GlobalData.AccessToken);
+            GlobalData.AccessToken = newuser.AccessToken;
+            GlobalData.RefreshToken = newuser.RefreshToken;
+        }
         public abstract void Save();
 
         #endregion

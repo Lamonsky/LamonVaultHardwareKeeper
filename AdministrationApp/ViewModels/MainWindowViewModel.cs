@@ -181,6 +181,7 @@ namespace AdministrationApp.ViewModels
         }
         #endregion
         #region Commands
+
         public MainWindowViewModel()
         {
             Messenger.Default.Register<string>(this, open);

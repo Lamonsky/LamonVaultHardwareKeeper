@@ -117,7 +117,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            
             await RequestHelper.SendRequestAsync(URLs.NETWORKDEVICE, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("NetworkDeviceRefresh");
         }

@@ -98,10 +98,11 @@ namespace AdministrationApp.ViewModels
                 if (adminuser.IsInRole)
                 {
                     GlobalData.AccessToken = user.AccessToken;
+                    GlobalData.RefreshToken = user.RefreshToken;
                     GlobalData.Email = item.Email;
                     List<UserVM> userVMs = await RequestHelper.SendRequestAsync<object, List<UserVM>>(URLs.USER, HttpMethod.Get, null, GlobalData.AccessToken);
                     UserVM loggeduser = userVMs.Where(item => item.Email == GlobalData.Email).First();
-                    GlobalData.UserId = loggeduser.Id;
+                    GlobalData.UserId = loggeduser.Id;                    
                     MainWindow window = new MainWindow();
                     var viewModel = new MainWindowViewModel();
                     window.DataContext = viewModel;

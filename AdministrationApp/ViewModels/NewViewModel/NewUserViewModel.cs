@@ -53,24 +53,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<PositionVM>(this, getPosition);
             IsActive = true;
-            _IsValid = false;
-        }
-        private bool _IsValid;
-        public bool IsValid
-        {
-            get
-            {
-                return _IsValid;
-            }
-            set
-            {
-                if(_IsValid != value)
-                {
-                    _IsValid = value;
-                    OnPropertyChanged(() => IsValid);
-                    
-                }
-            }
+            IsValid = false;
         }
         private void ValidatePassword()
         {
@@ -85,7 +68,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            
             RestApiUsers user = new();
             user.Email = item.Email;
             user.Password = item.Password;

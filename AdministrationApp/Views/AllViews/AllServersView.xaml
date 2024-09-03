@@ -21,6 +21,10 @@
             <DataGridTextColumn Header="Numer seryjny" Binding="{Binding SerialNumber}"/>
             <DataGridTextColumn Header="Numer inwentarzowy" Binding="{Binding InventoryNumber}"/>
             <DataGridTextColumn Header="Użytkownik komputera" Binding="{Binding User}"/>
+            <DataGridTextColumn Header="Utworzone przez" Binding="{Binding CreatedBy}"/>
+            <DataGridTextColumn Header="Data utworzenia" Binding="{Binding CreatedAt}"/>
+            <DataGridTextColumn Header="Zmodyfikowane przez" Binding="{Binding ModifiedBy}"/>
+            <DataGridTextColumn Header="Data modyfikacji" Binding="{Binding ModifiedAt}"/>
         </DataGrid.Columns>
     </DataGrid>
 </local:WszystkieViewBase>

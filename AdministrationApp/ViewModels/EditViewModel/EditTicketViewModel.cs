@@ -94,6 +94,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         #region Konstruktor
         public EditTicketViewModel(TicketCreateEditVM vm) : base("EditTicket")
         {
+            IsValid = true;
             item = vm;
             setForeignKeys();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
@@ -120,8 +121,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         public override async void Save()
         {
             item.ModifiedAt = DateTime.Now;
-            item.ModifiedBy = GlobalData.UserId;
-            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            item.ModifiedBy = GlobalData.UserId;                     
             await RequestHelper.SendRequestAsync(URLs.TICKET_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("TicketsRefresh");
         }

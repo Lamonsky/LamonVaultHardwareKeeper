@@ -29,13 +29,149 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Filter()
         {
-            //throw new NotImplementedException();
+            switch(FilterField)
+            {
+                case "Wszędzie":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.ManufacturerName?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Location?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.ComputerType?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.ComputerModel?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Processor?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Ram?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Disk?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.GraphicsCard?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.OperatingSystem?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.SerialNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.InventoryNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.User?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Nazwa":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Producent":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.ManufacturerName?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Lokalizacja":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.Location?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Status":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Typ Komputera":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.ComputerType?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Model":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.ComputerModel?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Procesor":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.Processor?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "RAM":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.Ram?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Dysk Twardy":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.Disk?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Karta graficzna":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.GraphicsCard?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "System operacyjny":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.OperatingSystem?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer seryjny":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.SerialNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer inwentarzowy":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.InventoryNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Użytkownik komputera":
+                    List = new List<ComputersVM>(
+                        List.Where(item =>
+                            (item.User?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+            }
         }
 
         public override List<string> GetComboBoxFilterList()
-        {
-            //throw new NotImplementedException();
-            return new List<string>();
+        {            
+            return new List<string>
+            {
+                "Wszędzie",
+                "Nazwa",
+                "Producent",
+                "Lokalizacja",
+                "Status",
+                "Typ Komputera",
+                "Model",
+                "Procesor",
+                "RAM",
+                "Dysk Twardy",
+                "Karta graficzna",
+                "System operacyjny",
+                "Numer seryjny",
+                "Numer inwentarzowy",
+                "Użytkownik komputera"
+            };
         }
 
         public override async void load()

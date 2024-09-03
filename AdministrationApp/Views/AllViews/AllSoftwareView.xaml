@@ -15,6 +15,10 @@
             <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
             <DataGridTextColumn Header="Wydawca" Binding="{Binding Publisher}"/>
             <DataGridTextColumn Header="Użytkownik" Binding="{Binding Users}"/>
+            <DataGridTextColumn Header="Utworzone przez" Binding="{Binding CreatedBy}"/>
+            <DataGridTextColumn Header="Data utworzenia" Binding="{Binding CreatedAt}"/>
+            <DataGridTextColumn Header="Zmodyfikowane przez" Binding="{Binding ModifiedBy}"/>
+            <DataGridTextColumn Header="Data modyfikacji" Binding="{Binding ModifiedAt}"/>
         </DataGrid.Columns>
     </DataGrid>
 </local:WszystkieViewBase>

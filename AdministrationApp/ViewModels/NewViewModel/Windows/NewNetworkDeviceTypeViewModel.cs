@@ -22,7 +22,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            
             await RequestHelper.SendRequestAsync(URLs.NETWORKDEVICETYPE, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("NetworkDeviceTypeRefresh");
             _window.Close();

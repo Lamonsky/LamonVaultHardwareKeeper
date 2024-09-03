@@ -31,8 +31,18 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override List<string> GetComboBoxFilterList()
         {
-            //throw new NotImplementedException();
-            return new List<string>();
+            return new List<string>
+            {
+                "Wszędzie",
+                "Treść zgłoszenia",
+                "Typ zgłoszenia",
+                "Kategoria",
+                "Status",
+                "Lokalizacja",
+                "Użytkownik",
+                "E-Mail",
+                "Właściciel"
+            };
         }
 
         public override async void load()
