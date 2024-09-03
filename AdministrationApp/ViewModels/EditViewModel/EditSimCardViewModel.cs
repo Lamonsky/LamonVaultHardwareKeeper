@@ -77,15 +77,18 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.SIMCARD_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Post, item, null);
+            item.ModifiedAt = DateTime.Now;
+            item.ModifiedBy = GlobalData.UserId;
+            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(URLs.SIMCARD_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("SimCardRefresh");
         }
         #endregion
         #region CommandsFunctions
         public async void setForeignKeys()
         {
-            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, null);
-            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, null);
+            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             StatusName = statusvm.Name;
             UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
         }

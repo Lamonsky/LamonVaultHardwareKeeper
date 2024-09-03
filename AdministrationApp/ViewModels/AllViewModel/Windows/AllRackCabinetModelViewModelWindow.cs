@@ -57,12 +57,12 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<RackCabinetModelVM>>(URLs.RACKCABINETMODEL, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<RackCabinetModelVM>>(URLs.RACKCABINETMODEL, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         public async override void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.RACKCABINETMODEL_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
+            await RequestHelper.SendRequestAsync(URLs.RACKCABINETMODEL_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
 

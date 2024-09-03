@@ -22,7 +22,10 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.PRINTERMODEL, HttpMethod.Post, item, null);
+            item.CreatedAt = DateTime.Now;
+            item.CreatedBy = GlobalData.UserId;
+            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(URLs.PRINTERMODEL, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("PrinterModelRefresh");
             _window.Close();
         }
@@ -31,7 +34,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
 
         private async void getStatusItems()
         {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, null);
+            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         #endregion

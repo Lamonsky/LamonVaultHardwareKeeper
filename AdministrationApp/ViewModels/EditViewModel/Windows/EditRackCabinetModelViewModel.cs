@@ -37,7 +37,10 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.RACKCABINETMODEL_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, null);
+            item.ModifiedAt = DateTime.Now;
+            item.ModifiedBy = GlobalData.UserId;
+            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(URLs.RACKCABINETMODEL_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("RackCabinetModelRefresh");
             _window.Close();
         }

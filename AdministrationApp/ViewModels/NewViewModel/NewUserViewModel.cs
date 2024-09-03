@@ -83,6 +83,9 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         public override async void Save()
         {
+            item.CreatedAt = DateTime.Now;
+            item.CreatedBy = GlobalData.UserId;
+            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
             RestApiUsers user = new();
             user.Email = item.Email;
             user.Password = item.Password;

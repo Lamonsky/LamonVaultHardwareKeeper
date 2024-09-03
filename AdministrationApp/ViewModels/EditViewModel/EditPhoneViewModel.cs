@@ -132,19 +132,22 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.PHONE_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, null);
+            item.ModifiedAt = DateTime.Now;
+            item.ModifiedBy = GlobalData.UserId;
+            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(URLs.PHONE_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("PhoneRefresh");
         }
         #endregion
         #region CommandsFunctions
         public async void setForeignKeys()
         {
-            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, null);
-            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, null);
-            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, null);
-            PhoneTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, PhoneTypeVM>(URLs.PHONETYPE_ID.Replace("{id}", item.PhoneType.ToString()), HttpMethod.Get, null, null);
-            PhoneModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, PhoneModelVM>(URLs.PHONEMODEL_ID.Replace("{id}", item.Model.ToString()), HttpMethod.Get, null, null);
-            ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()), HttpMethod.Get, null, null);
+            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            PhoneTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, PhoneTypeVM>(URLs.PHONETYPE_ID.Replace("{id}", item.PhoneType.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            PhoneModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, PhoneModelVM>(URLs.PHONEMODEL_ID.Replace("{id}", item.Model.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             StatusName = statusvm.Name;
             LokacjaName = locationVM.Name;
             UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;

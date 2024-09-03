@@ -39,7 +39,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<ServerVM>>(URLs.SERVER, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<ServerVM>>(URLs.SERVER, HttpMethod.Get, null, GlobalData.AccessToken);
         }
         private ServerVM _ChosenItem;
         public ServerVM ChosenItem
@@ -63,7 +63,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.SERVER_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
+            await RequestHelper.SendRequestAsync(URLs.SERVER_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
 

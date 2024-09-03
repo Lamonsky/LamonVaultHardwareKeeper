@@ -40,7 +40,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<ComputersVM>>(URLs.COMPUTERS, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<ComputersVM>>(URLs.COMPUTERS, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         private ComputersVM _ChosenComputer;

@@ -40,7 +40,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<MonitorsVM>>(URLs.MONITORS, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<MonitorsVM>>(URLs.MONITORS, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         private MonitorsVM _ChosenMonitor;

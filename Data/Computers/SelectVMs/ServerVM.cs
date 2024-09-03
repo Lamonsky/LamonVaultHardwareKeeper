@@ -33,5 +33,16 @@ namespace Data.Computers.SelectVMs
         public string? InventoryNumber { get; set; }
         [JsonPropertyName("user")]
         public string? User { get; set; }
+        [JsonPropertyName("createdAt")]
+        public DateTime? CreatedAt { get; set; }
+
+        [JsonPropertyName("createdBy")]
+        public string? CreatedBy { get; set; }
+
+        [JsonPropertyName("modifiedAt")]
+        public DateTime? ModifiedAt { get; set; }
+
+        [JsonPropertyName("modifiedBy")]
+        public string? ModifiedBy { get; set; }
     }
 }

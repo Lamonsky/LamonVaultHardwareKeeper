@@ -42,6 +42,9 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         }
         public override async void Save()
         {
+            item.ModifiedAt = DateTime.Now;
+            item.ModifiedBy = GlobalData.UserId;
+            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
             await RequestHelper.SendRequestAsync(URLs.LOCATION_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("LocationRefresh");
             _window.Close();

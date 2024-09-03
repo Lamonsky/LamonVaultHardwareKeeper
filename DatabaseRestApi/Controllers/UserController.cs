@@ -31,7 +31,9 @@ namespace DatabaseRestApi.Controllers
                     Phone2 = item.Phone2,
                     InternalNumber = item.InternalNumber,
                     Position = item.PositionNavigation.Name,
-                    LocationId = item.Location.Id
+                    LocationId = item.Location.Id,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.ComputerCreatedByNavigations.ToString(),
                 }).ToListAsync();
             return Json(userVM);
         }

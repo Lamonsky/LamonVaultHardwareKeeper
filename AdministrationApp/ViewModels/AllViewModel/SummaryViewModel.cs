@@ -87,7 +87,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async Task<MainWindowModel> getItems()
         {
-            return await RequestHelper.SendRequestAsync<object, MainWindowModel>(URLs.MAINWINDOW, HttpMethod.Get, null, null);
+            return await RequestHelper.SendRequestAsync<object, MainWindowModel>(URLs.MAINWINDOW, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         public async override void load()

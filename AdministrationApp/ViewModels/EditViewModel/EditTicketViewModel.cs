@@ -106,10 +106,10 @@ namespace AdministrationApp.ViewModels.EditViewModel
         public async void setForeignKeys()
         {
             UserVM uvm = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.User.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            TicketStatusVM tsvm = await RequestHelper.SendRequestAsync<object, TicketStatusVM>(URLs.TICKETSTATUS_ID.Replace("{id}", item.User.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            TicketCategoryVM tcvm = await RequestHelper.SendRequestAsync<object, TicketCategoryVM>(URLs.TICKETCATEGORY_ID.Replace("{id}", item.User.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            TicketTypeVM ttvm = await RequestHelper.SendRequestAsync<object, TicketTypeVM>(URLs.TICKETTYPE_ID.Replace("{id}", item.User.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            TechnicianVM tvm = await RequestHelper.SendRequestAsync<object, TechnicianVM>(URLs.TECHNICIAN_ID.Replace("{id}", item.User.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            TicketStatusVM tsvm = await RequestHelper.SendRequestAsync<object, TicketStatusVM>(URLs.TICKETSTATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            TicketCategoryVM tcvm = await RequestHelper.SendRequestAsync<object, TicketCategoryVM>(URLs.TICKETCATEGORY_ID.Replace("{id}", item.Category.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            TicketTypeVM ttvm = await RequestHelper.SendRequestAsync<object, TicketTypeVM>(URLs.TICKETTYPE_ID.Replace("{id}", item.Type.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            TechnicianVM tvm = await RequestHelper.SendRequestAsync<object, TechnicianVM>(URLs.TECHNICIAN_ID.Replace("{id}", item.Owner.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             UserName = uvm.FirstName + " " + uvm.LastName + " " + uvm.InternalNumber + " " + uvm.Position;
             StatusName = tsvm.Name;
             CategoryName = tcvm.Name;
@@ -119,6 +119,9 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         public override async void Save()
         {
+            item.ModifiedAt = DateTime.Now;
+            item.ModifiedBy = GlobalData.UserId;
+            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
             await RequestHelper.SendRequestAsync(URLs.TICKET_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("TicketsRefresh");
         }

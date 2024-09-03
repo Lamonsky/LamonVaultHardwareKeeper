@@ -57,12 +57,12 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<ComputerTypeVM>>(URLs.COMPUTERTYPE, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<ComputerTypeVM>>(URLs.COMPUTERTYPE, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         public async override void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.COMPUTERTYPE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
+            await RequestHelper.SendRequestAsync(URLs.COMPUTERTYPE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
 

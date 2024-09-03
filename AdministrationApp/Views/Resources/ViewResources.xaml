@@ -112,6 +112,9 @@
     <DataTemplate DataType="{x:Type vme:EditUserViewModel}">
         <vwn:NewUserView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditTicketViewModel}">
+        <vwn:NewTicketView/>
+    </DataTemplate>
 
 
 

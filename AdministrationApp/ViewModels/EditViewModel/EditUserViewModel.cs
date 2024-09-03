@@ -53,15 +53,18 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, null);
+            item.ModifiedAt = DateTime.Now;
+            item.ModifiedBy = GlobalData.UserId;
+            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("UsersRefresh");
         }
         #endregion
         #region CommandsFunctions
         public async void setForeignKeys()
         {
-            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, null);
-            PositionVM positionVM = await RequestHelper.SendRequestAsync<object, PositionVM>(URLs.POSITION_ID.Replace("{id}", item.Position.ToString()), HttpMethod.Get, null, null);
+            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            PositionVM positionVM = await RequestHelper.SendRequestAsync<object, PositionVM>(URLs.POSITION_ID.Replace("{id}", item.Position.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             LokacjaName = locationVM.Name;
             PositionName = positionVM.Name;
         }

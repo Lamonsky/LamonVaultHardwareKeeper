@@ -56,12 +56,12 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<PrintersVM>>(URLs.PRINTER, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<PrintersVM>>(URLs.PRINTER, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         public async override void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.PRINTER_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
+            await RequestHelper.SendRequestAsync(URLs.PRINTER_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
 

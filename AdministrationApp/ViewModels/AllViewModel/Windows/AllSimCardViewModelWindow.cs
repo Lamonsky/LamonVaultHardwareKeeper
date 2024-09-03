@@ -64,7 +64,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<SimCardsVM>>(URLs.SIMCARD, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<SimCardsVM>>(URLs.SIMCARD, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         public override void Edit()

@@ -115,13 +115,13 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         public async void setForeignKeys()
         {
-            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, null);
-            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, null);
-            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.UserId.ToString()), HttpMethod.Get, null, null);
-            ComputerTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, ComputerTypeVM>(URLs.COMPUTERTYPE_ID.Replace("{id}", item.ComputerTypeId.ToString()), HttpMethod.Get, null, null);
-            ComputerModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, ComputerModelVM>(URLs.COMPUTERMODEL_ID.Replace("{id}", item.ComputerModelId.ToString()), HttpMethod.Get, null, null);
-            ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.ManufacturerId.ToString()), HttpMethod.Get, null, null);
-            OperatingSystemVM osvm = await RequestHelper.SendRequestAsync<object, OperatingSystemVM>(URLs.OPERATINGSYSTEM_ID.Replace("{id}", item.OperatingSystemId.ToString()), HttpMethod.Get, null, null);
+            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.UserId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            ComputerTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, ComputerTypeVM>(URLs.COMPUTERTYPE_ID.Replace("{id}", item.ComputerTypeId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            ComputerModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, ComputerModelVM>(URLs.COMPUTERMODEL_ID.Replace("{id}", item.ComputerModelId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.ManufacturerId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            OperatingSystemVM osvm = await RequestHelper.SendRequestAsync<object, OperatingSystemVM>(URLs.OPERATINGSYSTEM_ID.Replace("{id}", item.OperatingSystemId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             StatusName = statusvm.Name;
             OperatingSystemName = osvm.Name;
             LokacjaName = locationVM.Name;
@@ -132,15 +132,11 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         public override async void Save()
         {
-            try
-            {
-                await RequestHelper.SendRequestAsync(URLs.COMPUTERS_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
-                Messenger.Default.Send("ComputersRefresh");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            item.ModifiedAt = DateTime.Now;
+            item.ModifiedBy = GlobalData.UserId;
+            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(URLs.COMPUTERS_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
+            Messenger.Default.Send("ComputersRefresh");
         }
         #endregion
         #region CommandsFunctions

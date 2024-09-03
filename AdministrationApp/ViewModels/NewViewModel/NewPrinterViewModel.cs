@@ -100,7 +100,10 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         public override async void Save()
         {
-            await RequestHelper.SendRequestAsync(URLs.PRINTER, HttpMethod.Post, item, null);
+            item.CreatedAt = DateTime.Now;
+            item.CreatedBy = GlobalData.UserId;
+            await RequestHelper.SendRequestAsync(URLs.REFRESH, HttpMethod.Post, GlobalData.AccessToken, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(URLs.PRINTER, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("PrinterRefresh");
         }
         #endregion
@@ -113,7 +116,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
         private async void getModelItems()
         {
-            modelComboBoxItems = await RequestHelper.SendRequestAsync<object, List<PrinterModelVM>>(URLs.PRINTERMODEL, HttpMethod.Get, null, null);
+            modelComboBoxItems = await RequestHelper.SendRequestAsync<object, List<PrinterModelVM>>(URLs.PRINTERMODEL, HttpMethod.Get, null, GlobalData.AccessToken);
 
         }
 
@@ -125,12 +128,12 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
         private async void getStatusItems()
         {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, null);
+            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         private async void getProducentItems()
         {
-            manufacturerComboBoxItems = await RequestHelper.SendRequestAsync<object, List<ManufacturerVM>>(URLs.MANUFACTURER, HttpMethod.Get, null, null);
+            manufacturerComboBoxItems = await RequestHelper.SendRequestAsync<object, List<ManufacturerVM>>(URLs.MANUFACTURER, HttpMethod.Get, null, GlobalData.AccessToken);
         }
         private void getChosenLokacja(LocationVM vM)
         {

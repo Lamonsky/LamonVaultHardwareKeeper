@@ -54,7 +54,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         
         public async override void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<NetworkDeviceVM>>(URLs.NETWORKDEVICE, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<NetworkDeviceVM>>(URLs.NETWORKDEVICE, HttpMethod.Get, null, GlobalData.AccessToken);
         }
         public async override void Remove()
         {

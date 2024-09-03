@@ -132,7 +132,7 @@ namespace AdministrationApp.ViewModels
             try
             {
                 string url = urlTemplate.Replace("{id}", id);
-                TViewModel vm = await RequestHelper.SendRequestAsync<object, TViewModel>(url, HttpMethod.Get, null, null);
+                TViewModel vm = await RequestHelper.SendRequestAsync<object, TViewModel>(url, HttpMethod.Get, null, GlobalData.AccessToken);
 
                 if (vm != null)
                 {
@@ -191,14 +191,8 @@ namespace AdministrationApp.ViewModels
         {
             switch (name)
             {
-                case "GroupsTypeAdd":
-                    CreateGroupsTypeWindow();
-                    break;
                 case "HardDriveModelAdd":
                     CreateHardDriveModelWindow();
-                    break;
-                case "KnowledgeBaseCategoryAdd":
-                    CreateKnowledgeBaseCategoryWindow();
                     break;
                 case "LicenseTypeAdd":
                     CreateLicenseTypeWindow();
@@ -462,14 +456,8 @@ namespace AdministrationApp.ViewModels
                 case string n when n.StartsWith("DeviceModelEdit"):
                     EditDeviceModel(CutString(name));
                     break;
-                case string n when n.StartsWith("GroupsTypeEdit"):
-                    EditGroupsType(CutString(name));
-                    break;
                 case string n when n.StartsWith("HardDriveModelEdit"):
                     EditHardDriveModel(CutString(name));
-                    break;
-                case string n when n.StartsWith("KnowledgebaseCategoryEdit"):
-                    EditKnowledgebaseCategory(CutString(name));
                     break;
                 case string n when n.StartsWith("LicenseTypeEdit"):
                     EditLicenseType(CutString(name));
@@ -1036,17 +1024,9 @@ namespace AdministrationApp.ViewModels
         {
             CreateWindows<NewTechnicianWindow, NewTechnicianViewModelWindow>(window => new NewTechnicianViewModelWindow(window));
         }
-        private void CreateGroupsTypeWindow()
-        {
-            CreateWindows<NewDictionaryWindow, NewGroupsTypeViewModel>(window => new NewGroupsTypeViewModel(window));
-        }
         private void CreateHardDriveModelWindow()
         {
             CreateWindows<NewDictionaryWindow, NewHardDriveModelViewModel>(window => new NewHardDriveModelViewModel(window));
-        }
-        private void CreateKnowledgeBaseCategoryWindow()
-        {
-            CreateWindows<NewDictionaryWindow, NewKnowledgeBaseCategoryViewModel>(window => new NewKnowledgeBaseCategoryViewModel(window));
         }
         private void CreateLicenseTypeWindow()
         {
@@ -1176,16 +1156,6 @@ namespace AdministrationApp.ViewModels
         }
 
 
-        private async void EditGroupsType(string id)
-        {
-            await EditItemWindow<GroupTypeCreateEditVM, EditGroupsTypeViewModel, NewDictionaryWindow>(
-                id,
-                URLs.GROUPTYPE_CEVM_ID,
-                (window, vm) => new EditGroupsTypeViewModel(window, vm)
-            );
-        }
-
-
 
         private async void EditHardDriveModel(string id)
         {
@@ -1193,17 +1163,6 @@ namespace AdministrationApp.ViewModels
                 id,
                 URLs.HARDDRIVEMODEL_CEVM_ID,
                 (window, vm) => new EditHardDriveModelViewModel(window, vm)
-            );
-        }
-
-
-
-        private async void EditKnowledgebaseCategory(string id)
-        {
-            await EditItemWindow<KnowledgeBaseCategoryCreateEditVM, EditKnowledgebaseCategoryViewModel, NewDictionaryWindow>(
-                id,
-                URLs.KNOWLEDGEBASECATEGORY_CEVM_ID,
-                (window, vm) => new EditKnowledgebaseCategoryViewModel(window, vm)
             );
         }
 

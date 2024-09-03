@@ -71,7 +71,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<UserVM>>(URLs.USER, HttpMethod.Get, null, null);
+            List = await RequestHelper.SendRequestAsync<object, List<UserVM>>(URLs.USER, HttpMethod.Get, null, GlobalData.AccessToken);
         }
 
         public override void Edit()

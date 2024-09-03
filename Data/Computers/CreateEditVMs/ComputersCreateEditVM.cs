@@ -59,13 +59,13 @@ namespace Data.Computers.CreateEditVMs
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; }
 
-        [JsonPropertyName("createdByNavigation")]
-        public int? CreatedByNavigation { get; set; }
+        [JsonPropertyName("createdBy")]
+        public int? CreatedBy { get; set; }
 
         [JsonPropertyName("modifiedAt")]
         public DateTime? ModifiedAt { get; set; }
 
-        [JsonPropertyName("modifiedByNavigation")]
-        public int? ModifiedByNavigation { get; set; }
+        [JsonPropertyName("modifiedBy")]
+        public int? ModifiedBy { get; set; }
     }
 }
