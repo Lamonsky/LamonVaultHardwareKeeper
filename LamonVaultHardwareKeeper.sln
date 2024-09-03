@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdministrationApp", "AdministrationApp\AdministrationApp.csproj", "{9EA29042-201D-4A5F-B7F1-5F026F41F87D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebInterface", "WebInterface\WebInterface.csproj", "{FF9C58A0-4EDB-4D1B-B084-9B07377F8AFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebInterface", "WebInterface\WebInterface.csproj", "{FF9C58A0-4EDB-4D1B-B084-9B07377F8AFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementy rozwiązania", "Elementy rozwiązania", "{D82C87C3-A599-49C1-8C15-7A495DD53209}"
+	ProjectSection(SolutionItems) = preProject
+		info.txt = info.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -21,7 +21,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(operaingSystemVM);
@@ -38,7 +42,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).FirstAsync();
             return Json(operaingSystemVM);
@@ -70,7 +78,8 @@ namespace DatabaseRestApi.Controllers
                 Name = operaingSystemCreateEditVM.Name,
                 Comment = operaingSystemCreateEditVM.Comment,
                 Status = operaingSystemCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = operaingSystemCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -90,6 +99,7 @@ namespace DatabaseRestApi.Controllers
             operaingSystems.Name = operaingSystemCreateEditVM.Name;
             operaingSystems.Comment = operaingSystemCreateEditVM.Comment;
             operaingSystems.Status = operaingSystemCreateEditVM.Status;
+            operaingSystems.ModifiedBy = operaingSystemCreateEditVM.ModifiedBy;
             operaingSystems.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();

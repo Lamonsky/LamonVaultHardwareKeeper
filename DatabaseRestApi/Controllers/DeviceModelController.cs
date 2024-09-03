@@ -22,8 +22,12 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
-                    
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+
                 }).ToListAsync();
             return Json(deviceModelVM);
         }
@@ -40,8 +44,12 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
-                    
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+
                 }).FirstAsync();
             return Json(deviceModelVM);
         }
@@ -73,7 +81,8 @@ namespace DatabaseRestApi.Controllers
                 Name = deviceModelCreateEditVM.Name,
                 Comment = deviceModelCreateEditVM.Comment,
                 Status = deviceModelCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = deviceModelCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -94,6 +103,7 @@ namespace DatabaseRestApi.Controllers
             deviceModels.Comment = deviceModelCreateEditVM.Comment;
             deviceModels.Status = deviceModelCreateEditVM.Status;
             deviceModels.ModifiedAt = DateTime.Now;
+            deviceModels.ModifiedBy = deviceModelCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

@@ -27,7 +27,11 @@ namespace DatabaseRestApi.Controllers
                     Status = item.Status.Name,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(simcardsVMs);
         }
@@ -49,7 +53,11 @@ namespace DatabaseRestApi.Controllers
                     Status = item.Status.Name,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(simcardsVMs);
         }
@@ -71,7 +79,7 @@ namespace DatabaseRestApi.Controllers
                     StatusId = item.StatusId,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.Users
+                    Users = item.Users,
                 }).FirstAsync();
             return Json(simcardsVMs);
         }
@@ -90,7 +98,8 @@ namespace DatabaseRestApi.Controllers
                 SerialNumber = simCardsCreateEditVM?.SerialNumber,
                 InventoryNumber = simCardsCreateEditVM?.InventoryNumber,
                 Users = simCardsCreateEditVM.Users,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = simCardsCreateEditVM?.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -115,6 +124,8 @@ namespace DatabaseRestApi.Controllers
             simcard.SerialNumber = simCardsCreateEditVM?.SerialNumber;
             simcard.InventoryNumber = simCardsCreateEditVM?.InventoryNumber;
             simcard.Users = simCardsCreateEditVM.Users;
+            simcard.ModifiedBy = simCardsCreateEditVM?.ModifiedBy;
+            simcard.StatusId = simCardsCreateEditVM.StatusId;
             simcard.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();

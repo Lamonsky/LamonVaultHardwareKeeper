@@ -23,7 +23,11 @@ namespace DatabaseRestApi.Controllers
                     Name = item.Name,
                     Manufacturer = item.ManufacturerNavigation.Name,
                     Type = item.TypeNavigation.Name,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(simcomponentVMs);
         }
@@ -41,7 +45,11 @@ namespace DatabaseRestApi.Controllers
                     Name = item.Name,
                     Manufacturer = item.ManufacturerNavigation.Name,
                     Type = item.TypeNavigation.Name,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(simcomponentVMs);
         }
@@ -74,6 +82,7 @@ namespace DatabaseRestApi.Controllers
                 Manufacturer = simComponentCreateEditVM.Manufacturer,
                 Type = simComponentCreateEditVM.Type,
                 Status = simComponentCreateEditVM.Status,
+                CreatedBy = simComponentCreateEditVM.CreatedBy,
                 CreatedAt = DateTime.Now
             });
 
@@ -96,6 +105,7 @@ namespace DatabaseRestApi.Controllers
             simComponent.Type = simComponentCreateEditVM.Type;
             simComponent.Status = simComponentCreateEditVM.Status;
             simComponent.ModifiedAt = DateTime.Now;
+            simComponent.ModifiedBy = simComponentCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

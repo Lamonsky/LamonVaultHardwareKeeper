@@ -25,6 +25,10 @@ namespace DatabaseRestApi.Controllers
                     Capacity = item.Capacity.ToString(),
                     Server = item.ServerNavigation.Name + " " + item.ServerNavigation.InventoryNumber + " " + item.ServerNavigation.SerialNumber,
                     Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(hardDriveVMs);
@@ -45,6 +49,10 @@ namespace DatabaseRestApi.Controllers
                     Capacity = item.Capacity.ToString(),
                     Server = item.ServerNavigation.Name + " " + item.ServerNavigation.InventoryNumber + " " + item.ServerNavigation.SerialNumber,
                     Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).FirstAsync();
             return Json(hardDriveVMs);
@@ -81,7 +89,8 @@ namespace DatabaseRestApi.Controllers
                 Capacity = hardDriveCreateEditVM.Capacity,
                 Server = hardDriveCreateEditVM.Server,
                 Status = hardDriveCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = hardDriveCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -104,6 +113,7 @@ namespace DatabaseRestApi.Controllers
             harddrive.Server = hardDriveCreateEditVM.Server;
             harddrive.Status = hardDriveCreateEditVM.Status;
             harddrive.ModifiedAt = DateTime.Now;
+            harddrive.ModifiedBy = hardDriveCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

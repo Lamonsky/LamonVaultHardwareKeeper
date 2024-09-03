@@ -29,6 +29,10 @@ namespace DatabaseRestApi.Controllers
                     Publisher = item.PublisherNavigation.Name,
                     Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
                     Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(softwareVM);
         }
@@ -48,6 +52,10 @@ namespace DatabaseRestApi.Controllers
                     Publisher = item.PublisherNavigation.Name,
                     Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
                     Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(softwareVM);
         }
@@ -82,6 +90,7 @@ namespace DatabaseRestApi.Controllers
                 Publisher = softwareCreateEditVM.Publisher,
                 Users = softwareCreateEditVM.Users,
                 Status = softwareCreateEditVM.Status,
+                CreatedBy = softwareCreateEditVM.CreatedBy,
                 CreatedAt = DateTime.Now
             });
 
@@ -103,6 +112,8 @@ namespace DatabaseRestApi.Controllers
             software.LocationId = softwareCreateEditVM.LocationId;
             software.Publisher = softwareCreateEditVM.Publisher;
             software.Users = softwareCreateEditVM.Users;
+            software.Status = softwareCreateEditVM.Status;
+            software.ModifiedBy = softwareCreateEditVM.ModifiedBy;
             software.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();

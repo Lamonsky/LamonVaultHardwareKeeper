@@ -23,8 +23,12 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
-                    
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+
                 }).ToListAsync();
             return Json(rackcabinetTypeVM);
         }
@@ -41,8 +45,12 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
-                    
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+
                 }).FirstAsync();
             return Json(rackcabinetTypeVM);
         }
@@ -59,7 +67,8 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.Status
+                    Status = item.Status,
+
                     
                 }).FirstAsync();
             return Json(rackcabinetTypeVM);
@@ -74,7 +83,8 @@ namespace DatabaseRestApi.Controllers
                 Name = rackcabinetTypeCreateEditVM.Name,
                 Comment = rackcabinetTypeCreateEditVM.Comment,
                 Status = rackcabinetTypeCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = rackcabinetTypeCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -95,6 +105,7 @@ namespace DatabaseRestApi.Controllers
             rackcabinetType.Comment = rackcabinetTypeCreateEditVM.Comment;
             rackcabinetType.Status = rackcabinetTypeCreateEditVM.Status;
             rackcabinetType.ModifiedAt = DateTime.Now;
+            rackcabinetType.ModifiedBy = rackcabinetTypeCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

@@ -22,7 +22,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(computerModelVM);
         }
@@ -39,8 +43,12 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
-                }).FirstOrDefaultAsync();
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).FirstAsync();
             return Json(computerModelVM);
         }
         [Route(URLs.COMPUTERMODEL_CEVM_ID)]
@@ -70,7 +78,8 @@ namespace DatabaseRestApi.Controllers
                 Name = computerModelCreateEditVM.Name,
                 Comment = computerModelCreateEditVM.Comment,
                 Status = computerModelCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = computerModelCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -91,6 +100,7 @@ namespace DatabaseRestApi.Controllers
             computerModels.Comment = computerModelCreateEditVM.Comment;
             computerModels.Status = computerModelCreateEditVM.Status;
             computerModels.ModifiedAt = DateTime.Now;
+            computerModels.ModifiedBy = computerModelCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

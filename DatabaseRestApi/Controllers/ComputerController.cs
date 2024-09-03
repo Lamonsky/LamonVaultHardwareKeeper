@@ -37,7 +37,11 @@ namespace DatabaseRestApi.Controllers
                     OperatingSystem = item.OperatingSystemNavigation.Name,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName + " " + item.UsersNavigation.Email,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(computerVMs);
         }
@@ -65,7 +69,11 @@ namespace DatabaseRestApi.Controllers
                     OperatingSystem = item.OperatingSystemNavigation.Name,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(computerVMs);
         }
@@ -94,7 +102,11 @@ namespace DatabaseRestApi.Controllers
                     OperatingSystemId = item.OperatingSystem,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    UserId = item.Users
+                    UserId = item.Users,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedBy,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedBy,
                 }).FirstAsync();
             return Json(computerVMs);
         }
@@ -121,6 +133,7 @@ namespace DatabaseRestApi.Controllers
                 SerialNumber = computersCreateEditVM.SerialNumber,
                 InventoryNumber = computersCreateEditVM.InventoryNumber,
                 Users = computersCreateEditVM.UserId,
+                CreatedBy = computersCreateEditVM.CreatedBy,
                 CreatedAt = DateTime.Now
             });
 
@@ -154,6 +167,7 @@ namespace DatabaseRestApi.Controllers
             computers.InventoryNumber = computersCreateEditVM.InventoryNumber;
             computers.Users = computersCreateEditVM.UserId;
             computers.ModifiedAt = DateTime.Now;
+            computers.ModifiedBy = computersCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

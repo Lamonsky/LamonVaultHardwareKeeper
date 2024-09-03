@@ -22,8 +22,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
-
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(ticketCategoryVM);
         }
@@ -40,8 +43,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
-
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(ticketCategoryVM);
         }
@@ -73,7 +79,8 @@ namespace DatabaseRestApi.Controllers
                 Name = ticketCategoryCreateEditVM.Name,
                 Comment = ticketCategoryCreateEditVM.Comment,
                 Status = ticketCategoryCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = ticketCategoryCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -94,6 +101,7 @@ namespace DatabaseRestApi.Controllers
             ticketCategory.Comment = ticketCategoryCreateEditVM.Comment;
             ticketCategory.Status = ticketCategoryCreateEditVM.Status;
             ticketCategory.ModifiedAt = DateTime.Now;
+            ticketCategory.ModifiedBy = ticketCategoryCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

@@ -22,7 +22,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(positionVM);
@@ -40,7 +44,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).FirstAsync();
             return Json(positionVM);
@@ -73,7 +81,8 @@ namespace DatabaseRestApi.Controllers
                 Name = positionCreateEditVM.Name,
                 Comment = positionCreateEditVM.Comment,
                 Status = positionCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = positionCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -94,6 +103,7 @@ namespace DatabaseRestApi.Controllers
             position.Comment = positionCreateEditVM.Comment;
             position.Status = positionCreateEditVM.Status;
             position.ModifiedAt = DateTime.Now;
+            position.ModifiedBy = positionCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

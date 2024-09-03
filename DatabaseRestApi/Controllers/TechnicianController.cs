@@ -21,7 +21,11 @@ namespace DatabaseRestApi.Controllers
                 {
                     Id = item.Id,
                     Users = item.Users.FirstName + " " + item.Users.LastName + " " + item.Users.InternalNumber,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(technicianVMs);
         }
@@ -37,7 +41,11 @@ namespace DatabaseRestApi.Controllers
                 {
                     Id = item.Id,
                     Users = item.Users.FirstName + " " + item.Users.LastName + " " + item.Users.InternalNumber,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(technicianVMs);
         }
@@ -66,7 +74,8 @@ namespace DatabaseRestApi.Controllers
             {
                 Status = technicianCreateEditVM.Status,
                 UsersId = technicianCreateEditVM.UsersId,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = technicianCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -85,6 +94,7 @@ namespace DatabaseRestApi.Controllers
             }
             technician.Status = technicianCreateEditVM.Status;
             technician.UsersId = technicianCreateEditVM.UsersId;
+            technician.ModifiedBy = technicianCreateEditVM.ModifiedBy;
             technician.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();

@@ -22,8 +22,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
-
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(ticketStatusVM);
         }
@@ -40,8 +43,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
-
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(ticketStatusVM);
         }
@@ -73,7 +79,8 @@ namespace DatabaseRestApi.Controllers
                 Name = ticketStatusCreateEditVM.Name,
                 Comment = ticketStatusCreateEditVM.Comment,
                 Status = ticketStatusCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = ticketStatusCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -94,6 +101,7 @@ namespace DatabaseRestApi.Controllers
             ticketStatus.Comment = ticketStatusCreateEditVM.Comment;
             ticketStatus.Status = ticketStatusCreateEditVM.Status;
             ticketStatus.ModifiedAt = DateTime.Now;
+            ticketStatus.ModifiedBy = ticketStatusCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

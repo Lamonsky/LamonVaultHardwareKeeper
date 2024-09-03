@@ -30,7 +30,11 @@ namespace DatabaseRestApi.Controllers
                     Model = item.ModelNavigation.Name,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(devicesVMs);
         }
@@ -52,7 +56,11 @@ namespace DatabaseRestApi.Controllers
                     Model = item.ModelNavigation.Name,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(devicesVMs);
         }
@@ -93,7 +101,8 @@ namespace DatabaseRestApi.Controllers
                 SerialNumber = devicesCreateEditVm?.SerialNumber,
                 InventoryNumber = devicesCreateEditVm?.InventoryNumber,
                 Users = devicesCreateEditVm.Users,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = devicesCreateEditVm?.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -119,6 +128,7 @@ namespace DatabaseRestApi.Controllers
             device.InventoryNumber = devicesCreateEditVm?.InventoryNumber;
             device.Users = devicesCreateEditVm.Users;
             device.ModifiedAt = DateTime.Now;
+            device.ModifiedBy = devicesCreateEditVm?.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

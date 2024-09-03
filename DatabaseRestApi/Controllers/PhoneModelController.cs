@@ -22,7 +22,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(phoneModelVM);
@@ -40,7 +44,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(phoneModelVM);
@@ -72,7 +80,8 @@ namespace DatabaseRestApi.Controllers
                 Name = phoneModelCreateEditVM.Name,
                 Comment = phoneModelCreateEditVM.Comment,
                 Status = phoneModelCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = phoneModelCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -93,6 +102,7 @@ namespace DatabaseRestApi.Controllers
             phoneModels.Comment = phoneModelCreateEditVM.Comment;
             phoneModels.Status = phoneModelCreateEditVM.Status;
             phoneModels.ModifiedAt = DateTime.Now;
+            phoneModels.ModifiedBy = phoneModelCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

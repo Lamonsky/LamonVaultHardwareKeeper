@@ -103,6 +103,10 @@ public partial class User
     [InverseProperty("UsersNavigation")]
     public virtual ICollection<Contract> ContractUsersNavigations { get; set; } = new List<Contract>();
 
+    [ForeignKey("CreatedBy")]
+    [InverseProperty("InverseCreatedByNavigation")]
+    public virtual User? CreatedByNavigation { get; set; }
+
     [InverseProperty("CreatedByNavigation")]
     public virtual ICollection<Device> DeviceCreatedByNavigations { get; set; } = new List<Device>();
 
@@ -138,6 +142,12 @@ public partial class User
 
     [InverseProperty("ModifiedByNavigation")]
     public virtual ICollection<HardDriveModel> HardDriveModelModifiedByNavigations { get; set; } = new List<HardDriveModel>();
+
+    [InverseProperty("CreatedByNavigation")]
+    public virtual ICollection<User> InverseCreatedByNavigation { get; set; } = new List<User>();
+
+    [InverseProperty("ModifiedByNavigation")]
+    public virtual ICollection<User> InverseModifiedByNavigation { get; set; } = new List<User>();
 
     [InverseProperty("CreatedByNavigation")]
     public virtual ICollection<KnowledgeBaseCategory> KnowledgeBaseCategoryCreatedByNavigations { get; set; } = new List<KnowledgeBaseCategory>();
@@ -193,6 +203,10 @@ public partial class User
 
     [InverseProperty("ModifiedByNavigation")]
     public virtual ICollection<Manufacturer> ManufacturerModifiedByNavigations { get; set; } = new List<Manufacturer>();
+
+    [ForeignKey("ModifiedBy")]
+    [InverseProperty("InverseModifiedByNavigation")]
+    public virtual User? ModifiedByNavigation { get; set; }
 
     [InverseProperty("CreatedByNavigation")]
     public virtual ICollection<Monitor> MonitorCreatedByNavigations { get; set; } = new List<Monitor>();

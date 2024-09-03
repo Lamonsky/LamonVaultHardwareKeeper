@@ -132,7 +132,7 @@ public partial class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;User ID=lamonvaulthardwarekeeperapiuser;Password=restapi123;Database=LamonVault_Hardware_Keeper;TrustServerCertificate=True;Integrated Security=True");
+        => optionsBuilder.UseSqlServer("Server=localhost;Database=LamonVault_Hardware_Keeper;User ID=lamonvaulthardwarekeeperapiuser;Password=restapi123;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -839,7 +839,11 @@ public partial class DatabaseContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Users__3214EC278FD1F6FC");
 
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.InverseCreatedByNavigation).HasConstraintName("FK_Users_Users");
+
             entity.HasOne(d => d.Location).WithMany(p => p.Users).HasConstraintName("FK__Users__LocationI__11F49EE0");
+
+            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.InverseModifiedByNavigation).HasConstraintName("FK_Users_Users1");
 
             entity.HasOne(d => d.PositionNavigation).WithMany(p => p.Users).HasConstraintName("FK__Users__Position__12E8C319");
         });

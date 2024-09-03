@@ -28,7 +28,11 @@ namespace DatabaseRestApi.Controllers
                     SerialNumber = item.SerialNumber,
                     Height = item.Height.ToString(),
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(rackcabinetVM);
         }
@@ -51,7 +55,11 @@ namespace DatabaseRestApi.Controllers
                     SerialNumber = item.SerialNumber,
                     Height = item.Height.ToString(),
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(rackcabinetVM);
         }
@@ -95,7 +103,8 @@ namespace DatabaseRestApi.Controllers
                 SerialNumber=RackCabinetCreateEditVM.SerialNumber,
                 InventoryNumber = RackCabinetCreateEditVM.InventoryNumber,
                 Users = RackCabinetCreateEditVM.Users,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = RackCabinetCreateEditVM.CreatedBy
             });
 
             await database.SaveChangesAsync();
@@ -122,6 +131,7 @@ namespace DatabaseRestApi.Controllers
             rackcabinet.InventoryNumber = RackCabinetCreateEditVM.InventoryNumber;
             rackcabinet.Users = RackCabinetCreateEditVM.Users;
             rackcabinet.ModifiedAt = DateTime.Now;
+            rackcabinet.ModifiedBy = RackCabinetCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

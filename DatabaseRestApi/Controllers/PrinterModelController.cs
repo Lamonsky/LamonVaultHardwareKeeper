@@ -21,7 +21,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(printerModelVM);
@@ -37,7 +41,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).FirstAsync();
             return Json(printerModelVM);
@@ -68,7 +76,8 @@ namespace DatabaseRestApi.Controllers
                 Name = printerModelCreateEditVM.Name,
                 Comment = printerModelCreateEditVM.Comment,
                 Status = printerModelCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = printerModelCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -89,6 +98,7 @@ namespace DatabaseRestApi.Controllers
             printerModels.Comment = printerModelCreateEditVM.Comment;
             printerModels.Status = printerModelCreateEditVM.Status;
             printerModels.ModifiedAt = DateTime.Now;
+            printerModels.ModifiedBy = printerModelCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

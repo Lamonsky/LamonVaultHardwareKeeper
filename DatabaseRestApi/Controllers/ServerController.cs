@@ -32,7 +32,11 @@ namespace DatabaseRestApi.Controllers
                     OperatingSystem = item.OperatingSystemNavigation.Name,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(serverVM);
@@ -58,7 +62,11 @@ namespace DatabaseRestApi.Controllers
                     OperatingSystem = item.OperatingSystemNavigation.Name,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).FirstAsync();
             return Json(serverVM);
@@ -107,7 +115,8 @@ namespace DatabaseRestApi.Controllers
                 SerialNumber = serverCreateEditVM.SerialNumber,
                 InventoryNumber = serverCreateEditVM.InventoryNumber,
                 Users = serverCreateEditVM.Users,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = serverCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -136,6 +145,7 @@ namespace DatabaseRestApi.Controllers
             server.InventoryNumber = serverCreateEditVM.InventoryNumber;
             server.Users = serverCreateEditVM.Users;
             server.ModifiedAt = DateTime.Now;
+            server.ModifiedBy = serverCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

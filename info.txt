@@ -1,0 +1,2 @@
+AKTUALIZACJA BAZY
+Scaffold-DbContext "Server=localhost;Database=LamonVault_Hardware_Keeper;User ID=lamonvaulthardwarekeeperapiuser;Password=restapi123;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models\ -ContextDir Models\Contexts -Context DatabaseContext -DataAnnotations -Force

@@ -29,7 +29,11 @@ namespace DatabaseRestApi.Controllers
                     IpAddress = item.IpAddress,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(PrintersVM);
         }
@@ -53,7 +57,11 @@ namespace DatabaseRestApi.Controllers
                     IpAddress = item.IpAddress,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(PrintersVM);
         }
@@ -99,7 +107,8 @@ namespace DatabaseRestApi.Controllers
                 IpAddress = printerCreateEditVM.IpAddress,
                 InventoryNumber = printerCreateEditVM.InventoryNumber,
                 Users = printerCreateEditVM.Users,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = printerCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -127,6 +136,7 @@ namespace DatabaseRestApi.Controllers
             printer.IpAddress = printerCreateEditVM.IpAddress;
             printer.Users = printerCreateEditVM.Users;
             printer.ModifiedAt = DateTime.Now;
+            printer.ModifiedBy = printerCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

@@ -23,7 +23,11 @@ namespace DatabaseRestApi.Controllers
                     Name = item.Name,
                     Comment = item.Comment,
                     Status = item.StatusNavigation.Name,
-                    
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+
                 }).ToListAsync();
             return Json(simcomponentTypeVM);
         }
@@ -41,7 +45,11 @@ namespace DatabaseRestApi.Controllers
                     Name = item.Name,
                     Comment = item.Comment,
                     Status = item.StatusNavigation.Name,
-                    
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+
                 }).FirstAsync();
             return Json(simcomponentTypeVM);
         }
@@ -73,6 +81,7 @@ namespace DatabaseRestApi.Controllers
                 Name = simcomponentTypeCreateEditVM.Name,
                 Comment = simcomponentTypeCreateEditVM.Comment,
                 Status = simcomponentTypeCreateEditVM.Status,
+                CreatedBy = simcomponentTypeCreateEditVM.CreatedBy,
                 CreatedAt = DateTime.Now
             });
 
@@ -93,6 +102,7 @@ namespace DatabaseRestApi.Controllers
             simcomponentType.Name = simcomponentTypeCreateEditVM.Name;
             simcomponentType.Comment = simcomponentTypeCreateEditVM.Comment;
             simcomponentType.Status = simcomponentTypeCreateEditVM.Status;
+            simcomponentType.ModifiedBy = simcomponentTypeCreateEditVM.ModifiedBy;
             simcomponentType.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();

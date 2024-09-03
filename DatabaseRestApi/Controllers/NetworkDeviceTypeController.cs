@@ -23,7 +23,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(networkDeviceTypeVM);
@@ -41,7 +45,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(networkDeviceTypeVM);
@@ -74,7 +82,8 @@ namespace DatabaseRestApi.Controllers
                 Name = networkDeviceTypeCreateEditVM.Name,
                 Comment = networkDeviceTypeCreateEditVM.Comment,
                 Status = networkDeviceTypeCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = networkDeviceTypeCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -95,6 +104,7 @@ namespace DatabaseRestApi.Controllers
             networkDeviceType.Comment = networkDeviceTypeCreateEditVM.Comment;
             networkDeviceType.Status = networkDeviceTypeCreateEditVM.Status;
             networkDeviceType.ModifiedAt = DateTime.Now;
+            networkDeviceType.ModifiedBy = networkDeviceTypeCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

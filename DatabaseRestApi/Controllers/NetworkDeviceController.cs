@@ -33,7 +33,11 @@ namespace DatabaseRestApi.Controllers
                     Rack = item.RackNavigation.Manufacturer + " " + item.RackNavigation.ModelNavigation.Name + " " + item.RackNavigation.Location.Name,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(networkdeviceVM);
         }
@@ -42,7 +46,7 @@ namespace DatabaseRestApi.Controllers
         public async Task<IActionResult> GetItem(int id)
         {
             DatabaseContext database = new();
-            List<NetworkDeviceVM> networkdeviceVM = await database.NetworkDevices
+            NetworkDeviceVM networkdeviceVM = await database.NetworkDevices
                 .Where(item => item.StatusId != 99)
                 .Where(item => item.Id == id)
                 .Select(item => new NetworkDeviceVM()
@@ -57,8 +61,12 @@ namespace DatabaseRestApi.Controllers
                     Rack = item.RackNavigation.Manufacturer + " " + item.RackNavigation.ModelNavigation.Name + " " + item.RackNavigation.Location.Name,
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
-                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName
-                }).ToListAsync();
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).FirstAsync();
             return Json(networkdeviceVM);
         }
         [Route(URLs.NETWORKDEVICE_CEVM_ID)]
@@ -103,7 +111,8 @@ namespace DatabaseRestApi.Controllers
                 SerialNumber=NetworkDeviceCreateEditVM.SerialNumber,
                 InventoryNumber = NetworkDeviceCreateEditVM.InventoryNumber,
                 Users = NetworkDeviceCreateEditVM.Users,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = NetworkDeviceCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -131,6 +140,7 @@ namespace DatabaseRestApi.Controllers
             networkdevice.InventoryNumber = NetworkDeviceCreateEditVM.InventoryNumber;
             networkdevice.Users = NetworkDeviceCreateEditVM.Users;
             networkdevice.ModifiedAt = DateTime.Now;
+            networkdevice.ModifiedBy = NetworkDeviceCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

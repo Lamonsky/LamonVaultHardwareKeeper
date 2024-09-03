@@ -22,7 +22,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(monitorTypeVM);
@@ -40,7 +44,11 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Comment = item.Comment,
-                    Status = item.StatusNavigation.Name
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).FirstAsync();
             return Json(monitorTypeVM);
@@ -73,7 +81,8 @@ namespace DatabaseRestApi.Controllers
                 Name = monitorTypeCreateEditVM.Name,
                 Comment = monitorTypeCreateEditVM.Comment,
                 Status = monitorTypeCreateEditVM.Status,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = monitorTypeCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -94,6 +103,7 @@ namespace DatabaseRestApi.Controllers
             monitorType.Comment = monitorTypeCreateEditVM.Comment;
             monitorType.Status = monitorTypeCreateEditVM.Status;
             monitorType.ModifiedAt = DateTime.Now;
+            monitorType.ModifiedBy = monitorTypeCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

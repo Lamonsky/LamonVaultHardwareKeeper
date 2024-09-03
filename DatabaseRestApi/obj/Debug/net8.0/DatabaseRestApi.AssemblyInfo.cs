@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DatabaseRestApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b0c040efcdc3f3f7d15f45697d61222ab71f546")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae4712fc55ae99b1cc97872a49e965ad1e39d816")]
 [assembly: System.Reflection.AssemblyProductAttribute("DatabaseRestApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DatabaseRestApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

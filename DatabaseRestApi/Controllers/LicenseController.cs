@@ -31,7 +31,11 @@ namespace DatabaseRestApi.Controllers
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
                     ExpiryDate = item.ExpiryDate,
-                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName + " " + item.UsersNavigation.InternalNumber
+                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName + " " + item.UsersNavigation.InternalNumber,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).ToListAsync();
             return Json(licenseVM);
@@ -56,7 +60,11 @@ namespace DatabaseRestApi.Controllers
                     SerialNumber = item.SerialNumber,
                     InventoryNumber = item.InventoryNumber,
                     ExpiryDate = item.ExpiryDate,
-                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName + " " + item.UsersNavigation.InternalNumber
+                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName + " " + item.UsersNavigation.InternalNumber,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
 
                 }).FirstAsync();
             return Json(licenseVM);
@@ -104,7 +112,8 @@ namespace DatabaseRestApi.Controllers
                 InventoryNumber = licenseCreateEditVM.InventoryNumber,
                 ExpiryDate = licenseCreateEditVM.ExpiryDate,
                 Users = licenseCreateEditVM.Users,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = licenseCreateEditVM.CreatedBy,
             });
 
             await database.SaveChangesAsync();
@@ -132,6 +141,7 @@ namespace DatabaseRestApi.Controllers
             license.ExpiryDate = licenseCreateEditVM.ExpiryDate;
             license.Users = licenseCreateEditVM.Users;
             license.ModifiedAt = DateTime.Now;
+            license.ModifiedBy = licenseCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }

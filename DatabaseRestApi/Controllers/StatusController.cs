@@ -20,8 +20,11 @@ namespace DatabaseRestApi.Controllers
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    Comment = item.Comment
-                    
+                    Comment = item.Comment,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(statusVM);
         }
@@ -36,8 +39,11 @@ namespace DatabaseRestApi.Controllers
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    Comment = item.Comment
-                    
+                    Comment = item.Comment,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(statusVM);
         }
@@ -66,6 +72,7 @@ namespace DatabaseRestApi.Controllers
             {
                 Name = statusCreateEditVM.Name,
                 Comment = statusCreateEditVM.Comment,
+                CreatedBy = statusCreateEditVM.CreatedBy,
                 CreatedAt = DateTime.Now
             });
 
@@ -85,6 +92,7 @@ namespace DatabaseRestApi.Controllers
             }
             statuss.Name = statusCreateEditVM.Name;
             statuss.Comment = statusCreateEditVM.Comment;
+            statuss.ModifiedBy = statusCreateEditVM.ModifiedBy;
             statuss.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();

@@ -33,7 +33,9 @@ namespace DatabaseRestApi.Controllers
                     Position = item.PositionNavigation.Name,
                     LocationId = item.Location.Id,
                     CreatedAt = item.CreatedAt,
-                    CreatedBy = item.ComputerCreatedByNavigations.ToString(),
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(userVM);
         }
@@ -57,8 +59,11 @@ namespace DatabaseRestApi.Controllers
                     Phone1 = item.Phone1,
                     Phone2 = item.Phone2,
                     InternalNumber = item.InternalNumber,
-                    Position = item.PositionNavigation.Name
-
+                    Position = item.PositionNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).FirstAsync();
             return Json(userVM);
         }
@@ -82,7 +87,7 @@ namespace DatabaseRestApi.Controllers
                     Phone1 = item.Phone1,
                     Phone2 = item.Phone2,
                     InternalNumber = item.InternalNumber,
-                    Position = item.Position
+                    Position = item.Position,
 
                 }).FirstAsync();
             return Json(userVM);
@@ -105,7 +110,8 @@ namespace DatabaseRestApi.Controllers
                 InternalNumber = userCreateEditVM.InternalNumber,
                 Password = userCreateEditVM.Password,
                 Position = userCreateEditVM.Position,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                CreatedBy = userCreateEditVM.CreatedBy
             });
 
             await database.SaveChangesAsync();
@@ -134,6 +140,7 @@ namespace DatabaseRestApi.Controllers
             user.Password = userCreateEditVM.Password;
             user.Position = userCreateEditVM.Position;
             user.ModifiedAt = DateTime.Now;
+            user.ModifiedBy = userCreateEditVM.ModifiedBy;
             await database.SaveChangesAsync();
             return Ok();
         }
