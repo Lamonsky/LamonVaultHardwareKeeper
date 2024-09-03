@@ -54,11 +54,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
             return new List<string>();
         }
 
-        public override List<string> GetComboBoxSortList()
-        {
-            return new List<string>();
-        }
-
         public async override void load()
         {
             List = await RequestHelper.SendRequestAsync<object, List<SoftwaresVM>>(URLs.SOFTWARE, HttpMethod.Get, null, null);
@@ -68,11 +63,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             await RequestHelper.SendRequestAsync(URLs.SOFTWARE_ID.Replace("{id}", ChosenSoftware.Id.ToString()), HttpMethod.Delete, ChosenSoftware, null);
             load();
-        }
-
-        public override void Sort()
-        {
-            throw new NotImplementedException();
         }
 
         public override void send()

@@ -65,20 +65,9 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
             return new List<string> { "Nazwa", "Adres", "Kod pocztowy", "Miasto", "Kraj", "Numer budynku", "Numer pokoju" };
         }
 
-        public override List<string> GetComboBoxSortList()
-        {
-            //throw new NotImplementedException();
-            return new List<string>();
-        }
-
         public override async void load()
         {
             List = await RequestHelper.SendRequestAsync<object, List<LocationVM>>(URLs.LOCATION, HttpMethod.Get, null, GlobalData.AccessToken);
-        }
-
-        public override void Sort()
-        {
-            //throw new NotImplementedException();
         }
 
         public override void Edit()

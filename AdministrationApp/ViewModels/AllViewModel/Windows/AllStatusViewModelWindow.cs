@@ -65,20 +65,9 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
             return new List<string>();
         }
 
-        public override List<string> GetComboBoxSortList()
-        {
-            //throw new NotImplementedException();
-            return new List<string>();
-        }
-
         public override async void load()
         {
             List = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, null);
-        }
-
-        public override void Sort()
-        {
-            //throw new NotImplementedException();
         }
 
         public override void Edit()

@@ -193,6 +193,7 @@ namespace Data
 
         public const string TICKET = "/ticket";
         public const string TICKET_ID = "/ticket/{id}";
+        public const string TICKET_OWNER_ID = "/ticket/owner/{id}";
         public const string TICKET_CEVM_ID = "/ticket/cevm/{id}";
 
         public const string TECHNICIAN = "/technician";

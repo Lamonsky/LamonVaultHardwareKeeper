@@ -54,11 +54,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
             return new List<string>();
         }
 
-        public override List<string> GetComboBoxSortList()
-        {
-            return new List<string>();
-        }
-
         public async override void load()
         {
             List = await RequestHelper.SendRequestAsync<object, List<RackCabinetVM>>(URLs.RACKCABINET, HttpMethod.Get, null, null);
@@ -70,10 +65,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
             load();
         }
 
-        public override void Sort()
-        {
-            throw new NotImplementedException();
-        }
 
         public override void send()
         {

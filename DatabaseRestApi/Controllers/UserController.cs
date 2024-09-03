@@ -16,7 +16,7 @@ namespace DatabaseRestApi.Controllers
         public async Task<IActionResult> Index()
         {
             DatabaseContext database = new();
-            List<UserVM> userVM= await database.Users
+            List<UserVM> userVM = await database.Users
                 .Where(item => item.IsActive == true)
                 .Select(item => new UserVM
                 {
@@ -30,8 +30,8 @@ namespace DatabaseRestApi.Controllers
                     Phone1 = item.Phone1,
                     Phone2 = item.Phone2,
                     InternalNumber = item.InternalNumber,
-                    Position = item.PositionNavigation.Name
-
+                    Position = item.PositionNavigation.Name,
+                    LocationId = item.Location.Id
                 }).ToListAsync();
             return Json(userVM);
         }

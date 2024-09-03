@@ -59,10 +59,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
             throw new NotImplementedException();
         }
 
-        public override List<string> GetComboBoxSortList()
-        {
-            throw new NotImplementedException();
-        }
 
         public override async void load()
         {
@@ -73,11 +69,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             await RequestHelper.SendRequestAsync(URLs.PRINTERMODEL_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
-        }
-
-        public override void Sort()
-        {
-            throw new NotImplementedException();
         }
 
         public override void send()

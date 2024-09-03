@@ -60,9 +60,7 @@
                             <Button Content="Moje zgłoszenia" Command="{Binding MyTicketsCommand}"/>
                         </TreeViewItem>
                     </TreeView>
-                    
                 </StackPanel>
-                
                 <HeaderedContentControl
                     Grid.Column="1"
                     Header="Przestrzeń robocza"
@@ -70,7 +68,6 @@
                     Content="{Binding Workspaces}"
                     ContentTemplate="{StaticResource WorkspacesTemplate}"
                     Style="{StaticResource MainHCCStyle}"/>
-                
             </Grid>
             <StatusBar Grid.Row="2" Background="LightBlue">
                 <StatusBarItem>

@@ -54,11 +54,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
             return new List<string>();
         }
 
-        public override List<string> GetComboBoxSortList()
-        {
-            return new List<string>();
-        }
-
         public async override void load()
         {
             List = await RequestHelper.SendRequestAsync<object, List<PrintersVM>>(URLs.PRINTER, HttpMethod.Get, null, null);
@@ -68,11 +63,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             await RequestHelper.SendRequestAsync(URLs.PRINTER_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
-        }
-
-        public override void Sort()
-        {
-            throw new NotImplementedException();
         }
 
         public override void send()

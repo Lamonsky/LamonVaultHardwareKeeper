@@ -72,6 +72,17 @@ namespace AdministrationApp.ViewModels
         }
         #endregion
         #region Funkcje
+        private string CutString(string text)
+        {
+            int index = text.LastIndexOf("/");
+
+            if (index == -1)
+            {
+                return text;
+            }
+
+            return text.Substring(index + 1);
+        }
         private void CreateWorkspace<T>() where T : WorkspaceViewModel, new()
         {
             T workspace = new T();
@@ -213,11 +224,17 @@ namespace AdministrationApp.ViewModels
                 case "TicketCategoryAdd":
                     CreateTicketCategoryWindow();
                     break;
-                case "TicketStatusAdd":
+                case "TicketStatuseAdd":
                     CreateTicketStatusWindow();
+                    break;
+                case "ChooseTicketStatus":
+                    ShowTicketStatusWindow();
                     break;
                 case "TicketTypeAdd":
                     CreateTicketTypeWindow();
+                    break;
+                case "TicketsAdd":
+                    CreateTicket();
                     break;
                 // Kategoria: Komputery
                 case "KomputeryAdd":
@@ -271,6 +288,9 @@ namespace AdministrationApp.ViewModels
                     break;
                 case string n when n.StartsWith("UżytkownicyEdit"):
                     EditUser(CutString(name));
+                    break;
+                case string n when n.StartsWith("TicketsEdit"):
+                    EditTicket(CutString(name));
                     break;
 
                 // Kategoria: Oprogramowanie
@@ -420,6 +440,18 @@ namespace AdministrationApp.ViewModels
                 case "StatusAdd":
                     CreateStatusWindow();
                     break;
+                case "ChooseTicketOwner":
+                    ShowTechnicianWindow();
+                    break;
+                case "ChooseTicketType":
+                    ShowTicketTypeWindow();
+                    break;
+                case "ChooseTicketCategory":
+                    ShowTicketCategoryWindow();
+                    break;
+                case "TechnicianAdd":
+                    CreateTechnicianWindow();
+                    break;
                 // Pozostałe edycje
                 case string n when n.StartsWith("ComputerModelEdit"):
                     EditComputerModel(CutString(name));
@@ -504,17 +536,7 @@ namespace AdministrationApp.ViewModels
 
 
         #endregion
-        private string CutString(string text)
-        {
-            int index = text.LastIndexOf("/");
-
-            if (index == -1)
-            {
-                return text;
-            }
-
-            return text.Substring(index + 1);
-        }
+        
 
         #region Komendy do Buttonow
         private BaseCommand _ShowSummaryCommand;
@@ -674,6 +696,32 @@ namespace AdministrationApp.ViewModels
                 return _ShowLocationWindowCommand;
             }
         }
+        private BaseCommand _AllTicketsCommand;
+
+        public ICommand AllTicketsCommand
+        {
+            get
+            {
+                if (_AllTicketsCommand == null)
+                {
+                    _AllTicketsCommand = new BaseCommand(() => ShowAllTickets());
+                }
+                return _AllTicketsCommand;
+            }
+        }
+        private BaseCommand _MyTicketsCommand;
+
+        public ICommand MyTicketsCommand
+        {
+            get
+            {
+                if (_MyTicketsCommand == null)
+                {
+                    _MyTicketsCommand = new BaseCommand(() => ShowMyTickets());
+                }
+                return _MyTicketsCommand;
+            }
+        }
 
 
         #endregion
@@ -681,6 +729,10 @@ namespace AdministrationApp.ViewModels
         private void CreateComputer()
         {
             CreateWorkspace<NewComputerViewModel>();
+        }   
+        private void CreateTicket()
+        {
+            CreateWorkspace<NewTicketViewModel>();
         }        
         private void CreateMonitor()
         {
@@ -765,6 +817,14 @@ namespace AdministrationApp.ViewModels
         private void ShowSimCard()
         {
             ShowAllWorkspace<AllSimCardViewModel>();
+        }
+        private void ShowAllTickets()
+        {
+            ShowAllWorkspace<AllTicketsViewModel>();
+        }
+        private void ShowMyTickets()
+        {
+            ShowAllWorkspace<MyTicketsViewModel>();
         }
         private void ShowPrinterTypeWindow()
         {
@@ -955,6 +1015,27 @@ namespace AdministrationApp.ViewModels
         {
             CreateWindows<NewDictionaryWindow, NewComputerModelViewModel>(window => new NewComputerModelViewModel(window));
         }
+        private void ShowTechnicianWindow()
+        {
+            CreateWindows<AllTechniciansWindow, AllTechniciansViewModelWindow>(window => new AllTechniciansViewModelWindow(window));
+        }
+        private void ShowTicketTypeWindow()
+        {
+            CreateWindows<AllDictionaryWindow, AllTicketTypeViewModelWindow>(window => new AllTicketTypeViewModelWindow(window));
+        }
+        private void ShowTicketStatusWindow()
+        {
+            CreateWindows<AllDictionaryWindow, AllTicketStatuseViewModelWindow>(window => new AllTicketStatuseViewModelWindow(window));
+        }
+        private void ShowTicketCategoryWindow()
+        {
+            CreateWindows<AllDictionaryWindow, AllTicketCategoryViewModelWindow>(window => new AllTicketCategoryViewModelWindow(window));
+        }
+
+        private void CreateTechnicianWindow()
+        {
+            CreateWindows<NewTechnicianWindow, NewTechnicianViewModelWindow>(window => new NewTechnicianViewModelWindow(window));
+        }
         private void CreateGroupsTypeWindow()
         {
             CreateWindows<NewDictionaryWindow, NewGroupsTypeViewModel>(window => new NewGroupsTypeViewModel(window));
@@ -999,6 +1080,10 @@ namespace AdministrationApp.ViewModels
         private async void EditComputer(string id)
         {
             await EditItem<ComputersCreateEditVM, EditComputerViewModel>(id, URLs.COMPUTERS_CEVM_ID, vm => new EditComputerViewModel(vm));
+        }
+        private async void EditTicket(string id)
+        {
+            await EditItem<TicketCreateEditVM, EditTicketViewModel>(id, URLs.TICKET_CEVM_ID, vm => new EditTicketViewModel(vm));
         }
         private async void EditComputerModel(string id)
         {

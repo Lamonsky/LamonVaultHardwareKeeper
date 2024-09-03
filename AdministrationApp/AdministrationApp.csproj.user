@@ -31,6 +31,9 @@
     <Compile Update="Views\AllViews\AllSoftwareView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AllViews\AllTicketsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AllViews\AllUserView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -79,6 +82,9 @@
     <Compile Update="Views\NewViews\NewSoftwareView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\NewViews\NewTicketView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\NewViews\NewUserView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,6 +92,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\NewViews\Windows\NewLocationWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewViews\Windows\NewTechnicianWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -120,10 +129,19 @@
     <Page Update="Views\AllViews\AllSoftwareView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AllViews\MyTicketsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllViews\AllTicketsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AllViews\AllUserView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllViews\SummaryView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllWindows\AllTechniciansWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllWindows\AllSimCardWindow.xaml">
@@ -177,6 +195,9 @@
     <Page Update="Views\NewViews\NewSoftwareView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\NewViews\NewTicketView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\NewViews\NewUserView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -184,6 +205,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\NewViews\Windows\NewLocationWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\Windows\NewTechnicianWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Resources\ViewResources.xaml">

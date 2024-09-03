@@ -36,20 +36,9 @@ namespace AdministrationApp.ViewModels.AllViewModel
             return new List<string>();
         }
 
-        public override List<string> GetComboBoxSortList()
-        {
-            //throw new NotImplementedException();
-            return new List<string>();
-        }
-
         public override async void load()
         {
             List = await RequestHelper.SendRequestAsync<object, List<UserVM>>(URLs.USER, HttpMethod.Get, null, null);
-        }
-
-        public override void Sort()
-        {
-            //throw new NotImplementedException();
         }
         private UserVM _ChosenUser;
         public UserVM ChosenUser

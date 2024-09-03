@@ -13,6 +13,7 @@ using System.Windows.Input;
 using Data.Helpers;
 using System.Windows;
 using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace AdministrationApp.ViewModels.NewViewModel
 {
@@ -67,11 +68,13 @@ namespace AdministrationApp.ViewModels.NewViewModel
                 {
                     _IsValid = value;
                     OnPropertyChanged(() => IsValid);
+                    
                 }
             }
         }
         private void ValidatePassword()
         {
+            ErrorMessage = string.Empty;
             IsValid = PasswordValidator.ValidatePassword(Password);
             if(!IsValid)
             {

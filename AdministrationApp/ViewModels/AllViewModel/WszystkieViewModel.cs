@@ -52,18 +52,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
                 return _RefreshCommand;
             }
         }
-        private BaseCommand _SortCommand;
-        public ICommand SortCommand
-        {
-            get
-            {
-                if (_SortCommand == null)
-                {
-                    _SortCommand = new BaseCommand(() => Sort());
-                }
-                return _SortCommand;
-            }
-        }
         private BaseCommand _EditCommand;
         public ICommand EditCommand
         {
@@ -163,18 +151,9 @@ namespace AdministrationApp.ViewModels.AllViewModel
         #endregion
 
         #region Sortowanie
-        public abstract void Sort();
-        public abstract List<string> GetComboBoxSortList();
 
         public abstract void Filter();
         public abstract List<string> GetComboBoxFilterList();
-        public List<string> SortComboBoxListItems
-        {
-            get
-            {
-                return GetComboBoxSortList();
-            }
-        }
         public List<string> FilterComboBoxListItems
         {
             get
@@ -183,7 +162,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
             }
         }
         public string FindTextBox { get; set; }
-        public string SortField { get; set; }
         public string FilterField { get; set; }
         public int ItemID { get; set; }
         #endregion

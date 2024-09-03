@@ -51,10 +51,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             throw new NotImplementedException();
         }
-        public override List<string> GetComboBoxSortList()
-        {
-            throw new NotImplementedException();
-        }
+        
         public async override void load()
         {
             List = await RequestHelper.SendRequestAsync<object, List<NetworkDeviceVM>>(URLs.NETWORKDEVICE, HttpMethod.Get, null, null);
@@ -64,11 +61,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
             await RequestHelper.SendRequestAsync(URLs.NETWORKDEVICE_ID.Replace("{id}", ChosenNetworkDevice.Id.ToString()), HttpMethod.Delete, ChosenNetworkDevice, null);
             load();
         }
-        public override void Sort()
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public override void send()
         {
             throw new NotImplementedException();

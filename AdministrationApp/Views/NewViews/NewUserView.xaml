@@ -18,6 +18,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="35"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="35"/>
@@ -41,20 +42,22 @@
                 <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Path=Usersname}"/>
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="Hasło:"/>
                 <PasswordBox Grid.Row="1" Grid.Column="5" PasswordChar="*" PasswordChanged="PasswordBox_PasswordChanged"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="Email"/>
-                <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Path=Email}"/>
-                <TextBlock Grid.Row="2" Grid.Column="4" Text="Numer wewnętrzny"/>
-                <TextBox Grid.Row="2" Grid.Column="5" Text="{Binding Path=InternalNumber}"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="Numer telefonu"/>
-                <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Path=Phone1}"/>
-                <TextBlock Grid.Row="3" Grid.Column="4" Text="Numer telefonu 2"/>
-                <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding Path=Phone2}"/>
-                <TextBlock Grid.Row="4" Grid.Column="1" Text="Stanowisko"/>
-                <ComboBox Grid.Row="4" Grid.Column="2" ItemsSource="{Binding Path=positionComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Position, Mode=TwoWay}"/>
-                <TextBlock Grid.Row="4" Grid.Column="4" Text="Aktywny"/>
-                <CheckBox Grid.Row="4" Grid.Column="5" IsChecked="{Binding Path=IsActive, Mode=TwoWay}"/>
-                <TextBlock Grid.Row="5" Grid.Column="1" Text="Lokalizacja:"/>
-                <Grid Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="5">
+                <Label Grid.Row="2" Grid.ColumnSpan="7" Content="{Binding ErrorMessage}" Foreground="Red" />
+
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="Email"/>
+                <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Path=Email}"/>
+                <TextBlock Grid.Row="3" Grid.Column="4" Text="Numer wewnętrzny"/>
+                <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding Path=InternalNumber}"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="Numer telefonu"/>
+                <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=Phone1}"/>
+                <TextBlock Grid.Row="4" Grid.Column="4" Text="Numer telefonu 2"/>
+                <TextBox Grid.Row="4" Grid.Column="5" Text="{Binding Path=Phone2}"/>
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="Stanowisko"/>
+                <ComboBox Grid.Row="5" Grid.Column="2" ItemsSource="{Binding Path=positionComboBoxItems}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Path=Position, Mode=TwoWay}"/>
+                <TextBlock Grid.Row="5" Grid.Column="4" Text="Aktywny"/>
+                <CheckBox Grid.Row="5" Grid.Column="5" IsChecked="{Binding Path=IsActive, Mode=TwoWay}"/>
+                <TextBlock Grid.Row="6" Grid.Column="1" Text="Lokalizacja:"/>
+                <Grid Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
@@ -64,7 +67,6 @@
                         <ui:SymbolIcon Symbol="Location12"/>
                     </Button>
                 </Grid>
-                <Label Grid.Row="6" Grid.ColumnSpan="7" Content="{Binding ErrorMessage}" Foreground="Red" />
             </Grid>
         </Expander>
     </Grid>

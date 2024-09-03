@@ -43,6 +43,12 @@
     <DataTemplate DataType="{x:Type vma:AllSimCardViewModel}">
         <vwa:AllSimCardView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllTicketsViewModel}">
+        <vwa:AllTicketsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:MyTicketsViewModel}">
+        <vwa:MyTicketsView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vmn:NewComputerViewModel}">
         <vwn:NewComputerView/>
     </DataTemplate>
@@ -72,6 +78,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmn:NewSimCardViewModel}">
         <vwn:NewSimCardView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewTicketViewModel}">
+        <vwn:NewTicketView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vme:EditComputerViewModel}">
         <vwn:NewComputerView/>
