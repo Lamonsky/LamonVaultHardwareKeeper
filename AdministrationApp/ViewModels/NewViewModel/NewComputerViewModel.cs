@@ -4,6 +4,9 @@ using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using GalaSoft.MvvmLight.Messaging;
 using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.NewViewModel
@@ -111,11 +114,21 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
         }
         public override async void Save()
-        {
+        {                      
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;            
             await RequestHelper.SendRequestAsync(URLs.COMPUTERS, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("ComputersRefresh");
+
+
+
+            string json = JsonSerializer.Serialize(item);
+            LogCreateEditVM log = new();
+            log.LogDate = DateTime.Now;
+            log.CreatedAt = DateTime.Now;
+            log.CreatedBy = GlobalData.UserId;
+            log.Description = "Utworzono rekord " + json;
+            await RequestHelper.SendRequestAsync(URLs.LOG, HttpMethod.Post, log, GlobalData.AccessToken);
         }
         #endregion
         #region CommandsFunctions

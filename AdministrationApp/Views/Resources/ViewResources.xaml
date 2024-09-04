@@ -49,6 +49,9 @@
     <DataTemplate DataType="{x:Type vma:AllTicketsViewModel}">
         <vwa:AllTicketsView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllServersViewModel}">
+        <vwa:AllServersView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vma:MyTicketsViewModel}">
         <vwa:MyTicketsView/>
     </DataTemplate>
@@ -72,6 +75,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmn:NewDeviceViewModel}">
         <vwn:NewDeviceView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewServerViewModel}">
+        <vwn:NewServerView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmn:NewPrinterViewModel}">
         <vwn:NewPrinterView/>
@@ -123,6 +129,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vme:EditHardDriveViewModel}">
         <vwn:NewHardDriveView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditServerViewModel}">
+        <vwn:NewServerView/>
     </DataTemplate>
 
 

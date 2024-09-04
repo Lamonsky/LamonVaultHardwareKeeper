@@ -41,12 +41,6 @@ public partial class Status
     [InverseProperty("Status")]
     public virtual ICollection<Computer> Computers { get; set; } = new List<Computer>();
 
-    [InverseProperty("StatusNavigation")]
-    public virtual ICollection<ContractType> ContractTypes { get; set; } = new List<ContractType>();
-
-    [InverseProperty("Status")]
-    public virtual ICollection<Contract> Contracts { get; set; } = new List<Contract>();
-
     [ForeignKey("CreatedBy")]
     [InverseProperty("StatusCreatedByNavigations")]
     public virtual User? CreatedByNavigation { get; set; }
@@ -61,19 +55,10 @@ public partial class Status
     public virtual ICollection<Device> Devices { get; set; } = new List<Device>();
 
     [InverseProperty("StatusNavigation")]
-    public virtual ICollection<GroupsType> GroupsTypes { get; set; } = new List<GroupsType>();
-
-    [InverseProperty("StatusNavigation")]
     public virtual ICollection<HardDriveModel> HardDriveModels { get; set; } = new List<HardDriveModel>();
 
     [InverseProperty("StatusNavigation")]
     public virtual ICollection<HardDrife> HardDrives { get; set; } = new List<HardDrife>();
-
-    [InverseProperty("StatusNavigation")]
-    public virtual ICollection<KnowledgeBaseCategory> KnowledgeBaseCategories { get; set; } = new List<KnowledgeBaseCategory>();
-
-    [InverseProperty("StatusNavigation")]
-    public virtual ICollection<KnowledgeBase> KnowledgeBases { get; set; } = new List<KnowledgeBase>();
 
     [InverseProperty("StatusNavigation")]
     public virtual ICollection<LicenseType> LicenseTypes { get; set; } = new List<LicenseType>();
@@ -132,12 +117,6 @@ public partial class Status
 
     [InverseProperty("Status")]
     public virtual ICollection<Printer> Printers { get; set; } = new List<Printer>();
-
-    [InverseProperty("StatusNavigation")]
-    public virtual ICollection<ProjectType> ProjectTypes { get; set; } = new List<ProjectType>();
-
-    [InverseProperty("Status")]
-    public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
 
     [InverseProperty("StatusNavigation")]
     public virtual ICollection<RackCabinetModel> RackCabinetModels { get; set; } = new List<RackCabinetModel>();

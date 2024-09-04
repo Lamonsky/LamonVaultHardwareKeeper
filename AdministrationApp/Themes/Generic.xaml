@@ -14,7 +14,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Margin="0,2,0,2" Background="Transparent">
-                            <Grid IsEnabled="{Binding IsLoading}">
+                            <Grid IsEnabled="{Binding Path=IsLoading}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
@@ -74,7 +74,7 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Content="SaveAndClose" IsEnabled="{Binding Path=IsValid}" Command="{Binding SaveAndCloseCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
+                                <Button Grid.Column="0" Content="SaveAndClose" Command="{Binding SaveAndCloseCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
 
                                 </Button>
                             </Grid>
@@ -100,7 +100,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0">
-                            <Grid IsEnabled="{Binding IsLoading}">
+                            <Grid IsEnabled="{Binding Path=IsLoading}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>

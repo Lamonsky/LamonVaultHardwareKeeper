@@ -15,25 +15,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
     //
     public abstract class JedenViewModel<T> : WorkspaceViewModel
     {
-        #region Dane
-        private bool _IsValid;
-        public bool IsValid
-        {
-            get
-            {
-                return _IsValid;
-            }
-            set
-            {
-                if (_IsValid != value)
-                {
-                    _IsValid = value;
-                    OnPropertyChanged(() => IsValid);
-
-                }
-            }
-        }
-        #endregion
         #region Command
         private BaseCommand _SaveAndCloseCommand;
         //ta komenda bedzie podpieta pod przycisk Zapisz i Zamknik

@@ -68,7 +68,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
         #region Konstruktor
         public NewHardDriveViewModel() : base("NewHardDrive")
         {
-            IsValid = true;
             item = new HardDriveCreateEditVM();
             Messenger.Default.Register<ServerVM>(this, getServer);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
@@ -82,7 +81,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item.CreatedBy = GlobalData.UserId;
             
             await RequestHelper.SendRequestAsync(URLs.HARDDRIVE, HttpMethod.Post, item, GlobalData.AccessToken);
-            Messenger.Default.Send("HardDriveRefresh");
+            Messenger.Default.Send("HardDrivesRefresh");
         }
         #endregion
         #region CommandsFunctions

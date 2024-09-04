@@ -14,6 +14,7 @@ using Data.Helpers;
 using System.Windows;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using AdministrationApp.Views;
 
 namespace AdministrationApp.ViewModels.NewViewModel
 {
@@ -52,8 +53,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item = new UserCreateEditVM();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<PositionVM>(this, getPosition);
-            IsActive = true;
-            IsValid = false;
         }
         private void ValidatePassword()
         {
@@ -66,6 +65,11 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         public override async void Save()
         {
+            if (!IsValid)
+            {
+                MessageBox.Show("Uzupełnij błędnie wypełnione pola");
+                return;
+            }
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
             
@@ -101,6 +105,22 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
         #endregion
         #region Dane
+        private bool _IsValid;
+        public bool IsValid
+        {
+            get
+            {
+                return _IsValid;
+            }
+            set
+            {
+                if(_IsValid != value)
+                {
+                    _IsValid = value;
+                    OnPropertyChanged(() => IsValid);
+                }
+            }
+        }
         private string _errorMessage;
         public string ErrorMessage
         {

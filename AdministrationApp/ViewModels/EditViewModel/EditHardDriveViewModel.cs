@@ -95,7 +95,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             item.ModifiedBy = GlobalData.UserId;
             
             await RequestHelper.SendRequestAsync(URLs.HARDDRIVE_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
-            Messenger.Default.Send("HardDriveRefresh");
+            Messenger.Default.Send("HardDrivesRefresh");
         }
         #endregion
         #region CommandsFunctions

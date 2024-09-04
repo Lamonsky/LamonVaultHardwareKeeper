@@ -187,6 +187,9 @@ namespace AdministrationApp.ViewModels
                 case "HardDrivesAdd":
                     CreateHardDrive();
                     break;
+                case "ServerAdd":
+                    CreateServer();
+                    break;
                 case "LicenseTypeAdd":
                     CreateLicenseTypeWindow();
                     break;
@@ -289,6 +292,12 @@ namespace AdministrationApp.ViewModels
                     break;
                 case string n when n.StartsWith("OprogramowanieEdit"):
                     EditSoftware(CutString(name));
+                    break;
+                case string n when n.StartsWith("ServerEdit"):
+                    EditServer(CutString(name));
+                    break;
+                case string n when n.StartsWith("HardDrivesEdit"):
+                    EditHardDrive(CutString(name));
                     break;
 
                 // Kategoria: Urządzenia sieciowe
@@ -565,6 +574,18 @@ namespace AdministrationApp.ViewModels
                 return _ShowComputersCommand;
             }
         }
+        private BaseCommand _ShowLogsCommand;
+        public ICommand ShowLogsCommand
+        {
+            get
+            {
+                if (_ShowLogsCommand == null)
+                {
+                    _ShowLogsCommand = new BaseCommand(() => ShowLogs());
+                }
+                return _ShowLogsCommand;
+            }
+        }
         private BaseCommand _ShowComputerModelCommand;
         public ICommand ShowComputerModelCommand
         {
@@ -755,6 +776,10 @@ namespace AdministrationApp.ViewModels
         private void CreateComputer()
         {
             CreateWorkspace<NewComputerViewModel>();
+        } 
+        private void CreateServer()
+        {
+            CreateWorkspace<NewServerViewModel>();
         }  
         private void CreateHardDrive()
         {
@@ -819,6 +844,10 @@ namespace AdministrationApp.ViewModels
         private void ShowSummary()
         {
             ShowAllWorkspace<SummaryViewModel>();
+        }
+        private void ShowLogs()
+        {
+            ShowAllWorkspace<LogsViewModel>();
         }
         private void ShowMonitors()
         {
@@ -1126,6 +1155,10 @@ namespace AdministrationApp.ViewModels
         private async void EditComputer(string id)
         {
             await EditItem<ComputersCreateEditVM, EditComputerViewModel>(id, URLs.COMPUTERS_CEVM_ID, vm => new EditComputerViewModel(vm));
+        }
+        private async void EditServer(string id)
+        {
+            await EditItem<ServerCreateEditVM, EditServerViewModel>(id, URLs.SERVER_CEVM_ID, vm => new EditServerViewModel(vm));
         }
         private async void EditTicket(string id)
         {

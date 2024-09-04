@@ -34,27 +34,15 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<ComputerType> ComputerTypes { get; set; }
 
-    public virtual DbSet<Contract> Contracts { get; set; }
-
-    public virtual DbSet<ContractType> ContractTypes { get; set; }
-
     public virtual DbSet<Device> Devices { get; set; }
 
     public virtual DbSet<DeviceModel> DeviceModels { get; set; }
 
     public virtual DbSet<DeviceType> DeviceTypes { get; set; }
 
-    public virtual DbSet<Group> Groups { get; set; }
-
-    public virtual DbSet<GroupsType> GroupsTypes { get; set; }
-
     public virtual DbSet<HardDrife> HardDrives { get; set; }
 
     public virtual DbSet<HardDriveModel> HardDriveModels { get; set; }
-
-    public virtual DbSet<KnowledgeBase> KnowledgeBases { get; set; }
-
-    public virtual DbSet<KnowledgeBaseCategory> KnowledgeBaseCategories { get; set; }
 
     public virtual DbSet<License> Licenses { get; set; }
 
@@ -96,10 +84,6 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<PrinterType> PrinterTypes { get; set; }
 
-    public virtual DbSet<Project> Projects { get; set; }
-
-    public virtual DbSet<ProjectType> ProjectTypes { get; set; }
-
     public virtual DbSet<RackCabinet> RackCabinets { get; set; }
 
     public virtual DbSet<RackCabinetModel> RackCabinetModels { get; set; }
@@ -129,8 +113,6 @@ public partial class DatabaseContext : DbContext
     public virtual DbSet<TicketType> TicketTypes { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
-
-    public virtual DbSet<Vendor> Vendors { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -209,34 +191,6 @@ public partial class DatabaseContext : DbContext
             entity.HasOne(d => d.StatusNavigation).WithMany(p => p.ComputerTypes).HasConstraintName("FK_Computer_Types_Statuses");
         });
 
-        modelBuilder.Entity<Contract>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Contract__3214EC27185C66C6");
-
-            entity.HasOne(d => d.ContractTypeNavigation).WithMany(p => p.Contracts).HasConstraintName("FK__Contracts__Contr__75235608");
-
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.ContractCreatedByNavigations).HasConstraintName("FK__Contracts__Creat__76177A41");
-
-            entity.HasOne(d => d.Location).WithMany(p => p.Contracts).HasConstraintName("FK__Contracts__Locat__733B0D96");
-
-            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.ContractModifiedByNavigations).HasConstraintName("FK__Contracts__Modif__770B9E7A");
-
-            entity.HasOne(d => d.Status).WithMany(p => p.Contracts).HasConstraintName("FK__Contracts__Statu__742F31CF");
-
-            entity.HasOne(d => d.UsersNavigation).WithMany(p => p.ContractUsersNavigations).HasConstraintName("FK_Contracts_Users");
-        });
-
-        modelBuilder.Entity<ContractType>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Contract__3214EC2773A97630");
-
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.ContractTypeCreatedByNavigations).HasConstraintName("FK__Contract___Creat__3CA9F2BB");
-
-            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.ContractTypeModifiedByNavigations).HasConstraintName("FK__Contract___Modif__3D9E16F4");
-
-            entity.HasOne(d => d.StatusNavigation).WithMany(p => p.ContractTypes).HasConstraintName("FK_Contract_Types_Contract_Types");
-        });
-
         modelBuilder.Entity<Device>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Devices__3214EC2745DF9BE0");
@@ -278,22 +232,6 @@ public partial class DatabaseContext : DbContext
             entity.HasOne(d => d.StatusNavigation).WithMany(p => p.DeviceTypes).HasConstraintName("FK_Device_Types_Statuses");
         });
 
-        modelBuilder.Entity<Group>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Groups__3214EC270AA90A3E");
-
-            entity.HasOne(d => d.GroupType).WithMany(p => p.Groups).HasConstraintName("FK__Groups__Group_Ty__5B638405");
-
-            entity.HasOne(d => d.Users).WithMany(p => p.Groups).HasConstraintName("FK__Groups__Users_ID__5A6F5FCC");
-        });
-
-        modelBuilder.Entity<GroupsType>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Groups_T__3214EC27EEB7E0AD");
-
-            entity.HasOne(d => d.StatusNavigation).WithMany(p => p.GroupsTypes).HasConstraintName("FK_Groups_Types_Statuses");
-        });
-
         modelBuilder.Entity<HardDrife>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Hard_Dri__3214EC27CCC931FC");
@@ -320,32 +258,6 @@ public partial class DatabaseContext : DbContext
             entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.HardDriveModelModifiedByNavigations).HasConstraintName("FK__Hard_Driv__Modif__3F865F66");
 
             entity.HasOne(d => d.StatusNavigation).WithMany(p => p.HardDriveModels).HasConstraintName("FK_Hard_Drive_Models_Statuses");
-        });
-
-        modelBuilder.Entity<KnowledgeBase>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Knowledg__3214EC27DEEE68B6");
-
-            entity.HasOne(d => d.CategoryNavigation).WithMany(p => p.KnowledgeBases).HasConstraintName("FK__Knowledge__Categ__6E765879");
-
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.KnowledgeBaseCreatedByNavigations).HasConstraintName("FK__Knowledge__Creat__6F6A7CB2");
-
-            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.KnowledgeBaseModifiedByNavigations).HasConstraintName("FK__Knowledge__Modif__705EA0EB");
-
-            entity.HasOne(d => d.StatusNavigation).WithMany(p => p.KnowledgeBases).HasConstraintName("FK_Knowledge_Base_Statuses");
-
-            entity.HasOne(d => d.UsersNavigation).WithMany(p => p.KnowledgeBaseUsersNavigations).HasConstraintName("FK_Knowledge_Base_Users");
-        });
-
-        modelBuilder.Entity<KnowledgeBaseCategory>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Knowledg__3214EC276D6A0312");
-
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.KnowledgeBaseCategoryCreatedByNavigations).HasConstraintName("FK__Knowledge__Creat__7152C524");
-
-            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.KnowledgeBaseCategoryModifiedByNavigations).HasConstraintName("FK__Knowledge__Modif__7246E95D");
-
-            entity.HasOne(d => d.StatusNavigation).WithMany(p => p.KnowledgeBaseCategories).HasConstraintName("FK_Knowledge_Base_Categories_Statuses");
         });
 
         modelBuilder.Entity<License>(entity =>
@@ -613,32 +525,6 @@ public partial class DatabaseContext : DbContext
             entity.HasOne(d => d.StatusNavigation).WithMany(p => p.PrinterTypes).HasConstraintName("FK_Printer_Types_Statuses");
         });
 
-        modelBuilder.Entity<Project>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Projects__3214EC271F1E24AD");
-
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.ProjectCreatedByNavigations).HasConstraintName("FK__Projects__Create__0DEF03D2");
-
-            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.ProjectModifiedByNavigations).HasConstraintName("FK__Projects__Modifi__0EE3280B");
-
-            entity.HasOne(d => d.ProjectTypeNavigation).WithMany(p => p.Projects).HasConstraintName("FK__Projects__Projec__0CFADF99");
-
-            entity.HasOne(d => d.Status).WithMany(p => p.Projects).HasConstraintName("FK_Projects_Statuses");
-
-            entity.HasOne(d => d.UsersNavigation).WithMany(p => p.ProjectUsersNavigations).HasConstraintName("FK__Projects__Users__0C06BB60");
-        });
-
-        modelBuilder.Entity<ProjectType>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Project___3214EC276F56CFD2");
-
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.ProjectTypeCreatedByNavigations).HasConstraintName("FK__Project_T__Creat__46335CF5");
-
-            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.ProjectTypeModifiedByNavigations).HasConstraintName("FK__Project_T__Modif__4727812E");
-
-            entity.HasOne(d => d.StatusNavigation).WithMany(p => p.ProjectTypes).HasConstraintName("FK_Project_Types_Statuses");
-        });
-
         modelBuilder.Entity<RackCabinet>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Rack_Cab__3214EC27C13ACA73");
@@ -848,17 +734,6 @@ public partial class DatabaseContext : DbContext
             entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.InverseModifiedByNavigation).HasConstraintName("FK_Users_Users1");
 
             entity.HasOne(d => d.PositionNavigation).WithMany(p => p.Users).HasConstraintName("FK__Users__Position__12E8C319");
-        });
-
-        modelBuilder.Entity<Vendor>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Vendors__3214EC275F8F5A94");
-
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.VendorCreatedByNavigations).HasConstraintName("FK__Vendors__Created__3AC1AA49");
-
-            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.VendorModifiedByNavigations).HasConstraintName("FK__Vendors__Modifie__3BB5CE82");
-
-            entity.HasOne(d => d.UsersNavigation).WithMany(p => p.VendorUsersNavigations).HasConstraintName("FK_Vendors_Users");
         });
 
         OnModelCreatingPartial(modelBuilder);

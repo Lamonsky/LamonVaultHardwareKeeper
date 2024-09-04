@@ -60,9 +60,6 @@ public partial class Location
     [InverseProperty("Location")]
     public virtual ICollection<Computer> Computers { get; set; } = new List<Computer>();
 
-    [InverseProperty("Location")]
-    public virtual ICollection<Contract> Contracts { get; set; } = new List<Contract>();
-
     [ForeignKey("CreatedBy")]
     [InverseProperty("LocationCreatedByNavigations")]
     public virtual User? CreatedByNavigation { get; set; }

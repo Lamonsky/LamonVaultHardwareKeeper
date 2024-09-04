@@ -1,4 +1,4 @@
-﻿
+﻿C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\App.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Themes\Generic.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllComputerView.xaml;;
@@ -28,11 +28,13 @@ FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administratio
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\MainWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewComputerView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewDeviceView.xaml;;
+FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewHardDriveView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewMonitorView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewNetworkDeviceView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewPhoneView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewPrinterView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewRackCabinetView.xaml;;
+FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewServerView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewSimCardView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewSoftwareView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewTicketView.xaml;;
@@ -42,5 +44,4 @@ FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administratio
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\Windows\NewSimComponentWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\Windows\NewTechnicianWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\Resources\ViewResources.xaml;;
-FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewHardDriveView.xaml;;
 

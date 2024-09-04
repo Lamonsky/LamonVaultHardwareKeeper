@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using AdministrationApp.Helpers;
 using Data;
 using Data.Computers.SelectVMs;
@@ -196,7 +197,15 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Edit()
         {
-            Messenger.Default.Send(DisplayName + "Edit/" + ChosenComputer.Id);
+            if (ChosenComputer == null)
+            {
+                MessageBox.Show("Nie wybrano żadnego rekordu do edycji");
+            }
+            else 
+            {
+                Messenger.Default.Send(DisplayName + "Edit/" + ChosenComputer.Id);
+            }
+            
         }
 
         public override async void Remove()

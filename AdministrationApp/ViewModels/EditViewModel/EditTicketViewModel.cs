@@ -94,7 +94,6 @@ namespace AdministrationApp.ViewModels.EditViewModel
         #region Konstruktor
         public EditTicketViewModel(TicketCreateEditVM vm) : base("EditTicket")
         {
-            IsValid = true;
             item = vm;
             setForeignKeys();
             Messenger.Default.Register<UserVM>(this, getChosenUser);

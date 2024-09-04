@@ -11,6 +11,9 @@ namespace Data
         public const string LOGIN = "/login";
         public const string REGISTER = "/register";
         public const string REFRESH = "/refresh";
+        public const string LOG = "/log";
+        public const string LOG_ID = "/log/{id}";
+
         public const string IDENTITY_CREATE_ROLE = "/identity_create_role";
         public const string IDENTITY_ADD_USER_TO_ROLE = "/identity_add_user_to_role";
         public const string IDENTITY_CHECK_USER_ADMIN_ROLE = "/identity_check_user_admin_role/{email}";

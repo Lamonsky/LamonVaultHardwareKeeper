@@ -5,6 +5,7 @@ using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using GalaSoft.MvvmLight.Messaging;
 using System.Net.Http;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 
@@ -102,6 +103,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         #region Konstruktor
         public EditComputerViewModel(ComputersCreateEditVM vm) : base("Edycja komputera")
         {
+            old = vm;
             item = vm;
             setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
@@ -137,6 +139,15 @@ namespace AdministrationApp.ViewModels.EditViewModel
             
             await RequestHelper.SendRequestAsync(URLs.COMPUTERS_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("ComputersRefresh");
+
+            string olditem = JsonSerializer.Serialize(old);
+            string newitem = JsonSerializer.Serialize(item);
+            LogCreateEditVM log = new();
+            log.LogDate = DateTime.Now;
+            log.CreatedAt = DateTime.Now;
+            log.CreatedBy = GlobalData.UserId;
+            log.Description = "Zmodyfikowano rekord. Stara wartość " + old + " Nowa wartość " + newitem;
+            await RequestHelper.SendRequestAsync(URLs.LOG, HttpMethod.Post, log, GlobalData.AccessToken);
         }
         #endregion
         #region CommandsFunctions
@@ -179,7 +190,17 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         #endregion
         #region Dane
-
+        private ComputersCreateEditVM old
+        {
+            get
+            {
+                return old;
+            }
+            set
+            {
+                old = value;
+            }
+        }
         public int Id
         {
             get

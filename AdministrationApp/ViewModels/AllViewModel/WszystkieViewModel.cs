@@ -126,6 +126,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
             set
             {
                 _List = value;
+                IsLoading = true;
                 OnPropertyChanged(() => List);
             }
         }
@@ -136,7 +137,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
             IsLoading = false;
             DisplayName = displayName;
             load();
-            IsLoading = true;
+
         }
         #endregion
         #region Pomocniczy
@@ -163,7 +164,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public string FindTextBox { get; set; }
         public string FilterField { get; set; }
-        public int ItemID { get; set; }
         #endregion
     }
 }

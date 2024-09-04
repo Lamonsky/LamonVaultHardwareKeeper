@@ -186,6 +186,9 @@
     <Page Update="Views\AllViews\AllPrinterView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\NewViews\NewServerView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\NewViews\NewComputerView.xaml">
       <SubType>Designer</SubType>
     </Page>

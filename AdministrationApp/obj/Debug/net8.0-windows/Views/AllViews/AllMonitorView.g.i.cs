@@ -53,7 +53,7 @@ namespace AdministrationApp.Views.AllViews {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AdministrationApp;component/views/allviews/allmonitorview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AdministrationApp;V1.0.0.0;component/views/allviews/allmonitorview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\AllViews\AllMonitorView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

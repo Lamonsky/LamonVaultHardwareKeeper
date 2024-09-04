@@ -42,6 +42,9 @@
     <Compile Update="Views\AllWindows\AllLocationsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\NewViews\NewServerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\NewViews\Windows\NewSimComponentWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

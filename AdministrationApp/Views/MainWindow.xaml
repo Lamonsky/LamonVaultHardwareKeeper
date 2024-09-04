@@ -28,7 +28,9 @@
                 <TextBlock Text="Lamon - Vault Hardware Keeper" Grid.Column="0"/>
                 <Menu Grid.Column="1">
                     <MenuItem Header="Podsumowanie" Command="{Binding ShowSummaryCommand}"/>
-                    <MenuItem Header="_System"/>
+                    <MenuItem Header="_System">
+                        <MenuItem Header="Logi" Command="{Binding ShowLogsCommand}"/>
+                    </MenuItem>
                     <MenuItem Header="Komputery">
                         <MenuItem Header="Modele komputerów" Command="{Binding ShowComputerModelCommand}"/>
                     </MenuItem>

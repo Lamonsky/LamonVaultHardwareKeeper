@@ -26,9 +26,6 @@ public partial class Log
     [Column("Created_By")]
     public int? CreatedBy { get; set; }
 
-    [Column("Modified_At", TypeName = "datetime")]
-    public DateTime? ModifiedAt { get; set; }
-
     [Column("Modified_By")]
     public int? ModifiedBy { get; set; }
 
