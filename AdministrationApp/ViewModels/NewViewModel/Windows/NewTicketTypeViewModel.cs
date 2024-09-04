@@ -37,7 +37,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
             await RequestHelper.SendRequestAsync(URLs.TICKETTYPE, HttpMethod.Post, item, GlobalData.AccessToken);
-            
+            NewSaveLogs(item);
             Messenger.Default.Send("TicketTypeRefresh");
             _window.Close();
         }

@@ -12,22 +12,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     {
         private Window _window;
 
-        private TicketTypeVM _ChosenItem;
-        public TicketTypeVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllTicketTypeViewModelWindow(Window window) : base("TicketType")
         {
             Messenger.Default.Register<string>(this, open);
@@ -100,6 +84,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.TICKETTYPE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

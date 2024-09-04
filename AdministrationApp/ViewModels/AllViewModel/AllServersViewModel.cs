@@ -156,21 +156,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             List = await RequestHelper.SendRequestAsync<object, List<ServerVM>>(URLs.SERVER, HttpMethod.Get, null, GlobalData.AccessToken);
         }
-        private ServerVM _ChosenItem;
-        public ServerVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
         public override void Edit()
         {
             Messenger.Default.Send(DisplayName + "Edit/" + ChosenItem.Id);
@@ -178,6 +163,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.SERVER_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

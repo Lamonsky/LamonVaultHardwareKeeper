@@ -95,6 +95,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         public EditPrinterViewModel(PrintersCreateEditVM vm) : base("Nowa drukarka")
         {
             item = vm;
+            oldItem = vm;
             setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
@@ -107,7 +108,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.PRINTER_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("PrinterRefresh");
         }

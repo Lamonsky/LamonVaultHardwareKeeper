@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Height="450" Width="800">
 
-        <DataGrid ItemsSource="{Binding List}" AutoGenerateColumns="False" SelectedItem="{Binding Path=ChosenUser, Mode=TwoWay}" IsReadOnly="True">
+        <DataGrid ItemsSource="{Binding List}" AutoGenerateColumns="False" SelectedItem="{Binding Path=ChosenItem, Mode=TwoWay}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}"/>
                 <DataGridTextColumn Header="Nazwa Użytkownika" Binding="{Binding Path=Usersname}"/>

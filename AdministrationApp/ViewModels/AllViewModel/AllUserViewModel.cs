@@ -131,29 +131,15 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             List = await RequestHelper.SendRequestAsync<object, List<UserVM>>(URLs.USER, HttpMethod.Get, null, GlobalData.AccessToken);
         }
-        private UserVM _ChosenUser;
-        public UserVM ChosenUser
-        {
-            set
-            {
-                if (_ChosenUser != value)
-                {
-                    _ChosenUser = value;
-                }
-            }
-            get
-            {
-                return _ChosenUser;
-            }
-        }
         public override void Edit()
         {
-            Messenger.Default.Send(DisplayName + "Edit/" + ChosenUser.Id);
+            Messenger.Default.Send(DisplayName + "Edit/" + ChosenItem.Id);
         }
 
         public override async void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", ChosenUser.Id.ToString()), HttpMethod.Delete, ChosenUser, GlobalData.AccessToken);
+            RemoveSaveLogs(ChosenItem);
+            await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
 

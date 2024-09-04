@@ -13,21 +13,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
 {
     class AllSoftwareViewModel : WszystkieViewModel<SoftwaresVM>
     {
-        private SoftwaresVM _ChosenSoftware;
-        public SoftwaresVM ChosenSoftware
-        {
-            set
-            {
-                if (_ChosenSoftware != value)
-                {
-                    _ChosenSoftware = value;
-                }
-            }
-            get
-            {
-                return _ChosenSoftware;
-            }
-        }
         public AllSoftwareViewModel() : base("Oprogramowanie")
         {
             Messenger.Default.Register<string>(this, open);
@@ -41,7 +26,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Edit()
         {
-            Messenger.Default.Send(DisplayName + "Edit/" + ChosenSoftware.Id);
+            Messenger.Default.Send(DisplayName + "Edit/" + ChosenItem.Id);
         }
 
         public override void Filter()
@@ -117,7 +102,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.SOFTWARE_ID.Replace("{id}", ChosenSoftware.Id.ToString()), HttpMethod.Delete, ChosenSoftware, null);
+            RemoveSaveLogs(ChosenItem);
+            await RequestHelper.SendRequestAsync(URLs.SOFTWARE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
         }
 

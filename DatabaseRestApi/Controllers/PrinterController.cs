@@ -151,7 +151,7 @@ namespace DatabaseRestApi.Controllers
             {
                 return BadRequest("Nie ma komputera o podanym id {id}");
             }
-
+            printer.StatusId = 99;
             printer.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();

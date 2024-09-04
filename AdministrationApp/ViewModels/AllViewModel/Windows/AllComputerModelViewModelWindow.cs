@@ -11,23 +11,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllComputerModelViewModelWindow : WszystkieViewModel<ComputerModelVM>
     {
         private Window _window;
-
-        private ComputerModelVM _ChosenItem;
-        public ComputerModelVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllComputerModelViewModelWindow(Window window) : base("ComputerModel")
         {
             Messenger.Default.Register<string>(this, open);
@@ -99,6 +82,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.COMPUTERMODEL_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

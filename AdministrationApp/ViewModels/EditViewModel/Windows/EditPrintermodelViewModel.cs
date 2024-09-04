@@ -31,6 +31,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         public EditPrintermodelViewModel(Window window, PrinterModelCreateEditVM vm) : base("Printermodel")
         {
             item = vm;
+            oldItem = vm;
             _window = window;
             setForeignKeys();
             Messenger.Default.Register<StatusVM>(this, getStatus);
@@ -39,7 +40,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.PRINTERMODEL_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("PrintermodelRefresh");
             _window.Close();

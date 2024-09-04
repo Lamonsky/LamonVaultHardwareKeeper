@@ -17,6 +17,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<TicketVM> ticketVM = await database.Tickets
+                .OrderBy(item => item.StatusId)
                 .Select(item => new TicketVM
                 {
                     Id = item.Id,

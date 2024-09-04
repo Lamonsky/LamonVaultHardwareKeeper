@@ -95,6 +95,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         public EditMonitorViewModel(MonitorsCreateEditVM vm) : base("Edycja monitora")
         {
             item = vm;
+            oldItem = vm;
             setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
@@ -108,7 +109,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.MONITORS_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("MonitorRefresh");
         }

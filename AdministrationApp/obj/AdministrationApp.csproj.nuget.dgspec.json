@@ -44,6 +44,10 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.102.3, )"
+            },
             "MaterialDesignThemes": {
               "target": "Package",
               "version": "[4.9.0, )"
@@ -75,6 +79,9 @@
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
             },
             "Microsoft.WindowsDesktop.App.WPF": {
               "privateAssets": "none"

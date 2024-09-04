@@ -11,23 +11,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllDeviceModelViewModelWindow : WszystkieViewModel<DeviceModelVM>
     {
         private Window _window;
-
-        private DeviceModelVM _ChosenItem;
-        public DeviceModelVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllDeviceModelViewModelWindow(Window window) : base("DeviceModel")
         {
             Messenger.Default.Register<string>(this, open);
@@ -100,6 +83,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.DEVICEMODEL_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

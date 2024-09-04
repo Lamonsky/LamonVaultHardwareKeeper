@@ -12,22 +12,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     {
         private Window _window;
 
-        private SimComponentVM _ChosenItem;
-        public SimComponentVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllSimComponentViewModelWindow(Window window) : base("SimComponent")
         {
             Messenger.Default.Register<string>(this, open);
@@ -109,6 +93,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.SIMCOMPONENT_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

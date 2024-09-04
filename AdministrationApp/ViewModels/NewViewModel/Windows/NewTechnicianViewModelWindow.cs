@@ -56,7 +56,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            
+            NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.TECHNICIAN, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("TechnicianRefresh");
             _window.Close();

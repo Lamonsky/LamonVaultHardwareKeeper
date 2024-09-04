@@ -133,30 +133,15 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             List = await RequestHelper.SendRequestAsync<object, List<MonitorsVM>>(URLs.MONITORS, HttpMethod.Get, null, GlobalData.AccessToken);
         }
-
-        private MonitorsVM _ChosenMonitor;
-        public MonitorsVM ChosenMonitor
-        {
-            set
-            {
-                if (_ChosenMonitor != value)
-                {
-                    _ChosenMonitor = value;
-                }
-            }
-            get
-            {
-                return _ChosenMonitor;
-            }
-        }
         public override void Edit()
         {
-            Messenger.Default.Send(DisplayName + "Edit/" + ChosenMonitor.Id);
+            Messenger.Default.Send(DisplayName + "Edit/" + ChosenItem.Id);
         }
 
         public override async void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.MONITORS_ID.Replace("{id}", ChosenMonitor.Id.ToString()), HttpMethod.Delete, ChosenMonitor, null);
+            RemoveSaveLogs(ChosenItem);
+            await RequestHelper.SendRequestAsync(URLs.MONITORS_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
         }
 

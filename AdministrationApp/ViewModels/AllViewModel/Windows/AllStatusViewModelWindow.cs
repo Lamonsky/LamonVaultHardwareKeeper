@@ -25,23 +25,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
                 window.Close();
             }
         }
-        #region Commands
-        private StatusVM _ChosenItem;
-        public StatusVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-        #endregion
         public AllStatusViewModelWindow(Window window) : base("Status")
         {
             Messenger.Default.Register<string>(this, open);
@@ -114,6 +97,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override async void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.STATUS_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

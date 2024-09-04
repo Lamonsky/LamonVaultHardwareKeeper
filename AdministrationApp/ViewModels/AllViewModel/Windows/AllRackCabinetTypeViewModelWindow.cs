@@ -12,22 +12,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     {
         private Window _window;
 
-        private RackCabinetTypeVM _ChosenItem;
-        public RackCabinetTypeVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllRackCabinetTypeViewModelWindow(Window window) : base("RackCabinetType")
         {
             Messenger.Default.Register<string>(this, open);
@@ -100,6 +84,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.RACKCABINETTYPE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

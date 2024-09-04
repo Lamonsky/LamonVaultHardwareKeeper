@@ -16,22 +16,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     {
         private Window _window;
 
-        private PrinterModelVM _ChosenItem;
-        public PrinterModelVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllPrinterModelViewModelWindow(Window window) : base("Modele drukarek")
         {
             Messenger.Default.Register<string>(this, open);
@@ -105,6 +89,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.PRINTERMODEL_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

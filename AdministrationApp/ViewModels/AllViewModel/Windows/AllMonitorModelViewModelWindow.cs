@@ -11,23 +11,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllMonitorModelViewModelWindow : WszystkieViewModel<MonitorModelVM>
     {
         private Window _window;
-
-        private MonitorModelVM _ChosenItem;
-        public MonitorModelVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllMonitorModelViewModelWindow(Window window) : base("MonitorModel")
         {
             Messenger.Default.Register<string>(this, open);
@@ -100,6 +83,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.MONITORMODEL_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

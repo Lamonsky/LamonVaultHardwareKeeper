@@ -47,6 +47,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         public EditUserViewModel(UserCreateEditVM vm) : base("Nowy użytkownik")
         {
             item = vm;
+            oldItem = vm;
             setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<PositionVM>(this, getPosition);
@@ -55,7 +56,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("UsersRefresh");
         }

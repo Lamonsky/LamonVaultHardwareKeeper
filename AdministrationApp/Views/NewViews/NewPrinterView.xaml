@@ -73,7 +73,7 @@
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="{Binding Path=PrinterModelName}"/>
+                    <TextBlock Grid.Column="0" Text="{Binding Path=ModelName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChoosePrinterModelCommand}">
                         <ui:SymbolIcon Symbol="LocationAdd16"/>
                     </Button>

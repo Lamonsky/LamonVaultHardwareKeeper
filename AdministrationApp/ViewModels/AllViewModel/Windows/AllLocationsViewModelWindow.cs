@@ -17,31 +17,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
     class AllLocationsViewModelWindow : WszystkieViewModel<LocationVM>
     {
         private Window _window;
-        public event EventHandler OnRequestClose;
-        public void CloseWindow(Window window)
-        {
-            if (window != null)
-            {
-                window.Close();
-            }
-        }
-        #region Commands
-        private LocationVM _ChosenLocation;
-        public LocationVM ChosenLocation
-        {
-            set
-            {
-                if (_ChosenLocation != value)
-                {
-                    _ChosenLocation = value;
-                }
-            }
-            get
-            {
-                return _ChosenLocation;
-            }
-        }
-        #endregion
         public AllLocationsViewModelWindow(Window window) : base("Location")
         {
             Messenger.Default.Register<string>(this, open);
@@ -144,18 +119,18 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override void Edit()
         {
-            Messenger.Default.Send(DisplayName+"Edit/"+ChosenLocation.Id.ToString());
+            Messenger.Default.Send(DisplayName+"Edit/"+ChosenItem.Id.ToString());
         }
 
         public override async void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.LOCATION_ID.Replace("{id}", ChosenLocation.Id.ToString()), HttpMethod.Delete, ChosenLocation, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(URLs.LOCATION_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
 
         public override void send()
         {
-            Messenger.Default.Send(ChosenLocation);
+            Messenger.Default.Send(ChosenItem);
             _window.Close();
         }
     }

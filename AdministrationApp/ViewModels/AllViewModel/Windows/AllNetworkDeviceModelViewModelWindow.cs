@@ -11,23 +11,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllNetworkDeviceModelViewModelWindow : WszystkieViewModel<NetworkDeviceModelVM>
     {
         private Window _window;
-
-        private NetworkDeviceModelVM _ChosenItem;
-        public NetworkDeviceModelVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllNetworkDeviceModelViewModelWindow(Window window) : base("NetworkDeviceModel")
         {
             Messenger.Default.Register<string>(this, open);
@@ -100,6 +83,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.NETWORKDEVICEMODEL_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

@@ -31,6 +31,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         public EditManufacturerViewModel(Window window, ManufacturerCreateEditVM vm) : base("Manufacturer")
         {
             item = vm;
+            oldItem = vm;
             _window = window;
             setForeignKeys();
             Messenger.Default.Register<StatusVM>(this, getStatus);
@@ -39,7 +40,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.MANUFACTURER_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("ManufacturerRefresh");
             _window.Close();

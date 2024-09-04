@@ -179,38 +179,23 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             List = await RequestHelper.SendRequestAsync<object, List<ComputersVM>>(URLs.COMPUTERS, HttpMethod.Get, null, GlobalData.AccessToken);
         }
-
-        private ComputersVM _ChosenComputer;
-        public ComputersVM ChosenComputer
-        {
-            set
-            {
-                if(_ChosenComputer != value)
-                {
-                    _ChosenComputer = value;
-                }
-            }
-            get
-            {
-                return _ChosenComputer;
-            }
-        }
         public override void Edit()
         {
-            if (ChosenComputer == null)
+            if (ChosenItem != null)
             {
-                MessageBox.Show("Nie wybrano żadnego rekordu do edycji");
+                
+                Messenger.Default.Send(DisplayName + "Edit/" + ChosenItem.Id);
             }
             else 
             {
-                Messenger.Default.Send(DisplayName + "Edit/" + ChosenComputer.Id);
+                MessageBox.Show("Nie wybrano żadnego rekordu do edycji");
             }
             
         }
 
         public override async void Remove()
-        {            
-            await RequestHelper.SendRequestAsync(URLs.COMPUTERS_ID.Replace("{id}", ChosenComputer.Id.ToString()), HttpMethod.Delete, ChosenComputer, null);
+        {
+            await RequestHelper.SendRequestAsync(URLs.COMPUTERS_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
         }
 

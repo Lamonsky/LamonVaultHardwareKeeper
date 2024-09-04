@@ -31,6 +31,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         public EditLocationViewModel(Window window, LocationCreateEditVM vm) : base("Location")
         {
             item = vm;
+            oldItem = vm;
             setForeignKeys();
             Messenger.Default.Register<StatusVM>(this, getStatus);
             _window = window;
@@ -44,7 +45,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.LOCATION_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("LocationRefresh");
             _window.Close();

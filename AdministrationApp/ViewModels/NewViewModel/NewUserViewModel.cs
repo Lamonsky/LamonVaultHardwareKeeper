@@ -72,7 +72,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            
+            NewSaveLogs(item);
             RestApiUsers user = new();
             user.Email = item.Email;
             user.Password = item.Password;

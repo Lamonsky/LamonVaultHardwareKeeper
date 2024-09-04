@@ -31,13 +31,14 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         public EditStatusViewModel(Window window, StatusCreateEditVM vm) : base("Status")
         {
             item = vm;
+            oldItem = vm;
             _window = window;
         }
         public override async void Save()
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.STATUS_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("StatusRefresh");
             _window.Close();

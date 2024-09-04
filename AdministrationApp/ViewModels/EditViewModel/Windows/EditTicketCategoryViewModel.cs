@@ -31,6 +31,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         public EditTicketCategoryViewModel(Window window, TicketCategoryCreateEditVM vm) : base("TicketCategory")
         {
             item = vm;
+            oldItem = vm;
             _window = window;
             setForeignKeys();
             Messenger.Default.Register<StatusVM>(this, getStatus);
@@ -39,7 +40,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.TICKETCATEGORY_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("TicketCategoryRefresh");
             _window.Close();

@@ -97,22 +97,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             List = await RequestHelper.SendRequestAsync<object, List<HardDriveVM>>(URLs.HARDDRIVE, HttpMethod.Get, null, GlobalData.AccessToken);
         }
-
-        private HardDriveVM _ChosenItem;
-        public HardDriveVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
         public override void Edit()
         {
             Messenger.Default.Send(DisplayName + "Edit/" + ChosenItem.Id);
@@ -120,6 +104,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.HARDDRIVE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
         }

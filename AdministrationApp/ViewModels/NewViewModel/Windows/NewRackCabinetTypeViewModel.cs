@@ -36,7 +36,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            
+            NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.RACKCABINETTYPE, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("RackCabinetTypeRefresh");
             _window.Close();

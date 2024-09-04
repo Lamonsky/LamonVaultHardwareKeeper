@@ -72,19 +72,18 @@ namespace AdministrationApp.ViewModels.EditViewModel
         public EditSoftwareViewModel(SoftwareCreateEditVM vm) : base("Edycja oprogramowania")
         {
             item = vm;
+            oldItem = vm;
             setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<StatusVM>(this, getStatus);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
-
-
         }
         public override async void Save()
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.SOFTWARE_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("SoftwareRefresh");
         }

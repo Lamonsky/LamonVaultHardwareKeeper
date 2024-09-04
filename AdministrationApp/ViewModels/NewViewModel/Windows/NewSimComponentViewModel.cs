@@ -64,7 +64,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            
+            NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.SIMCOMPONENT, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("SimComponentRefresh");
             _window.Close();

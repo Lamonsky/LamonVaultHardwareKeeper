@@ -10,21 +10,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllPrinterTypeViewModelWindow : WszystkieViewModel<PrinterTypeVM>
     {
         private Window _window;
-        private PrinterTypeVM _ChosenItem;
-        public PrinterTypeVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
 
         public AllPrinterTypeViewModelWindow(Window window) : base("Rodzaje drukarek")
         {
@@ -99,6 +84,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.PRINTERTYPE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

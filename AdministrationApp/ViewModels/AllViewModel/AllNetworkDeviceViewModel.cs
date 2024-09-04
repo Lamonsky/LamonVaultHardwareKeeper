@@ -14,21 +14,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
 {
     class AllNetworkDeviceViewModel : WszystkieViewModel<NetworkDeviceVM>
     {
-        private NetworkDeviceVM _ChosenNetworkDevice;
-        public NetworkDeviceVM ChosenNetworkDevice
-        {
-            set
-            {
-                if (_ChosenNetworkDevice != value)
-                {
-                    _ChosenNetworkDevice = value;
-                }
-            }
-            get
-            {
-                return _ChosenNetworkDevice;
-            }
-        }
         public AllNetworkDeviceViewModel() : base("Urządzenia sieciowe") {
             Messenger.Default.Register<string>(this, open);
         }
@@ -41,7 +26,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Edit()
         {
-            Messenger.Default.Send(DisplayName + "Edit/" + ChosenNetworkDevice.Id);
+            Messenger.Default.Send(DisplayName + "Edit/" + ChosenItem.Id);
         }
         public override void Filter()
         {
@@ -159,7 +144,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public async override void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.NETWORKDEVICE_ID.Replace("{id}", ChosenNetworkDevice.Id.ToString()), HttpMethod.Delete, ChosenNetworkDevice, null);
+            RemoveSaveLogs(ChosenItem);
+            await RequestHelper.SendRequestAsync(URLs.NETWORKDEVICE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
         }
        

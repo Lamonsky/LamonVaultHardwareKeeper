@@ -119,16 +119,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item.CreatedBy = GlobalData.UserId;            
             await RequestHelper.SendRequestAsync(URLs.COMPUTERS, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("ComputersRefresh");
-
-
-
-            string json = JsonSerializer.Serialize(item);
-            LogCreateEditVM log = new();
-            log.LogDate = DateTime.Now;
-            log.CreatedAt = DateTime.Now;
-            log.CreatedBy = GlobalData.UserId;
-            log.Description = "Utworzono rekord " + json;
-            await RequestHelper.SendRequestAsync(URLs.LOG, HttpMethod.Post, log, GlobalData.AccessToken);
+            NewSaveLogs(item);
         }
         #endregion
         #region CommandsFunctions

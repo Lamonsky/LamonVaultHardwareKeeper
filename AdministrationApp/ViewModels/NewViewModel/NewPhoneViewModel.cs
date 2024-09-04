@@ -130,7 +130,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            
+            NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.PHONE, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("PhoneRefresh");
         }

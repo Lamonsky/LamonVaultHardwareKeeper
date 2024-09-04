@@ -90,6 +90,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         public EditServerViewModel(ServerCreateEditVM vm) : base("EditServer")
         {
             item = vm;
+            oldItem = vm;
             setForeignKeys();
             Messenger.Default.Register<OperatingSystemVM>(this, getOS);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
@@ -118,7 +119,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.SERVER_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("ServerRefresh");
         }

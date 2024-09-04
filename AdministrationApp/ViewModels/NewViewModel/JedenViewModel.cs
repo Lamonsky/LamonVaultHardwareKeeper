@@ -1,11 +1,13 @@
 ﻿using AdministrationApp.Helpers;
 using Data;
+using Data.Computers.CreateEditVMs;
 using Data.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -32,6 +34,18 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
         #region Konstruktor
         protected T item;
+        private T _oldItem;
+        public T oldItem
+        {
+            get
+            {
+                return _oldItem;
+            }
+            set
+            {
+                _oldItem = value;
+            }
+        }
         public JedenViewModel(string displayName)
         {
             DisplayName = displayName;
@@ -42,7 +56,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         private void SaveAndClose()
         {
             //dodać wysyłanie do api jsona
-            Save();            
+            Save();
             OnRequestClose();
             RefreshToken();
 
@@ -55,6 +69,29 @@ namespace AdministrationApp.ViewModels.NewViewModel
             GlobalData.RefreshToken = newuser.RefreshToken;
         }
         public abstract void Save();
+        public async void EditSaveLogs(T oldvm, T newvm)
+        {
+            string olditem = JsonSerializer.Serialize(oldvm);
+            string newitem = JsonSerializer.Serialize(newvm);
+            LogCreateEditVM log = new();
+            log.LogDate = DateTime.Now;
+            log.Users = GlobalData.UserId;
+            log.CreatedAt = DateTime.Now;
+            log.CreatedBy = GlobalData.UserId;
+            log.Description = $"Zmodyfikowano rekord w tabeli {DisplayName}. Stary rekord {olditem}. Nowy rekord {newitem}.";
+            await RequestHelper.SendRequestAsync(URLs.LOG, HttpMethod.Post, log, GlobalData.AccessToken);
+        }
+        public async void NewSaveLogs(T newvm)
+        {
+            string newitem = JsonSerializer.Serialize(newvm);
+            LogCreateEditVM log = new();
+            log.LogDate = DateTime.Now;
+            log.Users = GlobalData.UserId;
+            log.CreatedAt = DateTime.Now;
+            log.CreatedBy = GlobalData.UserId;
+            log.Description = $"Utworzono rekord w tabeli {DisplayName}. Nowy rekord {newitem}.";
+            await RequestHelper.SendRequestAsync(URLs.LOG, HttpMethod.Post, log, GlobalData.AccessToken);
+        }        
 
         #endregion
 

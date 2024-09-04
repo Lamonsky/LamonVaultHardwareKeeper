@@ -11,23 +11,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllManufacturerViewModelWindow : WszystkieViewModel<ManufacturerVM>
     {
         private Window _window;
-
-        private ManufacturerVM _ChosenItem;
-        public ManufacturerVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllManufacturerViewModelWindow(Window window) : base("Manufacturer")
         {
             Messenger.Default.Register<string>(this, open);
@@ -107,6 +90,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.MANUFACTURER_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

@@ -17,23 +17,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
     class AllUserViewModelWindow : WszystkieViewModel<UserVM>
     {
         private Window _window;
-        #region Commands
-        private UserVM _ChosenUser;
-        public UserVM ChosenUser
-        {
-            set
-            {
-                if (_ChosenUser != value)
-                {
-                    _ChosenUser = value;
-                }
-            }
-            get
-            {
-                return _ChosenUser;
-            }
-        }
-        #endregion
         public AllUserViewModelWindow() : base("User")
         {
             Messenger.Default.Register<string>(this, open);
@@ -159,18 +142,19 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override void Edit()
         {
-            Messenger.Default.Send(DisplayName+"Edit/"+ChosenUser.Id.ToString());
+            Messenger.Default.Send(DisplayName+"Edit/"+ChosenItem.Id.ToString());
         }
 
         public override async void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", ChosenUser.Id.ToString()), HttpMethod.Delete, ChosenUser, GlobalData.AccessToken);
+            RemoveSaveLogs(ChosenItem);
+            await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
 
         public override void send()
         {
-            Messenger.Default.Send(ChosenUser);
+            Messenger.Default.Send(ChosenItem);
             _window.Close();
         }
     }

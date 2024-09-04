@@ -38,7 +38,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            
+            NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.PRINTERMODEL, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("PrinterModelRefresh");
             _window.Close();

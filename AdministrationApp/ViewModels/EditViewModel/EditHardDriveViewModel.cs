@@ -71,6 +71,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         public EditHardDriveViewModel(HardDriveCreateEditVM vm) : base("NewHardDrive")
         {
             item = vm;
+            oldItem = vm;
             setForeignKeys();
             Messenger.Default.Register<ServerVM>(this, getServer);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
@@ -93,7 +94,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.HARDDRIVE_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("HardDrivesRefresh");
         }

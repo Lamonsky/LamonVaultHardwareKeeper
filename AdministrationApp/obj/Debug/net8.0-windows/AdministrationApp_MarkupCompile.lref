@@ -1,4 +1,4 @@
-﻿C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+﻿
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\App.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Themes\Generic.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllComputerView.xaml;;
@@ -14,6 +14,7 @@ FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administratio
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllSoftwareView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllTicketsView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllUserView.xaml;;
+FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\LogsView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\MyTicketsView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\SummaryView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllDictionaryWindow.xaml;;

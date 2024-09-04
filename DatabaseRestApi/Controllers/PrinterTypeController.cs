@@ -49,7 +49,6 @@ namespace DatabaseRestApi.Controllers
                     CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
                     ModifiedAt = item.ModifiedAt,
                     ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
-
                 }).FirstAsync();
             return Json(printerTypeVM);
         }

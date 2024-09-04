@@ -100,7 +100,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            
+            NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.SERVER, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("ServerRefresh");
         }

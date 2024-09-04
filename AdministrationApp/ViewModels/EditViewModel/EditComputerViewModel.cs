@@ -103,7 +103,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         #region Konstruktor
         public EditComputerViewModel(ComputersCreateEditVM vm) : base("Edycja komputera")
         {
-            old = vm;
+            oldItemJson = JsonSerializer.Serialize(vm);
             item = vm;
             setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
@@ -140,13 +140,13 @@ namespace AdministrationApp.ViewModels.EditViewModel
             await RequestHelper.SendRequestAsync(URLs.COMPUTERS_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("ComputersRefresh");
 
-            string olditem = JsonSerializer.Serialize(old);
             string newitem = JsonSerializer.Serialize(item);
             LogCreateEditVM log = new();
+            log.Users = GlobalData.UserId;
             log.LogDate = DateTime.Now;
             log.CreatedAt = DateTime.Now;
             log.CreatedBy = GlobalData.UserId;
-            log.Description = "Zmodyfikowano rekord. Stara wartość " + old + " Nowa wartość " + newitem;
+            log.Description = "Zmodyfikowano rekord w tabeli Komputery. Stara wartość " + oldItemJson + " Nowa wartość " + newitem;
             await RequestHelper.SendRequestAsync(URLs.LOG, HttpMethod.Post, log, GlobalData.AccessToken);
         }
         #endregion
@@ -189,16 +189,21 @@ namespace AdministrationApp.ViewModels.EditViewModel
             ComputerModelName = vm.Name;
         }
         #endregion
-        #region Dane
-        private ComputersCreateEditVM old
+        #region Dane     
+        private string _oldItemJson;
+        public string oldItemJson
         {
             get
             {
-                return old;
+                return _oldItemJson;
             }
             set
             {
-                old = value;
+                if( _oldItemJson != value )
+                {
+                    _oldItemJson = value;
+                    OnPropertyChanged(() => oldItemJson);
+                }
             }
         }
         public int Id

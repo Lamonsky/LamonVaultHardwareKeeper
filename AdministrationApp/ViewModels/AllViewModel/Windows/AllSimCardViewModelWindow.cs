@@ -10,31 +10,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
     class AllSimCardViewModelWindow : WszystkieViewModel<SimCardsVM>
     {
         private Window _window;
-        public event EventHandler OnRequestClose;
-        public void CloseWindow(Window window)
-        {
-            if (window != null)
-            {
-                window.Close();
-            }
-        }
-        #region Commands
-        private SimCardsVM _ChosenItem;
-        public SimCardsVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-        #endregion
         public AllSimCardViewModelWindow() : base("Karty SIM")
         {
             Messenger.Default.Register<string>(this, open);
@@ -154,9 +129,11 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
             Messenger.Default.Send(DisplayName+"Edit/"+ChosenItem.Id.ToString());
         }
 
-        public override void Remove()
+        public override async void Remove()
         {
-            throw new NotImplementedException();
+            
+            await RequestHelper.SendRequestAsync(URLs.SIMCARD_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
+            load();
         }
 
         public override void send()

@@ -13,21 +13,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
 {
     class AllSimCardViewModel : WszystkieViewModel<SimCardsVM>
     {
-        private SimCardsVM _ChosenItem;
-        public SimCardsVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
         public AllSimCardViewModel() : base("Karty Sim")
         {
             Messenger.Default.Register<string>(this, open);
@@ -146,6 +131,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.SIMCARD_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

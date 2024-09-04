@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"
         d:DesignHeight="450" d:DesignWidth="800">
-    <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding Path=ChosenComputer}" AutoGenerateColumns="False" IsReadOnly="True">
+    <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding Path=ChosenItem}" AutoGenerateColumns="False" IsReadOnly="True">
         <DataGrid.Columns>
             <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
             <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}"/>

@@ -78,6 +78,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         public EditDeviceViewModel(DevicesCreateEditVM vm) : base("Edycja urządzenia")
         {
             item = vm;
+            oldItem = vm;
             setForeignKeys();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<DeviceModelVM>(this, getDeviceModel);
@@ -89,7 +90,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.DEVICE_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("DeviceRefresh");
         }

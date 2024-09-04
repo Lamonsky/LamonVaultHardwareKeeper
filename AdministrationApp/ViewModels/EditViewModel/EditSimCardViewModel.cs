@@ -71,6 +71,8 @@ namespace AdministrationApp.ViewModels.EditViewModel
         public EditSimCardViewModel(SimCardsCreateEditVM vm) : base("Edycja Karty Sim")
         {
             item = vm;
+            oldItem = vm;
+            setForeignKeys();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<StatusVM>(this, getStatus);
 
@@ -79,7 +81,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
-            
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.SIMCARD_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("SimCardRefresh");
         }

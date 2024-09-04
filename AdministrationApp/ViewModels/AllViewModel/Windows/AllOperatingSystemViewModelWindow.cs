@@ -11,23 +11,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllOperatingSystemViewModelWindow : WszystkieViewModel<OperatingSystemVM>
     {
         private Window _window;
-
-        private OperatingSystemVM _ChosenItem;
-        public OperatingSystemVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllOperatingSystemViewModelWindow(Window window) : base("OperatingSystem")
         {
             Messenger.Default.Register<string>(this, open);
@@ -99,6 +82,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.OPERATINGSYSTEM_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

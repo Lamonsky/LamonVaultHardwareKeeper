@@ -18,22 +18,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
     {
         private Window _window;
 
-        private TechnicianVM _ChosenItem;
-        public TechnicianVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
-
         public AllTechniciansViewModelWindow(Window window) : base("Technician")
         {
             Messenger.Default.Register<string>(this, open);
@@ -97,6 +81,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.TECHNICIAN_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }

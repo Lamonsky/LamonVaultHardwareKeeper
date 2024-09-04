@@ -37,7 +37,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-            
+            NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.MONITORMODEL, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("MonitorModelRefresh");
             _window.Close();

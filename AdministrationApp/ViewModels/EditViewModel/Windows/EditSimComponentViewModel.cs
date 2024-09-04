@@ -56,6 +56,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         public EditSimComponentViewModel(Window window, SimComponentCreateEditVM vm) : base("SimComponent")
         {
             item = vm;
+            oldItem = vm;
             setForeignKeys();
             Messenger.Default.Register<StatusVM>(this, getStatus);
             Messenger.Default.Register<SimComponentTypeVM>(this, getSimComponentType);
@@ -75,7 +76,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         {
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
-
+            EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.SIMCOMPONENT, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("SimComponentRefresh");
             _window.Close();

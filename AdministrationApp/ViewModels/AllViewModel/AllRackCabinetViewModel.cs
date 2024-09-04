@@ -13,21 +13,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
 {
     class AllRackCabinetViewModel : WszystkieViewModel<RackCabinetVM>
     {
-        private RackCabinetVM _ChosenItem;
-        public RackCabinetVM ChosenItem
-        {
-            set
-            {
-                if (_ChosenItem != value)
-                {
-                    _ChosenItem = value;
-                }
-            }
-            get
-            {
-                return _ChosenItem;
-            }
-        }
         public AllRackCabinetViewModel() : base("Szafy Rack")
         {
             Messenger.Default.Register<string>(this, open);
@@ -153,6 +138,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
+            
             await RequestHelper.SendRequestAsync(URLs.RACKCABINET_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
