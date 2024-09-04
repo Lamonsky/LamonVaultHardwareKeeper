@@ -334,3 +334,9 @@ C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administration
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\Windows\NewSimComponentWindow.g.cs
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllSimComponentWindow.baml
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\Windows\NewSimComponentWindow.baml
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllViews\AllHardDriveView.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllServersWindow.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllViews\AllHardDriveView.baml
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllServersWindow.baml
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\NewHardDriveView.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\NewHardDriveView.baml

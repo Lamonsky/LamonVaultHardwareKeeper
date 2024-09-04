@@ -43,6 +43,9 @@
     <DataTemplate DataType="{x:Type vma:AllSimCardViewModel}">
         <vwa:AllSimCardView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllHardDrivesViewModel}">
+        <vwa:AllHardDriveView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vma:AllTicketsViewModel}">
         <vwa:AllTicketsView/>
     </DataTemplate>
@@ -51,6 +54,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmn:NewComputerViewModel}">
         <vwn:NewComputerView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewHardDriveViewModel}">
+        <vwn:NewHardDriveView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmn:NewMonitorViewModel}">
         <vwn:NewMonitorView/>
@@ -114,6 +120,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vme:EditTicketViewModel}">
         <vwn:NewTicketView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditHardDriveViewModel}">
+        <vwn:NewHardDriveView/>
     </DataTemplate>
 
 

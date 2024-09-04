@@ -54,6 +54,7 @@
                             <Button Content="Drukarki" Command="{Binding ShowPrinterCommand}"/>
                             <Button Content="Telefony" Command="{Binding ShowPhoneCommand}"/>
                             <Button Content="Szafy Rack" Command="{Binding ShowRackCabinetCommand}"/>
+                            <Button Content="Dyski twarde" Command="{Binding ShowHardDriveCommand}"/>
                             <Button Content="Serwery" Command="{Binding ShowServersCommand}"/>
                             <Button Content="Karty Sim" Command="{Binding ShowSimCardCommand}"/>
                             <Button Content="Użytkownicy" Command="{Binding ShowUserCommand}"/>

@@ -65,9 +65,9 @@ namespace DatabaseRestApi.Controllers
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    Manufacturer = item.Manufacturer,
-                    Type = item.Type,
-                    Status = item.Status
+                    Manufacturer = (int)item.Manufacturer,
+                    Type = (int)item.Type,
+                    Status = (int)item.Status
                 }).FirstAsync();
             return Json(simcomponentVMs);
         }

@@ -14,6 +14,7 @@ using AdministrationApp.ViewModels.EditViewModel.Windows;
 using AdministrationApp.ViewModels.NewViewModel;
 using AdministrationApp.ViewModels.NewViewModel.Windows;
 using AdministrationApp.Views.AllWindows;
+using AdministrationApp.Views.NewViews;
 using AdministrationApp.Views.NewViews.Windows;
 using Data;
 using Data.Computers.CreateEditVMs;
@@ -183,6 +184,9 @@ namespace AdministrationApp.ViewModels
                 case "HardDriveModelAdd":
                     CreateHardDriveModelWindow();
                     break;
+                case "HardDrivesAdd":
+                    CreateHardDrive();
+                    break;
                 case "LicenseTypeAdd":
                     CreateLicenseTypeWindow();
                     break;
@@ -212,6 +216,9 @@ namespace AdministrationApp.ViewModels
                     break;
                 case "ChooseTicketStatus":
                     ShowTicketStatusWindow();
+                    break;
+                case "ChooseServer":
+                    ShowServersWindow();
                     break;
                 case "TicketTypeAdd":
                     CreateTicketTypeWindow();
@@ -441,6 +448,9 @@ namespace AdministrationApp.ViewModels
                 case "ChooseTicketCategory":
                     ShowTicketCategoryWindow();
                     break;
+                case "ChooseHardDriveModel":
+                    ShowHardDriveModelWindow();
+                    break;
                 case "TechnicianAdd":
                     CreateTechnicianWindow();
                     break;
@@ -456,6 +466,9 @@ namespace AdministrationApp.ViewModels
                     break;
                 case string n when n.StartsWith("HardDriveModelEdit"):
                     EditHardDriveModel(CutString(name));
+                    break;
+                case string n when n.StartsWith("HardDriveEdit"):
+                    EditHardDrive(CutString(name));
                     break;
                 case string n when n.StartsWith("LicenseTypeEdit"):
                     EditLicenseType(CutString(name));
@@ -574,6 +587,18 @@ namespace AdministrationApp.ViewModels
                     _ShowMonitorsCommand = new BaseCommand(() => ShowMonitors());
                 }
                 return _ShowMonitorsCommand;
+            }
+        }
+        private BaseCommand _ShowHardDriveCommand;
+        public ICommand ShowHardDriveCommand
+        {
+            get
+            {
+                if (_ShowHardDriveCommand == null)
+                {
+                    _ShowHardDriveCommand = new BaseCommand(() => ShowHardDrives());
+                }
+                return _ShowHardDriveCommand;
             }
         }
         private BaseCommand _ShowUserCommand;
@@ -730,6 +755,10 @@ namespace AdministrationApp.ViewModels
         private void CreateComputer()
         {
             CreateWorkspace<NewComputerViewModel>();
+        }  
+        private void CreateHardDrive()
+        {
+            CreateWorkspace<NewHardDriveViewModel>();
         }   
         private void CreateTicket()
         {
@@ -794,6 +823,10 @@ namespace AdministrationApp.ViewModels
         private void ShowMonitors()
         {
             ShowAllWorkspace<AllMonitorViewModel>();
+        }
+        private void ShowHardDrives()
+        {
+            ShowAllWorkspace<AllHardDrivesViewModel>();
         }
         private void ShowUsers()
         {
@@ -1023,6 +1056,10 @@ namespace AdministrationApp.ViewModels
         {
             CreateWindows<AllDictionaryWindow, AllComputerModelViewModelWindow>(window => new AllComputerModelViewModelWindow(window));
         }
+        private void ShowHardDriveModelWindow()
+        {
+            CreateWindows<AllDictionaryWindow, AllHardDriveModelViewModelWindow>(window => new AllHardDriveModelViewModelWindow(window));
+        }
 
         private void CreateComputerModelWindow()
         {
@@ -1039,6 +1076,10 @@ namespace AdministrationApp.ViewModels
         private void ShowTicketStatusWindow()
         {
             CreateWindows<AllDictionaryWindow, AllTicketStatuseViewModelWindow>(window => new AllTicketStatuseViewModelWindow(window));
+        }
+        private void ShowServersWindow()
+        {
+            CreateWindows<AllServersWindow, AllServersViewModel>(window => new AllServersViewModel(window));
         }
         private void ShowTicketCategoryWindow()
         {
@@ -1141,6 +1182,10 @@ namespace AdministrationApp.ViewModels
         private async void EditUser(string id)
         {
             await EditItem<UserCreateEditVM, EditUserViewModel>(id, URLs.USER_CEVM_ID, vm => new EditUserViewModel(vm));
+        }
+        private async void EditHardDrive(string id)
+        {
+            await EditItem<HardDriveCreateEditVM, EditHardDriveViewModel>(id, URLs.HARDDRIVE_CEVM_ID, vm => new EditHardDriveViewModel(vm));
         }
 
         private async void EditComputerType(string id)

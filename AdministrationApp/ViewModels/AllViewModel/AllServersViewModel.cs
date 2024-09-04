@@ -9,15 +9,21 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using System.Windows;
 
 namespace AdministrationApp.ViewModels.AllViewModel
 {
     public class AllServersViewModel : WszystkieViewModel<ServerVM>
     {
-
+        private Window _window;
         public AllServersViewModel() : base("Server")
         {
             Messenger.Default.Register<string>(this, open);
+        }
+        public AllServersViewModel(Window window) : base("Server")
+        {
+            Messenger.Default.Register<string>(this, open);
+            _window = window;
         }
         private void open(string name)
         {
@@ -178,7 +184,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override void send()
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send(ChosenItem);
+            _window.Close();
         }
     }
 }
