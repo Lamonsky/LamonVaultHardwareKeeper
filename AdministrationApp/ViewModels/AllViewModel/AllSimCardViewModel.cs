@@ -46,12 +46,95 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override void Filter()
         {
-            throw new NotImplementedException();
+            switch(FilterField)
+            {
+                default:
+                    List = new List<SimCardsVM>(
+                        List.Where(item =>
+                            (item.PinCode?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.PukCode?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Component?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.SerialNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.InventoryNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.PhoneNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Users?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Kod PIN":
+                    List = new List<SimCardsVM>(
+                        List.Where(item =>
+                            (item.PinCode?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Kod PUK":
+                    List = new List<SimCardsVM>(
+                        List.Where(item =>
+                            (item.PukCode?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Komponent":
+                    List = new List<SimCardsVM>(
+                        List.Where(item =>
+                            (item.Component?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer seryjny":
+                    List = new List<SimCardsVM>(
+                        List.Where(item =>
+                            (item.SerialNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer wewnętrzny":
+                    List = new List<SimCardsVM>(
+                        List.Where(item =>
+                            (item.InventoryNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer telefonu":
+                    List = new List<SimCardsVM>(
+                        List.Where(item =>
+                            (item.PhoneNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Status":
+                    List = new List<SimCardsVM>(
+                        List.Where(item =>
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Użytkownik":
+                    List = new List<SimCardsVM>(
+                        List.Where(item =>
+                            (item.Users?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+            }
         }
 
         public override List<string> GetComboBoxFilterList()
         {
-            return new List<string>();
+            return new List<string>
+            {
+                
+                "Kod PIN",
+                "Kod PUK",
+                "Komponent",
+                "Numer seryjny",
+                "Numer wewnętrzny",
+                "Numer telefonu",
+                "Status",
+                "Użytkownik"
+            };
         }
 
 

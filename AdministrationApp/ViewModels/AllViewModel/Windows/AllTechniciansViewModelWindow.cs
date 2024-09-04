@@ -53,12 +53,41 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override void Filter()
         {
-            throw new NotImplementedException();
+            switch (FilterField)
+            {
+                default:
+                    List = new List<TechnicianVM>(
+                        List.Where(item =>
+                            (item.Users?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Użytkownik":
+                    List = new List<TechnicianVM>(
+                        List.Where(item =>
+                            (item.Users?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Status":
+                    List = new List<TechnicianVM>(
+                        List.Where(item =>
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+            }
         }
 
         public override List<string> GetComboBoxFilterList()
         {
-            throw new NotImplementedException();
+            return new List<string>
+            {
+
+                "Użytkownik",
+                "Status",
+            };
         }
 
         public override async void load()

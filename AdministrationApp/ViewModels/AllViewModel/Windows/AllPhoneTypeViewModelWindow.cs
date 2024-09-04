@@ -47,12 +47,50 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override void Filter()
         {
-            throw new NotImplementedException();
+            switch (FilterField)
+            {
+                default:
+                    List = new List<PhoneTypeVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Comment?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Nazwa":
+                    List = new List<PhoneTypeVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Opis":
+                    List = new List<PhoneTypeVM>(
+                        List.Where(item =>
+                            (item.Comment?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Status":
+                    List = new List<PhoneTypeVM>(
+                        List.Where(item =>
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+            }
         }
 
         public override List<string> GetComboBoxFilterList()
         {
-            throw new NotImplementedException();
+            return new List<string>
+            {
+
+                "Nazwa",
+                "Opis",
+                "Status",
+            };
         }
 
         public override async void load()

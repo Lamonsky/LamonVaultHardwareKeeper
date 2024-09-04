@@ -31,7 +31,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {
             switch(FilterField)
             {
-                case "Wszędzie":
+                default:
                     List = new List<ComputersVM>(
                         List.Where(item =>
                             (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
@@ -142,7 +142,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
                         ).ToList()
                     );
                     break;
-                case "Użytkownik komputera":
+                case "Osoba odpowiedzialna":
                     List = new List<ComputersVM>(
                         List.Where(item =>
                             (item.User?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
@@ -156,7 +156,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         {            
             return new List<string>
             {
-                "Wszędzie",
+                
                 "Nazwa",
                 "Producent",
                 "Lokalizacja",
@@ -170,7 +170,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
                 "System operacyjny",
                 "Numer seryjny",
                 "Numer inwentarzowy",
-                "Użytkownik komputera"
+                "Osoba odpowiedzialna"
             };
         }
 

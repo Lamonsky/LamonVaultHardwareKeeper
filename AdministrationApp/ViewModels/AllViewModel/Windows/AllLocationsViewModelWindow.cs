@@ -56,13 +56,85 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
         }
         public override void Filter()
         {
-            //throw new NotImplementedException();
+            switch (FilterField)
+            {
+                default:
+                    List = new List<LocationVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Address?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.PostalCode?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.City?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Country?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.BuildingNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.RoomNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Nazwa":
+                    List = new List<LocationVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Adres":
+                    List = new List<LocationVM>(
+                        List.Where(item =>
+                            (item.Address?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Kod pocztowy":
+                    List = new List<LocationVM>(
+                        List.Where(item =>
+                            (item.PostalCode?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Miasto":
+                    List = new List<LocationVM>(
+                        List.Where(item =>
+                            (item.City?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Kraj":
+                    List = new List<LocationVM>(
+                        List.Where(item =>
+                            (item.Country?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer budynku":
+                    List = new List<LocationVM>(
+                        List.Where(item =>
+                            (item.BuildingNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer pokoju":
+                    List = new List<LocationVM>(
+                        List.Where(item =>
+                            (item.RoomNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+            };
         }
 
         public override List<string> GetComboBoxFilterList()
         {
-            //throw new NotImplementedException();
-            return new List<string> { "Nazwa", "Adres", "Kod pocztowy", "Miasto", "Kraj", "Numer budynku", "Numer pokoju" };
+            return new List<string> 
+            { 
+                "Nazwa", 
+                "Adres", 
+                "Kod pocztowy", 
+                "Miasto", 
+                "Kraj", 
+                "Numer budynku", 
+                "Numer pokoju" 
+            };
         }
 
         public override async void load()

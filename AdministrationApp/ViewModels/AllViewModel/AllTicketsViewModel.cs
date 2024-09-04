@@ -26,14 +26,87 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Filter()
         {
-            //throw new NotImplementedException();
+            switch (FilterField)
+            {
+                default:
+                    List = new List<TicketVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Type?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Category?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Location?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.User?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Owner?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Email?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Treść zgłoszenia":
+                    List = new List<TicketVM>(
+                       List.Where(item =>
+                           (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                       ).ToList()
+                       );
+                    break;
+                case "Typ zgłoszenia":
+                    List = new List<TicketVM>(
+                       List.Where(item =>
+                           (item.Type?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                       ).ToList()
+                       );
+                    break;
+                case "Kategoria":
+                    List = new List<TicketVM>(
+                       List.Where(item =>
+                           (item.Category?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                       ).ToList()
+                       );
+                    break;
+                case "Status":
+                    List = new List<TicketVM>(
+                       List.Where(item =>
+                           (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                       ).ToList()
+                       );
+                    break;
+                case "Lokalizacja":
+                    List = new List<TicketVM>(
+                       List.Where(item =>
+                           (item.Location?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                       ).ToList()
+                       );
+                    break;
+                case "Użytkownik":
+                    List = new List<TicketVM>(
+                       List.Where(item =>
+                           (item.User?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                       ).ToList()
+                       );
+                    break;
+                case "E-Mail":
+                    List = new List<TicketVM>(
+                       List.Where(item =>
+                           (item.Email?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                       ).ToList()
+                       );
+                    break;
+                case "Właściciel":
+                    List = new List<TicketVM>(
+                       List.Where(item =>
+                           (item.Owner?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                       ).ToList()
+                       );
+                    break;
+            }
+
         }
 
         public override List<string> GetComboBoxFilterList()
         {
             return new List<string>
             {
-                "Wszędzie",
+                
                 "Treść zgłoszenia",
                 "Typ zgłoszenia",
                 "Kategoria",

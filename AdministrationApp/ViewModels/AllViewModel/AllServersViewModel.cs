@@ -28,13 +28,122 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Filter()
         {
-            //throw new NotImplementedException();
+            switch (FilterField)
+            {
+                default:
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Location?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Manufacturer?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Model?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Processor?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Ram?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.OperatingSystem?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.SerialNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.InventoryNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.User?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Nazwa":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Lokalizacja":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.Location?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Status":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Producent":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.Manufacturer?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Model":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.Model?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Procesor":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.Processor?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "RAM":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.Ram?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "System operacyjny":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.OperatingSystem?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer seryjny":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.SerialNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer inwentarzowy":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.InventoryNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Osoba odpowiedzialna":
+                    List = new List<ServerVM>(
+                        List.Where(item =>
+                            (item.User?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+            }
         }
 
         public override List<string> GetComboBoxFilterList()
         {
-            //throw new NotImplementedException();
-            return new List<string>();
+            return new List<string>
+            {
+                
+                "Nazwa",
+                "Lokalizacja",
+                "Producent",
+                "Status",
+                "Model",
+                "Procesor",
+                "RAM",
+                "System operacyjny",
+                "Numer seryjny",
+                "Numer inwentarzowy",
+                "Osoba odpowiedzialna"
+            };
         }
 
         public override async void load()

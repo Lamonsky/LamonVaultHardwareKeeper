@@ -46,12 +46,68 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override void Filter()
         {
-            throw new NotImplementedException();
+            switch(FilterField)
+            {
+                default:
+                    List = new List<SoftwaresVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Location?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Publisher?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Users?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Nazwa":
+                    List = new List<SoftwaresVM>(
+                        List.Where(item =>
+                            (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Lokalizacja":
+                    List = new List<SoftwaresVM>(
+                        List.Where(item =>
+                            (item.Location?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Dostawca":
+                    List = new List<SoftwaresVM>(
+                        List.Where(item =>
+                            (item.Publisher?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Osoba odpowiedzialna":
+                    List = new List<SoftwaresVM>(
+                        List.Where(item =>
+                            (item.Users?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Status":
+                    List = new List<SoftwaresVM>(
+                        List.Where(item =>
+                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+            }
         }
 
         public override List<string> GetComboBoxFilterList()
         {
-            return new List<string>();
+            return new List<string>
+            {
+                
+                "Nazwa",
+                "Lokalizacja",
+                "Dostawca",
+                "Osoba odpowiedzialna",
+                "Status"
+            };
         }
 
         public async override void load()

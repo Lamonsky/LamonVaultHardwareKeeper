@@ -27,13 +27,104 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Filter()
         {
-            //throw new NotImplementedException();
+            switch (FilterField)
+            {
+                default:
+                    List = new List<UserVM>(
+                        List.Where(item =>
+                            (item.Usersname?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.FirstName?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.LastName?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Location?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Email?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Phone1?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Phone2?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.InternalNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+                            (item.Position?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Login":
+                    List = new List<UserVM>(
+                        List.Where(item =>
+                            (item.Usersname?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Imię":
+                    List = new List<UserVM>(
+                        List.Where(item =>
+                            (item.FirstName?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Nazwisko":
+                    List = new List<UserVM>(
+                        List.Where(item =>
+                            (item.LastName?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Lokalizacja":
+                    List = new List<UserVM>(
+                        List.Where(item =>
+                            (item.Location?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Email":
+                    List = new List<UserVM>(
+                        List.Where(item =>
+                            (item.Email?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer telefonu 1":
+                    List = new List<UserVM>(
+                        List.Where(item =>
+                            (item.Phone1?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer telefonu 2":
+                    List = new List<UserVM>(
+                        List.Where(item =>
+                            (item.Phone2?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Numer wewnętrzny":
+                    List = new List<UserVM>(
+                        List.Where(item =>
+                            (item.InternalNumber?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+                case "Pozycja":
+                    List = new List<UserVM>(
+                        List.Where(item =>
+                            (item.Position?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
+                        ).ToList()
+                    );
+                    break;
+            }
         }
 
         public override List<string> GetComboBoxFilterList()
         {
-            //throw new NotImplementedException();
-            return new List<string>();
+            return new List<string>
+            {
+                
+                "Login",
+                "Imię",
+                "Nazwisko",
+                "Lokalizacja",
+                "Email",
+                "Numer telefonu 1",
+                "Numer telefonu 2",
+                "Numer wewnętrzny",
+                "Pozycja"
+            };
         }
 
         public override async void load()
@@ -62,7 +153,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", ChosenUser.Id.ToString()), HttpMethod.Delete, ChosenUser, null);
+            await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", ChosenUser.Id.ToString()), HttpMethod.Delete, ChosenUser, GlobalData.AccessToken);
             load();
         }
 
