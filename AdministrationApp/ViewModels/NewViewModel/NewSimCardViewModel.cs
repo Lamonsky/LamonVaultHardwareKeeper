@@ -19,17 +19,17 @@ namespace AdministrationApp.ViewModels.NewViewModel
         private BaseCommand _ChooseUserCommand;
         private BaseCommand _ChooseStatusCommand;
         private BaseCommand _ChooseManufacturerCommand;
-        private BaseCommand _ChooseSimComponentTypeCommand;
+        private BaseCommand _ChooseSimComponentCommand;
 
-        public ICommand ChooseSimComponentTypeCommand
+        public ICommand ChooseSimComponentCommand
         {
             get
             {
-                if (_ChooseSimComponentTypeCommand == null)
+                if (_ChooseSimComponentCommand == null)
                 {
-                    _ChooseSimComponentTypeCommand = new BaseCommand(() => Messenger.Default.Send("ChooseSimComponentType"));
+                    _ChooseSimComponentCommand = new BaseCommand(() => Messenger.Default.Send("ChooseSimComponent"));
                 }
-                return _ChooseSimComponentTypeCommand;
+                return _ChooseSimComponentCommand;
             }
         }
         public ICommand ChooseManufacturerCommand

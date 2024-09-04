@@ -27,8 +27,11 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Lamon - Vault Hardware Keeper" Grid.Column="0"/>
                 <Menu Grid.Column="1">
-                    <MenuItem Header="_System"/>
                     <MenuItem Header="Podsumowanie" Command="{Binding ShowSummaryCommand}"/>
+                    <MenuItem Header="_System"/>
+                    <MenuItem Header="Komputery">
+                        <MenuItem Header="Modele komputerów" Command="{Binding ShowComputerModelCommand}"/>
+                    </MenuItem>
                 </Menu>
                 <TextBlock Text="{Binding EMail}" Grid.Column="2" HorizontalAlignment="Right"/>
             </Grid>

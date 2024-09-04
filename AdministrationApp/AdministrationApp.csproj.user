@@ -141,6 +141,9 @@
     <Page Update="Views\AllViews\SummaryView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AllWindows\AllSimComponentWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AllWindows\AllTechniciansWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -199,6 +202,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\NewViews\NewUserView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\Windows\NewSimComponentWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\NewViews\Windows\NewDictionaryWindow.xaml">

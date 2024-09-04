@@ -20,6 +20,18 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
     public class NewTechnicianViewModelWindow : JedenViewModel<TechnicianCreateEditVM>
     {
         private Window _window;
+        private BaseCommand _ChooseStatusCommand;
+        public ICommand ChooseStatusCommand
+        {
+            get
+            {
+                if (_ChooseStatusCommand == null)
+                {
+                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
+                }
+                return _ChooseStatusCommand;
+            }
+        }
         private BaseCommand _ChooseUserCommand;
         public ICommand ChooseUserCommand
         {
@@ -37,6 +49,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         {
             item = new TechnicianCreateEditVM();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
+            Messenger.Default.Register<StatusVM>(this, getStatus);
             _window = window;
         }
         public override async void Save()
@@ -51,9 +64,10 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         #endregion
         #region CommandsFunctions
 
-        private async void getStatusItems()
+        private void getStatus(StatusVM vm)
         {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, GlobalData.AccessToken);
+            item.Status = vm.Id;
+            StatusName = vm.Name;
         }
         private async void getChosenUser(UserVM vm)
         {
@@ -63,6 +77,22 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
 
         #endregion
         #region Dane
+        private string _StatusName;
+        public string StatusName
+        {
+            get
+            {
+                return _StatusName;
+            }
+            set
+            {
+                if (_StatusName != value)
+                {
+                    _StatusName = value;
+                    OnPropertyChanged(() => StatusName);
+                }
+            }
+        }
         private string _UserName;
         public string UserName
         {
@@ -110,23 +140,6 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
                 OnPropertyChanged(() => UsersId);
             }
         }        
-        private List<StatusVM> _statusComboBoxItems;
-        public List<StatusVM> statusComboBoxItems
-        {
-            get
-            {
-                if (_statusComboBoxItems == null)
-                {
-                    getStatusItems();
-                }
-                return _statusComboBoxItems;
-            }
-            set
-            {
-                _statusComboBoxItems = value;
-                OnPropertyChanged(() => statusComboBoxItems);
-            }
-        }
         #endregion
     }
 }

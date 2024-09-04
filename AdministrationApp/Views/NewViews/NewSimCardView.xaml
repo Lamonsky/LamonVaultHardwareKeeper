@@ -47,11 +47,12 @@
 						<ColumnDefinition Width="3*"/>
 						<ColumnDefinition Width="1*"/>
 					</Grid.ColumnDefinitions>
-					<TextBlock Grid.Column="0" Text="{Binding Path=SimComponentTypeName}"/>
-					<Button Grid.Column="1" Command="{Binding Path=ChooseSimComponentTypeCommand}">
+					<TextBlock Grid.Column="0" Text="{Binding Path=SimComponentName}"/>
+					<Button Grid.Column="1" Command="{Binding Path=ChooseSimComponentCommand}">
 						<ui:SymbolIcon Symbol="LocationAdd16"/>
 					</Button>
-				</Grid>                <TextBlock Grid.Row="1" Grid.Column="1" Text="Kod PIN:"/>
+				</Grid>                
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Kod PIN:"/>
                 <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Path=PinCode, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="Kod PUK:"/>
                 <TextBox Grid.Row="1" Grid.Column="5" Text="{Binding Path=PukCode, UpdateSourceTrigger=PropertyChanged}"/>

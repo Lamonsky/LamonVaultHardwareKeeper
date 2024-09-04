@@ -6,16 +6,30 @@ using Data;
 using GalaSoft.MvvmLight.Messaging;
 using System.Net.Http;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
     public class NewComputerModelViewModel : JedenViewModel<ComputerModelCreateEditVM>
     {
         private Window _window;
+        private BaseCommand _ChooseStatusCommand;
+        public ICommand ChooseStatusCommand
+        {
+            get
+            {
+                if (_ChooseStatusCommand == null)
+                {
+                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
+                }
+                return _ChooseStatusCommand;
+            }
+        }
         #region Konstruktor
         public NewComputerModelViewModel(Window window) : base("ComputerModel")
         {
             item = new ComputerModelCreateEditVM();
+            Messenger.Default.Register<StatusVM>(this, getStatus);
             _window = window;
         }
         public override async void Save()
@@ -30,13 +44,30 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         #endregion
         #region CommandsFunctions
 
-        private async void getStatusItems()
+        private void getStatus(StatusVM vm)
         {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, GlobalData.AccessToken);
+            item.Status = vm.Id;
+            StatusName = vm.Name;
         }
 
         #endregion
         #region Dane
+        private string _StatusName;
+        public string StatusName
+        {
+            get
+            {
+                return _StatusName;
+            }
+            set
+            {
+                if (_StatusName != value)
+                {
+                    _StatusName = value;
+                    OnPropertyChanged(() => StatusName);
+                }
+            }
+        }
         public int Id
         {
             get
@@ -78,23 +109,6 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             {
                 item.Name = value;
                 OnPropertyChanged(() => Name);
-            }
-        }
-        private List<StatusVM> _statusComboBoxItems;
-        public List<StatusVM> statusComboBoxItems
-        {
-            get
-            {
-                if (_statusComboBoxItems == null)
-                {
-                    getStatusItems();
-                }
-                return _statusComboBoxItems;
-            }
-            set
-            {
-                _statusComboBoxItems = value;
-                OnPropertyChanged(() => statusComboBoxItems);
             }
         }
         #endregion

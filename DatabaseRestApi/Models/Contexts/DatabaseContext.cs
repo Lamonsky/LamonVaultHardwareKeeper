@@ -80,6 +80,8 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<OperatingSystem> OperatingSystems { get; set; }
 
+    public virtual DbSet<PageContent> PageContents { get; set; }
+
     public virtual DbSet<Phone> Phones { get; set; }
 
     public virtual DbSet<PhoneModel> PhoneModels { get; set; }

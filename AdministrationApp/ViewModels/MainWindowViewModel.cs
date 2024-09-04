@@ -103,28 +103,16 @@ namespace AdministrationApp.ViewModels
         where W : Window, new()
         where VM : class
         {
-            // Sprawdzenie, czy okno już istnieje w otwartych oknach aplikacji.
-            W existingWindow = Application.Current.Windows.OfType<W>().FirstOrDefault();
+            // Tworzenie nowego okna.
+            W window = new W();
 
-            if (existingWindow != null)
-            {
-                // Jeśli okno już istnieje, aktywujemy je i ustawiamy na wierzchu.
-                existingWindow.Activate();
-                existingWindow.Focus();
-            }
-            else
-            {
-                // Tworzenie nowego okna.
-                W window = new W();
+            // Tworzenie ViewModelu z użyciem fabryki, która przyjmuje instancję okna.
+            VM viewModel = viewModelFactory(window);
 
-                // Tworzenie ViewModelu z użyciem fabryki, która przyjmuje instancję okna.
-                VM viewModel = viewModelFactory(window);
+            // Przypisanie ViewModelu do DataContext okna.
+            window.DataContext = viewModel;
 
-                // Przypisanie ViewModelu do DataContext okna.
-                window.DataContext = viewModel;
-
-                window.Show();
-            }
+            window.Show();
         }
         private async Task EditItem<TViewModel, TWorkspace>(string id, string urlTemplate, Func<TViewModel, TWorkspace> createWorkspace)
         where TWorkspace : WorkspaceViewModel
@@ -406,11 +394,17 @@ namespace AdministrationApp.ViewModels
                 case "SimComponentTypeAdd":
                     CreateSimComponentTypeWindow();
                     break;
+                case "SimComponentAdd":
+                    CreateSimComponentWindow();
+                    break;
                 case "ChooseSimCard":
                     ShowSimCardWindow();
                     break;
                 case "ChooseSimComponentType":
                     ShowSimComponentTypeWindow();
+                    break;
+                case "ChooseSimComponent":
+                    ShowSimComponentWindow();
                     break;
                 case string n when n.StartsWith("Karty SimEdit"):
                     EditSimCard(CutString(name));
@@ -431,6 +425,9 @@ namespace AdministrationApp.ViewModels
                     break;
                 case "ChooseOperatingSystem":
                     ShowOperatingSystemWindow();
+                    break;
+                case "ChoosePosition":
+                    ShowPositionWindow();
                     break;
                 case "StatusAdd":
                     CreateStatusWindow();
@@ -505,6 +502,9 @@ namespace AdministrationApp.ViewModels
                 case string n when n.StartsWith("SimComponentTypeEdit"):
                     EditSimComponentType(CutString(name));
                     break;
+                case string n when n.StartsWith("SimComponentEdit"):
+                    EditSimComponent(CutString(name));
+                    break;
                 case string n when n.StartsWith("StatusEdit"):
                     EditStatus(CutString(name));
                     break;
@@ -550,6 +550,18 @@ namespace AdministrationApp.ViewModels
                     _ShowComputersCommand = new BaseCommand(() => ShowComputers());
                 }
                 return _ShowComputersCommand;
+            }
+        }
+        private BaseCommand _ShowComputerModelCommand;
+        public ICommand ShowComputerModelCommand
+        {
+            get
+            {
+                if (_ShowComputerModelCommand == null)
+                {
+                    _ShowComputerModelCommand = new BaseCommand(() => ShowComputerModelWindow());
+                }
+                return _ShowComputerModelCommand;
             }
         }
         private BaseCommand _ShowMonitorsCommand;
@@ -869,10 +881,18 @@ namespace AdministrationApp.ViewModels
         {
             CreateWindows<AllDictionaryWindow, AllSimComponentTypeViewModelWindow>(window => new AllSimComponentTypeViewModelWindow(window));
         }
+        private void ShowSimComponentWindow()
+        {
+            CreateWindows<AllSimComponentWindow, AllSimComponentViewModelWindow>(window => new AllSimComponentViewModelWindow(window));
+        }
 
         private void CreateSimComponentTypeWindow()
         {
             CreateWindows<NewDictionaryWindow, NewSimComponentTypeViewModel>(window => new NewSimComponentTypeViewModel(window));
+        }
+        private void CreateSimComponentWindow()
+        {
+            CreateWindows<NewSimComponentWindow, NewSimComponentViewModel>(window => new NewSimComponentViewModel(window));
         }
 
         private void ShowRackCabinetTypeWindow()
@@ -978,6 +998,10 @@ namespace AdministrationApp.ViewModels
         private void ShowOperatingSystemWindow()
         {
             CreateWindows<AllDictionaryWindow, AllOperatingSystemViewModelWindow>(window => new AllOperatingSystemViewModelWindow(window));
+        }
+        private void ShowPositionWindow()
+        {
+            CreateWindows<AllDictionaryWindow, AllPositionViewModelWindow>(window => new AllPositionViewModelWindow(window));
         }
 
         private void CreateOperatingSystemWindow()
@@ -1328,6 +1352,15 @@ namespace AdministrationApp.ViewModels
                 id,
                 URLs.SIMCOMPONENTTYPE_CEVM_ID,
                 (window, vm) => new EditSimComponentTypeViewModel(window, vm)
+            );
+        }
+        
+        private async void EditSimComponent(string id)
+        {
+            await EditItemWindow<SimComponentCreateEditVM, EditSimComponentViewModel, NewSimComponentWindow>(
+                id,
+                URLs.SIMCOMPONENT_CEVM_ID,
+                (window, vm) => new EditSimComponentViewModel(window, vm)
             );
         }
 

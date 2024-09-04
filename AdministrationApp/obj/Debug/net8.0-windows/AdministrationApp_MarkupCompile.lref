@@ -18,6 +18,7 @@ FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administratio
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllDictionaryWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllLocationsWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllSimCardWindow.xaml;;
+FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllSimComponentWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllStatusWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllTechniciansWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllUsersWindow.xaml;;
@@ -36,6 +37,7 @@ FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administratio
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewUserView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\Windows\NewDictionaryWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\Windows\NewLocationWindow.xaml;;
+FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\Windows\NewSimComponentWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\Windows\NewTechnicianWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\Resources\ViewResources.xaml;;
 

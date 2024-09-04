@@ -97,6 +97,9 @@ namespace AdministrationApp.ViewModels.NewViewModel
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<PrinterTypeVM>(this, getPrinterType);
+            Messenger.Default.Register<PrinterModelVM>(this, getPrinterModel);
+            Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
+            Messenger.Default.Register<StatusVM>(this, getStatus);
         }
         public override async void Save()
         {
@@ -114,10 +117,10 @@ namespace AdministrationApp.ViewModels.NewViewModel
             UserName = vM.FirstName + " " + vM.LastName + " " + vM.InternalNumber + " " + vM.Position;
         }
 
-        private async void getModelItems()
+        private async void getPrinterModel(PrinterModelVM vm)
         {
-            modelComboBoxItems = await RequestHelper.SendRequestAsync<object, List<PrinterModelVM>>(URLs.PRINTERMODEL, HttpMethod.Get, null, GlobalData.AccessToken);
-
+            item.Model = vm.Id;
+            ModelName = vm.Name;
         }
 
         private async void getPrinterType(PrinterTypeVM vM)
@@ -126,19 +129,20 @@ namespace AdministrationApp.ViewModels.NewViewModel
             PrinterTypeName = vM.Name;
         }
 
-        private async void getStatusItems()
+        private async void getManufacturer(ManufacturerVM vm)
         {
-            statusComboBoxItems = await RequestHelper.SendRequestAsync<object, List<StatusVM>>(URLs.STATUS, HttpMethod.Get, null, GlobalData.AccessToken);
-        }
-
-        private async void getProducentItems()
-        {
-            manufacturerComboBoxItems = await RequestHelper.SendRequestAsync<object, List<ManufacturerVM>>(URLs.MANUFACTURER, HttpMethod.Get, null, GlobalData.AccessToken);
+            item.Manufacturer = vm.Id;
+            ManufacturerName = vm.Name;
         }
         private void getChosenLokacja(LocationVM vM)
         {
             item.LocationId = vM.Id;
             LokacjaName = vM.Name;
+        }
+        private void getStatus(StatusVM vM)
+        {
+            item.StatusId = vM.Id;
+            StatusName = vM.Name;
         }
 
         #endregion
@@ -279,7 +283,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_LokacjaName == null)
+                if (_LokacjaName != value)
                 {
                     _LokacjaName = value;
                     OnPropertyChanged(() => LokacjaName);
@@ -295,7 +299,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_PrinterTypeName == null)
+                if (_PrinterTypeName != value)
                 {
                     _PrinterTypeName = value;
                     OnPropertyChanged(() => PrinterTypeName);
@@ -311,67 +315,59 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);
                 }
             }
         }
-        #endregion
-        #region Foreign Keys
-        private List<ManufacturerVM> _manufacturerComboBoxItems;
-        public List<ManufacturerVM> manufacturerComboBoxItems
+        private string _ManufacturerName;
+        public string ManufacturerName
         {
             get
             {
-                //jak lista....
-                if (_manufacturerComboBoxItems == null)
-                {
-                    getProducentItems();
-                }
-                return _manufacturerComboBoxItems;
+                return _ManufacturerName;
             }
             set
             {
-                _manufacturerComboBoxItems = value;
-                OnPropertyChanged(() => manufacturerComboBoxItems);
+                if (_ManufacturerName != value)
+                {
+                    _ManufacturerName = value;
+                    OnPropertyChanged(() => ManufacturerName);
+                }
             }
         }
-        private List<StatusVM> _statusComboBoxItems;
-        public List<StatusVM> statusComboBoxItems
+        private string _ModelName;
+        public string ModelName
         {
             get
             {
-                //jak lista....
-                if (_statusComboBoxItems == null)
-                {
-                    getStatusItems();
-                }
-                return _statusComboBoxItems;
+                return _ModelName;
             }
             set
             {
-                _statusComboBoxItems = value;
-                OnPropertyChanged(() => statusComboBoxItems);
+                if (_ModelName != value)
+                {
+                    _ModelName = value;
+                    OnPropertyChanged(() => ModelName);
+                }
             }
         }
-        private List<PrinterModelVM> _modelComboBoxItems;
-        public List<PrinterModelVM> modelComboBoxItems
+        private string _StatusName;
+        public string StatusName
         {
             get
             {
-                //jak lista....
-                if (_modelComboBoxItems == null)
-                {
-                    getModelItems();
-                }
-                return _modelComboBoxItems;
+                return _StatusName;
             }
             set
             {
-                _modelComboBoxItems = value;
-                OnPropertyChanged(() => modelComboBoxItems);
+                if (_StatusName != value)
+                {
+                    _StatusName = value;
+                    OnPropertyChanged(() => StatusName);
+                }
             }
         }
         #endregion

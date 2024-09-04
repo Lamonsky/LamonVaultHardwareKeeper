@@ -202,5 +202,9 @@ namespace Data
         public const string TECHNICIAN_CEVM_ID = "/technician/cevm/{id}";
 
 
+        public const string PAGECONTENT = "/pagecontent";
+        public const string PAGECONTENT_ID = "/pagecontent/{id}";
+        public const string PAGECONTENT_CEVM_ID = "/pagecontent/devm/{id}";
+
     }
 }

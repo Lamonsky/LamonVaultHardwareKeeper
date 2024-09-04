@@ -30,6 +30,9 @@
     <Compile Update="Views\AllViews\MyTicketsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AllWindows\AllSimComponentWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AllWindows\AllTechniciansWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +40,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\AllWindows\AllLocationsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewViews\Windows\NewSimComponentWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
