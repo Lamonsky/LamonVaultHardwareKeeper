@@ -48,7 +48,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item = vm;
             oldItem = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<PositionVM>(this, getPosition);
         }
@@ -57,17 +57,39 @@ namespace AdministrationApp.ViewModels.EditViewModel
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
             EditSaveLogs(oldItem, item);
-            await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(
+                URLs.USER_ID.Replace("{id}", item.Id.ToString()), 
+                HttpMethod.Put, 
+                item, 
+                GlobalData.AccessToken);
             Messenger.Default.Send("UsersRefresh");
         }
         #endregion
         #region CommandsFunctions
         public async void setForeignKeys()
         {
-            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            PositionVM positionVM = await RequestHelper.SendRequestAsync<object, PositionVM>(URLs.POSITION_ID.Replace("{id}", item.Position.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            LokacjaName = locationVM.Name;
-            PositionName = positionVM.Name;
+            if (item.LocationId != null)
+            {
+                LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
+                    URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                LokacjaName = locationVM.Name;
+            }
+
+            if (item.Position != null)
+            {
+                PositionVM positionVM = await RequestHelper.SendRequestAsync<object, PositionVM>(
+                    URLs.POSITION_ID.Replace("{id}", item.Position.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                PositionName = positionVM.Name;
+            }
+
         }
 
         private void getChosenLokacja(LocationVM vM)

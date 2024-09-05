@@ -16,6 +16,9 @@
     <Compile Update="Views\AllViews\AllHardDriveView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AllViews\AllLicenseView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AllViews\AllMonitorView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -123,6 +126,9 @@
     <Page Update="Views\AllViews\AllHardDriveView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AllViews\AllLicenseView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AllViews\AllPageContentView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -177,6 +183,9 @@
     <Page Update="Views\AllWindows\AllSimComponentWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AllWindows\AllSoftwareWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AllWindows\AllTechniciansWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -202,6 +211,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllViews\AllPrinterView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\NewLicenseView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\NewViews\NewPageContentView.xaml">

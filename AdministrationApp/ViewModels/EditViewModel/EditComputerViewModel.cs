@@ -105,7 +105,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             oldItemJson = JsonSerializer.Serialize(vm);
             item = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<ComputerTypeVM>(this, getComputerType);
@@ -117,20 +117,83 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         public async void setForeignKeys()
         {
-            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.UserId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ComputerTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, ComputerTypeVM>(URLs.COMPUTERTYPE_ID.Replace("{id}", item.ComputerTypeId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ComputerModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, ComputerModelVM>(URLs.COMPUTERMODEL_ID.Replace("{id}", item.ComputerModelId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.ManufacturerId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            OperatingSystemVM osvm = await RequestHelper.SendRequestAsync<object, OperatingSystemVM>(URLs.OPERATINGSYSTEM_ID.Replace("{id}", item.OperatingSystemId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            StatusName = statusvm.Name;
-            OperatingSystemName = osvm.Name;
-            LokacjaName = locationVM.Name;
-            UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
-            ComputerTypeName = ctypevm.Name;
-            ManufacturerName = manufacturerVM.Name;
-            ComputerModelName = cmodelvm.Name;
+            if (item.StatusId != null)
+            {
+                StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                    URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                StatusName = statusvm.Name;
+            }
+
+            if (item.LocationId != null)
+            {
+                LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
+                    URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                LokacjaName = locationVM.Name;
+            }
+
+            if (item.UserId != null)
+            {
+                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                    URLs.USER_ID.Replace("{id}", item.UserId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+            }
+
+            if (item.ComputerTypeId != null)
+            {
+                ComputerTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, ComputerTypeVM>(
+                    URLs.COMPUTERTYPE_ID.Replace("{id}", item.ComputerTypeId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ComputerTypeName = ctypevm.Name;
+            }
+
+            if (item.ComputerModelId != null)
+            {
+                ComputerModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, ComputerModelVM>(
+                    URLs.COMPUTERMODEL_ID.Replace("{id}", item.ComputerModelId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ComputerModelName = cmodelvm.Name;
+            }
+
+            if (item.ManufacturerId != null)
+            {
+                ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                    URLs.MANUFACTURER_ID.Replace("{id}", item.ManufacturerId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ManufacturerName = manufacturerVM.Name;
+            }
+
+            if (item.OperatingSystemId != null)
+            {
+                OperatingSystemVM osvm = await RequestHelper.SendRequestAsync<object, OperatingSystemVM>(
+                    URLs.OPERATINGSYSTEM_ID.Replace("{id}", item.OperatingSystemId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                OperatingSystemName = osvm.Name;
+            }
+
         }
         public override async void Save()
         {

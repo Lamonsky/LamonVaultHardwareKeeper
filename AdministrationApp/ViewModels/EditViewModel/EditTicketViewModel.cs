@@ -96,7 +96,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item = vm;
             oldItem = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<TicketStatusVM>(this, getStatus);
             Messenger.Default.Register<TicketCategoryVM>(this, getTicketCategory);
@@ -106,17 +106,62 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         public async void setForeignKeys()
         {
-            UserVM uvm = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.User.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            TicketStatusVM tsvm = await RequestHelper.SendRequestAsync<object, TicketStatusVM>(URLs.TICKETSTATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            TicketCategoryVM tcvm = await RequestHelper.SendRequestAsync<object, TicketCategoryVM>(URLs.TICKETCATEGORY_ID.Replace("{id}", item.Category.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            TicketTypeVM ttvm = await RequestHelper.SendRequestAsync<object, TicketTypeVM>(URLs.TICKETTYPE_ID.Replace("{id}", item.Type.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            TechnicianVM tvm = await RequestHelper.SendRequestAsync<object, TechnicianVM>(URLs.TECHNICIAN_ID.Replace("{id}", item.Owner.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            UserName = uvm.FirstName + " " + uvm.LastName + " " + uvm.InternalNumber + " " + uvm.Position;
-            StatusName = tsvm.Name;
-            CategoryName = tcvm.Name;
-            TicketTypeName = ttvm.Name;
-            OwnerName = tvm.Users;
-    
+            if (item.User != null)
+            {
+                UserVM uvm = await RequestHelper.SendRequestAsync<object, UserVM>(
+                    URLs.USER_ID.Replace("{id}", item.User.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                UserName = uvm.FirstName + " " + uvm.LastName + " " + uvm.InternalNumber + " " + uvm.Position;
+            }
+
+            if (item.StatusId != null)
+            {
+                TicketStatusVM tsvm = await RequestHelper.SendRequestAsync<object, TicketStatusVM>(
+                    URLs.TICKETSTATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                StatusName = tsvm.Name;
+            }
+
+            if (item.Category != null)
+            {
+                TicketCategoryVM tcvm = await RequestHelper.SendRequestAsync<object, TicketCategoryVM>(
+                    URLs.TICKETCATEGORY_ID.Replace("{id}", item.Category.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                CategoryName = tcvm.Name;
+            }
+
+            if (item.Type != null)
+            {
+                TicketTypeVM ttvm = await RequestHelper.SendRequestAsync<object, TicketTypeVM>(
+                    URLs.TICKETTYPE_ID.Replace("{id}", item.Type.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                TicketTypeName = ttvm.Name;
+            }
+
+            if (item.Owner != null)
+            {
+                TechnicianVM tvm = await RequestHelper.SendRequestAsync<object, TechnicianVM>(
+                    URLs.TECHNICIAN_ID.Replace("{id}", item.Owner.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                OwnerName = tvm.Users;
+            }
+
+
         }
         public override async void Save()
         {

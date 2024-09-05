@@ -49,6 +49,7 @@
                             <Button Content="Komputery" Command="{Binding ShowComputersCommand}"/>
                             <Button Content="Monitory" Command="{Binding ShowMonitorsCommand}"/>
                             <Button Content="Oprogramowanie" Command="{Binding ShowSoftwareCommand}"/>
+                            <Button Content="Licencje" Command="{Binding ShowLicenseCommand}"/>
                             <Button Content="Urządzenia sieciowe" Command="{Binding ShowNetworkDeviceCommand}"/>
                             <Button Content="Urządzenia" Command="{Binding ShowDeviceCommand}"/>
                             <Button Content="Drukarki" Command="{Binding ShowPrinterCommand}"/>

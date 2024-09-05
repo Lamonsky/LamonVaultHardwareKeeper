@@ -32,14 +32,17 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         {
             item = vm;
             oldItem = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<StatusVM>(this, getStatus);
             _window = window;
         }
         private async void setForeignKeys()
         {
-            StatusVM vm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.Status.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            StatusName = vm.Name;
+            if (item.Status != null)
+            {
+                StatusVM vm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.Status.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+                StatusName = vm.Name;
+            }
         }
         public override async void Save()
         {

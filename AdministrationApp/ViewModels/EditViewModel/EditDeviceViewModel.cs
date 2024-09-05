@@ -79,7 +79,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item = vm;
             oldItem = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<DeviceModelVM>(this, getDeviceModel);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
@@ -98,16 +98,61 @@ namespace AdministrationApp.ViewModels.EditViewModel
         #region CommandsFunctions
         public async void setForeignKeys()
         {
-            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            DeviceTypeVM typevm = await RequestHelper.SendRequestAsync<object, DeviceTypeVM>(URLs.DEVICETYPE_ID.Replace("{id}", item.DeviceType.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            DeviceModelVM modelvm = await RequestHelper.SendRequestAsync<object, DeviceModelVM>(URLs.DEVICEMODEL_ID.Replace("{id}", item.Model.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            StatusName = statusvm.Name;
-            UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
-            DeviceTypeName = typevm.Name;
-            ManufacturerName = manufacturerVM.Name;
-            DeviceModelName = modelvm.Name;
+            if (item.StatusId != null)
+            {
+                StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                    URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                StatusName = statusvm.Name;
+            }
+
+            if (item.Users != null)
+            {
+                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                    URLs.USER_ID.Replace("{id}", item.Users.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+            }
+
+            if (item.DeviceType != null)
+            {
+                DeviceTypeVM typevm = await RequestHelper.SendRequestAsync<object, DeviceTypeVM>(
+                    URLs.DEVICETYPE_ID.Replace("{id}", item.DeviceType.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                DeviceTypeName = typevm.Name;
+            }
+
+            if (item.Model != null)
+            {
+                DeviceModelVM modelvm = await RequestHelper.SendRequestAsync<object, DeviceModelVM>(
+                    URLs.DEVICEMODEL_ID.Replace("{id}", item.Model.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                DeviceModelName = modelvm.Name;
+            }
+
+            if (item.Manufacturer != null)
+            {
+                ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                    URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ManufacturerName = manufacturerVM.Name;
+            }
+
         }
         private void getStatus(StatusVM vm)
         {

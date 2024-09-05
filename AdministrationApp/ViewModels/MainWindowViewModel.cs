@@ -194,6 +194,12 @@ namespace AdministrationApp.ViewModels
                 case "LicenseTypeAdd":
                     CreateLicenseTypeWindow();
                     break;
+                case "ChooseLicenseType":
+                    ShowLicenseTypeWindow();
+                    break;
+                case "LicencjeAdd":
+                    CreateLicense();
+                    break;
                 case "LocationsAdd":
                     CreateLocationsWindow();
                     break;
@@ -476,6 +482,9 @@ namespace AdministrationApp.ViewModels
                 case "TechnicianAdd":
                     CreateTechnicianWindow();
                     break;
+                case "ChooseSoftware":
+                    ShowSoftwareWindow();
+                    break;
                 // Pozostałe edycje
                 case string n when n.StartsWith("ComputerModelEdit"):
                     EditComputerModel(CutString(name));
@@ -494,6 +503,9 @@ namespace AdministrationApp.ViewModels
                     break;
                 case string n when n.StartsWith("LicenseTypeEdit"):
                     EditLicenseType(CutString(name));
+                    break;
+                case string n when n.StartsWith("LicencjeEdit"):
+                    EditLicense(CutString(name));
                     break;
                 case string n when n.StartsWith("ManufacturerEdit"):
                     EditManufacturer(CutString(name));
@@ -585,6 +597,18 @@ namespace AdministrationApp.ViewModels
                     _ShowComputersCommand = new BaseCommand(() => ShowComputers());
                 }
                 return _ShowComputersCommand;
+            }
+        }
+        private BaseCommand _ShowLicenseCommand;
+        public ICommand ShowLicenseCommand
+        {
+            get
+            {
+                if (_ShowLicenseCommand == null)
+                {
+                    _ShowLicenseCommand = new BaseCommand(() => ShowLicense());
+                }
+                return _ShowLicenseCommand;
             }
         }
         private BaseCommand _ShowPageContentCommand;
@@ -854,6 +878,10 @@ namespace AdministrationApp.ViewModels
         {
             ShowAllWorkspace<AllComputerViewModel>();
         }
+        private void ShowLicense()
+        {
+            ShowAllWorkspace<AllLicenseViewModel>();
+        }
         private void ShowNetworkDevice()
         {
             ShowAllWorkspace<AllNetworkDeviceViewModel>();
@@ -881,6 +909,10 @@ namespace AdministrationApp.ViewModels
         private void CreatePageContent()
         {
             CreateWorkspace<NewPageContentViewModel>();
+        }
+        private void CreateLicense()
+        {
+            CreateWorkspace<NewLicenseViewModel>();
         }
         private void ShowMonitors()
         {
@@ -925,6 +957,10 @@ namespace AdministrationApp.ViewModels
         private void ShowPrinterTypeWindow()
         {
             CreateWindows<AllDictionaryWindow, AllPrinterTypeViewModelWindow>(window => new AllPrinterTypeViewModelWindow(window));
+        }
+        private void ShowSoftwareWindow()
+        {
+            CreateWindows<AllSoftwareWindow, AllSoftwareViewModel>(window => new AllSoftwareViewModel(window));
         }
         
         private void CreateStatusWindow()
@@ -1139,6 +1175,10 @@ namespace AdministrationApp.ViewModels
         {
             CreateWindows<AllDictionaryWindow, AllTicketTypeViewModelWindow>(window => new AllTicketTypeViewModelWindow(window));
         }
+        private void ShowLicenseTypeWindow()
+        {
+            CreateWindows<AllDictionaryWindow, AllLicenseTypeViewModelWindow>(window => new AllLicenseTypeViewModelWindow(window));
+        }
         private void ShowTicketStatusWindow()
         {
             CreateWindows<AllDictionaryWindow, AllTicketStatuseViewModelWindow>(window => new AllTicketStatuseViewModelWindow(window));
@@ -1192,6 +1232,10 @@ namespace AdministrationApp.ViewModels
         private async void EditComputer(string id)
         {
             await EditItem<ComputersCreateEditVM, EditComputerViewModel>(id, URLs.COMPUTERS_CEVM_ID, vm => new EditComputerViewModel(vm));
+        }
+        private async void EditLicense(string id)
+        {
+            await EditItem<LicenseCreateEditVM, EditLicenseViewModel>(id, URLs.LICENSE_CEVM_ID, vm => new EditLicenseViewModel(vm));
         }
         private async void EditServer(string id)
         {

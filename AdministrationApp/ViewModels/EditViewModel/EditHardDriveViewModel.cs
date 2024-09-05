@@ -72,7 +72,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item = vm;
             oldItem = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<ServerVM>(this, getServer);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
             Messenger.Default.Register<StatusVM>(this, getStatus);
@@ -81,14 +81,50 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         public async void setForeignKeys()
         {
-            ServerVM svm = await RequestHelper.SendRequestAsync<object, ServerVM>(URLs.SERVER_ID.Replace("{id}", item.Server.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ManufacturerVM Mvm = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            StatusVM sTvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.Status.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            HardDriveModelVM hdmvm = await RequestHelper.SendRequestAsync<object, HardDriveModelVM>(URLs.HARDDRIVEMODEL_ID.Replace("{id}", item.Model.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ServerName = svm.Name;
-            ManufacturerName = Mvm.Name;
-            StatusName = sTvm.Name;
-            HardDriveModelName = hdmvm.Name;
+            if (item.Server != null)
+            {
+                ServerVM svm = await RequestHelper.SendRequestAsync<object, ServerVM>(
+                    URLs.SERVER_ID.Replace("{id}", item.Server.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ServerName = svm.Name;
+            }
+
+            if (item.Manufacturer != null)
+            {
+                ManufacturerVM Mvm = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                    URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ManufacturerName = Mvm.Name;
+            }
+
+            if (item.Status != null)
+            {
+                StatusVM sTvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                    URLs.STATUS_ID.Replace("{id}", item.Status.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                StatusName = sTvm.Name;
+            }
+
+            if (item.Model != null)
+            {
+                HardDriveModelVM hdmvm = await RequestHelper.SendRequestAsync<object, HardDriveModelVM>(
+                    URLs.HARDDRIVEMODEL_ID.Replace("{id}", item.Model.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                HardDriveModelName = hdmvm.Name;
+            }
+
         }
         public override async void Save()
         {

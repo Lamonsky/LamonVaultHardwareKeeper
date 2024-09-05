@@ -8,13 +8,20 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AdministrationApp.ViewModels.AllViewModel
 {
     class AllSoftwareViewModel : WszystkieViewModel<SoftwaresVM>
     {
+        private Window _window;
         public AllSoftwareViewModel() : base("Oprogramowanie")
         {
+            Messenger.Default.Register<string>(this, open);
+        }
+        public AllSoftwareViewModel(Window window) : base("Oprogramowanie")
+        {
+            _window = window;
             Messenger.Default.Register<string>(this, open);
         }
         private void open(string name)
@@ -109,7 +116,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override void send()
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send(ChosenItem);
+            _window.Close();
         }
     }
 }

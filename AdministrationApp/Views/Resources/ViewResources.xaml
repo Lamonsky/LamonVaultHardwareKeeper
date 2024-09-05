@@ -19,6 +19,9 @@
     <DataTemplate DataType="{x:Type vma:AllMonitorViewModel}">
         <vwa:AllMonitorView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllLicenseViewModel}">
+        <vwa:AllLicenseView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vma:AllUserViewModel}">
         <vwa:AllUserView/>
     </DataTemplate>
@@ -73,6 +76,9 @@
     <DataTemplate DataType="{x:Type vmn:NewMonitorViewModel}">
         <vwn:NewMonitorView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vmn:NewLicenseViewModel}">
+        <vwn:NewLicenseView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vmn:NewUserViewModel}">
         <vwn:NewUserView/>
     </DataTemplate>
@@ -114,6 +120,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vme:EditPageContentViewModel}">
         <vwn:NewPageContentView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vme:EditLicenseViewModel}">
+        <vwn:NewLicenseView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vme:EditNetworkDeviceViewModel}">
         <vwn:NewNetworkDeviceView/>

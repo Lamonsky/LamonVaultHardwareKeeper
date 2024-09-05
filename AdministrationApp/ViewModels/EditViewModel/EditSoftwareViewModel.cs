@@ -73,7 +73,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item = vm;
             oldItem = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<StatusVM>(this, getStatus);
@@ -92,14 +92,50 @@ namespace AdministrationApp.ViewModels.EditViewModel
         #region CommandsFunctions
         public async void setForeignKeys()
         {
-            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.Status.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Publisher.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            StatusName = statusvm.Name;
-            LokacjaName = locationVM.Name;
-            UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
-            ManufacturerName = manufacturerVM.Name;
+            if (item.Status != null)
+            {
+                StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                    URLs.STATUS_ID.Replace("{id}", item.Status.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                StatusName = statusvm.Name;
+            }
+
+            if (item.LocationId != null)
+            {
+                LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
+                    URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                LokacjaName = locationVM.Name;
+            }
+
+            if (item.Users != null)
+            {
+                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                    URLs.USER_ID.Replace("{id}", item.Users.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+            }
+
+            if (item.Publisher != null)
+            {
+                ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                    URLs.MANUFACTURER_ID.Replace("{id}", item.Publisher.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ManufacturerName = manufacturerVM.Name;
+            }
+
         }
         private void getChosenUser(UserVM vM)
         {

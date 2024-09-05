@@ -357,3 +357,9 @@ C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administration
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\NewPageContentView.baml
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllRackCabinetWindow.g.cs
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllRackCabinetWindow.baml
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllViews\AllLicenseView.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\NewLicenseView.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllViews\AllLicenseView.baml
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\NewLicenseView.baml
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllSoftwareWindow.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllSoftwareWindow.baml

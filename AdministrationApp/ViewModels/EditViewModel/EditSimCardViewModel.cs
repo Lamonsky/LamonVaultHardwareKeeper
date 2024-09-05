@@ -60,7 +60,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item = vm;
             oldItem = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<StatusVM>(this, getStatus);
             Messenger.Default.Register<SimComponentVM>(this, getComponent);
@@ -77,12 +77,39 @@ namespace AdministrationApp.ViewModels.EditViewModel
         #region CommandsFunctions
         public async void setForeignKeys()
         {
-            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            SimComponentVM comvm = await RequestHelper.SendRequestAsync<object, SimComponentVM>(URLs.SIMCOMPONENT_ID.Replace("{id}", item.Component.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            StatusName = statusvm.Name;
-            UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
-            ComponentName = comvm.Name;
+            if (item.StatusId != null)
+            {
+                StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                    URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                StatusName = statusvm.Name;
+            }
+
+            if (item.Users != null)
+            {
+                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                    URLs.USER_ID.Replace("{id}", item.Users.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+            }
+
+            if (item.Component != null)
+            {
+                SimComponentVM comvm = await RequestHelper.SendRequestAsync<object, SimComponentVM>(
+                    URLs.SIMCOMPONENT_ID.Replace("{id}", item.Component.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ComponentName = comvm.Name;
+            }
+
         }
         private void getChosenUser(UserVM vM)
         {

@@ -4,6 +4,7 @@ FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administratio
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllComputerView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllDeviceView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllHardDriveView.xaml;;
+FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllLicenseView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllMonitorView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllNetworkDeviceView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllViews\AllPageContentView.xaml;;
@@ -24,6 +25,7 @@ FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administratio
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllServersWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllSimCardWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllSimComponentWindow.xaml;;
+FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllSoftwareWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllStatusWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllTechniciansWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllUsersWindow.xaml;;
@@ -32,6 +34,7 @@ FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administratio
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewComputerView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewDeviceView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewHardDriveView.xaml;;
+FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewLicenseView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewMonitorView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewNetworkDeviceView.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\NewPageContentView.xaml;;

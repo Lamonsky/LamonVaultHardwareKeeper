@@ -120,7 +120,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item = vm;
             oldItem = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<SimCardsVM>(this, getChosenSimCard1);
@@ -143,23 +143,94 @@ namespace AdministrationApp.ViewModels.EditViewModel
         #region CommandsFunctions
         public async void setForeignKeys()
         {
-            StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            PhoneTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, PhoneTypeVM>(URLs.PHONETYPE_ID.Replace("{id}", item.PhoneType.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            PhoneModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, PhoneModelVM>(URLs.PHONEMODEL_ID.Replace("{id}", item.Model.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            SimCardsVM scvm1 = await RequestHelper.SendRequestAsync<object, SimCardsVM>(URLs.SIMCARD_ID.Replace("{id}", item.SimCard1.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            SimCardsVM scvm2 = await RequestHelper.SendRequestAsync<object, SimCardsVM>(URLs.SIMCARD_ID.Replace("{id}", item.SimCard2.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            if (item.StatusId != null)
+            {
+                StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                    URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                StatusName = statusvm.Name;
+            }
 
-            StatusName = statusvm.Name;
-            LokacjaName = locationVM.Name;
-            UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
-            PhoneTypeName = ctypevm.Name;
-            ManufacturerName = manufacturerVM.Name;
-            PhoneModelName = cmodelvm.Name;
-            SimCard1S = scvm1.PhoneNumber + " " + scvm1.InventoryNumber + " " + scvm1.SerialNumber;
-            SimCard2S = scvm2.PhoneNumber + " " + scvm2.InventoryNumber + " " + scvm2.SerialNumber;
+            if (item.LocationId != null)
+            {
+                LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
+                    URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                LokacjaName = locationVM.Name;
+            }
+
+            if (item.Users != null)
+            {
+                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                    URLs.USER_ID.Replace("{id}", item.Users.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+            }
+
+            if (item.PhoneType != null)
+            {
+                PhoneTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, PhoneTypeVM>(
+                    URLs.PHONETYPE_ID.Replace("{id}", item.PhoneType.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                PhoneTypeName = ctypevm.Name;
+            }
+
+            if (item.Model != null)
+            {
+                PhoneModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, PhoneModelVM>(
+                    URLs.PHONEMODEL_ID.Replace("{id}", item.Model.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                PhoneModelName = cmodelvm.Name;
+            }
+
+            if (item.Manufacturer != null)
+            {
+                ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                    URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ManufacturerName = manufacturerVM.Name;
+            }
+
+            if (item.SimCard1 != null)
+            {
+                SimCardsVM scvm1 = await RequestHelper.SendRequestAsync<object, SimCardsVM>(
+                    URLs.SIMCARD_ID.Replace("{id}", item.SimCard1.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                SimCard1S = scvm1.PhoneNumber + " " + scvm1.InventoryNumber + " " + scvm1.SerialNumber;
+            }
+
+            if (item.SimCard2 != null)
+            {
+                SimCardsVM scvm2 = await RequestHelper.SendRequestAsync<object, SimCardsVM>(
+                    URLs.SIMCARD_ID.Replace("{id}", item.SimCard2.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                SimCard2S = scvm2.PhoneNumber + " " + scvm2.InventoryNumber + " " + scvm2.SerialNumber;
+            }
+
         }
         private void getManufacturer(ManufacturerVM vm)
         {

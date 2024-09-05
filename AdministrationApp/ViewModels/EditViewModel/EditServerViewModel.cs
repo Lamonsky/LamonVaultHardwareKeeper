@@ -91,7 +91,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             item = vm;
             oldItem = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<OperatingSystemVM>(this, getOS);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
             Messenger.Default.Register<StatusVM>(this, getStatus);
@@ -102,18 +102,72 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         public async void setForeignKeys()
         {
-            OperatingSystemVM osvm = await RequestHelper.SendRequestAsync<object, OperatingSystemVM>(URLs.OPERATINGSYSTEM_ID.Replace("{id}", item.OperatingSystem.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ManufacturerVM manufacturer = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            StatusVM statusVM = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ComputerModelVM computerModelVM = await RequestHelper.SendRequestAsync<object, ComputerModelVM>(URLs.COMPUTERMODEL_ID.Replace("{id}", item.Model.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            OperatingSystemName = osvm.Name;
-            ManufacturerName = manufacturer.Name;
-            StatusName = statusVM.Name;
-            ServerModelName = computerModelVM.Name;
-            LocationName = locationVM.Name;
-            UserName = userVM.FirstName  + " " + userVM.LastName + " " + userVM.Email;
+            if (item.OperatingSystem != null)
+            {
+                OperatingSystemVM osvm = await RequestHelper.SendRequestAsync<object, OperatingSystemVM>(
+                    URLs.OPERATINGSYSTEM_ID.Replace("{id}", item.OperatingSystem.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                OperatingSystemName = osvm.Name;
+            }
+
+            if (item.Manufacturer != null)
+            {
+                ManufacturerVM manufacturer = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                    URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ManufacturerName = manufacturer.Name;
+            }
+
+            if (item.StatusId != null)
+            {
+                StatusVM statusVM = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                    URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                StatusName = statusVM.Name;
+            }
+
+            if (item.Model != null)
+            {
+                ComputerModelVM computerModelVM = await RequestHelper.SendRequestAsync<object, ComputerModelVM>(
+                    URLs.COMPUTERMODEL_ID.Replace("{id}", item.Model.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ServerModelName = computerModelVM.Name;
+            }
+
+            if (item.LocationId != null)
+            {
+                LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
+                    URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                LocationName = locationVM.Name;
+            }
+
+            if (item.Users != null)
+            {
+                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                    URLs.USER_ID.Replace("{id}", item.Users.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.Email;
+            }
+
         }
         public override async void Save()
         {

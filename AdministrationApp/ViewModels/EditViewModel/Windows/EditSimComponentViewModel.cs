@@ -57,7 +57,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         {
             item = vm;
             oldItem = vm;
-            setForeignKeys();
+            if (item != null) setForeignKeys();
             Messenger.Default.Register<StatusVM>(this, getStatus);
             Messenger.Default.Register<SimComponentTypeVM>(this, getSimComponentType);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
@@ -65,12 +65,39 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         }
         private async void setForeignKeys()
         {
-            StatusVM svm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.Status.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            SimComponentTypeVM sctvm = await RequestHelper.SendRequestAsync<object, SimComponentTypeVM>(URLs.SIMCOMPONENTTYPE_ID.Replace("{id}", item.Type.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            ManufacturerVM mvm = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            StatusName = svm.Name;
-            TypeName = sctvm.Name;
-            ManufacturerName = mvm.Name;
+            if (item.Status != null)
+            {
+                StatusVM svm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                    URLs.STATUS_ID.Replace("{id}", item.Status.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                StatusName = svm.Name;
+            }
+
+            if (item.Type != null)
+            {
+                SimComponentTypeVM sctvm = await RequestHelper.SendRequestAsync<object, SimComponentTypeVM>(
+                    URLs.SIMCOMPONENTTYPE_ID.Replace("{id}", item.Type.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                TypeName = sctvm.Name;
+            }
+
+            if (item.Manufacturer != null)
+            {
+                ManufacturerVM mvm = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                    URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
+                    HttpMethod.Get,
+                    null,
+                    GlobalData.AccessToken
+                );
+                ManufacturerName = mvm.Name;
+            }
+
         }
         public override async void Save()
         {
