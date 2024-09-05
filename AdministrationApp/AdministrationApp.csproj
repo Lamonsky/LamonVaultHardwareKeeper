@@ -44,6 +44,9 @@
     <Compile Update="Views\AllViews\MyTicketsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AllWindows\AllRackCabinetWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AllWindows\AllSimComponentWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -22,6 +22,9 @@
     <Compile Update="Views\AllViews\AllNetworkDeviceView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AllViews\AllPageContentView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AllViews\AllPhoneView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -79,6 +82,9 @@
     <Compile Update="Views\NewViews\NewNetworkDeviceView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\NewViews\NewPageContentView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\NewViews\NewPhoneView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -115,6 +121,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllViews\AllHardDriveView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllViews\AllPageContentView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllViews\AllServersView.xaml">
@@ -159,6 +168,9 @@
     <Page Update="Views\AllViews\SummaryView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AllWindows\AllRackCabinetWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AllWindows\AllServersWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -190,6 +202,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllViews\AllPrinterView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewViews\NewPageContentView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\NewViews\NewServerView.xaml">

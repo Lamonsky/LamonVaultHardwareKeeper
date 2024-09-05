@@ -8,13 +8,20 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AdministrationApp.ViewModels.AllViewModel
 {
     class AllRackCabinetViewModel : WszystkieViewModel<RackCabinetVM>
     {
+        private Window _window;
         public AllRackCabinetViewModel() : base("Szafy Rack")
         {
+            Messenger.Default.Register<string>(this, open);
+        }
+        public AllRackCabinetViewModel(Window window) : base("Szafy Rack")
+        {
+            _window = window;
             Messenger.Default.Register<string>(this, open);
         }
         private void open(string name)
@@ -146,7 +153,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override void send()
         {
-            throw new NotImplementedException();
+            Messenger.Default.Send(ChosenItem);
+            _window.Close();
         }
     }
 }

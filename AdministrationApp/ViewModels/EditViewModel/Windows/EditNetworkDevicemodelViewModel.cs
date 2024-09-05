@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditNetworkDevicemodelViewModel(Window window, NetworkDeviceModelCreateEditVM vm) : base("NetworkDevicemodel")
+        public EditNetworkDevicemodelViewModel(Window window, NetworkDeviceModelCreateEditVM vm) : base("NetworkDeviceModel")
         {
             item = vm;
             oldItem = vm;
@@ -42,7 +42,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             item.ModifiedBy = GlobalData.UserId;
             EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.NETWORKDEVICEMODEL_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
-            Messenger.Default.Send("NetworkDevicemodelRefresh");
+            Messenger.Default.Send("NetworkDeviceModelRefresh");
             _window.Close();
         }
         #endregion

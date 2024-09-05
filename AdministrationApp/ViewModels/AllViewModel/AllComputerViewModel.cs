@@ -181,7 +181,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Edit()
         {
-            if (ChosenItem != null)
+            if (ChosenItem.Id != null)
             {
                 
                 Messenger.Default.Send(DisplayName + "Edit/" + ChosenItem.Id);

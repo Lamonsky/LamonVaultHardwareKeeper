@@ -174,6 +174,7 @@ namespace AdministrationApp.ViewModels
         public MainWindowViewModel()
         {
             Messenger.Default.Register<string>(this, open);
+            ShowAllWorkspace<SummaryViewModel>();
 
         }
 
@@ -239,6 +240,9 @@ namespace AdministrationApp.ViewModels
                 case "ComputerTypeAdd":
                     CreateComputerTypeWindow();
                     break;
+                case "PageContentAdd":
+                    CreatePageContent();
+                    break;
                 case "ChooseComputerModel":
                     ShowComputerModelWindow();
                     break;
@@ -250,6 +254,9 @@ namespace AdministrationApp.ViewModels
                     break;
                 case string n when n.StartsWith("ComputerModelEdit"):
                     EditComputerModel(CutString(name));
+                    break;
+                case string n when n.StartsWith("PageContentEdit"):
+                    EditPageContent((CutString(name)));
                     break;
 
                 // Kategoria: Monitory
@@ -382,6 +389,9 @@ namespace AdministrationApp.ViewModels
                 case string n when n.StartsWith("TelefonyEdit"):
                     EditPhone(CutString(name));
                     break;
+                case string n when n.StartsWith("PhoneModelEdit"):
+                    EditPhoneModel(CutString(name));
+                    break;
 
                 // Kategoria: Szafy Rack
                 case "Szafy RackAdd":
@@ -398,6 +408,9 @@ namespace AdministrationApp.ViewModels
                     break;
                 case "ChooseRackCabinetType":
                     ShowRackCabinetTypeWindow();
+                    break;
+                case "ChooseRackCabinet":
+                    ShowRackCabinetWindow();
                     break;
                 case string n when n.StartsWith("Szafy RackEdit"):
                     EditRackCabinet(CutString(name));
@@ -491,7 +504,7 @@ namespace AdministrationApp.ViewModels
                 case string n when n.StartsWith("MonitorTypeEdit"):
                     EditMonitorType(CutString(name));
                     break;
-                case string n when n.StartsWith("NetworkDevicemodelEdit"):
+                case string n when n.StartsWith("NetworkDeviceModelEdit"):
                     EditNetworkDevicemodel(CutString(name));
                     break;
                 case string n when n.StartsWith("NetworkDeviceTypeEdit"):
@@ -572,6 +585,18 @@ namespace AdministrationApp.ViewModels
                     _ShowComputersCommand = new BaseCommand(() => ShowComputers());
                 }
                 return _ShowComputersCommand;
+            }
+        }
+        private BaseCommand _ShowPageContentCommand;
+        public ICommand ShowPageContentCommand
+        {
+            get
+            {
+                if (_ShowPageContentCommand == null)
+                {
+                    _ShowPageContentCommand = new BaseCommand(() => ShowPageContent());
+                }
+                return _ShowPageContentCommand;
             }
         }
         private BaseCommand _ShowLogsCommand;
@@ -849,6 +874,14 @@ namespace AdministrationApp.ViewModels
         {
             ShowAllWorkspace<LogsViewModel>();
         }
+        private void ShowPageContent()
+        {
+            ShowAllWorkspace<AllPageContentViewModel>();
+        }
+        private void CreatePageContent()
+        {
+            CreateWorkspace<NewPageContentViewModel>();
+        }
         private void ShowMonitors()
         {
             ShowAllWorkspace<AllMonitorViewModel>();
@@ -960,6 +993,10 @@ namespace AdministrationApp.ViewModels
         private void ShowRackCabinetTypeWindow()
         {
             CreateWindows<AllDictionaryWindow, AllRackCabinetTypeViewModelWindow>(window => new AllRackCabinetTypeViewModelWindow(window));
+        }
+        private void ShowRackCabinetWindow()
+        {
+            CreateWindows<AllRackCabinetWindow, AllRackCabinetViewModel>(window => new AllRackCabinetViewModel(window));
         }
 
         private void CreateRackCabinetTypeWindow()
@@ -1172,9 +1209,21 @@ namespace AdministrationApp.ViewModels
                 (window, vm) => new EditComputerModelViewModel(window, vm)
             );
         }
+        private async void EditPhoneModel(string id)
+        {
+            await EditItemWindow<PhoneModelCreateEditVM, EditPhonemodelViewModel, NewDictionaryWindow>(
+                id,
+                URLs.PHONEMODEL_CEVM_ID,
+                (window, vm) => new EditPhonemodelViewModel(window, vm)
+            );
+        }
         private async void EditDevice(string id)
         {
             await EditItem<DevicesCreateEditVM, EditDeviceViewModel>(id, URLs.DEVICE_CEVM_ID, vm => new EditDeviceViewModel(vm));
+        }
+        private async void EditPageContent(string id)
+        {
+            await EditItem<PageContentCreateEditVM, EditPageContentViewModel>(id, URLs.PAGECONTENT_CEVM_ID, vm => new EditPageContentViewModel(vm));
         }
 
         private async void EditMonitor(string id)

@@ -5,6 +5,7 @@ using Data.Computers.SelectVMs;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -111,6 +112,8 @@ namespace AdministrationApp.ViewModels.NewViewModel
             Messenger.Default.Register<StatusVM>(this, getStatus);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
             Messenger.Default.Register<RackCabinetVM>(this, getRackCabinet);
+            Messenger.Default.Register<NetworkDeviceTypeVM>(this, getNetworkDeviceType);
+            Messenger.Default.Register<NetworkDeviceModelVM>(this, getNetworkDeviceModel);
 
         }
         public override async void Save()
@@ -148,8 +151,52 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item.Manufacturer = vm.Id;
             ManufacturerName = vm.Name;
         }
+        private void getNetworkDeviceModel(NetworkDeviceModelVM vM)
+        {
+            item.Model = vM.Id;
+            NetworkDeviceModelName = vM.Name;
+        }
+        private void getNetworkDeviceType(NetworkDeviceTypeVM vm)
+        {
+            item.DeviceType = vm.Id;
+            NetworkDeviceTypeName = vm.Name;
+        }
         #endregion
         #region Dane
+        private string _NetworkDeviceModelName;
+        public string NetworkDeviceModelName
+        {
+            get
+            {
+                return _NetworkDeviceModelName;
+            }
+            set
+            {
+                if (_NetworkDeviceModelName != value)
+                {
+                    _NetworkDeviceModelName = value;
+                    OnPropertyChanged(() => NetworkDeviceModelName);
+                }
+
+            }
+        }
+        private string _NetworkDeviceTypeName;
+        public string NetworkDeviceTypeName
+        {
+            get
+            {
+                return _NetworkDeviceTypeName;
+            }
+            set
+            {
+                if (_NetworkDeviceTypeName != value)
+                {
+                    _NetworkDeviceTypeName = value;
+                    OnPropertyChanged(() => NetworkDeviceTypeName);
+                }
+
+            }
+        }
         private string _RackCabinetName;
         public string RackCabinetName
         {
@@ -159,7 +206,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_RackCabinetName == null)
+                if (_RackCabinetName != value)
                 {
                     _RackCabinetName = value;
                     OnPropertyChanged(() => RackCabinetName);
@@ -176,7 +223,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_StatusName == null)
+                if (_StatusName != value)
                 {
                     _StatusName = value;
                     OnPropertyChanged(() => StatusName);
@@ -193,7 +240,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_ManufacturerName == null)
+                if (_ManufacturerName != value)
                 {
                     _ManufacturerName = value;
                     OnPropertyChanged(() => ManufacturerName);
@@ -337,7 +384,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_LokacjaName == null)
+                if (_LokacjaName != value)
                 {
                     _LokacjaName = value;
                     OnPropertyChanged(() => LokacjaName);
@@ -353,7 +400,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);

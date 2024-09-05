@@ -81,6 +81,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             Messenger.Default.Register<DeviceModelVM>(this, getDeviceModel);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
             Messenger.Default.Register<StatusVM>(this, getStatus);
+            Messenger.Default.Register<DeviceTypeVM>(this, getDeviceType);
 
         }
         public override async void Save()
@@ -97,6 +98,11 @@ namespace AdministrationApp.ViewModels.NewViewModel
         {
             item.StatusId = vm.Id;
             StatusName = vm.Name;
+        }
+        private void getDeviceType(DeviceTypeVM vm)
+        {
+            item.DeviceType = vm.Id;
+            DeviceTypeName = vm.Name;
         }
         private void getChosenUser(UserVM vM)
         {
@@ -125,7 +131,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_ManufacturerName == null)
+                if (_ManufacturerName != value)
                 {
                     _ManufacturerName = value;
                     OnPropertyChanged(() => ManufacturerName);
@@ -142,7 +148,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_StatusName == null)
+                if (_StatusName != value)
                 {
                     _StatusName = value;
                     OnPropertyChanged(() => StatusName);
@@ -166,10 +172,27 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_DeviceModelName == null)
+                if (_DeviceModelName != value)
                 {
                     _DeviceModelName = value;
                     OnPropertyChanged(() => DeviceModelName);
+                }
+
+            }
+        }
+        private string _DeviceTypeName;
+        public string DeviceTypeName
+        {
+            get
+            {
+                return _DeviceTypeName;
+            }
+            set
+            {
+                if (_DeviceTypeName != value)
+                {
+                    _DeviceTypeName = value;
+                    OnPropertyChanged(() => DeviceTypeName);
                 }
 
             }
@@ -279,7 +302,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);

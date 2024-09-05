@@ -74,6 +74,7 @@ namespace DatabaseRestApi.Controllers
             DatabaseContext database = new();
             PhonesCreateEditVM phonesVMs = await database.Phones
                 .Where(item => item.StatusId != 99)
+                .Where(item => item.Id == id)
                 .Select(item => new PhonesCreateEditVM
                 {
                     Id = item.Id,

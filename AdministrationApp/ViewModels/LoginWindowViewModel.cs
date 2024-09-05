@@ -21,8 +21,10 @@ namespace AdministrationApp.ViewModels
     public class LoginWindowViewModel : JedenViewModel<RestApiUsers>
     {
         private Window _window;
+        
         public LoginWindowViewModel(Window window) : base("Logowanie")
         {
+            IsButtonEnabled = true;
             item = new RestApiUsers();
             _window = window;
         }
@@ -51,6 +53,22 @@ namespace AdministrationApp.ViewModels
         }
 
         #region Dane
+        private bool _IsButtonEnabled;
+        public bool IsButtonEnabled
+        {
+            get
+            {
+                return _IsButtonEnabled;
+            }
+            set
+            {
+                if( _IsButtonEnabled != value )
+                {
+                    _IsButtonEnabled = value;
+                    OnPropertyChanged(() => IsButtonEnabled);
+                }
+            }
+        }
 
         public string? Email
         {
@@ -90,9 +108,10 @@ namespace AdministrationApp.ViewModels
         #endregion
 
         public async override void Save()
-        {
+        {            
             try
             {
+                IsButtonEnabled = false;
                 LoggedUser user = await RequestHelper.SendRequestAsync<object, LoggedUser>(URLs.LOGIN, HttpMethod.Post, item, GlobalData.AccessToken);
                 UserInAdminRole adminuser = await RequestHelper.SendRequestAsync<object, UserInAdminRole>(URLs.IDENTITY_CHECK_USER_ADMIN_ROLE.Replace("{email}", item.Email), HttpMethod.Get, null, GlobalData.AccessToken);
                 if (adminuser.IsInRole)
@@ -111,12 +130,14 @@ namespace AdministrationApp.ViewModels
                 }
                 else
                 {
+                    IsButtonEnabled = true;
                     ErrorMessage = "Nie masz uprawnień do zalogowania. Skontaktuj się z administratorem";
                 }
             }
             catch (Exception ex)
             {
                 ErrorMessage = "Błędne logowanie";
+                IsButtonEnabled = true;
             }
             
 

@@ -171,12 +171,12 @@ namespace AdministrationApp.ViewModels.EditViewModel
         private void getModel(NetworkDeviceModelVM vM)
         {
             item.Model = vM.Id;
-            LokacjaName = vM.Name;
+            NetworkDeviceModelName = vM.Name;
         }
         private void getType(NetworkDeviceTypeVM vm)
         {
             item.DeviceType = vm.Id;
-            ManufacturerName = vm.Name;
+            NetworkDeviceTypeName = vm.Name;
         }
         #endregion
         #region Dane

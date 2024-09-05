@@ -29,7 +29,11 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Column="0" Content="{Binding ErrorMessage}" Foreground="Red" />
-            <Button Grid.Column="1"  HorizontalAlignment="Left" Command="{Binding LoginCommand}" Content="Zaloguj"/>
+            <Button Grid.Column="1"  HorizontalAlignment="Left" IsEnabled="{Binding Path=IsButtonEnabled}" IsDefault="True" Command="{Binding LoginCommand}" Content="Zaloguj">
+                <Button.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
+                </Button.InputBindings>
+            </Button>
         </Grid>
     </Grid>
 </Window>

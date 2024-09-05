@@ -149,12 +149,17 @@ namespace AdministrationApp.ViewModels.EditViewModel
             PhoneTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, PhoneTypeVM>(URLs.PHONETYPE_ID.Replace("{id}", item.PhoneType.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             PhoneModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, PhoneModelVM>(URLs.PHONEMODEL_ID.Replace("{id}", item.Model.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            SimCardsVM scvm1 = await RequestHelper.SendRequestAsync<object, SimCardsVM>(URLs.SIMCARD_ID.Replace("{id}", item.SimCard1.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            SimCardsVM scvm2 = await RequestHelper.SendRequestAsync<object, SimCardsVM>(URLs.SIMCARD_ID.Replace("{id}", item.SimCard2.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+
             StatusName = statusvm.Name;
             LokacjaName = locationVM.Name;
             UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
             PhoneTypeName = ctypevm.Name;
             ManufacturerName = manufacturerVM.Name;
             PhoneModelName = cmodelvm.Name;
+            SimCard1S = scvm1.PhoneNumber + " " + scvm1.InventoryNumber + " " + scvm1.SerialNumber;
+            SimCard2S = scvm2.PhoneNumber + " " + scvm2.InventoryNumber + " " + scvm2.SerialNumber;
         }
         private void getManufacturer(ManufacturerVM vm)
         {

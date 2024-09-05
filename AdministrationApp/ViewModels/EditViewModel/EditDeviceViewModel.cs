@@ -84,7 +84,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             Messenger.Default.Register<DeviceModelVM>(this, getDeviceModel);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
             Messenger.Default.Register<StatusVM>(this, getStatus);
-
+            Messenger.Default.Register<DeviceTypeVM>(this, getDeviceType);
         }
         public override async void Save()
         {
@@ -114,6 +114,11 @@ namespace AdministrationApp.ViewModels.EditViewModel
             item.StatusId = vm.Id;
             StatusName = vm.Name;
         }
+        private void getDeviceType(DeviceTypeVM vm)
+        {
+            item.DeviceType = vm.Id;
+            DeviceTypeName = vm.Name;
+        }
         private void getChosenUser(UserVM vM)
         {
             item.Users = vM.Id;
@@ -141,7 +146,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_ManufacturerName == null)
+                if (_ManufacturerName != value)
                 {
                     _ManufacturerName = value;
                     OnPropertyChanged(() => ManufacturerName);
@@ -149,6 +154,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
 
             }
         }
+
         private string _StatusName;
         public string StatusName
         {
@@ -158,7 +164,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_StatusName == null)
+                if (_StatusName != value)
                 {
                     _StatusName = value;
                     OnPropertyChanged(() => StatusName);
@@ -182,7 +188,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_DeviceModelName == null)
+                if (_DeviceModelName != value)
                 {
                     _DeviceModelName = value;
                     OnPropertyChanged(() => DeviceModelName);
@@ -202,7 +208,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
                 if (_DeviceTypeName != value)
                 {
                     _DeviceTypeName = value;
-                    OnPropertyChanged(() => _DeviceTypeName);
+                    OnPropertyChanged(() => DeviceTypeName);
                 }
 
             }
@@ -312,7 +318,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);

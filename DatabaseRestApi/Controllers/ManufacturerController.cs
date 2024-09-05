@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<ManufacturerVM> manufacturerVM = await database.Manufacturers
+                .Where(item => item.Status != 99)
                 .Select(item => new ManufacturerVM
                 {
                     Id = item.Id,
@@ -36,6 +37,8 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             ManufacturerVM manufacturerVM = await database.Manufacturers
+                .Where(item => item.Id == id)
+                .Where(item => item.Status != 99)
                 .Select(item => new ManufacturerVM
                 {
                     Id = item.Id,
@@ -56,6 +59,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             ManufacturerCreateEditVM manufacturerVM = await database.Manufacturers
+                .Where(item => item.Status != 99)
                 .Where(item => item.Id == id)
                 .Select(item => new ManufacturerCreateEditVM
                 {

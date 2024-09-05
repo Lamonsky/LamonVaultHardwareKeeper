@@ -351,3 +351,9 @@ C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administration
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\bin\Debug\net8.0-windows\Irony.dll
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\bin\Debug\net8.0-windows\SixLabors.Fonts.dll
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\bin\Debug\net8.0-windows\XLParser.dll
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllViews\AllPageContentView.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\NewPageContentView.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllViews\AllPageContentView.baml
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\NewPageContentView.baml
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllRackCabinetWindow.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllRackCabinetWindow.baml

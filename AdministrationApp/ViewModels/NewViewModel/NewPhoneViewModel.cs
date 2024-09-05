@@ -124,6 +124,8 @@ namespace AdministrationApp.ViewModels.NewViewModel
             Messenger.Default.Register<SimCardsVM>(this, getChosenSimCard2);
             Messenger.Default.Register<StatusVM>(this, getStatus);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
+            Messenger.Default.Register<PhoneModelVM>(this, getPhoneModel);
+            Messenger.Default.Register<PhoneTypeVM>(this, getPhoneType);
 
         }
         public override async void Save()
@@ -166,9 +168,52 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item.LocationId = vM.Id;
             LokacjaName = vM.Name;
         }
-
+        private void getPhoneModel(PhoneModelVM vM)
+        {
+            item.Model = vM.Id;
+            PhoneModelName = vM.Name;
+        }
+        private void getPhoneType(PhoneTypeVM vM)
+        {
+            item.PhoneType = vM.Id;
+            PhoneTypeName = vM.Name;
+        }
         #endregion
         #region Dane
+        private string _PhoneModelName;
+        public string PhoneModelName
+        {
+            get
+            {
+                return _PhoneModelName;
+            }
+            set
+            {
+                if (_PhoneModelName != value)
+                {
+                    _PhoneModelName = value;
+                    OnPropertyChanged(() => PhoneModelName);
+                }
+
+            }
+        }
+        private string _PhoneTypeName;
+        public string PhoneTypeName
+        {
+            get
+            {
+                return _PhoneTypeName;
+            }
+            set
+            {
+                if (_PhoneTypeName != value)
+                {
+                    _PhoneTypeName = value;
+                    OnPropertyChanged(() => PhoneTypeName);
+                }
+
+            }
+        }
         public int Id
         {
             get
@@ -185,7 +230,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_ManufacturerName == null)
+                if (_ManufacturerName != value)
                 {
                     _ManufacturerName = value;
                     OnPropertyChanged(() => ManufacturerName);
@@ -202,7 +247,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_StatusName == null)
+                if (_StatusName != value)
                 {
                     _StatusName = value;
                     OnPropertyChanged(() => StatusName);
@@ -377,7 +422,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_LokacjaName == null)
+                if (_LokacjaName != value)
                 {
                     _LokacjaName = value;
                     OnPropertyChanged(() => LokacjaName);
@@ -393,7 +438,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);

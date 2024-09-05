@@ -10,9 +10,9 @@
     <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding Path=ChosenItem}" AutoGenerateColumns="False" IsReadOnly="True">
         <DataGrid.Columns>
             <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-            <DataGridTextColumn Header="Użytkownik" Binding="{Binding Users}"/>
-            <DataGridTextColumn Header="Data Logu" Binding="{Binding LogDate}"/>
-            <DataGridTextColumn Header="Opis" Width="500" Binding="{Binding Description}">
+            <DataGridTextColumn Header="Użytkownik" Width="1*" Binding="{Binding Users}"/>
+            <DataGridTextColumn Header="Data Logu" Width="1*" Binding="{Binding LogDate}"/>
+            <DataGridTextColumn Header="Opis" Width="2*" Binding="{Binding Description}">
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />

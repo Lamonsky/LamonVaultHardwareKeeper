@@ -30,9 +30,7 @@
                     <MenuItem Header="Podsumowanie" Command="{Binding ShowSummaryCommand}"/>
                     <MenuItem Header="_System">
                         <MenuItem Header="Logi" Command="{Binding ShowLogsCommand}"/>
-                    </MenuItem>
-                    <MenuItem Header="Komputery">
-                        <MenuItem Header="Modele komputerów" Command="{Binding ShowComputerModelCommand}"/>
+                        <MenuItem Header="Interfejs klienta" Command="{Binding ShowPageContentCommand}"/>
                     </MenuItem>
                 </Menu>
                 <TextBlock Text="{Binding EMail}" Grid.Column="2" HorizontalAlignment="Right"/>

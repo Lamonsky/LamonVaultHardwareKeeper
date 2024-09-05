@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<OperatingSystemVM> operaingSystemVM = await database.OperatingSystems
+                .Where(item => item.Status != 99)
                 .Select(item => new OperatingSystemVM
                 {
                     Id = item.Id,
@@ -36,6 +37,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             OperatingSystemVM operaingSystemVM = await database.OperatingSystems
+                .Where(item => item.Status != 99)
                 .Where(item => item.Id == id)
                 .Select(item => new OperatingSystemVM
                 {
@@ -57,6 +59,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             OperatingSystemCreateEditVM operaingSystemVM = await database.OperatingSystems
+                .Where(item => item.Status != 99)
                 .Where(item => item.Id == id)
                 .Select(item => new OperatingSystemCreateEditVM
                 {
