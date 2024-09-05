@@ -126,7 +126,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_ManufacturerName == null)
+                if (_ManufacturerName != value)
                 {
                     _ManufacturerName = value;
                     OnPropertyChanged(() => ManufacturerName);
@@ -143,7 +143,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_StatusName == null)
+                if (_StatusName != value)
                 {
                     _StatusName = value;
                     OnPropertyChanged(() => StatusName);
@@ -220,7 +220,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_LokacjaName == null)
+                if (_LokacjaName != value)
                 {
                     _LokacjaName = value;
                     OnPropertyChanged(() => LokacjaName);
@@ -236,7 +236,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);

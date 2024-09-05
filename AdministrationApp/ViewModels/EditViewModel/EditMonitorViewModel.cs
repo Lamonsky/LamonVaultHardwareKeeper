@@ -224,7 +224,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_ManufacturerName == null)
+                if (_ManufacturerName != value)
                 {
                     _ManufacturerName = value;
                     OnPropertyChanged(() => ManufacturerName);

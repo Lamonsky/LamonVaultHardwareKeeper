@@ -522,10 +522,10 @@ namespace AdministrationApp.ViewModels
                 case string n when n.StartsWith("PositionEdit"):
                     EditPosition(CutString(name));
                     break;
-                case string n when n.StartsWith("PrintermodelEdit"):
+                case string n when n.StartsWith("Modele drukarekEdit"):
                     EditPrintermodel(CutString(name));
                     break;
-                case string n when n.StartsWith("PrintertypeEdit"):
+                case string n when n.StartsWith("Rodzaje drukarekEdit"):
                     EditPrintertype(CutString(name));
                     break;
                 case string n when n.StartsWith("RackCabinetModelEdit"):

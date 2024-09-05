@@ -66,6 +66,7 @@ namespace DatabaseRestApi.Controllers
             DatabaseContext database = new();
             SoftwareCreateEditVM softwareVM = await database.Softwares
                 .Where(item => item.Status != 99)
+                .Where(item => item.Id == id)
                 .Select(item => new SoftwareCreateEditVM()
                 {
                     Id = item.Id,

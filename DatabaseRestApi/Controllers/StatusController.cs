@@ -108,7 +108,7 @@ namespace DatabaseRestApi.Controllers
             {
                 return BadRequest("Nie ma komputera o podanym id {id}");
             }
-            statuss.ModifiedAt = DateTime.Now;
+            database.Statuses.Remove(statuss);
             await database.SaveChangesAsync();
             return Ok();
         }

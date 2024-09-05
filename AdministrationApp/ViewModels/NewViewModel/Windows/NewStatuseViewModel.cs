@@ -13,23 +13,10 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
     public class NewStatuseViewModel : JedenViewModel<StatusCreateEditVM>
     {
         private Window _window;
-        private BaseCommand _ChooseStatusCommand;
-        public ICommand ChooseStatusCommand
-        {
-            get
-            {
-                if (_ChooseStatusCommand == null)
-                {
-                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
-                }
-                return _ChooseStatusCommand;
-            }
-        }
         #region Konstruktor
         public NewStatuseViewModel(Window window) : base("Status")
         {
             item = new StatusCreateEditVM();
-            Messenger.Default.Register<StatusVM>(this, getStatus);
             _window = window;
         }
         public override async void Save()
@@ -38,36 +25,11 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             item.CreatedBy = GlobalData.UserId;
             NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.STATUS, HttpMethod.Post, item, GlobalData.AccessToken);
-            Messenger.Default.Send("StatuseRefresh");
+            Messenger.Default.Send("StatusRefresh");
             _window.Close();
         }
         #endregion
-        #region CommandsFunctions
-
-        private void getStatus(StatusVM vm)
-        {
-            item.Status = vm.Id;
-            StatusName = vm.Name;
-        }
-
-        #endregion
         #region Dane
-        private string _StatusName;
-        public string StatusName
-        {
-            get
-            {
-                return _StatusName;
-            }
-            set
-            {
-                if (_StatusName != value)
-                {
-                    _StatusName = value;
-                    OnPropertyChanged(() => StatusName);
-                }
-            }
-        }
         public int Id
         {
             get

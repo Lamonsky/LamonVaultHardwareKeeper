@@ -446,7 +446,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_LokacjaName == null)
+                if (_LokacjaName != value)
                 {
                     _LokacjaName = value;
                     OnPropertyChanged(() => LokacjaName);
@@ -462,7 +462,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);

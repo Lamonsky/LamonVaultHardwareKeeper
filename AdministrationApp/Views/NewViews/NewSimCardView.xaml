@@ -47,7 +47,7 @@
 						<ColumnDefinition Width="3*"/>
 						<ColumnDefinition Width="1*"/>
 					</Grid.ColumnDefinitions>
-					<TextBlock Grid.Column="0" Text="{Binding Path=SimComponentName}"/>
+					<TextBlock Grid.Column="0" Text="{Binding Path=ComponentName}"/>
 					<Button Grid.Column="1" Command="{Binding Path=ChooseSimComponentCommand}">
 						<ui:SymbolIcon Symbol="LocationAdd16"/>
 					</Button>

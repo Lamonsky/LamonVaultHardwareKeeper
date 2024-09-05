@@ -121,7 +121,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             RackCabinetTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, RackCabinetTypeVM>(URLs.RACKCABINETTYPE_ID.Replace("{id}", item.CabinetType.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-            RackCabinetModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, RackCabinetModelVM>(URLs.COMPUTERMODEL_ID.Replace("{id}", item.Model.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            RackCabinetModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, RackCabinetModelVM>(URLs.RACKCABINETMODEL_ID.Replace("{id}", item.Model.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             StatusName = statusvm.Name;
             LokacjaName = locationVM.Name;
@@ -179,7 +179,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_ManufacturerName == null)
+                if (_ManufacturerName != value)
                 {
                     _ManufacturerName = value;
                     OnPropertyChanged(() => ManufacturerName);
@@ -196,7 +196,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_RackCabinetTypeName == null)
+                if (_RackCabinetTypeName != value)
                 {
                     _RackCabinetTypeName = value;
                     OnPropertyChanged(() => RackCabinetTypeName);
@@ -213,7 +213,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_RackCabinetModelName == null)
+                if (_RackCabinetModelName != value)
                 {
                     _RackCabinetModelName = value;
                     OnPropertyChanged(() => RackCabinetModelName);
@@ -230,7 +230,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_StatusName == null)
+                if (_StatusName != value)
                 {
                     _StatusName = value;
                     OnPropertyChanged(() => StatusName);
@@ -355,7 +355,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_LokacjaName == null)
+                if (_LokacjaName != value)
                 {
                     _LokacjaName = value;
                     OnPropertyChanged(() => LokacjaName);
@@ -371,7 +371,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);

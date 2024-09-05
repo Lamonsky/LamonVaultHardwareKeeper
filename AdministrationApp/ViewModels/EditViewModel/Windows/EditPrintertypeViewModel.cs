@@ -42,7 +42,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             item.ModifiedBy = GlobalData.UserId;
             EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.PRINTERTYPE_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
-            Messenger.Default.Send("PrintertypeRefresh");
+            Messenger.Default.Send("PrinterTypeRefresh");
             _window.Close();
         }
         #endregion

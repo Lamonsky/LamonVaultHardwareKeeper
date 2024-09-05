@@ -19,29 +19,17 @@ namespace AdministrationApp.ViewModels.EditViewModel
         #region Commands
         private BaseCommand _ChooseUserCommand;
         private BaseCommand _ChooseStatusCommand;
-        private BaseCommand _ChooseManufacturerCommand;
-        private BaseCommand _ChooseSimComponentTypeCommand;
+        private BaseCommand _ChooseSimComponentCommand;
 
-        public ICommand ChooseSimComponentTypeCommand
+        public ICommand ChooseSimComponentCommand
         {
             get
             {
-                if (_ChooseSimComponentTypeCommand == null)
+                if (_ChooseSimComponentCommand == null)
                 {
-                    _ChooseSimComponentTypeCommand = new BaseCommand(() => Messenger.Default.Send("ChooseSimComponentType"));
+                    _ChooseSimComponentCommand = new BaseCommand(() => Messenger.Default.Send("ChooseSimComponent"));
                 }
-                return _ChooseSimComponentTypeCommand;
-            }
-        }
-        public ICommand ChooseManufacturerCommand
-        {
-            get
-            {
-                if (_ChooseManufacturerCommand == null)
-                {
-                    _ChooseManufacturerCommand = new BaseCommand(() => Messenger.Default.Send("ChooseManufacturer"));
-                }
-                return _ChooseManufacturerCommand;
+                return _ChooseSimComponentCommand;
             }
         }
         public ICommand ChooseStatusCommand
@@ -75,7 +63,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             setForeignKeys();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<StatusVM>(this, getStatus);
-
+            Messenger.Default.Register<SimComponentVM>(this, getComponent);
         }
         public override async void Save()
         {
@@ -91,8 +79,10 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            SimComponentVM comvm = await RequestHelper.SendRequestAsync<object, SimComponentVM>(URLs.SIMCOMPONENT_ID.Replace("{id}", item.Component.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             StatusName = statusvm.Name;
             UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+            ComponentName = comvm.Name;
         }
         private void getChosenUser(UserVM vM)
         {
@@ -104,8 +94,30 @@ namespace AdministrationApp.ViewModels.EditViewModel
             item.StatusId = vm.Id;
             StatusName = vm.Name;
         }
+        private void getComponent(SimComponentVM vm)
+        {
+            item.Component = vm.Id;
+            ComponentName = vm.Name;
+        }
         #endregion
         #region Dane
+        private string _ComponentName;
+        public string ComponentName
+        {
+            get
+            {
+                return _ComponentName;
+            }
+            set
+            {
+                if (_ComponentName != value)
+                {
+                    _ComponentName = value;
+                    OnPropertyChanged(() => ComponentName);
+                }
+
+            }
+        }
         public int Id
         {
             get
@@ -122,7 +134,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_StatusName == null)
+                if (_StatusName != value)
                 {
                     _StatusName = value;
                     OnPropertyChanged(() => StatusName);
@@ -235,7 +247,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);

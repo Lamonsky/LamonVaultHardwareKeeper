@@ -47,7 +47,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             {
                 if (_ChooseServerModelCommand == null)
                 {
-                    _ChooseServerModelCommand = new BaseCommand(() => Messenger.Default.Send("ChooseServerModel"));
+                    _ChooseServerModelCommand = new BaseCommand(() => Messenger.Default.Send("ChooseComputerModel"));
                 }
                 return _ChooseServerModelCommand;
             }

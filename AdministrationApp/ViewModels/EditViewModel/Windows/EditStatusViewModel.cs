@@ -15,18 +15,6 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
     public class EditStatusViewModel : JedenViewModel<StatusCreateEditVM>
     {
         private Window _window;
-        private BaseCommand _ChooseStatusCommand;
-        public ICommand ChooseStatusCommand
-        {
-            get
-            {
-                if (_ChooseStatusCommand == null)
-                {
-                    _ChooseStatusCommand = new BaseCommand(() => Messenger.Default.Send("ChooseStatus"));
-                }
-                return _ChooseStatusCommand;
-            }
-        }
         #region Konstruktor
         public EditStatusViewModel(Window window, StatusCreateEditVM vm) : base("Status")
         {

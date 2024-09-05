@@ -17,14 +17,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
     class AllStatusViewModelWindow : WszystkieViewModel<StatusVM>
     {
         private Window _window;
-        public event EventHandler OnRequestClose;
-        public void CloseWindow(Window window)
-        {
-            if (window != null)
-            {
-                window.Close();
-            }
-        }
         public AllStatusViewModelWindow(Window window) : base("Status")
         {
             Messenger.Default.Register<string>(this, open);
@@ -45,7 +37,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
                     List = new List<StatusVM>(
                         List.Where(item =>
                             (item.Name?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
-                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
                             (item.Comment?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
                         ).ToList()
                     );
@@ -64,13 +55,6 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
                         ).ToList()
                     );
                     break;
-                case "Status":
-                    List = new List<StatusVM>(
-                        List.Where(item =>
-                            (item.Status?.Contains(FindTextBox, StringComparison.CurrentCultureIgnoreCase) ?? false)
-                        ).ToList()
-                    );
-                    break;
             }
         }
 
@@ -80,8 +64,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
             {
 
                 "Nazwa",
-                "Opis",
-                "Status",
+                "Opis"
             };
         }
 

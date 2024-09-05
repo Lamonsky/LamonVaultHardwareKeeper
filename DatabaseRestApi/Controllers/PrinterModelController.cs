@@ -16,6 +16,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<PrinterModelVM> printerModelVM = await database.PrinterModels
+                .Where(item => item.Status != 99)
                 .Select(item => new PrinterModelVM
                 {
                     Id = item.Id,
@@ -36,6 +37,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             PrinterModelVM printerModelVM = await database.PrinterModels
+                .Where(item => item.Status != 99)
                 .Select(item => new PrinterModelVM
                 {
                     Id = item.Id,
@@ -56,6 +58,7 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             PrinterModelCreateEditVM printerModelVM = await database.PrinterModels
+                .Where(item => item.Status != 99)
                 .Where(item => item.Id == id)
                 .Select(item => new PrinterModelCreateEditVM
                 {

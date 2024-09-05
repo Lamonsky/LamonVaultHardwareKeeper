@@ -77,7 +77,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             item.CreatedAt = DateTime.Now;
             item.CreatedBy = GlobalData.UserId;
             EditSaveLogs(oldItem, item);
-            await RequestHelper.SendRequestAsync(URLs.SIMCOMPONENT, HttpMethod.Post, item, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(URLs.SIMCOMPONENT_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("SimComponentRefresh");
             _window.Close();
         }

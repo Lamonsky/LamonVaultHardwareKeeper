@@ -18,7 +18,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
         #region Commands
         private BaseCommand _ChooseUserCommand;
         private BaseCommand _ChooseStatusCommand;
-        private BaseCommand _ChooseManufacturerCommand;
         private BaseCommand _ChooseSimComponentCommand;
 
         public ICommand ChooseSimComponentCommand
@@ -30,17 +29,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
                     _ChooseSimComponentCommand = new BaseCommand(() => Messenger.Default.Send("ChooseSimComponent"));
                 }
                 return _ChooseSimComponentCommand;
-            }
-        }
-        public ICommand ChooseManufacturerCommand
-        {
-            get
-            {
-                if (_ChooseManufacturerCommand == null)
-                {
-                    _ChooseManufacturerCommand = new BaseCommand(() => Messenger.Default.Send("ChooseManufacturer"));
-                }
-                return _ChooseManufacturerCommand;
             }
         }
         public ICommand ChooseStatusCommand
@@ -72,6 +60,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item = new SimCardsCreateEditVM();
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<StatusVM>(this, getStatus);
+            Messenger.Default.Register<SimComponentVM>(this, getComponent);
 
         }
         public override async void Save()
@@ -94,6 +83,11 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item.StatusId = vm.Id;
             StatusName = vm.Name;
         }
+        private void getComponent(SimComponentVM vm)
+        {
+            item.Component = vm.Id;
+            ComponentName = vm.Name;
+        }
         #endregion
         #region Dane
         public int Id
@@ -112,10 +106,27 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_StatusName == null)
+                if (_StatusName != value)
                 {
                     _StatusName = value;
                     OnPropertyChanged(() => StatusName);
+                }
+
+            }
+        }
+        private string _ComponentName;
+        public string ComponentName
+        {
+            get
+            {
+                return _ComponentName;
+            }
+            set
+            {
+                if (_ComponentName != value)
+                {
+                    _ComponentName = value;
+                    OnPropertyChanged(() => ComponentName);
                 }
 
             }
@@ -225,7 +236,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             }
             set
             {
-                if (_UserName == null)
+                if (_UserName != value)
                 {
                     _UserName = value;
                     OnPropertyChanged(() => UserName);

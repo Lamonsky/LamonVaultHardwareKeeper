@@ -15,8 +15,6 @@ namespace Data.Computers.SelectVMs
         public string? Name { get; set; }
         [JsonPropertyName("comment")]
         public string? Comment { get; set; }
-        [JsonPropertyName("status")]
-        public string? Status { get; set; }
         [JsonPropertyName("createdAt")]
         public DateTime? CreatedAt { get; set; }
 

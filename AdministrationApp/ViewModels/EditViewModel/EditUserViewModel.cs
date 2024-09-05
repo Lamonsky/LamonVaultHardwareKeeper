@@ -247,7 +247,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             }
             set
             {
-                if (_LokacjaName == null)
+                if (_LokacjaName != value)
                 {
                     _LokacjaName = value;
                     OnPropertyChanged(() => LokacjaName);
