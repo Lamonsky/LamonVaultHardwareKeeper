@@ -9,6 +9,7 @@ using ClosedXML.Excel;
 using System.Windows.Forms;
 using DocumentFormat.OpenXml.Drawing;
 using System.Reflection;
+using System.Windows;
 
 namespace AdministrationApp.ViewModels.AllViewModel
 {
@@ -58,7 +59,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
             {
                 if (_EditCommand == null)
                 {
-                    _EditCommand = new BaseCommand(() => Edit());
+                    _EditCommand = new BaseCommand(() => EditAndSendItem());
                 }
                 return _EditCommand;
             }
@@ -173,10 +174,35 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public abstract void Edit();
         public abstract void Remove();
+        public void EditAndSendItem()
+        {
+            if (ChosenItem != null)
+            {
+                Edit();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Nie wybrano obiektu do edycji");
+            }
+        }
         public void RemoveAndSaveLogs()
         {
-            Remove();
-            if (ChosenItem != null) RemoveSaveLogs(ChosenItem);
+            if (ChosenItem != null)
+            {
+                MessageBoxResult result = System.Windows.MessageBox.Show(
+                    "Czy na pewno chcesz usunąć?",
+                    "Usuwanie",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning);
+
+                // Sprawdzenie odpowiedzi użytkownika
+                if (result == MessageBoxResult.Yes)
+                {
+                    // Logika usuwania
+                    Remove();
+                    RemoveSaveLogs(ChosenItem);
+                }
+            }
         }
         #endregion
 
@@ -263,7 +289,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
                 // Zapisz plik na dysku
                 workbook.SaveAs(csvFilePath);
-                MessageBox.Show($"Zapisano plik pod ścieżką {csvFilePath}");
+                System.Windows.MessageBox.Show($"Zapisano plik pod ścieżką {csvFilePath}");
             }
         }
     }

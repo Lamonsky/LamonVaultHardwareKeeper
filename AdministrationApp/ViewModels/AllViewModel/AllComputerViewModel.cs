@@ -181,7 +181,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         }
         public override void Edit()
         {
-            if (ChosenItem.Id != null)
+            if (ChosenItem != null)
             {
                 
                 Messenger.Default.Send(DisplayName + "Edit/" + ChosenItem.Id);
@@ -195,7 +195,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void Remove()
         {
-            if (ChosenItem != null) await RequestHelper.SendRequestAsync(URLs.COMPUTERS_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
+            await RequestHelper.SendRequestAsync(URLs.COMPUTERS_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
         }
 
