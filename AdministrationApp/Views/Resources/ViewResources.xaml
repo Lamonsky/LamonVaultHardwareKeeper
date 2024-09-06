@@ -164,6 +164,8 @@
     <sys:Double x:Key="LoginWindowContentFontSize">36</sys:Double>
     <sys:Double x:Key="SummaryPageFontSize">24</sys:Double>
     <SolidColorBrush x:Key="SummaryMainColorBrush">#FF49A0EC</SolidColorBrush>
+    <SolidColorBrush x:Key="MainColorBrush">#FDFDFD</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryColorBrush">#FAFAFA</SolidColorBrush>
 
 
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
@@ -194,6 +196,7 @@
         <Setter Property="ItemsSource" Value="{Binding List}"/>
         <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="Background" Value="{StaticResource SecondaryColorBrush}"/>
     </Style>
     
     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MaterialDesignLabel}">

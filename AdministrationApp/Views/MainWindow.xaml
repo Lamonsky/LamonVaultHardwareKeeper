@@ -18,7 +18,7 @@
     
     
     
-    <Border CornerRadius="20">
+    <Border CornerRadius="20" Background="{StaticResources MainColorBrush}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -57,7 +57,7 @@
                     <StackPanel Grid.Row="0">
                         <Button Content="Podsumowanie" Command="{Binding ShowSummaryCommand}"/>
                     </StackPanel>
-                    <Expander Header="Zasoby" Grid.Row="1" IsExpanded="True" Margin="5,5,5,5">
+                    <Expander Header="Zasoby" Grid.Row="1" IsExpanded="True" Margin="5,5,5,5" Background="{StaticResources MainColorBrush}">
                         <StackPanel>
                             <Button Content="Komputery" Command="{Binding ShowComputersCommand}"/>
                             <Button Content="Monitory" Command="{Binding ShowMonitorsCommand}"/>
@@ -74,7 +74,7 @@
                             <Button Content="Użytkownicy" Command="{Binding ShowUserCommand}"/>
                         </StackPanel>
                     </Expander>
-                    <Expander Header="Zgłoszenia" Grid.Row="2" IsExpanded="True" Margin="5,5,5,5">
+                    <Expander Header="Zgłoszenia" Grid.Row="2" IsExpanded="True" Margin="5,5,5,5" Background="{StaticResources MainColorBrush}">
                         <StackPanel>
                             <Button Content="Wszystkie zgłoszenia" Command="{Binding AllTicketsCommand}"/>
                             <Button Content="Moje zgłoszenia" Command="{Binding MyTicketsCommand}"/>

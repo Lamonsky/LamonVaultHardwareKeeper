@@ -13,7 +13,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Margin="0,2,0,2" Background="Transparent">
+                        <StackPanel Grid.Row="0" Margin="0,2,0,2">
                             <Grid IsEnabled="{Binding Path=IsLoading}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
@@ -39,7 +39,7 @@
                                 </Button>
                             </Grid>
                         </StackPanel>
-                        <StackPanel Grid.Row="1" Background="Aqua">
+                        <StackPanel Grid.Row="1">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
@@ -121,7 +121,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:AllDictionaryViewBase}">
-                    <Grid Background="Aqua">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
@@ -171,7 +171,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:NewDictionaryViewBase}" >
-                    <Grid Background="Aqua">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
