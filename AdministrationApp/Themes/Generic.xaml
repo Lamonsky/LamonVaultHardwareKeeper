@@ -7,7 +7,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:WszystkieViewBase}">
-                    <Grid Margin="0,10,0,0">
+                    <Grid Margin="0,0,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
@@ -22,19 +22,19 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Command="{Binding AddCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
+                                <Button Grid.Column="0" Command="{Binding AddCommand}"  Margin="5,0,5,0">
                                     <materialDesign:PackIcon Kind="PlusCircle"/>
                                 </Button>
-                                <Button Grid.Column="1" Command="{Binding EditCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
+                                <Button Grid.Column="1" Command="{Binding EditCommand}"  Margin="5,0,5,0">
                                     <materialDesign:PackIcon Kind="EditCircle"/>
                                 </Button>
-                                <Button Grid.Column="2" Command="{Binding RemoveCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
+                                <Button Grid.Column="2" Command="{Binding RemoveCommand}"  Margin="5,0,5,0">
                                     <materialDesign:PackIcon Kind="RemoveCircle"/>
                                 </Button>
-                                <Button Grid.Column="3" Command="{Binding RefreshCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
+                                <Button Grid.Column="3" Command="{Binding RefreshCommand}"  Margin="5,0,5,0">
                                     <materialDesign:PackIcon Kind="Refresh"/>
                                 </Button>
-                                <Button Grid.Column="4" Command="{Binding GenerateExcelCommand}" HorizontalAlignment="Right" Margin="5,0,5,10">
+                                <Button Grid.Column="4" Command="{Binding GenerateExcelCommand}" HorizontalAlignment="Right" Margin="5,0,5,0">
                                     <materialDesign:PackIcon Kind="MicrosoftExcel"/> 
                                 </Button>
                             </Grid>
@@ -52,38 +52,61 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Filtrowanie: " Margin="5,0,5,0" VerticalAlignment="Center"/>
                                 <ComboBox Grid.Column="1" ItemsSource="{Binding FilterComboBoxListItems}" SelectedValue="{Binding Path=FilterField,Mode=TwoWay}" Margin="5,0,5,0"/>
-                                <TextBox Grid.Column="2" Text="{Binding FindTextBox}" Margin="5,0,5,0" BorderThickness="1" Height="20"/>
-                                <Button Grid.Column="3" Content="Filtruj" Command="{Binding FilterCommand}" Margin="5,10,5,10"/>
+                                <TextBox Grid.Column="2" Text="{Binding FindTextBox}" Margin="5,0,5,0"/>
+                                <Button Grid.Column="3" Command="{Binding FilterCommand}" Margin="5,0,5,0">
+                                    <materialDesign:PackIcon Kind="Filter" />
+                                </Button>
                             </Grid>
                         </StackPanel>
-                        <ContentPresenter Grid.Row="2" Margin="0,5,0,5"/>
+                        <ContentPresenter Grid.Row="2" Margin="5,5,5,5"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
+    
+    
+    <Style TargetType="{x:Type local:SummaryViewBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SummaryViewBase}">
+                    <Grid Margin="0,0,0,0">
+                        <ContentPresenter Margin="5,5,5,5"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    
 
     <Style TargetType="{x:Type local:JedenViewBase}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:JedenViewBase}">
-                    <Grid Margin="0,10,0,0">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Height="30" Margin="0,2,0,2">
+                        <StackPanel Grid.Row="0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Content="SaveAndClose" Command="{Binding SaveAndCloseCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
-
+                                <Button Grid.Column="0" Command="{Binding SaveAndCloseCommand}" Margin="5,0,0,0">
+                                    <materialDesign:PackIcon Kind="ContentSave" />
+                                </Button>
+                                <Button Grid.Column="1" Command="{Binding CancelCommand}" Margin="5,0,0,0">
+                                    <materialDesign:PackIcon Kind="CloseCircle" />
                                 </Button>
                             </Grid>
                         </StackPanel>
-                        <ContentPresenter Grid.Row="1" Margin="0,5,0,5"/>
+                        <ContentPresenter Grid.Row="1" Margin="5,0,5,5"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -115,24 +138,24 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Command="{Binding AddCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
+                                <Button Grid.Column="0" Command="{Binding AddCommand}"  Margin="5,0,5,0">
                                     <materialDesign:PackIcon Kind="PlusCircle"/>
                                 </Button>
-                                <Button Grid.Column="1" Command="{Binding EditCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
+                                <Button Grid.Column="1" Command="{Binding EditCommand}"  Margin="5,0,5,0">
                                     <materialDesign:PackIcon Kind="EditCircle"/>
                                 </Button>
-                                <Button Grid.Column="2" Command="{Binding RemoveCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
+                                <Button Grid.Column="2" Command="{Binding RemoveCommand}"  Margin="5,0,5,0">
                                     <materialDesign:PackIcon Kind="RemoveCircle"/>
                                 </Button>
-                                <Button Grid.Column="3" Command="{Binding RefreshCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
+                                <Button Grid.Column="3" Command="{Binding RefreshCommand}"  Margin="5,0,5,0">
                                     <materialDesign:PackIcon Kind="Refresh"/>
                                 </Button>
                                 <Label Grid.Column="4" Content="Filtrowanie: " Margin="5,0,5,0" VerticalAlignment="Center"/>
-                                <TextBox Grid.Column="5" Text="{Binding FindTextBox}" Margin="5,0,5,0" BorderThickness="1" Height="20"/>
-                                <Button Grid.Column="6" Command="{Binding FilterCommand}" Margin="5,10,5,10">
+                                <TextBox Grid.Column="5" Text="{Binding FindTextBox}" Margin="5,0,5,0" />
+                                <Button Grid.Column="6" Command="{Binding FilterCommand}" Margin="5,0,5,0">
                                     <materialDesign:PackIcon Kind="Send"/>
                                 </Button>
-                                <Button Grid.Column="7" HorizontalAlignment="Right" Command="{Binding SendCommand}">
+                                <Button Grid.Column="7" HorizontalAlignment="Right" Command="{Binding SendCommand}" Margin="0,0,5,0">
                                     <materialDesign:PackIcon Kind="Send"/>
                                 </Button>
                             </Grid>
@@ -159,11 +182,11 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Content="SaveAndClose" x:Name="SaveAndCloseButton" Command="{Binding SaveAndCloseCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
-
+                                <Button Grid.Column="0" Command="{Binding SaveAndCloseCommand}" Margin="5,0,0,0">
+                                    <materialDesign:PackIcon Kind="ContentSave" />
                                 </Button>
-                                <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Center" Margin="5,0,5,10">
-
+                                <Button Grid.Column="1" Command="{Binding CancelCommand}" Margin="5,0,0,0">
+                                    <materialDesign:PackIcon Kind="CloseCircle" />
                                 </Button>
                             </Grid>
                         </StackPanel>
@@ -173,6 +196,10 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
+
+
 
 
 </ResourceDictionary>

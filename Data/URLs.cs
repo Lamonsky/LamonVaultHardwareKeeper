@@ -196,6 +196,7 @@ namespace Data
         public const string TICKETTYPE_CEVM_ID = "/tickettype/cevm/{id}";
 
         public const string TICKET = "/ticket";
+        public const string CLOSEDTICKET = "/ticket/closed";
         public const string TICKET_ID = "/ticket/{id}";
         public const string TICKET_OWNER_ID = "/ticket/owner/{id}";
         public const string TICKET_CEVM_ID = "/ticket/cevm/{id}";

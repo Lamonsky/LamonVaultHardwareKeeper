@@ -28,5 +28,7 @@ namespace Data.Computers.SelectVMs
 
         [JsonPropertyName("modifiedBy")]
         public string? ModifiedBy { get; set; }
+        [JsonPropertyName("countToClosed")]
+        public bool CountToClosed { get; set; }
     }
 }

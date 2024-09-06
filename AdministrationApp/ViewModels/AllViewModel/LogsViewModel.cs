@@ -73,7 +73,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override void send()
         {
-            throw new NotImplementedException();
         }
     }
 }

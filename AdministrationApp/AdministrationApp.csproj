@@ -44,6 +44,9 @@
     <Compile Update="Views\AllViews\MyTicketsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AllWindows\AllTicketStatusWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AllWindows\AllRackCabinetWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -66,6 +69,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\NewViews\NewServerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewViews\Windows\NewTicketStatusWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\NewViews\Windows\NewSimComponentWindow.xaml.cs">

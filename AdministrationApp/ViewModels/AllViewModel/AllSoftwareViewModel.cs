@@ -109,8 +109,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
-            RemoveSaveLogs(ChosenItem);
-            await RequestHelper.SendRequestAsync(URLs.SOFTWARE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
+            if (ChosenItem != null) await RequestHelper.SendRequestAsync(URLs.SOFTWARE_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
         }
 

@@ -93,8 +93,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
-            
-            await RequestHelper.SendRequestAsync(URLs.SIMCOMPONENT_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
+
+            if (ChosenItem != null) await RequestHelper.SendRequestAsync(URLs.SIMCOMPONENT_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
         public override void send()

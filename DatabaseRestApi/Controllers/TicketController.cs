@@ -17,6 +17,35 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<TicketVM> ticketVM = await database.Tickets
+                .Where(item => item.Status.CountToClosed == false)
+                .Where(item => item.StatusId != 99)
+                .OrderBy(item => item.StatusId)
+                .Select(item => new TicketVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Type = item.TypeNavigation.Name,
+                    Category = item.CategoryNavigation.Name,
+                    Status = item.Status.Name,
+                    Location = item.Location.Name,
+                    User = item.UserNavigation.FirstName + " " + item.UserNavigation.LastName,
+                    Owner = item.OwnerNavigation.Users.FirstName + " " + item.OwnerNavigation.Users.LastName,
+                    Email = item.UserNavigation.Email,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).ToListAsync();
+            return Json(ticketVM);
+        }
+        [Route(URLs.CLOSEDTICKET)]
+        [HttpGet]
+        public async Task<IActionResult> ClosedTickets()
+        {
+            DatabaseContext database = new();
+            List<TicketVM> ticketVM = await database.Tickets
+                .Where(item => item.Status.CountToClosed == true)
+                .Where(item => item.StatusId != 99)
                 .OrderBy(item => item.StatusId)
                 .Select(item => new TicketVM
                 {

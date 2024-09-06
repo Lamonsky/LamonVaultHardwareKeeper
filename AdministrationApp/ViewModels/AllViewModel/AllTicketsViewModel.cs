@@ -129,14 +129,13 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void Remove()
         {
-            
-            await RequestHelper.SendRequestAsync(URLs.TICKET_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
+
+            if (ChosenItem != null) await RequestHelper.SendRequestAsync(URLs.TICKET_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
 
         public override void send()
         {
-            throw new NotImplementedException();
         }
     }
 }

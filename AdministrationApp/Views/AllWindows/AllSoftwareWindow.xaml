@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Height="450" Width="800">
 
-    <DataGrid ItemsSource="{Binding List}" SelectedItem="{Binding Path=ChosenItem}" AutoGenerateColumns="False" IsReadOnly="True">
+    <DataGrid>
         <DataGrid.Columns>
             <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
             <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}"/>

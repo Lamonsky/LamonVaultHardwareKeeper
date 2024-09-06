@@ -85,6 +85,18 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
                 return item.Id;
             }
         }
+        public bool CountToClosed
+        {
+            get
+            {
+                return item.CountToClosed;
+            }
+            set
+            {
+                item.CountToClosed = value;
+                OnPropertyChanged(() => CountToClosed);
+            }
+        }
         public int? Status
         {
             get

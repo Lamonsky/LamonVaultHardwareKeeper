@@ -28,6 +28,7 @@ FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administratio
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllSoftwareWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllStatusWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllTechniciansWindow.xaml;;
+FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllTicketStatusWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\AllWindows\AllUsersWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\LoginWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\MainWindow.xaml;;
@@ -50,5 +51,6 @@ FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administratio
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\Windows\NewLocationWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\Windows\NewSimComponentWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\Windows\NewTechnicianWindow.xaml;;
+FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\NewViews\Windows\NewTicketStatusWindow.xaml;;
 FC:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\Views\Resources\ViewResources.xaml;;
 

@@ -18,7 +18,7 @@ namespace AdministrationApp.Views.AllViews
     /// <summary>
     /// Logika interakcji dla klasy SummaryView.xaml
     /// </summary>
-    public partial class SummaryView : WszystkieViewBase
+    public partial class SummaryView : SummaryViewBase
     {
         public SummaryView()
         {

@@ -4,14 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdministrationApp"
-        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Height="900" Width="1600">
 
-    <Window.Resources>
-        <ResourceDictionary Source="Resources/ViewResources.xaml"/>
-    </Window.Resources>
 
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+    </Window.Resources>
+    
+    
+    
+    
     <Border CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
@@ -19,21 +25,20 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Background="LightBlue">
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Lamon - Vault Hardware Keeper" Grid.Column="0"/>
+                <TextBlock Text="Lamon - Vault Hardware Keeper" Grid.Column="0" Margin="10,0,0,0"/>
                 <Menu Grid.Column="1">
-                    <MenuItem Header="Podsumowanie" Command="{Binding ShowSummaryCommand}"/>
                     <MenuItem Header="_System">
                         <MenuItem Header="Logi" Command="{Binding ShowLogsCommand}"/>
                         <MenuItem Header="Interfejs klienta" Command="{Binding ShowPageContentCommand}"/>
                     </MenuItem>
                 </Menu>
-                <TextBlock Text="{Binding EMail}" Grid.Column="2" HorizontalAlignment="Right"/>
+                <TextBlock Text="{Binding EMail}" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,10,0"/>
             </Grid>
             
             
@@ -43,9 +48,17 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Background="LightBlue">
-                    <TreeView Style="{StaticResource MaterialDesignTreeView}">
-                        <TreeViewItem Header="Zasoby" IsExpanded="True">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <Button Content="Podsumowanie" Command="{Binding ShowSummaryCommand}"/>
+                    </StackPanel>
+                    <Expander Header="Zasoby" Grid.Row="1" IsExpanded="True" Margin="5,5,5,5">
+                        <StackPanel>
                             <Button Content="Komputery" Command="{Binding ShowComputersCommand}"/>
                             <Button Content="Monitory" Command="{Binding ShowMonitorsCommand}"/>
                             <Button Content="Oprogramowanie" Command="{Binding ShowSoftwareCommand}"/>
@@ -59,13 +72,19 @@
                             <Button Content="Serwery" Command="{Binding ShowServersCommand}"/>
                             <Button Content="Karty Sim" Command="{Binding ShowSimCardCommand}"/>
                             <Button Content="Użytkownicy" Command="{Binding ShowUserCommand}"/>
-                        </TreeViewItem>
-                        <TreeViewItem Header="Zgłoszenia" IsExpanded="True">
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="Zgłoszenia" Grid.Row="2" IsExpanded="True" Margin="5,5,5,5">
+                        <StackPanel>
                             <Button Content="Wszystkie zgłoszenia" Command="{Binding AllTicketsCommand}"/>
                             <Button Content="Moje zgłoszenia" Command="{Binding MyTicketsCommand}"/>
-                        </TreeViewItem>
-                    </TreeView>
-                </StackPanel>
+                            <Button Content="Zamknięte zgłoszenia" Command="{Binding ClosedTicketsCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    
+                </Grid>
+                
+                
                 <HeaderedContentControl
                     Grid.Column="1"
                     Header="Przestrzeń robocza"

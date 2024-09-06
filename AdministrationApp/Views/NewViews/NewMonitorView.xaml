@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:AdministrationApp.Views"
         mc:Ignorable="d"
         d:DesignHeight="450" d:DesignWidth="800">
@@ -40,7 +40,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=LokacjaName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseLocationCommand}">
-                        <ui:SymbolIcon Symbol="Location12"/>
+<materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Status:"/>
@@ -51,7 +51,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=StatusName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseStatusCommand}">
-                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="Typ Monitora:"/>
@@ -62,7 +62,7 @@
 					</Grid.ColumnDefinitions>
 					<TextBlock Grid.Column="0" Text="{Binding Path=MonitorTypeName}"/>
 					<Button Grid.Column="1" Command="{Binding Path=ChooseMonitorTypeCommand}">
-						<ui:SymbolIcon Symbol="LocationAdd16"/>
+						<materialDesign:PackIcon Kind="PageNext" />
 					</Button>
 				</Grid>                
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="Producent:"/>
@@ -73,7 +73,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=ManufacturerName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseManufacturerCommand}">
-                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="2" Grid.Column="4" Text="Model:"/>
@@ -84,7 +84,7 @@
 					</Grid.ColumnDefinitions>
 					<TextBlock Grid.Column="0" Text="{Binding Path=MonitorModelName}"/>
 					<Button Grid.Column="1" Command="{Binding Path=ChooseMonitorModelCommand}">
-						<ui:SymbolIcon Symbol="LocationAdd16"/>
+						<materialDesign:PackIcon Kind="PageNext" />
 					</Button>
 				</Grid>                <TextBlock Grid.Row="3" Grid.Column="4" Text="Numer seryjny:"/>
                 <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
@@ -98,7 +98,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=UserName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseUserCommand}">
-                        <ui:SymbolIcon Symbol="People24"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
             </Grid>

@@ -23,6 +23,7 @@ namespace DatabaseRestApi.Controllers
                     Name = item.Name,
                     Comment = item.Comment,
                     Status = item.StatusNavigation.Name,
+                    CountToClosed = (bool)item.CountToClosed,
                     CreatedAt = item.CreatedAt,
                     CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
                     ModifiedAt = item.ModifiedAt,
@@ -44,6 +45,7 @@ namespace DatabaseRestApi.Controllers
                     Name = item.Name,
                     Comment = item.Comment,
                     Status = item.StatusNavigation.Name,
+                    CountToClosed = (bool)item.CountToClosed,
                     CreatedAt = item.CreatedAt,
                     CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
                     ModifiedAt = item.ModifiedAt,
@@ -63,6 +65,7 @@ namespace DatabaseRestApi.Controllers
                 {
                     Id = item.Id,
                     Name = item.Name,
+                    CountToClosed = (bool)item.CountToClosed,
                     Comment = item.Comment,
                     Status = item.Status
 
@@ -78,6 +81,7 @@ namespace DatabaseRestApi.Controllers
             {
                 Name = ticketStatusCreateEditVM.Name,
                 Comment = ticketStatusCreateEditVM.Comment,
+                CountToClosed = ticketStatusCreateEditVM.CountToClosed,
                 Status = ticketStatusCreateEditVM.Status,
                 CreatedAt = DateTime.Now,
                 CreatedBy = ticketStatusCreateEditVM.CreatedBy,
@@ -99,6 +103,7 @@ namespace DatabaseRestApi.Controllers
             }
             ticketStatus.Name = ticketStatusCreateEditVM.Name;
             ticketStatus.Comment = ticketStatusCreateEditVM.Comment;
+            ticketStatus.CountToClosed = ticketStatusCreateEditVM.CountToClosed;
             ticketStatus.Status = ticketStatusCreateEditVM.Status;
             ticketStatus.ModifiedAt = DateTime.Now;
             ticketStatus.ModifiedBy = ticketStatusCreateEditVM.ModifiedBy;

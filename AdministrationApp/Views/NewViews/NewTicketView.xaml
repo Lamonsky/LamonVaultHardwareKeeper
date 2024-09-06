@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdministrationApp.Views"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
 
@@ -39,7 +39,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=TicketTypeName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseTypeCommand}">
-                        <ui:SymbolIcon Symbol="Location12"/>
+<materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="0" Grid.Column="4" Text="Kategoria zgłoszenia:"/>
@@ -50,7 +50,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=CategoryName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseCategoryCommand}">
-                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 
@@ -62,7 +62,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=StatusName, UpdateSourceTrigger=PropertyChanged}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseTicketStatusCommand}">
-                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="Użytkownik:"/>
@@ -73,7 +73,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=UserName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseUserCommand}">
-                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="Właściciel:"/>
@@ -84,7 +84,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=OwnerName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseOwnerCommand}">
-                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" HorizontalAlignment="Center" Text="Treść zgłoszenia:"/>

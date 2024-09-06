@@ -176,7 +176,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         public void RemoveAndSaveLogs()
         {
             Remove();
-            RemoveSaveLogs(ChosenItem);
+            if (ChosenItem != null) RemoveSaveLogs(ChosenItem);
         }
         #endregion
 

@@ -75,13 +75,12 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public async override void Remove()
         {
-            await RequestHelper.SendRequestAsync(URLs.PAGECONTENT_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
+            if (ChosenItem != null) await RequestHelper.SendRequestAsync(URLs.PAGECONTENT_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, null);
             load();
         }
 
         public override void send()
         {
-            throw new NotImplementedException();
         }
     }
 }

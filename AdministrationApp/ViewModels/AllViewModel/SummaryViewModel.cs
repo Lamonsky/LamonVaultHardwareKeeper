@@ -11,10 +11,12 @@ using System.Threading.Tasks;
 using AdministrationApp.Views;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
+using System.Diagnostics;
+using AdministrationApp.ViewModels.NewViewModel;
 
 namespace AdministrationApp.ViewModels.AllViewModel
 {
-    public class SummaryViewModel : WszystkieViewModel<MainWindowModel>
+    public class SummaryViewModel : JedenViewModel<MainWindowModel>
     {
         #region Commands
         private BaseCommand _ShowComputersCommand;
@@ -31,7 +33,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
                 }
                 return _ShowComputersCommand;
             }
-        }public ICommand ShowMonitorCommand
+        }
+        public ICommand ShowMonitorCommand
         {
             get
             {
@@ -41,7 +44,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
                 }
                 return _ShowMonitorCommand;
             }
-        }public ICommand ShowLocationCommand
+        }
+        public ICommand ShowLocationCommand
         {
             get
             {
@@ -51,7 +55,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
                 }
                 return _ShowLocationCommand;
             }
-        }public ICommand ShowUserCommand
+        }
+        public ICommand ShowUserCommand
         {
             get
             {
@@ -80,116 +85,257 @@ namespace AdministrationApp.ViewModels.AllViewModel
             }
         }
 
-        public SummaryViewModel() : base("Podsumowanie")
+        public SummaryViewModel(MainWindowModel vm) : base("Podsumowanie")
         {
-            load();
+            item = vm;
         }
-
-        public async Task<MainWindowModel> getItems()
+        public override void Save()
         {
-            return await RequestHelper.SendRequestAsync<object, MainWindowModel>(URLs.MAINWINDOW, HttpMethod.Get, null, GlobalData.AccessToken);
-        }
 
-        public async override void load()
-        {
-            model = await getItems();
-            ComputerCount = model.ComputerCount;
-            monitorCount = model.MonitorCount;
-            usersCount = model.UserCount;
-            locationCount = model.LocationCount;
         }
         #endregion
         #region Dane
-        private int _computerCount;
+
         public int ComputerCount
         {
             get
             {
-                return _computerCount;
+                return item.ComputerCount;
             }
             set
             {
-                if (_computerCount != value)
+                if (item.ComputerCount != value)
                 {
-                    _computerCount = value;
+                    item.ComputerCount = value;
                     OnPropertyChanged(() => ComputerCount);
                 }
             }
         }
-        private int _monitorCount;
-        public int monitorCount
+
+        public int MonitorCount
         {
             get
             {
-                return _monitorCount;
+                return item.MonitorCount;
             }
             set
             {
-                if (_monitorCount != value)
+                if (item.MonitorCount != value)
                 {
-                    _monitorCount = value;
-                    OnPropertyChanged(() => monitorCount);
+                    item.MonitorCount = value;
+                    OnPropertyChanged(() => MonitorCount);
                 }
             }
         }
-        private int _locationCount;
-        public int locationCount
+
+        public int SoftwareCount
         {
             get
             {
-                return _locationCount;
+                return item.SoftwareCount;
             }
             set
             {
-                if (_locationCount != value)
+                if (item.SoftwareCount != value)
                 {
-                    _locationCount = value;
-                    OnPropertyChanged(() => locationCount);
+                    item.SoftwareCount = value;
+                    OnPropertyChanged(() => SoftwareCount);
                 }
             }
         }
-        private int _usersCount;
-        public int usersCount
+
+        public int LicenseCount
         {
             get
             {
-                return _usersCount;
+                return item.LicenseCount;
             }
             set
             {
-                if (_usersCount != value)
+                if (item.LicenseCount != value)
                 {
-                    _usersCount = value;
-                    OnPropertyChanged(() => usersCount);
+                    item.LicenseCount = value;
+                    OnPropertyChanged(() => LicenseCount);
                 }
             }
         }
-        #endregion
-        #region NECESSERY
-        public override void Edit()
+
+        public int NetworkDeviceCount
         {
-            throw new NotImplementedException();
+            get
+            {
+                return item.NetworkDeviceCount;
+            }
+            set
+            {
+                if (item.NetworkDeviceCount != value)
+                {
+                    item.NetworkDeviceCount = value;
+                    OnPropertyChanged(() => NetworkDeviceCount);
+                }
+            }
         }
 
-        public override void Filter()
+        public int DeviceCount
         {
-            throw new NotImplementedException();
+            get
+            {
+                return item.DeviceCount;
+            }
+            set
+            {
+                if (item.DeviceCount != value)
+                {
+                    item.DeviceCount = value;
+                    OnPropertyChanged(() => DeviceCount);
+                }
+            }
         }
 
-        public override List<string> GetComboBoxFilterList()
+        public int PrinterCount
         {
-            return new List<string>();
+            get
+            {
+                return item.PrinterCount;
+            }
+            set
+            {
+                if (item.PrinterCount != value)
+                {
+                    item.PrinterCount = value;
+                    OnPropertyChanged(() => PrinterCount);
+                }
+            }
         }
 
-        public override void Remove()
+        public int PhoneCount
         {
-            throw new NotImplementedException();
+            get
+            {
+                return item.PhoneCount;
+            }
+            set
+            {
+                if (item.PhoneCount != value)
+                {
+                    item.PhoneCount = value;
+                    OnPropertyChanged(() => PhoneCount);
+                }
+            }
         }
 
-        public override void send()
+        public int RackCabinetCount
         {
-            throw new NotImplementedException();
+            get
+            {
+                return item.RackCabinetCount;
+            }
+            set
+            {
+                if (item.RackCabinetCount != value)
+                {
+                    item.RackCabinetCount = value;
+                    OnPropertyChanged(() => RackCabinetCount);
+                }
+            }
         }
+
+        public int HardDriveCount
+        {
+            get
+            {
+                return item.HardDriveCount;
+            }
+            set
+            {
+                if (item.HardDriveCount != value)
+                {
+                    item.HardDriveCount = value;
+                    OnPropertyChanged(() => HardDriveCount);
+                }
+            }
+        }
+
+        public int ServerCount
+        {
+            get
+            {
+                return item.ServerCount;
+            }
+            set
+            {
+                if (item.ServerCount != value)
+                {
+                    item.ServerCount = value;
+                    OnPropertyChanged(() => ServerCount);
+                }
+            }
+        }
+
+        public int SimCardCount
+        {
+            get
+            {
+                return item.SimCardCount;
+            }
+            set
+            {
+                if (item.SimCardCount != value)
+                {
+                    item.SimCardCount = value;
+                    OnPropertyChanged(() => SimCardCount);
+                }
+            }
+        }
+
+        public int UsersCount
+        {
+            get
+            {
+                return item.UsersCount;
+            }
+            set
+            {
+                if (item.UsersCount != value)
+                {
+                    item.UsersCount = value;
+                    OnPropertyChanged(() => UsersCount);
+                }
+            }
+        }
+
+        public int TicketsCount
+        {
+            get
+            {
+                return item.TicketsCount;
+            }
+            set
+            {
+                if (item.TicketsCount != value)
+                {
+                    item.TicketsCount = value;
+                    OnPropertyChanged(() => TicketsCount);
+                }
+            }
+        }
+
+        public int LocationCount
+        {
+            get
+            {
+                return item.LocationCount;
+            }
+            set
+            {
+                if (item.LocationCount != value)
+                {
+                    item.LocationCount = value;
+                    OnPropertyChanged(() => LocationCount);
+                }
+            }
+        }
+
         #endregion
     }
 }

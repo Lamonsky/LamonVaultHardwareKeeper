@@ -8,7 +8,10 @@
                     xmlns:vme="clr-namespace:AdministrationApp.ViewModels.EditViewModel"
                     xmlns:vmnw="clr-namespace:AdministrationApp.ViewModels.NewViewModel.Windows"
                     xmlns:vwn="clr-namespace:AdministrationApp.Views.NewViews"
-                    xmlns:vwnw="clr-namespace:AdministrationApp.Views.NewViews.Windows">
+                    xmlns:vwnw="clr-namespace:AdministrationApp.Views.NewViews.Windows"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+>
 
     <DataTemplate DataType="{x:Type vma:SummaryViewModel}">
         <vwa:SummaryView/>
@@ -50,6 +53,9 @@
         <vwa:AllHardDriveView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vma:AllTicketsViewModel}">
+        <vwa:AllTicketsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllClosedTicketsViewModel}">
         <vwa:AllTicketsView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vma:AllServersViewModel}">
@@ -155,39 +161,66 @@
         <vwn:NewServerView/>
     </DataTemplate>
 
+    <sys:Double x:Key="LoginWindowContentFontSize">36</sys:Double>
+    <sys:Double x:Key="SummaryPageFontSize">24</sys:Double>
+    <SolidColorBrush x:Key="SummaryMainColorBrush">#FF49A0EC</SolidColorBrush>
 
 
-    <Style TargetType="TextBox">
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
                 <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}"/>
             </Trigger>
         </Style.Triggers>
-        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="2,2,2,2"/>
-    </Style>
-
-    <Style TargetType="{x:Type TextBlock}">
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="Margin" Value="2,2,2,2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
     <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="2,2,2,2"/>
     </Style>
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignFlatAccentButton}">
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="2,2,2,2"/>
-        <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
+
+    <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
+        <Setter Property="Margin" Value="10,10,10,10"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
+    <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
+        <Setter Property="Margin" Value="2,2,2,2"/>
+        <Setter Property="SelectedItem" Value="{Binding Path=ChosenItem}"/>
+        <Setter Property="ItemsSource" Value="{Binding List}"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+    </Style>
+    
+    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MaterialDesignLabel}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle" BasedOn="{StaticResource MaterialDesignBody2TextBlock}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+        
+    <!-- Bez poniższego nie działa -->
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}"/>
+
+    <Style TargetType="{x:Type Button}" x:Key="BaseButtonStyle" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+        <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButtonStyle}"/>
 
 
-
+    <Style TargetType="{x:Type Grid}">
+        <Setter Property="Margin" Value="0,1,0,1"/>
+    </Style>
+    
     <!--DONT CHANGE DOWNSIDE-->
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">

@@ -81,8 +81,8 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public async override void Remove()
         {
-            
-            await RequestHelper.SendRequestAsync(URLs.TECHNICIAN_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
+
+            if (ChosenItem != null) await RequestHelper.SendRequestAsync(URLs.TECHNICIAN_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
 

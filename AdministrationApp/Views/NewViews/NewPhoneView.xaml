@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdministrationApp.Views"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -41,7 +41,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=LokacjaName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseLocationCommand}">
-                        <ui:SymbolIcon Symbol="Location12"/>
+<materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Status:"/>
@@ -52,7 +52,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=StatusName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseStatusCommand}">
-                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="Typ telefonu:"/>
@@ -63,7 +63,7 @@
 					</Grid.ColumnDefinitions>
 					<TextBlock Grid.Column="0" Text="{Binding Path=PhoneTypeName}"/>
 					<Button Grid.Column="1" Command="{Binding Path=ChoosePhoneTypeCommand}">
-						<ui:SymbolIcon Symbol="LocationAdd16"/>
+						<materialDesign:PackIcon Kind="PageNext" />
 					</Button>
 				</Grid>                
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="Producent:"/>
@@ -74,7 +74,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=ManufacturerName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseManufacturerCommand}">
-                        <ui:SymbolIcon Symbol="LocationAdd16"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="2" Grid.Column="4" Text="Model:"/>
@@ -85,7 +85,7 @@
 					</Grid.ColumnDefinitions>
 					<TextBlock Grid.Column="0" Text="{Binding Path=PhoneModelName}"/>
 					<Button Grid.Column="1" Command="{Binding Path=ChoosePhoneModelCommand}">
-						<ui:SymbolIcon Symbol="LocationAdd16"/>
+						<materialDesign:PackIcon Kind="PageNext" />
 					</Button>
 				</Grid>                <TextBlock Grid.Row="3" Grid.Column="4" Text="Numer seryjny:"/>
                 <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
@@ -99,7 +99,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=SimCard1S}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseSimCard1Command}">
-                        <ui:SymbolIcon Symbol="People24"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="4" Grid.Column="4" Text="Karta sim 2"/>
@@ -110,7 +110,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=SimCard2S}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseSimCard2Command}">
-                        <ui:SymbolIcon Symbol="People24"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 <TextBlock Grid.Row="5" Grid.Column="1" Text="Użytkownik"/>
@@ -121,7 +121,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Path=UserName}"/>
                     <Button Grid.Column="1" Command="{Binding Path=ChooseUserCommand}">
-                        <ui:SymbolIcon Symbol="People24"/>
+                        <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
                 

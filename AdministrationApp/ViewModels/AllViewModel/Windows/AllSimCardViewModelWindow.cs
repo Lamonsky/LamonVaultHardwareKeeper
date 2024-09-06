@@ -131,8 +131,8 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
 
         public override async void Remove()
         {
-            
-            await RequestHelper.SendRequestAsync(URLs.SIMCARD_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
+
+            if (ChosenItem != null) await RequestHelper.SendRequestAsync(URLs.SIMCARD_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
             load();
         }
 

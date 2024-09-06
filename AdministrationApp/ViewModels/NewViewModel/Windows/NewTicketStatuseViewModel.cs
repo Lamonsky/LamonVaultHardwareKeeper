@@ -87,6 +87,18 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
                 OnPropertyChanged(() => Status);
             }
         }
+        public bool CountToClosed
+        {
+            get
+            {
+                return item.CountToClosed;
+            }
+            set
+            {
+                item.CountToClosed = value;
+                OnPropertyChanged(() => CountToClosed);
+            }
+        }
         public string? Comment
         {
             get
