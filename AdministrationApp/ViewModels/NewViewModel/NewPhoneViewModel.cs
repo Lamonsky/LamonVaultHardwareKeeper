@@ -108,7 +108,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             {
                 if (_ChooseSimCard2Command == null)
                 {
-                    _ChooseSimCard2Command = new BaseCommand(() => Messenger.Default.Send("ChooseSimCard"));
+                    _ChooseSimCard2Command = new BaseCommand(() => Messenger.Default.Send("ChooseSimCard2"));
                 }
                 return _ChooseSimCard2Command;
             }
@@ -121,7 +121,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
             Messenger.Default.Register<SimCardsVM>(this, getChosenSimCard1);
-            Messenger.Default.Register<SimCardsVM>(this, getChosenSimCard2);
+            Messenger.Default.Register<SimCardsVM2>(this, getChosenSimCard2);
             Messenger.Default.Register<StatusVM>(this, getStatus);
             Messenger.Default.Register<ManufacturerVM>(this, getManufacturer);
             Messenger.Default.Register<PhoneModelVM>(this, getPhoneModel);
@@ -158,7 +158,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             item.SimCard1 = scvm1.Id;
             SimCard1S = scvm1.PhoneNumber + " " + scvm1.InventoryNumber + " " + scvm1.SerialNumber;
         }
-        private void getChosenSimCard2(SimCardsVM scvm2)
+        private void getChosenSimCard2(SimCardsVM2 scvm2)
         {
             item.SimCard2 = scvm2.Id;
             SimCard2S = scvm2.PhoneNumber + " " + scvm2.InventoryNumber + " " + scvm2.SerialNumber;

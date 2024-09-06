@@ -266,6 +266,7 @@ namespace AdministrationApp.ViewModels
                 { "SimComponentTypeAdd", CreateSimComponentTypeWindow },
                 { "SimComponentAdd", CreateSimComponentWindow },
                 { "ChooseSimCard", ShowSimCardWindow },
+                { "ChooseSimCard2", ShowSimCardWindow2 },
                 { "ChooseSimComponentType", ShowSimComponentTypeWindow },
                 { "ChooseSimComponent", ShowSimComponentWindow },
 
@@ -800,6 +801,10 @@ namespace AdministrationApp.ViewModels
         private void ShowSimCardWindow()
         {
             CreateWindows<AllSimCardWindow, AllSimCardViewModelWindow>(window => new AllSimCardViewModelWindow(window));
+        }
+        private void ShowSimCardWindow2()
+        {
+            CreateWindows<AllSimCardWindow, AllSimCardViewModelWindow2>(window => new AllSimCardViewModelWindow2(window));
         }
 
         private void ShowSimComponentTypeWindow()
