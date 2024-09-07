@@ -52,11 +52,13 @@ C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\o
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.WebInterface.props
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.WebInterface.props
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\scopedcss\bundle\WebInterface.styles.css
-C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\scopedcss\projectbundle\WebInterface.bundle.scp.css
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\WebInterface.dll
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\refint\WebInterface.dll
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\WebInterface.pdb
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\WebInterface.genruntimeconfig.cache
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\ref\WebInterface.dll
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\bin\Debug\net8.0\Data.dll
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\bin\Debug\net8.0\Data.pdb
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\WebInterface.csproj.AssemblyReference.cache
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\obj\Debug\net8.0\WebInterface.csproj.CopyComplete

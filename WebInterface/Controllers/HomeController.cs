@@ -1,5 +1,8 @@
+using Data;
+using Data.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using WebInterface.Helpers;
 using WebInterface.Models;
 
 namespace WebInterface.Controllers
@@ -13,9 +16,18 @@ namespace WebInterface.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            
+            if(GlobalData.Email != null)
+            {
+                MainWindowModel model = await RequestHelper.SendRequestAsync<object, MainWindowModel>(URLs.MAINWINDOW_ID.Replace("{id}", GlobalData.Id.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");                
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

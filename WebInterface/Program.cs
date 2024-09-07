@@ -1,3 +1,5 @@
+using WebInterface.Helpers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,6 +21,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseMiddleware<CheckCookieMiddleware>();
 
 app.MapControllerRoute(
     name: "default",

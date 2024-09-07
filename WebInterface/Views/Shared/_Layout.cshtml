@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var cookie = Context.Request.Cookies["email"];
+    GlobalData.WhichLayout = cookie != null ? "_LoggedInLayout" : "_Layout";
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -16,27 +20,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-header">
-                        Zasoby
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <a asp-page="/Computers">Komputery</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a asp-page="/Monitors">Monitory</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a asp-page="/Summary">Podsumowanie</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9">
+            <div class="col">
                 <div class="card">
                     <div class="card-header">
                         Przestrzeń robocza
@@ -53,7 +37,7 @@
                     <div class="col">
                         WSB-NLU Damian Lamonski
                     </div>
-                    <div class="col text-right">
+                    <div class="col d-flex justify-content-end">
                         @DateTime.Now
                     </div>
                 </div>

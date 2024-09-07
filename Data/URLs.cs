@@ -135,6 +135,7 @@ namespace Data
         public const string LOCATION_CEVM_ID = "/location/cevm/{id}";
 
         public const string USER = "/user";
+        public const string USER_EMAIL_ID = "/user/email/{id}";
         public const string USER_ID = "/user/{id}";
         public const string USER_CEVM_ID = "/user/cevm/{id}";
 
@@ -155,6 +156,7 @@ namespace Data
         public const string HARDDRIVE_CEVM_ID = "/harddrive/cevm/{id}";
 
         public const string MAINWINDOW = "/mainwindowhelper";
+        public const string MAINWINDOW_ID = "/mainwindowhelper/{id}";
         public const string POSITION = "/position";
         public const string POSITION_ID = "/position/{id}";
         public const string POSITION_CEVM_ID = "/position/cevm/{id}";

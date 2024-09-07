@@ -1,8 +1,111 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Data.Helpers.MainWindowModel
+@{
+    ViewData["Title"] = "Strona Główna";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="container mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Komputery:</h5>
+                        <p class="card-text">@Model.ComputerCount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Monitory:</h5>
+                        <p class="card-text">@Model.MonitorCount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Oprogramowanie:</h5>
+                        <p class="card-text">@Model.SoftwareCount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Licencje:</h5>
+                        <p class="card-text">@Model.LicenseCount</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Urządzenia sieciowe:</h5>
+                        <p class="card-text">@Model.NetworkDeviceCount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Urządzenia:</h5>
+                        <p class="card-text">@Model.DeviceCount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Drukarki:</h5>
+                        <p class="card-text">@Model.PrinterCount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Telefony:</h5>
+                        <p class="card-text">@Model.PhoneCount</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Szafy Rack:</h5>
+                        <p class="card-text">@Model.RackCabinetCount</p>
+                    </div>
+                </div>
+            </div>           
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Serwery:</h5>
+                        <p class="card-text">@Model.ServerCount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Karty SIM:</h5>
+                        <p class="card-text">@Model.SimCardCount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Zgłoszenia:</h5>
+                        <p class="card-text">@Model.TicketsCount</p>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>

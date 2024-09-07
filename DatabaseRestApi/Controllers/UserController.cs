@@ -67,6 +67,34 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(userVM);
         }
+        [Route(URLs.USER_EMAIL_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetUserByEmail(string id)
+        {
+            DatabaseContext database = new();
+            UserVM userVM= await database.Users
+                .Where(item => item.IsActive == true)
+                .Where(item => item.Email == id)
+                .Select(item => new UserVM
+                {
+                    Id = item.Id,
+                    Usersname = item.Usersname,
+                    FirstName = item.FirstName,
+                    LastName = item.LastName,
+                    Email = item.Email,
+                    Location = item.Location.Name,
+                    IsActive = item.IsActive,
+                    Phone1 = item.Phone1,
+                    Phone2 = item.Phone2,
+                    InternalNumber = item.InternalNumber,
+                    Position = item.PositionNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).FirstAsync();
+            return Json(userVM);
+        }
         [Route(URLs.USER_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditUser(int id)

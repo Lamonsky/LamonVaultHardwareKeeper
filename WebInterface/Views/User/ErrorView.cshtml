@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Błąd";
+}
+
+<h1>Wystąpił błąd</h1>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <p><strong>Komunikat błędu:</strong> @ViewBag.ErrorMessage</p>
+    <p><strong>Ślad stosu:</strong> @ViewBag.StackTrace</p>
+}
+else
+{
+    <p>Nieznany błąd.</p>
+}
