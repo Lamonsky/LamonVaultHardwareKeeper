@@ -3,6 +3,8 @@ using WebInterface.Models;
 using Microsoft.AspNetCore.Mvc;
 using Data.Computers.SelectVMs;
 using Data;
+using Microsoft.AspNetCore.Identity.Data;
+using LoginRequest = WebInterface.Models.LoginRequest;
 
 namespace WebInterface.Controllers
 {
@@ -11,6 +13,11 @@ namespace WebInterface.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        public async Task<IActionResult> Details()
+        {
+            UserVM model = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", GlobalData.Id.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            return View(model);
         }
 
         public IActionResult Login()

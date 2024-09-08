@@ -41,6 +41,34 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(networkdeviceVM);
         }
+        [Route(URLs.NETWORKDEVICE_USER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetByUser(int id)
+        {
+            DatabaseContext database = new();
+            List<NetworkDeviceVM> networkdeviceVM = await database.NetworkDevices
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Users == id)
+                .Select(item => new NetworkDeviceVM()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Location = item.Location.Name,
+                    Status = item.Status.Name,
+                    Manufacturer = item.ManufacturerNavigation.Name,
+                    Model = item.ModelNavigation.Name,
+                    DeviceType = item.DeviceTypeNavigation.Name,
+                    Rack = item.RackNavigation.Manufacturer + " " + item.RackNavigation.ModelNavigation.Name + " " + item.RackNavigation.Location.Name,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).ToListAsync();
+            return Json(networkdeviceVM);
+        }
         [Route(URLs.NETWORKDEVICE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)

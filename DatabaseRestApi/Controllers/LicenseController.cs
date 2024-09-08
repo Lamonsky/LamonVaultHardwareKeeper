@@ -40,6 +40,35 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(licenseVM);
         }
+        [Route(URLs.LICENSE_USER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetByUser(int id)
+        {
+            DatabaseContext database = new();
+            List<LicenseVM> licenseVM = await database.Licenses
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Users == id)
+                .Select(item => new LicenseVM
+                {
+                    Id = item.Id,
+                    Software = item.SoftwareNavigation.Name,
+                    Name = item.Name,
+                    LicenseType = item.LicenseTypeNavigation.Name,
+                    Publisher = item.PublisherNavigation.Name,
+                    Status = item.Status.Name,
+                    Location = item.Location.Name,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    ExpiryDate = item.ExpiryDate,
+                    User = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName + " " + item.UsersNavigation.InternalNumber,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+
+                }).ToListAsync();
+            return Json(licenseVM);
+        }
         [Route(URLs.LICENSE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)

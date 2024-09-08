@@ -38,6 +38,35 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(phonesVMs);
         }
+        [Route(URLs.PHONE_USER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetByItem(int id)
+        {
+            DatabaseContext database = new();
+            List<PhonesVM> phonesVMs = await database.Phones
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Users == id)
+                .Select(item => new PhonesVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Status = item.Status.Name,
+                    PhoneType = item.PhoneTypeNavigation.Name,
+                    Manufacturer = item.ManufacturerNavigation.Name,
+                    Model = item.ModelNavigation.Name,
+                    SerialNumber = item.SerialNumber,
+                    Location = item.Location.Name,
+                    InventoryNumber = item.InventoryNumber,
+                    SimCard1 = item.SimCard1Navigation.PhoneNumber + " " + item.SimCard1Navigation.SerialNumber + " " + item.SimCard1Navigation.InventoryNumber,
+                    SimCard2 = item.SimCard2Navigation.PhoneNumber + " " + item.SimCard2Navigation.SerialNumber + " " + item.SimCard2Navigation.InventoryNumber,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).ToListAsync();
+            return Json(phonesVMs);
+        }
         [Route(URLs.PHONE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)

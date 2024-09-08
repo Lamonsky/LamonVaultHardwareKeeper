@@ -20,9 +20,11 @@ namespace Data
 
         public const string COMPUTERS = "/computers";
         public const string COMPUTERS_ID = "/computers/{id}";
+        public const string COMPUTERS_USER_ID = "/computers/user/{id}";
         public const string COMPUTERS_CEVM_ID = "/computers/cevm/{id}";
 
         public const string MONITORS = "/monitors";
+        public const string MONITORS_USER_ID = "/monitors/user/{id}";
         public const string MONITORS_ID = "/monitors/{id}";
         public const string MONITORS_CEVM_ID = "/monitors/cevm/{id}";
 
@@ -31,10 +33,12 @@ namespace Data
         public const string STATUS_CEVM_ID = "/status/cevm/{id}";
 
         public const string SOFTWARE = "/software";
+        public const string SOFTWARE_USER_ID = "/software/user/{id}";
         public const string SOFTWARE_ID = "/software/{id}";
         public const string SOFTWARE_CEVM_ID = "/software/cevm/{id}";
 
         public const string DEVICE = "/device";
+        public const string DEVICE_USER_ID = "/device/user/{id}";
         public const string DEVICE_ID = "/device/{id}";
         public const string DEVICE_CEVM_ID = "/device/cevm/{id}";
 
@@ -47,6 +51,7 @@ namespace Data
         public const string DEVICETYPE_CEVM_ID = "/devicetype/cevm/{id}";
 
         public const string PRINTER = "/printer";
+        public const string PRINTER_USER_ID = "/printer/user/{id}";
         public const string PRINTER_ID = "/printer/{id}";
         public const string PRINTER_CEVM_ID = "/printer/cevm/{id}";
 
@@ -59,6 +64,7 @@ namespace Data
         public const string PRINTERTYPE_CEVM_ID = "/printertype/cevm/{id}";
 
         public const string PHONE = "/phone";
+        public const string PHONE_USER_ID = "/phone/user/{id}";
         public const string PHONE_ID = "/phone/{id}";
         public const string PHONE_CEVM_ID = "/phone/cevm/{id}";
 
@@ -71,6 +77,7 @@ namespace Data
         public const string PHONETYPE_CEVM_ID = "/phonetype/cevm/{id}";
 
         public const string SIMCARD = "/simcard";
+        public const string SIMCARD_USER_ID = "/simcard/user/{id}";
         public const string SIMCARD_ID = "/simcard/{id}";
         public const string SIMCARD_CEVM_ID = "/simcard/cevm/{id}";
 
@@ -83,10 +90,12 @@ namespace Data
         public const string SIMCOMPONENTTYPE_CEVM_ID = "/simcomponenttype/cevm/{id}";
 
         public const string NETWORKDEVICE = "/networkdevice";
+        public const string NETWORKDEVICE_USER_ID = "/networkdevice/user/{id}";
         public const string NETWORKDEVICE_ID = "/networkdevice/{id}";
         public const string NETWORKDEVICE_CEVM_ID = "/networkdevice/cevm/{id}";
 
         public const string RACKCABINET = "/rackcabinet";
+        public const string RACKCABINET_USER_ID = "/rackcabinet/user/{id}";
         public const string RACKCABINET_ID = "/rackcabinet/{id}";
         public const string RACKCABINET_CEVM_ID = "/rackcabinet/cevm/{id}";
 
@@ -140,6 +149,7 @@ namespace Data
         public const string USER_CEVM_ID = "/user/cevm/{id}";
 
         public const string SERVER = "/server";
+        public const string SERVER_USER_ID = "/server/user/{id}";
         public const string SERVER_ID = "/server/{id}";
         public const string SERVER_CEVM_ID = "/server/cevm/{id}";
 
@@ -161,23 +171,12 @@ namespace Data
         public const string POSITION_ID = "/position/{id}";
         public const string POSITION_CEVM_ID = "/position/cevm/{id}";
 
-        public const string CONTRACTTYPE = "/contracttype";
-        public const string CONTRACTTYPE_ID = "/contracttype/{id}";
-        public const string CONTRACTTYPE_CEVM_ID = "/contracttype/cevm/{id}";
-
-        public const string KNOWLEDGEBASECATEGORY = "/knowledgebasecategory";
-        public const string KNOWLEDGEBASECATEGORY_ID = "/knowledgebasecategory/{id}";
-        public const string KNOWLEDGEBASECATEGORY_CEVM_ID = "/knowledgebasecategory/cevm/{id}";
-
-        public const string KNOWLEDGEBASE = "/knowledgebase";
-        public const string KNOWLEDGEBASE_ID = "/knowledgebase/{id}";
-        public const string KNOWLEDGEBASE_CEVM_ID = "/knowledgebase/cevm/{id}";
-
         public const string LICENSETYPE = "/licensetype";
         public const string LICENSETYPE_ID = "/licensetype/{id}";
         public const string LICENSETYPE_CEVM_ID = "/licensetype/cevm/{id}";
 
         public const string LICENSE = "/license";
+        public const string LICENSE_USER_ID = "/license/user/{id}";
         public const string LICENSE_ID = "/license/{id}";
         public const string LICENSE_CEVM_ID = "/license/cevm/{id}";
 
@@ -210,7 +209,7 @@ namespace Data
 
         public const string PAGECONTENT = "/pagecontent";
         public const string PAGECONTENT_ID = "/pagecontent/{id}";
-        public const string PAGECONTENT_CEVM_ID = "/pagecontent/devm/{id}";
+        public const string PAGECONTENT_CEVM_ID = "/pagecontent/cevm/{id}";
 
     }
 }

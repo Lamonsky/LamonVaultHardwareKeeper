@@ -38,6 +38,32 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(devicesVMs);
         }
+        [Route(URLs.DEVICE_USER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetByUser(int id)
+        {
+            DatabaseContext database = new();
+            List<DevicesVM> devicesVMs = await database.Devices
+                .Where(item => item.StatusId != 99)
+                .Where(item => item.Users == id)
+                .Select(item => new DevicesVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Status = item.Status.Name,
+                    DeviceType = item.DeviceTypeNavigation.Name,
+                    Manufacturer = item.ManufacturerNavigation.Name,
+                    Model = item.ModelNavigation.Name,
+                    SerialNumber = item.SerialNumber,
+                    InventoryNumber = item.InventoryNumber,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).ToListAsync();
+            return Json(devicesVMs);
+        }
         [Route(URLs.DEVICE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)

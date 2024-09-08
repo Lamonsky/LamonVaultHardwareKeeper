@@ -36,6 +36,29 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(softwareVM);
         }
+        [Route(URLs.SOFTWARE_USER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetByItem(int id)
+        {
+            DatabaseContext database = new();
+            List<SoftwaresVM> softwareVM = await database.Softwares
+                .Where(item => item.Status != 99)
+                .Where(item => item.Users == id)
+                .Select(item => new SoftwaresVM()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Location = item.Location.Name,
+                    Publisher = item.PublisherNavigation.Name,
+                    Users = item.UsersNavigation.FirstName + " " + item.UsersNavigation.LastName,
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).ToListAsync();
+            return Json(softwareVM);
+        }
         [Route(URLs.SOFTWARE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)

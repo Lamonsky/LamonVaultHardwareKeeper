@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Data.Computers.SelectVMs.TicketVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketCategoryName" })</h1>
+
+
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">                                
+                                <p class="card-text">
+                                            <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketTypeName" })</strong> <br />
+                                    @item.Type<br />
+                                            <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketTicketCategoryName" })</strong> <br />
+                                    @item.Category<br />
+                                            <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketStatusName" })</strong> <br />
+                                    @item.Status<br />
+                                            <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketLocationName" })</strong> <br />
+                                    @item.Location<br />
+                                            <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketUserName" })</strong> <br />
+                                    @item.User<br />
+                                            <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketOwnerName" })</strong> <br />
+                                    @item.Owner<br />
+                                            <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketEmailName" })</strong> <br />
+                                    @item.Email<br />
+                                            <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketDescriptionName" })</strong> <br />
+                                             @item.Name<br />
+                                </p>
+                               
+                            </div>
+                        </div>
+                    </div>
+        }
+    }
+    else
+    {
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Brak obiektów do wyświetlenia</h5>
+                    </div>
+                </div>
+            </div>
+    }
+</div>
