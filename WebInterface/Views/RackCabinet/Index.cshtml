@@ -1,42 +1,52 @@
-﻿@model IEnumerable<Data.Computers.SelectVMs.TicketVM>
+﻿@model IEnumerable<Data.Computers.SelectVMs.RackCabinetVM>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@await Component.InvokeAsync("PageContentViewComponent", new { type = "RackCabinetCategoryName" })</h1>
+
 
 <div class="row">
     @if (Model != null && Model.Any())
     {
         foreach (var item in Model)
         {
-                            <div class="col-md-4">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@item.Name</h5>
-                                        <p class="card-text">
-                                            <strong>Type:</strong> @item.Type<br />
-                                            <strong>Category:</strong> @item.Category<br />
-                                            <strong>Status:</strong> @item.Status<br />
-                                            <strong>Location:</strong> @item.Location<br />
-                                            <strong>User:</strong> @item.User<br />
-                                            <strong>Owner:</strong> @item.Owner<br />
-                                            <strong>Email:</strong> @item.Email<br />
-                                        </p>
+                                    <div class="col-md">
+                                        <div class="card">
+                                            <div class="card-body">   
+                                                <p class="card-text">
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "RackCabinetManufacturerName" })</strong> <br />
+                            @item.Manufacturer<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "RackCabinetLocationName" })</strong> <br />
+                            @item.Location<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "RackCabinetStatusName" })</strong> <br />
+                            @item.Status<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "RackCabinetTypeName" })</strong> <br />
+                            @item.CabinetType<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "RackCabinetModelName" })</strong> <br />
+                            @item.Model<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "RackCabinetHeightName" })</strong> <br />
+                            @item.Height<br />                                                    
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "RackCabinetSerialNumberName" })</strong> <br />
+                            @item.SerialNumber<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "RackCabinetInventoryNumberName" })</strong> <br />
+                            @item.InventoryNumber<br />
+                                                </p>
+
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
         }
     }
     else
     {
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Brak obiektów do wyświetlenia</h5>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Brak obiektów do wyświetlenia</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
     }
 </div>

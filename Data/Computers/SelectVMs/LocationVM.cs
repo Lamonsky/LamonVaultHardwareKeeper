@@ -38,5 +38,8 @@ namespace Data.Computers.SelectVMs
 
         [JsonPropertyName("modifiedBy")]
         public string? ModifiedBy { get; set; }
+
+        public string DisplayName => $"{Name}, {Address} {BuildingNumber}/{RoomNumber} {City}";
+
     }
 }

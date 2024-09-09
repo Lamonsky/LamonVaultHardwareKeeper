@@ -1,42 +1,53 @@
-﻿@model IEnumerable<Data.Computers.SelectVMs.TicketVM>
+﻿@model IEnumerable<Data.Computers.SelectVMs.NetworkDeviceVM>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@await Component.InvokeAsync("PageContentViewComponent", new { type = "NetworkDeviceCategoryName" })</h1>
+
 
 <div class="row">
     @if (Model != null && Model.Any())
     {
         foreach (var item in Model)
         {
-                            <div class="col-md-4">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@item.Name</h5>
-                                        <p class="card-text">
-                                            <strong>Type:</strong> @item.Type<br />
-                                            <strong>Category:</strong> @item.Category<br />
-                                            <strong>Status:</strong> @item.Status<br />
-                                            <strong>Location:</strong> @item.Location<br />
-                                            <strong>User:</strong> @item.User<br />
-                                            <strong>Owner:</strong> @item.Owner<br />
-                                            <strong>Email:</strong> @item.Email<br />
-                                        </p>
+                                    <div class="col-md">
+                                        <div class="card">
+                                            <div class="card-body">   
+                                                <h5 class="card-title">@item.Name</h5>
+                                                <p class="card-text">
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "NetworkDeviceManufacturerName" })</strong> <br />
+                            @item.Manufacturer<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "NetworkDeviceLocationName" })</strong> <br />
+                            @item.Location<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "NetworkDeviceStatusName" })</strong> <br />
+                            @item.Status<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "NetworkDeviceTypeName" })</strong> <br />
+                            @item.DeviceType<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "NetworkDeviceModelName" })</strong> <br />
+                            @item.Model<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "NetworkDeviceRackName" })</strong> <br />
+                            @item.Rack<br />                                                    
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "NetworkDeviceSerialNumberName" })</strong> <br />
+                            @item.SerialNumber<br />
+                                                    <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "NetworkDeviceInventoryNumberName" })</strong> <br />
+                            @item.InventoryNumber<br />
+                                                </p>
+
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
         }
     }
     else
     {
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Brak obiektów do wyświetlenia</h5>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Brak obiektów do wyświetlenia</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
     }
 </div>

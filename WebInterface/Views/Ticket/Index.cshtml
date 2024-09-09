@@ -5,6 +5,9 @@
 }
 
 <h1>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketCategoryName" })</h1>
+<a class="btn btn-primary mb-2" asp-asp-area="" asp-controller="Ticket" asp-action="CreateNew">
+    @await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketCreateNewButton" })
+                    </a>
 
 
 <div class="row">
@@ -12,8 +15,8 @@
     {
         foreach (var item in Model)
         {
-                    <div class="col-md-4">
-                        <div class="card mb-4">
+                    <div class="col-md">
+                        <div class="card">
                             <div class="card-body">                                
                                 <p class="card-text">
                                             <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "TicketTypeName" })</strong> <br />
