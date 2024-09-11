@@ -16,10 +16,7 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews.Windows
 {
-    /// <summary>
-    /// Interaction logic for NewPrinterTypeWindow.xaml
-    /// </summary>NewDictionaryWindow : Window
-    public partial class NewDictionaryWindow : NewDictionaryViewBase
+   public partial class NewDictionaryWindow : NewDictionaryViewBase
     {
         public NewDictionaryWindow()
         {

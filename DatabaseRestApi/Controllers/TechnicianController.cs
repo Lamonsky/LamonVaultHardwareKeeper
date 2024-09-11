@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class TechnicianController : Controller
     {
+        [Authorize]
         [Route(URLs.TECHNICIAN)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -29,6 +31,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(technicianVMs);
         }
+        [Authorize]
         [Route(URLs.TECHNICIAN_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -49,6 +52,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(technicianVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TECHNICIAN_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -65,6 +69,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(technicianVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TECHNICIAN)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TechnicianCreateEditVM technicianCreateEditVM)
@@ -81,7 +86,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TECHNICIAN_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] TechnicianCreateEditVM technicianCreateEditVM)
@@ -99,7 +104,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TECHNICIAN_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] TechnicianCreateEditVM technicianCreateEditVM)

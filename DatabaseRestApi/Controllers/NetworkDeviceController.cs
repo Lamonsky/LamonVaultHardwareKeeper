@@ -3,6 +3,7 @@ using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using DatabaseRestApi.Models;
 using DatabaseRestApi.Models.Contexts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace DatabaseRestApi.Controllers
 {   
     public class NetworkDeviceController : Controller
     {
+        [Authorize]
         [Route(URLs.NETWORKDEVICE)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -41,6 +43,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(networkdeviceVM);
         }
+        [Authorize]
         [Route(URLs.NETWORKDEVICE_USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetByUser(int id)
@@ -69,6 +72,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(networkdeviceVM);
         }
+        [Authorize]
         [Route(URLs.NETWORKDEVICE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -97,6 +101,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(networkdeviceVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.NETWORKDEVICE_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -121,7 +126,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(networkdeviceVM);
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.NETWORKDEVICE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] NetworkDeviceCreateEditVM NetworkDeviceCreateEditVM)
@@ -146,7 +151,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.NETWORKDEVICE_ID)]
         [HttpPut]
         public async Task<IActionResult> Edit(int id, [FromBody] NetworkDeviceCreateEditVM NetworkDeviceCreateEditVM)
@@ -172,7 +177,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.NETWORKDEVICE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] NetworkDeviceCreateEditVM NetworkDeviceCreateEditVM)

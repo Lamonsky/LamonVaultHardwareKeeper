@@ -7,11 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.WebEncoders.Testing;
 using System.Security.Policy;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class LicenseController : Controller
     {
+        [Authorize]
         [Route(URLs.LICENSE)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -40,6 +42,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(licenseVM);
         }
+        [Authorize]
         [Route(URLs.LICENSE_USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetByUser(int id)
@@ -69,6 +72,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(licenseVM);
         }
+        [Authorize]
         [Route(URLs.LICENSE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -98,6 +102,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(licenseVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.LICENSE_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -123,6 +128,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(licenseVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.LICENSE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] LicenseCreateEditVM licenseCreateEditVM)
@@ -148,7 +154,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.LICENSE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] LicenseCreateEditVM licenseCreateEditVM)
@@ -174,7 +180,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.LICENSE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] LicenseCreateEditVM licenseCreateEditVM)

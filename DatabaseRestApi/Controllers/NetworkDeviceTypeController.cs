@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
 using Humanizer.Localisation.DateToOrdinalWords;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class NetworkDeviceTypeController : Controller
     {
+        [Authorize]
         [Route(URLs.NETWORKDEVICETYPE)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -32,6 +34,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(networkDeviceTypeVM);
         }
+        [Authorize]
         [Route(URLs.NETWORKDEVICETYPE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -54,6 +57,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(networkDeviceTypeVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.NETWORKDEVICETYPE_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -72,6 +76,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(networkDeviceTypeVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.NETWORKDEVICETYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] NetworkDeviceTypeCreateEditVM networkDeviceTypeCreateEditVM)
@@ -89,7 +94,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.NETWORKDEVICETYPE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] NetworkDeviceTypeCreateEditVM networkDeviceTypeCreateEditVM)
@@ -108,7 +113,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.NETWORKDEVICETYPE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] NetworkDeviceTypeCreateEditVM networkDeviceTypeCreateEditVM)

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Interaction logic for AllPrintersView.xaml
-    /// </summary>
     public partial class AllPrinterView : WszystkieViewBase
     {
         public AllPrinterView()

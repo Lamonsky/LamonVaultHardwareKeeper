@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class SimComponentController : Controller
     {
+        [Authorize]
         [Route(URLs.SIMCOMPONENT)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -31,6 +33,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(simcomponentVMs);
         }
+        [Authorize]
         [Route(URLs.SIMCOMPONENT_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -53,6 +56,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(simcomponentVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SIMCOMPONENT_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -71,6 +75,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(simcomponentVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SIMCOMPONENT)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SimComponentCreateEditVM simComponentCreateEditVM)
@@ -89,7 +94,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SIMCOMPONENT_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] SimComponentCreateEditVM simComponentCreateEditVM)
@@ -109,7 +114,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SIMCOMPONENT_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] SimComponentCreateEditVM simComponentCreateEditVM)

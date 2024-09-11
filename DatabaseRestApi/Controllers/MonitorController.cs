@@ -3,6 +3,7 @@ using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using DatabaseRestApi.Models;
 using DatabaseRestApi.Models.Contexts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace DatabaseRestApi.Controllers
 {
     public class MonitorController : Controller
     {
+        [Authorize]
         [Route(URLs.MONITORS)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -39,6 +41,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(monitorsVMs);
         }
+        [Authorize]
         [Route(URLs.MONITORS_USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetByUser(int id)
@@ -66,6 +69,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(monitorsVMs);
         }
+        [Authorize]
         [Route(URLs.MONITORS_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -93,6 +97,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(monitorsVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.MONITORS_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -116,7 +121,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(monitorsVMs);
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.MONITORS)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] MonitorsCreateEditVM monitorsCreateEditVM)
@@ -140,7 +145,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.MONITORS_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] MonitorsCreateEditVM monitorsCreateEditVM)
@@ -165,7 +170,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.MONITORS_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] MonitorsCreateEditVM monitorsCreateEditVM)

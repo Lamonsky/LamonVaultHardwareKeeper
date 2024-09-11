@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class PhoneModelController : Controller
     {
+        [Authorize]
         [Route(URLs.PHONEMODEL)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -31,6 +33,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(phoneModelVM);
         }
+        [Authorize]
         [Route(URLs.PHONEMODEL_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -53,6 +56,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(phoneModelVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PHONEMODEL_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -71,6 +75,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(phoneModelVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PHONEMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PhoneModelCreateEditVM phoneModelCreateEditVM)
@@ -88,7 +93,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PHONEMODEL_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] PhoneModelCreateEditVM phoneModelCreateEditVM)
@@ -107,7 +112,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PHONEMODEL_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] PhoneModelCreateEditVM phoneModelCreateEditVM)

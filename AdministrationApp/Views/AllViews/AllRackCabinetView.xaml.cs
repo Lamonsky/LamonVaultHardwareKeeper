@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Interaction logic for AllRackCabinetView.xaml
-    /// </summary>
     public partial class AllRackCabinetView : WszystkieViewBase
     {
         public AllRackCabinetView()

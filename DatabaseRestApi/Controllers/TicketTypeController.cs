@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class TicketTypeController : Controller
     {
+        [Authorize]
         [Route(URLs.TICKETTYPE)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -28,7 +30,9 @@ namespace DatabaseRestApi.Controllers
                     ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
                 }).ToListAsync();
             return Json(ticketTypeVM);
-        }[Route(URLs.TICKETTYPE_ID)]
+        }
+        [Authorize]
+        [Route(URLs.TICKETTYPE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
         {
@@ -48,6 +52,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(ticketTypeVM);
         }
+        [Authorize]
         [Route(URLs.TICKETTYPE_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -65,6 +70,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(ticketTypeVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TICKETTYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TicketTypeCreateEditVM ticketTypeCreateEditVM)
@@ -82,7 +88,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TICKETTYPE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] TicketTypeCreateEditVM ticketTypeCreateEditVM)
@@ -101,7 +107,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TICKETTYPE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] TicketTypeCreateEditVM ticketTypeCreateEditVM)

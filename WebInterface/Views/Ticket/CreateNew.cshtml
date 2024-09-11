@@ -1,63 +1,73 @@
 ﻿@model WebInterface.Models.TicketCreateNewViewModel
 
 @{
-    ViewData["Title"] = "CreateNew";
+    ViewData["Title"] = "Nowe zgłoszenie";
 }
 
-<h1>CreateNew</h1>
+<h1>@await Component.InvokeAsync("PageContentViewComponent", new { type = "CreateTicketHeader" })</h1>
 
 <hr />
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col">
             <form asp-action="CreateNew">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <!-- Type Combobox -->
                 <div class="form-group">
-                    <label asp-for="Ticket.Type" class="control-label"></label>
-                    <select asp-for="Ticket.Type" class="form-control" asp-items="@(new SelectList(Model.TicketTypes, "Id", "Name"))">
-                        <option value="">-- Select Type --</option>
+                    <label asp-for="Ticket.Type" class="control-label ">
+                        @await Component.InvokeAsync("PageContentViewComponent", new { type = "CreateTicketTypeHeader" })
+                    </label>
+                    <select asp-for="Ticket.Type" class="form-control " asp-items="@(new SelectList(Model.TicketTypes, "Id", "Name"))">
+                        <option value="">-- Wybierz rodzaj zgłoszenia --</option>
                     </select>
                     <span asp-validation-for="Ticket.Type" class="text-danger"></span>
                 </div>
 
                 <!-- Category Combobox -->
                 <div class="form-group">
-                    <label asp-for="Ticket.Category" class="control-label"></label>
-                    <select asp-for="Ticket.Category" class="form-control" asp-items="@(new SelectList(Model.TicketCategories, "Id", "Name"))">
-                        <option value="">-- Select Category --</option>
+                    <label asp-for="Ticket.Category" class="control-label ">
+                        @await Component.InvokeAsync("PageContentViewComponent", new { type = "CreateTicketCategoryHeader" })
+                    </label>
+                    <select asp-for="Ticket.Category" class="form-control " asp-items="@(new SelectList(Model.TicketCategories, "Id", "Name"))">
+                        <option value="">-- Wybierz kategorię --</option>
                     </select>
                     <span asp-validation-for="Ticket.Category" class="text-danger"></span>
                 </div>
 
                 <!-- Status Combobox -->
                 <div class="form-group">
-                    <label asp-for="Ticket.StatusId" class="control-label"></label>
-                    <select asp-for="Ticket.StatusId" class="form-control" asp-items="@(new SelectList(Model.TicketStatuses, "Id", "Name"))">
-                        <option value=""></option>
+                    <label asp-for="Ticket.StatusId" class="control-label  ">
+                        @await Component.InvokeAsync("PageContentViewComponent", new { type = "CreateTicketStatusHeader" })
+                    </label>
+                    <select asp-for="Ticket.StatusId" class="form-control " asp-items="@(new SelectList(Model.TicketStatuses, "Id", "Name"))">
+                        <option value="">-- Wybierz status --</option>
                     </select>
                     <span asp-validation-for="Ticket.StatusId" class="text-danger"></span>
                 </div>
 
                 <!-- Location Field -->
                 <div class="form-group">
-                    <label asp-for="Ticket.LocationId" class="control-label"></label>
-                    <select asp-for="Ticket.LocationId" class="form-control" asp-items="@(new SelectList(Model.Location, "Id", "DisplayName"))">
-                        <option value="">-- Select Status --</option>
+                    <label asp-for="Ticket.LocationId" class="control-label  ">
+                        @await Component.InvokeAsync("PageContentViewComponent", new { type = "CreateTicketLocationHeader" })
+                    </label>
+                    <select asp-for="Ticket.LocationId" class="form-control " asp-items="@(new SelectList(Model.Location, "Id", "DisplayName"))">
+                        <option value="">-- Wybierz lokalizację --</option>
                     </select>
                     <span asp-validation-for="Ticket.LocationId" class="text-danger"></span>
                 </div>         
 
                 <!-- Name Field -->
                 <div class="form-group">
-                    <label asp-for="Ticket.Name" class="control-label"></label>
-                    <input asp-for="Ticket.Name" class="form-control" />
+                    <label asp-for="Ticket.Name" class="control-label ">
+                         @await Component.InvokeAsync("PageContentViewComponent", new { type = "CreateTicketNameHeader" })
+                    </label>
+                    <textarea asp-for="Ticket.Name" class="form-control " rows="4"></textarea>
                     <span asp-validation-for="Ticket.Name" class="text-danger"></span>
                 </div>
 
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary mt-2" />
+                <div class="form-group mt-2">
+                    <input type="submit" value="@await Component.InvokeAsync("PageContentViewComponent", new { type = "CreateTicketButtonHeader" })" class="btn btn-primary" />
                 </div>
             </form>
         </div>

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews
 {
-    /// <summary>
-    /// Logika interakcji dla klasy NewPageContentView.xaml
-    /// </summary>
     public partial class NewPageContentView : JedenViewBase
     {
         public NewPageContentView()

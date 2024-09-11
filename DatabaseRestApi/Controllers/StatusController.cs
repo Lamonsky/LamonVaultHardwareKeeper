@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class StatusController : Controller
     {
+        [Authorize]
         [Route(URLs.STATUS)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -28,6 +30,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(statusVM);
         }
+        [Authorize]
         [Route(URLs.STATUS_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -47,6 +50,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(statusVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.STATUS_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetStatus(int id)
@@ -63,6 +67,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(statusVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.STATUS)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] StatusCreateEditVM statusCreateEditVM)
@@ -79,7 +84,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.STATUS_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] StatusCreateEditVM statusCreateEditVM)
@@ -97,7 +102,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.STATUS_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] StatusCreateEditVM statusCreateEditVM)

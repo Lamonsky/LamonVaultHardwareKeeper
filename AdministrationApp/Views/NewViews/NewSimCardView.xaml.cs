@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews
 {
-    /// <summary>
-    /// Interaction logic for NewSimCardView.xaml
-    /// </summary>
     public partial class NewSimCardView : JedenViewBase
     {
         public NewSimCardView()

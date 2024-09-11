@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
 using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class DeviceTypeController : Controller
     {
+        [Authorize]
         [Route(URLs.DEVICETYPE)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -32,6 +34,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(deviceTypeVM);
         }
+        [Authorize]
         [Route(URLs.DEVICETYPE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -54,6 +57,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(deviceTypeVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.DEVICETYPE_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -72,6 +76,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(deviceTypeVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.DEVICETYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] DeviceTypeCreateEditVM deviceTypeCreateEditVM)
@@ -89,7 +94,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.DEVICETYPE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] DeviceTypeCreateEditVM deviceTypeCreateEditVM)
@@ -108,7 +113,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.DEVICETYPE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] DeviceTypeCreateEditVM deviceTypeCreateEditVM)

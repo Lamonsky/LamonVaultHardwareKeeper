@@ -11,6 +11,7 @@ namespace DatabaseRestApi.Controllers
 {
     public class TicketController : Controller
     {
+        [Authorize]
         [Route(URLs.TICKET)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -38,6 +39,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(ticketVM);
         }
+        [Authorize]
         [Route(URLs.CLOSEDTICKET)]
         [HttpGet]
         public async Task<IActionResult> ClosedTickets()
@@ -65,6 +67,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(ticketVM);
         }
+        [Authorize]
         [Route(URLs.TICKET_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -89,6 +92,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(ticketVM);
         }
+        [Authorize]
         [Route(URLs.TICKET_OWNER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItemByOwner(int id)
@@ -114,6 +118,33 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(ticketVM);
         }
+        [Authorize]
+        [Route(URLs.TICKET_USER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetItemByUser(int id)
+        {
+            DatabaseContext database = new();
+            List<TicketVM> ticketVM = await database.Tickets
+                .Where(item => item.User == id)
+                .Select(item => new TicketVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Type = item.TypeNavigation.Name,
+                    Category = item.CategoryNavigation.Name,
+                    Status = item.Status.Name,
+                    Location = item.Location.Name,
+                    User = item.UserNavigation.FirstName + " " + item.UserNavigation.LastName,
+                    Owner = item.OwnerNavigation.Users.FirstName + " " + item.OwnerNavigation.Users.LastName,
+                    Email = item.UserNavigation.Email,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).ToListAsync();
+            return Json(ticketVM);
+        }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TICKET_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)

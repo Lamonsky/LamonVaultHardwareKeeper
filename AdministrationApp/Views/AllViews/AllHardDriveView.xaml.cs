@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Logika interakcji dla klasy AllHardDriveView.xaml
-    /// </summary>
     public partial class AllHardDriveView : WszystkieViewBase
     {
         public AllHardDriveView()

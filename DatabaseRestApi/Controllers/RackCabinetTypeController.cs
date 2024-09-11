@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
 using Humanizer.Localisation.DateToOrdinalWords;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class RackCabinetTypeController : Controller
     {
+        [Authorize]
         [Route(URLs.RACKCABINETTYPE)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -32,6 +34,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(rackcabinetTypeVM);
         }
+        [Authorize]
         [Route(URLs.RACKCABINETTYPE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -54,6 +57,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(rackcabinetTypeVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.RACKCABINETTYPE_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -73,6 +77,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(rackcabinetTypeVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.RACKCABINETTYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] RackCabinetTypeCreateEditVM rackcabinetTypeCreateEditVM)
@@ -90,7 +95,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.RACKCABINETTYPE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] RackCabinetTypeCreateEditVM rackcabinetTypeCreateEditVM)
@@ -109,7 +114,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.RACKCABINETTYPE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] RackCabinetTypeCreateEditVM rackcabinetTypeCreateEditVM)

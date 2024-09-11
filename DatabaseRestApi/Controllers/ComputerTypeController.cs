@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class ComputerTypeController : Controller
     {
+        [Authorize]
         [Route(URLs.COMPUTERTYPE)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -31,6 +33,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(computerTypeVM);
         }
+        [Authorize]
         [Route(URLs.COMPUTERTYPE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -53,6 +56,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(computerTypeVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERTYPE_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -70,6 +74,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstOrDefaultAsync();
             return Json(computerTypeVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERTYPE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ComputerTypeCreateEditVM computerTypeCreateEditVM)
@@ -87,7 +92,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERTYPE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] ComputerTypeCreateEditVM computerTypeCreateEditVM)
@@ -106,7 +111,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERTYPE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] ComputerTypeCreateEditVM computerTypeCreateEditVM)

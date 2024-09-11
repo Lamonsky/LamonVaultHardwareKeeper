@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Logika interakcji dla klasy Computer.xaml
-    /// </summary>
     public partial class AllServersView : WszystkieViewBase
     {
         public AllServersView()

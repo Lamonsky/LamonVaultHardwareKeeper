@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Interaction logic for AllNetworkDeviceView.xaml
-    /// </summary>
     public partial class AllNetworkDeviceView : WszystkieViewBase
     {
         public AllNetworkDeviceView()

@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class UserController : Controller
     {
+        [Authorize]
         [Route(URLs.USER)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -39,6 +41,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(userVM);
         }
+        [Authorize]
         [Route(URLs.USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetUser(int id)
@@ -67,6 +70,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(userVM);
         }
+        [Authorize]
         [Route(URLs.USER_EMAIL_ID)]
         [HttpGet]
         public async Task<IActionResult> GetUserByEmail(string id)
@@ -95,6 +99,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(userVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.USER_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditUser(int id)
@@ -120,6 +125,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(userVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.USER)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserCreateEditVM userCreateEditVM)
@@ -145,7 +151,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.USER_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] UserCreateEditVM userCreateEditVM)
@@ -172,7 +178,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.USER_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] UserCreateEditVM userCreateEditVM)

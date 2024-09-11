@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Interaction logic for AllSimCardView.xaml
-    /// </summary>
     public partial class AllSimCardView : WszystkieViewBase
     {
         public AllSimCardView()

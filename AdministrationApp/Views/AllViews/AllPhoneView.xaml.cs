@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Interaction logic for AllPhoneView.xaml
-    /// </summary>
     public partial class AllPhoneView : WszystkieViewBase
     {
         public AllPhoneView()

@@ -3,6 +3,7 @@ using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using DatabaseRestApi.Models;
 using DatabaseRestApi.Models.Contexts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ namespace DatabaseRestApi.Controllers
 {
     public class HardDriveController : Controller
     {
+        [Authorize]
         [Route(URLs.HARDDRIVE)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -33,6 +35,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(hardDriveVMs);
         }
+        [Authorize]
         [Route(URLs.HARDDRIVE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -57,6 +60,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(hardDriveVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.HARDDRIVE_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -77,6 +81,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(hardDriveVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.HARDDRIVE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] HardDriveCreateEditVM hardDriveCreateEditVM)
@@ -96,7 +101,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.HARDDRIVE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] HardDriveCreateEditVM hardDriveCreateEditVM)
@@ -117,7 +122,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.HARDDRIVE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] HardDriveCreateEditVM hardDriveCreateEditVM)

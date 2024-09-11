@@ -13,7 +13,7 @@ namespace WebInterface.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            List<TicketVM> model = await RequestHelper.SendRequestAsync<object, List<TicketVM>>(URLs.TICKET_OWNER_ID.Replace("{id}", GlobalData.Id.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            List<TicketVM> model = await RequestHelper.SendRequestAsync<object, List<TicketVM>>(URLs.TICKET_USER_ID.Replace("{id}", GlobalData.Id.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             return View(model);
         }
         public async Task<IActionResult> CreateNew()
@@ -32,9 +32,10 @@ namespace WebInterface.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateNew(TicketCreateEditVM vM)
+        public async Task<IActionResult> CreateNew(TicketCreateNewViewModel vM)
         {
-            await RequestHelper.SendRequestAsync(URLs.TICKET, HttpMethod.Post, vM, GlobalData.AccessToken);
+            vM.Ticket.User = GlobalData.Id;
+            await RequestHelper.SendRequestAsync(URLs.TICKET, HttpMethod.Post, vM.Ticket, GlobalData.AccessToken);
             return RedirectToAction("Index", "Home");
         }
 

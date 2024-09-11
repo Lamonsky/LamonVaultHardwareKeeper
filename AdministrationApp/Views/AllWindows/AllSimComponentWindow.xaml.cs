@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllWindows
 {
-    /// <summary>
-    /// Interaction logic for DictionaryClassWindow.xaml
-    /// </summary>
     public partial class AllSimComponentWindow : AllDictionaryViewBase
     {
         public AllSimComponentWindow()

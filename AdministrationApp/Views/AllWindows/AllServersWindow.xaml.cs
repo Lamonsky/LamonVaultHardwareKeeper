@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllWindows
 {
-    /// <summary>
-    /// Logika interakcji dla klasy AllServersWindow.xaml
-    /// </summary>
     public partial class AllServersWindow : AllDictionaryViewBase
     {
         public AllServersWindow()

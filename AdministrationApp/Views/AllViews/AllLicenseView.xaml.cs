@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Logika interakcji dla klasy AllLicenseView.xaml
-    /// </summary>
     public partial class AllLicenseView : WszystkieViewBase
     {
         public AllLicenseView()

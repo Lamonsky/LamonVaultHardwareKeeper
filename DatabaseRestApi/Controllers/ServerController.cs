@@ -7,11 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Runtime.Intrinsics.Arm;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class ServerController : Controller
     {
+        [Authorize]
         [Route(URLs.SERVER)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -41,6 +43,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(serverVM);
         }
+        [Authorize]
         [Route(URLs.SERVER_USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetByUser(int id)
@@ -71,6 +74,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(serverVM);
         }
+        [Authorize]
         [Route(URLs.SERVER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -101,6 +105,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(serverVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SERVER_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -127,6 +132,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(serverVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SERVER)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ServerCreateEditVM serverCreateEditVM)
@@ -152,7 +158,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SERVER_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] ServerCreateEditVM serverCreateEditVM)
@@ -179,7 +185,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SERVER_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] ServerCreateEditVM serverCreateEditVM)

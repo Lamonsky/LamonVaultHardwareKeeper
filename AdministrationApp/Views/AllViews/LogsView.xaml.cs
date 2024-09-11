@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Logika interakcji dla klasy LogsView.xaml
-    /// </summary>
     public partial class LogsView : WszystkieViewBase
     {
         public LogsView()

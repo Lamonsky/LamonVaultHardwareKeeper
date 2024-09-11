@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews.Windows
 {
-    /// <summary>
-    /// Logika interakcji dla klasy NewLocationWindow.xaml
-    /// </summary>
     public partial class NewLocationWindow : NewDictionaryViewBase
     {
         public NewLocationWindow()

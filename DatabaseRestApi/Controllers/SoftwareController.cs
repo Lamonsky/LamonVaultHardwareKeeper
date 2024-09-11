@@ -3,6 +3,7 @@ using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using DatabaseRestApi.Models;
 using DatabaseRestApi.Models.Contexts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace DatabaseRestApi.Controllers
 {
     public class SoftwareController : Controller
     {
+        [Authorize]
         [Route(URLs.SOFTWARE)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -36,6 +38,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(softwareVM);
         }
+        [Authorize]
         [Route(URLs.SOFTWARE_USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetByItem(int id)
@@ -59,6 +62,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(softwareVM);
         }
+        [Authorize]
         [Route(URLs.SOFTWARE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -82,6 +86,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(softwareVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SOFTWARE_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -101,7 +106,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(softwareVM);
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SOFTWARE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SoftwareCreateEditVM softwareCreateEditVM)
@@ -121,7 +126,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SOFTWARE_ID)]
         [HttpPut]
         public async Task<IActionResult> Edit(int id, [FromBody] SoftwareCreateEditVM softwareCreateEditVM)
@@ -142,7 +147,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SOFTWARE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] SoftwareCreateEditVM softwareCreateEditVM)

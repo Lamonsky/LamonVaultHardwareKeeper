@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews
 {
-    /// <summary>
-    /// Logika interakcji dla klasy NewTicketView.xaml
-    /// </summary>
     public partial class NewTicketView : JedenViewBase
     {
         public NewTicketView()

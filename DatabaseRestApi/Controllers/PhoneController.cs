@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class PhoneController : Controller
     {
+        [Authorize]
         [Route(URLs.PHONE)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -38,6 +40,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(phonesVMs);
         }
+        [Authorize]
         [Route(URLs.PHONE_USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetByItem(int id)
@@ -67,6 +70,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(phonesVMs);
         }
+        [Authorize]
         [Route(URLs.PHONE_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -96,6 +100,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(phonesVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PHONE_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -121,6 +126,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(phonesVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PHONE)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PhonesCreateEditVM phonesCreateEditVm)
@@ -146,7 +152,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PHONE_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] PhonesCreateEditVM phonesCreateEditVm)
@@ -173,7 +179,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PHONE_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] PhonesCreateEditVM phonesCreateEditVm)

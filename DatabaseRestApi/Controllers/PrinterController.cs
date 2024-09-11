@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class PrinterController : Controller
     {
+        [Authorize]
         [Route(URLs.PRINTER)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -37,6 +39,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(PrintersVM);
         }
+        [Authorize]
         [Route(URLs.PRINTER_USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetByUser(int id)
@@ -65,6 +68,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(PrintersVM);
         }
+        [Authorize]
         [Route(URLs.PRINTER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -93,6 +97,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(PrintersVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PRINTER_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -117,7 +122,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(PrintersVM);
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PRINTER)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PrintersCreateEditVM printerCreateEditVM)
@@ -142,7 +147,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PRINTER_ID)]
         [HttpPut]
         public async Task<IActionResult> Edit(int id, [FromBody] PrintersCreateEditVM printerCreateEditVM)
@@ -168,7 +173,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PRINTER_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] PrintersCreateEditVM printerCreateEditVM)

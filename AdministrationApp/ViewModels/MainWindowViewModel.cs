@@ -39,7 +39,6 @@ namespace AdministrationApp.ViewModels
 
 
         #region Workspaces
-        //
         private ObservableCollection<WorkspaceViewModel> _Workspaces;
         public ObservableCollection<WorkspaceViewModel> Workspaces
         {
@@ -68,7 +67,6 @@ namespace AdministrationApp.ViewModels
         private void onWorkspaceRequestClose(object sender, EventArgs e)
         {
             WorkspaceViewModel workspace = sender as WorkspaceViewModel;
-            //workspace.Dispos();
             this.Workspaces.Remove(workspace);
         }
         #endregion
@@ -104,13 +102,10 @@ namespace AdministrationApp.ViewModels
         where W : Window, new()
         where VM : class
         {
-            // Tworzenie nowego okna.
             W window = new W();
 
-            // Tworzenie ViewModelu z użyciem fabryki, która przyjmuje instancję okna.
             VM viewModel = viewModelFactory(window);
 
-            // Przypisanie ViewModelu do DataContext okna.
             window.DataContext = viewModel;
 
             window.Show();
@@ -149,7 +144,7 @@ namespace AdministrationApp.ViewModels
 
                 if (vm != null)
                 {
-                    TWindow window = new TWindow(); // Można to zmienić na bardziej uniwersalne okno
+                    TWindow window = new TWindow();
                     TEditViewModel editViewModel = createViewModel(window, vm);
                     window.DataContext = editViewModel;
                     window.Show();
@@ -180,10 +175,8 @@ namespace AdministrationApp.ViewModels
 
         private void open(string name)
         {
-            // Słownik akcji
             var actions = new Dictionary<string, Action>
             {
-                // Dodawanie
                 { "HardDriveModelAdd", CreateHardDriveModelWindow },
                 { "HardDrivesAdd", CreateHardDrive },
                 { "ServerAdd", CreateServer },
@@ -203,7 +196,6 @@ namespace AdministrationApp.ViewModels
                 { "TicketTypeAdd", CreateTicketTypeWindow },
                 { "TicketsAdd", CreateTicket },
 
-                // Komputery
                 { "KomputeryAdd", CreateComputer },
                 { "ComputerModelAdd", CreateComputerModelWindow },
                 { "ComputerTypeAdd", CreateComputerTypeWindow },
@@ -211,49 +203,41 @@ namespace AdministrationApp.ViewModels
                 { "ChooseComputerModel", ShowComputerModelWindow },
                 { "ChooseComputerType", ShowComputerTypeWindow },
 
-                // Monitory
                 { "MonitoryAdd", CreateMonitor },
                 { "MonitorModelAdd", CreateMonitorModelWindow },
                 { "MonitorTypeAdd", CreateMonitorTypeWindow },
                 { "ChooseMonitorModel", ShowMonitorModelWindow },
                 { "ChooseMonitorType", ShowMonitorTypeWindow },
 
-                // Użytkownicy
                 { "UżytkownicyAdd", CreateUser },
                 { "ChooseUser", ShowUsersWindow },
 
-                // Oprogramowanie
                 { "OprogramowanieAdd", CreateSoftware },
 
-                // Urządzenia sieciowe
                 { "Urządzenia siecioweAdd", CreateNetworkDevice },
                 { "NetworkDeviceModelAdd", CreateNetworkDeviceModelWindow },
                 { "NetworkDeviceTypeAdd", CreateNetworkDeviceTypeWindow },
                 { "ChooseNetworkDeviceModel", ShowNetworkDeviceModelWindow },
                 { "ChooseNetworkDeviceType", ShowNetworkDeviceTypeWindow },
 
-                // Urządzenia
                 { "UrządzeniaAdd", CreateDevice },
                 { "DeviceModelAdd", CreateDeviceModelWindow },
                 { "DeviceTypeAdd", CreateDeviceTypeWindow },
                 { "ChooseDeviceModel", ShowDeviceModelWindow },
                 { "ChooseDeviceType", ShowDeviceTypeWindow },
 
-                // Drukarki
                 { "DrukarkiAdd", CreatePrinter },
                 { "Rodzaje drukarekAdd", CreatePrinterTypeWindow },
                 { "Modele drukarekAdd", CreatePrinterModelWindow },
                 { "ChoosePrinterType", ShowPrinterTypeWindow },
                 { "ChoosePrinterModel", ShowPrinterModelWindow },
 
-                // Telefony
                 { "TelefonyAdd", CreatePhone },
                 { "PhoneModelAdd", CreatePhoneModelWindow },
                 { "PhoneTypeAdd", CreatePhoneTypeWindow },
                 { "ChoosePhoneModel", ShowPhoneModelWindow },
                 { "ChoosePhoneType", ShowPhoneTypeWindow },
 
-                // Szafy Rack
                 { "Szafy RackAdd", CreateRackCabinet },
                 { "RackCabinetModelAdd", CreateRackCabinetModelWindow },
                 { "RackCabinetTypeAdd", CreateRackCabinetTypeWindow },
@@ -261,7 +245,6 @@ namespace AdministrationApp.ViewModels
                 { "ChooseRackCabinetType", ShowRackCabinetTypeWindow },
                 { "ChooseRackCabinet", ShowRackCabinetWindow },
 
-                // Karty Sim
                 { "Karty SimAdd", CreateSimCard },
                 { "SimComponentTypeAdd", CreateSimComponentTypeWindow },
                 { "SimComponentAdd", CreateSimComponentWindow },
@@ -270,7 +253,6 @@ namespace AdministrationApp.ViewModels
                 { "ChooseSimComponentType", ShowSimComponentTypeWindow },
                 { "ChooseSimComponent", ShowSimComponentWindow },
 
-                // Inne
                 { "ChooseLocation", ShowLocationWindow },
                 { "LocationAdd", CreateLocationsWindow },
                 { "ChooseStatus", ShowStatusWindow },
@@ -286,7 +268,6 @@ namespace AdministrationApp.ViewModels
                 { "ChooseSoftware", ShowSoftwareWindow }
             };
 
-            // Akcje, które wymagają cięcia stringa
             var startsWithActions = new Dictionary<string, Action<string>>
             {
                 { "KomputeryEdit", EditComputer },
@@ -331,14 +312,12 @@ namespace AdministrationApp.ViewModels
                 { "DeviceTypeEdit", EditDeviceType }
             };
 
-            // Sprawdzamy czy nazwa pasuje do słownika
             if (actions.ContainsKey(name))
             {
                 actions[name]();
             }
             else
             {
-                // Sprawdzamy czy zaczyna się od określonego prefixu
                 foreach (var action in startsWithActions)
                 {
                     if (name.StartsWith(action.Key))

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews
 {
-    /// <summary>
-    /// Interaction logic for NewNetworkDeviceView.xaml
-    /// </summary>
     public partial class NewNetworkDeviceView : JedenViewBase
     {
         public NewNetworkDeviceView()

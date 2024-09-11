@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class ComputerModelController : Controller
     {
+        [Authorize]
         [Route(URLs.COMPUTERMODEL)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -30,6 +32,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(computerModelVM);
         }
+        [Authorize]
         [Route(URLs.COMPUTERMODEL_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -51,6 +54,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(computerModelVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERMODEL_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -68,6 +72,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(computerModelVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ComputerModelCreateEditVM computerModelCreateEditVM)
@@ -85,7 +90,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERMODEL_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] ComputerModelCreateEditVM computerModelCreateEditVM)
@@ -104,7 +109,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERMODEL_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] ComputerModelCreateEditVM computerModelCreateEditVM)

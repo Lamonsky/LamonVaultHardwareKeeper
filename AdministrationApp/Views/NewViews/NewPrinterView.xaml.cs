@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews
 {
-    /// <summary>
-    /// Interaction logic for NewPrinterView.xaml
-    /// </summary>
     public partial class NewPrinterView : JedenViewBase
     {
         public NewPrinterView()

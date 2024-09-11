@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class SimCardController : Controller
     {
+        [Authorize]
         [Route(URLs.SIMCARD)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -35,6 +37,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(simcardsVMs);
         }
+        [Authorize]
         [Route(URLs.SIMCARD_USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetByUser(int id)
@@ -61,6 +64,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(simcardsVMs);
         }
+        [Authorize]
         [Route(URLs.SIMCARD_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -87,6 +91,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(simcardsVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SIMCARD_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -109,6 +114,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(simcardsVMs);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SIMCARD)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SimCardsCreateEditVM simCardsCreateEditVM)
@@ -131,7 +137,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SIMCARD_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] SimCardsCreateEditVM simCardsCreateEditVM)
@@ -156,7 +162,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.SIMCARD_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] SimCardsCreateEditVM simCardsCreateEditVM)

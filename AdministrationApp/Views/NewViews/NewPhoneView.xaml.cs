@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews
 {
-    /// <summary>
-    /// Interaction logic for NewPhoneView.xaml
-    /// </summary>
     public partial class NewPhoneView : JedenViewBase
     {
         public NewPhoneView()

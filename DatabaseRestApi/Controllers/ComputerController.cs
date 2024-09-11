@@ -14,6 +14,7 @@ namespace DatabaseRestApi.Controllers
 {
     public class ComputerController : Controller
     {
+        [Authorize]
         [Route(URLs.COMPUTERS)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -45,6 +46,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(computerVMs);
         }
+        [Authorize]
         [Route(URLs.COMPUTERS_USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetByUser(int id)
@@ -77,6 +79,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(computerVMs);
         }
+        [Authorize]
         [Route(URLs.COMPUTERS_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -143,7 +146,7 @@ namespace DatabaseRestApi.Controllers
             return Json(computerVMs);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERS)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ComputersCreateEditVM computersCreateEditVM)
@@ -172,7 +175,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERS_ID)]
         [HttpPut]
         public async Task<IActionResult> Edit(int id, [FromBody] ComputersCreateEditVM computersCreateEditVM)
@@ -203,7 +206,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.COMPUTERS_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] ComputersCreateEditVM computersCreateEditVM)

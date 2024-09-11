@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews
 {
-    /// <summary>
-    /// Logika interakcji dla klasy NewMonitorView.xaml
-    /// </summary>
     public partial class NewMonitorView : JedenViewBase
     {
         public NewMonitorView()

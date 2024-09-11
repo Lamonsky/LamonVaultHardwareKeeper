@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews
 {
-    /// <summary>
-    /// Logika interakcji dla klasy NewHardDriveView.xaml
-    /// </summary>
     public partial class NewHardDriveView : JedenViewBase
     {
         public NewHardDriveView()

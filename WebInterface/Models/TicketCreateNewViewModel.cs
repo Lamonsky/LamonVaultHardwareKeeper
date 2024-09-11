@@ -10,7 +10,6 @@ namespace WebInterface.Models
         public List<TicketTypeVM> TicketTypes { get; set; }
         public List<LocationVM> Location { get; set; }
 
-        // Możesz dodać inne pola, które są potrzebne
         public TicketCreateEditVM Ticket { get; set; }
 
 

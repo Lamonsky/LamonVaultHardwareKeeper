@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews.Windows
 {
-    /// <summary>
-    /// Logika interakcji dla klasy NewTechnicianWindow.xaml
-    /// </summary>
     public partial class NewTechnicianWindow : NewDictionaryViewBase
     {
         public NewTechnicianWindow()

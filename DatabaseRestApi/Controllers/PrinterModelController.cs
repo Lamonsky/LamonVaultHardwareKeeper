@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class PrinterModelController : Controller
     {
+        [Authorize]
         [Route(URLs.PRINTERMODEL)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -31,6 +33,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(printerModelVM);
         }
+        [Authorize]
         [Route(URLs.PRINTERMODEL_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -52,6 +55,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(printerModelVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PRINTERMODEL_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -69,6 +73,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(printerModelVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PRINTERMODEL)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PrinterModelCreateEditVM printerModelCreateEditVM)
@@ -86,7 +91,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PRINTERMODEL_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] PrinterModelCreateEditVM printerModelCreateEditVM)
@@ -105,7 +110,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.PRINTERMODEL_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] PrinterModelCreateEditVM printerModelCreateEditVM)

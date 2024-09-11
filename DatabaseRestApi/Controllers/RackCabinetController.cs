@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class RackCabinetController : Controller
     {
+        [Authorize]
         [Route(URLs.RACKCABINET)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -36,6 +38,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(rackcabinetVM);
         }
+        [Authorize]
         [Route(URLs.RACKCABINET_USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetByUser(int id)
@@ -63,6 +66,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(rackcabinetVM);
         }
+        [Authorize]
         [Route(URLs.RACKCABINET_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -90,6 +94,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(rackcabinetVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.RACKCABINET_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -113,7 +118,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(rackcabinetVM);
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.RACKCABINET)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] RackCabinetCreateEditVM RackCabinetCreateEditVM)
@@ -137,7 +142,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.RACKCABINET_ID)]
         [HttpPut]
         public async Task<IActionResult> Edit(int id, [FromBody] RackCabinetCreateEditVM RackCabinetCreateEditVM)
@@ -162,7 +167,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.RACKCABINET_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] RackCabinetCreateEditVM RackCabinetCreateEditVM)

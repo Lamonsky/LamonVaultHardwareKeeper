@@ -127,7 +127,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
                 OnPropertyChanged(() => IsLoading);
             }
         }
-        //tu ....
         private List<T> _List;
         public List<T> List
         {
@@ -195,10 +194,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning);
 
-                // Sprawdzenie odpowiedzi użytkownika
                 if (result == MessageBoxResult.Yes)
                 {
-                    // Logika usuwania
                     Remove();
                     RemoveSaveLogs(ChosenItem);
                 }
@@ -247,23 +244,19 @@ namespace AdministrationApp.ViewModels.AllViewModel
             {
                 var worksheet = workbook.Worksheets.Add(DisplayName);
 
-                // Pobierz właściwości typu T
                 var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-                // Utwórz nagłówki kolumn w Excelu na podstawie nazw właściwości
                 for (int i = 0; i < properties.Length; i++)
                 {
                     worksheet.Cell(1, i + 1).Value = properties[i].Name;
                 }
 
-                // Wypełnij arkusz danymi
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     for (int j = 0; j < properties.Length; j++)
                     {
                         var value = properties[j].GetValue(dataList[i]);
 
-                        // Obsługa różnych typów danych
                         if (value is int)
                         {
                             worksheet.Cell(i + 2, j + 1).Value = (int)value;
@@ -287,7 +280,6 @@ namespace AdministrationApp.ViewModels.AllViewModel
                     }
                 }
 
-                // Zapisz plik na dysku
                 workbook.SaveAs(csvFilePath);
                 System.Windows.MessageBox.Show($"Zapisano plik pod ścieżką {csvFilePath}");
             }

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Logika interakcji dla klasy AllMonitorsView.xaml
-    /// </summary>
     public partial class AllMonitorView : WszystkieViewBase
     {
         public AllMonitorView()

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.NewViews
 {
-    /// <summary>
-    /// Interaction logic for NewRackCabinetView.xaml
-    /// </summary>
     public partial class NewRackCabinetView : JedenViewBase
     {
         public NewRackCabinetView()

@@ -5,11 +5,13 @@ using DatabaseRestApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatabaseRestApi.Controllers
 {
     public class TicketCategoryController : Controller
     {
+        [Authorize]
         [Route(URLs.TICKETCATEGORY)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -30,6 +32,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(ticketCategoryVM);
         }
+        [Authorize]
         [Route(URLs.TICKETCATEGORY_ID)]
         [HttpGet]
         public async Task<IActionResult> GetItem(int id)
@@ -51,6 +54,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(ticketCategoryVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TICKETCATEGORY_CEVM_ID)]
         [HttpGet]
         public async Task<IActionResult> GetEditItem(int id)
@@ -69,6 +73,7 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(ticketCategoryVM);
         }
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TICKETCATEGORY)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TicketCategoryCreateEditVM ticketCategoryCreateEditVM)
@@ -86,7 +91,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TICKETCATEGORY_ID)]
         [HttpPut]
         public async Task<IActionResult> Create(int id, [FromBody] TicketCategoryCreateEditVM ticketCategoryCreateEditVM)
@@ -105,7 +110,7 @@ namespace DatabaseRestApi.Controllers
             await database.SaveChangesAsync();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin")]
         [Route(URLs.TICKETCATEGORY_ID)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, [FromBody] TicketCategoryCreateEditVM ticketCategoryCreateEditVM)

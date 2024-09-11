@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    /// <summary>
-    /// Logika interakcji dla klasy AllPageContentView.xaml
-    /// </summary>
     public partial class AllPageContentView : WszystkieViewBase
     {
         public AllPageContentView()
