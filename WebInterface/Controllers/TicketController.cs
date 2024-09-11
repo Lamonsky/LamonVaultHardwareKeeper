@@ -6,6 +6,7 @@ using WebInterface.Helpers;
 using WebInterface.Models;
 using Data.Computers.SelectVMs;
 using Data.Computers.CreateEditVMs;
+using System.Text.Json;
 
 namespace WebInterface.Controllers
 {
@@ -36,6 +37,16 @@ namespace WebInterface.Controllers
         {
             vM.Ticket.User = GlobalData.Id;
             await RequestHelper.SendRequestAsync(URLs.TICKET, HttpMethod.Post, vM.Ticket, GlobalData.AccessToken);
+
+            string newitem = JsonSerializer.Serialize(vM.Ticket);
+            LogCreateEditVM log = new();
+            log.LogDate = DateTime.Now;
+            log.Users = (int)GlobalData.Id;
+            log.CreatedAt = DateTime.Now;
+            log.CreatedBy = (int)GlobalData.Id;
+            log.Description = $"Utworzono rekord w tabeli Zg³oszenia. Nowy rekord {newitem}.";
+            await RequestHelper.SendRequestAsync(URLs.LOG, HttpMethod.Post, log, GlobalData.AccessToken);
+
             return RedirectToAction("Index", "Home");
         }
 

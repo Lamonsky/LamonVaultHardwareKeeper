@@ -22,11 +22,6 @@ namespace WebInterface.Controllers
 
         public IActionResult Login()
         {
-            Response.Cookies.Delete("email");
-            GlobalData.AccessToken = null;
-            GlobalData.RefreshToken = null;
-            GlobalData.Email = null;
-            GlobalData.Id = null;
             return View();
         }
         [HttpPost]
@@ -36,11 +31,12 @@ namespace WebInterface.Controllers
             {
                 LoginResponse loginResponse = await RequestHelper.SendRequestAsync<LoginRequest, LoginResponse>(URLs.LOGIN, HttpMethod.Post, loginRequest, GlobalData.AccessToken);
                 Response.Cookies.Append("email", loginRequest.EMail);
-                UserVM loggeduser = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_EMAIL_ID.Replace("{id}", loginRequest.EMail), HttpMethod.Get, null, GlobalData.AccessToken);
                 GlobalData.AccessToken = loginResponse.AccessToken;
                 GlobalData.RefreshToken = loginResponse.RefreshToken;
-                GlobalData.Email = loginResponse.Email;
+                GlobalData.Email = loginRequest.EMail;
+                UserVM loggeduser = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_EMAIL_ID.Replace("{id}", loginRequest.EMail), HttpMethod.Get, null, GlobalData.AccessToken);
                 GlobalData.Id = loggeduser.Id;
+
                 return RedirectToAction("Index", "Home");
             }
             catch(Exception ex)
@@ -54,10 +50,9 @@ namespace WebInterface.Controllers
         public IActionResult Logout()
         {
             Response.Cookies.Delete("email");
-            GlobalData.AccessToken = null;
-            GlobalData.RefreshToken = null;
-            GlobalData.Email = null;
-            GlobalData.Id = null;
+            Response.Cookies.Delete("accesstoken");
+            Response.Cookies.Delete("refreshtoken");
+            Response.Cookies.Delete("userid");
             return RedirectToAction("Login");
         }
     }

@@ -11,7 +11,6 @@ namespace DatabaseRestApi.Controllers
 {
     public class PageContentController : Controller
     {
-        [Authorize]
         [Route(URLs.PAGECONTENT)]
         [HttpGet]
         public async Task<IActionResult> Index()

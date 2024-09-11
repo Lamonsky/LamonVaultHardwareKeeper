@@ -7,7 +7,7 @@
 <h1>@await Component.InvokeAsync("PageContentViewComponent", new { type = "DeviceCategoryName" })</h1>
 
 
-<div class="row">
+<div class="row mt-2">
     @if (Model != null && Model.Any())
     {
         foreach (var item in Model)
@@ -15,7 +15,7 @@
                                     <div class="col-md">
                                         <div class="card">
                                             <div class="card-body">   
-                                                <h5 class="card-title">@item.Name</h5>
+                                                <h5 class="card-title mb-2">@item.Name</h5>
                                                 <p class="card-text">
                                                     <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "DeviceStatusName" })</strong> <br />
                             @item.Status<br />
@@ -38,10 +38,10 @@
     }
     else
     {
-                    <div class="col-md-4">
+                    <div class="col-md mt-2-4">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">Brak obiektów do wyświetlenia</h5>
+                                <h5 class="card-title mb-2">Brak obiektów do wyświetlenia</h5>
                             </div>
                         </div>
                     </div>

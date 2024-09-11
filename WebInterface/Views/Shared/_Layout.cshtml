@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@if (Context.Request.Cookies["email"] == null && !Context.Request.Path.Value.Contains("/User/Login"))
+{
+    Context.Response.Redirect("/User/Login");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,6 +14,7 @@
 </head>
 <body>
     <div class="container">
+
     @if(Context.Request.Cookies["email"] != null)
     {
                <header>
@@ -126,9 +131,10 @@
                     </div>
                 </div>
             </div>
-    }
-    else{
-             <div class="row">
+        }
+        else{            
+
+            <div class="row">
                 <div class="col">
                     <h1>@await Component.InvokeAsync("PageContentViewComponent", new { type = "LogoButton" })</h1>
                 </div>

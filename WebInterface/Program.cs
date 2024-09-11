@@ -20,7 +20,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.UseMiddleware<CheckCookieMiddleware>();
+//app.UseMiddleware<CheckCookieMiddleware>();
 
 app.MapControllerRoute(
     name: "default",

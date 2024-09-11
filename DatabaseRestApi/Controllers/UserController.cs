@@ -41,7 +41,7 @@ namespace DatabaseRestApi.Controllers
                 }).ToListAsync();
             return Json(userVM);
         }
-        [Authorize]
+
         [Route(URLs.USER_ID)]
         [HttpGet]
         public async Task<IActionResult> GetUser(int id)

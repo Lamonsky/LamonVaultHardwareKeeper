@@ -26,6 +26,7 @@ namespace WebInterface.Controllers
             }
             else
             {
+                Response.Cookies.Delete("email");
                 return RedirectToAction("Login", "User");                
             }
         }

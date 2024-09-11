@@ -168,7 +168,7 @@ namespace DatabaseRestApi.Controllers
         }
         [Route(URLs.TICKET)]
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody] TicketCreateEditVM ticketCreateEditVM)
         {
             DatabaseContext database = new();

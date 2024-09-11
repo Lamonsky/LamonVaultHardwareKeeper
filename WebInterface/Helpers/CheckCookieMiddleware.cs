@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using WebInterface.Models;
 
@@ -28,7 +29,10 @@ namespace WebInterface.Helpers
                     return;
                 }
             }
-            GlobalData.RefreshUserToken();
+            if(context.Request.Cookies["refreshtoken"] != null)
+            {
+                GlobalData.RefreshUserToken(context.Request.Cookies["refreshtoken"]);
+            }
             await _next(context);
         }
     }
