@@ -11,14 +11,6 @@ namespace WebInterface.Models
         public static string Email { get; set; }
         public static string AccessToken { get; set; }
         public static string RefreshToken { get; set; }
-        
-        public static async void RefreshUserToken(string _refreshToken)
-        {
-            RefreshTokenModel refreshToken = new(_refreshToken);
-            RefreshTokenModel newuser = await RequestHelper.SendRequestAsync<object, RefreshTokenModel>(URLs.REFRESH, HttpMethod.Post, refreshToken, GlobalData.AccessToken);
-            AccessToken = newuser.AccessToken;
-            RefreshToken = newuser.RefreshToken;
-        }
 
     }
 }
