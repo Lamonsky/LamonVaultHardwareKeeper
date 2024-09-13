@@ -16,6 +16,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
@@ -34,8 +35,10 @@
                 <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="0" Grid.Column="4" Text="Adres IP:"/>
                 <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Path=IpAddress, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="Status:"/>
-                <Grid Grid.Row="1" Grid.Column="2">
+                <Label Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Content="{Binding ErrorMessage}" Foreground="Red" />
+
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="Status:"/>
+                <Grid Grid.Row="2" Grid.Column="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
@@ -45,8 +48,8 @@
                         <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
-                <TextBlock Grid.Row="1" Grid.Column="4" Text="Typ drukarki:"/>
-                <Grid Grid.Row="1" Grid.Column="5">
+                <TextBlock Grid.Row="2" Grid.Column="4" Text="Typ drukarki:"/>
+                <Grid Grid.Row="2" Grid.Column="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
@@ -56,8 +59,8 @@
 <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="Producent:"/>
-                <Grid Grid.Row="2" Grid.Column="2">
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="Producent:"/>
+                <Grid Grid.Row="3" Grid.Column="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
@@ -67,8 +70,8 @@
                         <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
-                <TextBlock Grid.Row="2" Grid.Column="4" Text="Model:"/>
-                <Grid Grid.Row="2" Grid.Column="5">
+                <TextBlock Grid.Row="3" Grid.Column="4" Text="Model:"/>
+                <Grid Grid.Row="3" Grid.Column="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
@@ -78,12 +81,12 @@
                         <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
-                <TextBlock Grid.Row="3" Grid.Column="4" Text="Numer seryjny:"/>
-                <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="Numer inwentarzowy"/>
-                <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Path=InventoryNumber, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Grid.Row="4" Grid.Column="1" Text="Użytkownik"/>
-                <Grid Grid.Row="4" Grid.Column="2">
+                <TextBlock Grid.Row="4" Grid.Column="4" Text="Numer seryjny:"/>
+                <TextBox Grid.Row="4" Grid.Column="5" Text="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="Numer inwentarzowy"/>
+                <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=InventoryNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="Użytkownik"/>
+                <Grid Grid.Row="5" Grid.Column="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
@@ -93,8 +96,8 @@
                         <materialDesign:PackIcon Kind="PageNext" />
                     </Button>
                 </Grid>
-                <TextBlock Grid.Row="4" Grid.Column="4" Text="Lokalizacja:"/>
-                <Grid Grid.Row="4" Grid.Column="5">
+                <TextBlock Grid.Row="5" Grid.Column="4" Text="Lokalizacja:"/>
+                <Grid Grid.Row="5" Grid.Column="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>

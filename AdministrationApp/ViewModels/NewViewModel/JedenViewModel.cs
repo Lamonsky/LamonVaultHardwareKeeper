@@ -43,9 +43,36 @@ namespace AdministrationApp.ViewModels.NewViewModel
                 _oldItem = value;
             }
         }
+        private bool _IsValid;
+        public bool IsValid
+        {
+            get
+            {
+                return _IsValid;
+            }
+            set
+            {
+                if (_IsValid != value)
+                {
+                    _IsValid = value;
+                    OnPropertyChanged(() => IsValid);
+                }
+            }
+        }
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(() => ErrorMessage);
+            }
+        }
         public JedenViewModel(string displayName)
         {
             DisplayName = displayName;
+            IsValid = true;
         }
         #endregion
 

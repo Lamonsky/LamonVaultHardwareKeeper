@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -182,6 +183,22 @@ namespace AdministrationApp.ViewModels.EditViewModel
                 ManufacturerName = manufacturerVM.Name;
             }
 
+        }
+        public void ValidateIPAddress()
+        {
+            if (IPAddress.TryParse(IpAddress, out _))
+            {
+                IsValid = true;
+                ErrorMessage = null;
+            }
+            else
+            {
+                IsValid = false;
+            }
+            if (!IsValid)
+            {
+                ErrorMessage = ("Proszę wpisać poprawny adres IP");
+            }
         }
         private void getChosenUser(UserVM vM)
         {

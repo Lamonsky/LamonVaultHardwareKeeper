@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,6 +94,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         #region Konstruktor
         public NewPrinterViewModel() : base("Nowa drukarka")
         {
+            IsValid = false;
             item = new PrintersCreateEditVM();
             Messenger.Default.Register<LocationVM>(this, getChosenLokacja);
             Messenger.Default.Register<UserVM>(this, getChosenUser);
@@ -108,6 +110,22 @@ namespace AdministrationApp.ViewModels.NewViewModel
             NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.PRINTER, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("PrinterRefresh");
+        }
+        public void ValidateIPAddress()
+        {
+            if (IPAddress.TryParse(IpAddress, out _))
+            {
+                IsValid = true;
+                ErrorMessage = null;
+            }
+            else
+            {
+                IsValid = false;
+            }
+            if (!IsValid)
+            {
+                ErrorMessage = ("Proszę wpisać poprawny adres IP");
+            }
         }
         #endregion
         #region CommandsFunctions
@@ -248,6 +266,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             {
                 item.IpAddress = value;
                 OnPropertyChanged(() => IpAddress);
+                ValidateIPAddress();
             }
         }
         public string? InventoryNumber

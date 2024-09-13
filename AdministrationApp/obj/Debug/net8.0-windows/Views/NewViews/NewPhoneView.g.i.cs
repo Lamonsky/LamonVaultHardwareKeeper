@@ -56,7 +56,7 @@ namespace AdministrationApp.Views.NewViews {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AdministrationApp;V1.0.0.0;component/views/newviews/newphoneview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AdministrationApp;component/views/newviews/newphoneview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\NewViews\NewPhoneView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

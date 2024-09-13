@@ -62,6 +62,10 @@ namespace AdministrationApp.ViewModels.NewViewModel
             {
                 ErrorMessage = ("Nie wystarczająco silne hasło. Wymagania: conajmniej 8 znaków, conajmniej 1 mała litera, conajmniej 1 wielka litera, conajmniej 1 znak specjalny");
             }
+            else
+            {
+                ErrorMessage = null;
+            }
         }
         public override async void Save()
         {
@@ -105,32 +109,6 @@ namespace AdministrationApp.ViewModels.NewViewModel
 
         #endregion
         #region Dane
-        private bool _IsValid;
-        public bool IsValid
-        {
-            get
-            {
-                return _IsValid;
-            }
-            set
-            {
-                if(_IsValid != value)
-                {
-                    _IsValid = value;
-                    OnPropertyChanged(() => IsValid);
-                }
-            }
-        }
-        private string _errorMessage;
-        public string ErrorMessage
-        {
-            get => _errorMessage;
-            set
-            {
-                _errorMessage = value;
-                OnPropertyChanged(() => ErrorMessage);
-            }
-        }
         private string _PositionName;
         public string PositionName
         {
