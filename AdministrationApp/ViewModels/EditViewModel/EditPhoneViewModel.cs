@@ -145,91 +145,148 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             if (item.StatusId != null)
             {
-                StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
-                    URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                StatusName = statusvm.Name;
+                try
+                {
+                    StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                        URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    StatusName = statusvm.Name;
+                }
+                catch
+                {
+                    StatusName = "Nieaktywny status";
+                }
             }
 
             if (item.LocationId != null)
             {
-                LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
-                    URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                LokacjaName = locationVM.Name;
+                try
+                {
+                    LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
+                        URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    LokacjaName = locationVM.Name;
+                }
+                catch
+                {
+                    LokacjaName = "Nieaktywna lokalizacja";
+                }
             }
 
             if (item.Users != null)
             {
-                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
-                    URLs.USER_ID.Replace("{id}", item.Users.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+                try
+                {
+                    UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                        URLs.USER_ID.Replace("{id}", item.Users.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+                }
+                catch
+                {
+                    UserName = "Nieaktywny użytkownik";
+                }
             }
 
             if (item.PhoneType != null)
             {
-                PhoneTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, PhoneTypeVM>(
-                    URLs.PHONETYPE_ID.Replace("{id}", item.PhoneType.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                PhoneTypeName = ctypevm.Name;
+                try
+                {
+                    PhoneTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, PhoneTypeVM>(
+                        URLs.PHONETYPE_ID.Replace("{id}", item.PhoneType.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    PhoneTypeName = ctypevm.Name;
+                }
+                catch
+                {
+                    PhoneTypeName = "Nieaktywny typ telefonu";
+                }
             }
 
             if (item.Model != null)
             {
-                PhoneModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, PhoneModelVM>(
-                    URLs.PHONEMODEL_ID.Replace("{id}", item.Model.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                PhoneModelName = cmodelvm.Name;
+                try
+                {
+                    PhoneModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, PhoneModelVM>(
+                        URLs.PHONEMODEL_ID.Replace("{id}", item.Model.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    PhoneModelName = cmodelvm.Name;
+                }
+                catch
+                {
+                    PhoneModelName = "Nieaktywny model";
+                }
             }
 
             if (item.Manufacturer != null)
             {
-                ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
-                    URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                ManufacturerName = manufacturerVM.Name;
+                try
+                {
+                    ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                        URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    ManufacturerName = manufacturerVM.Name;
+                }
+                catch
+                {
+                    ManufacturerName = "Nieaktywny producent";
+                }
             }
 
             if (item.SimCard1 != null)
             {
-                SimCardsVM scvm1 = await RequestHelper.SendRequestAsync<object, SimCardsVM>(
-                    URLs.SIMCARD_ID.Replace("{id}", item.SimCard1.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                SimCard1S = scvm1.PhoneNumber + " " + scvm1.InventoryNumber + " " + scvm1.SerialNumber;
+                try
+                {
+                    SimCardsVM scvm1 = await RequestHelper.SendRequestAsync<object, SimCardsVM>(
+                        URLs.SIMCARD_ID.Replace("{id}", item.SimCard1.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    SimCard1S = scvm1.PhoneNumber + " " + scvm1.InventoryNumber + " " + scvm1.SerialNumber;
+                }
+                catch
+                {
+                    SimCard1S = "Nieaktywna karta sim";
+                }
             }
 
             if (item.SimCard2 != null)
             {
-                SimCardsVM scvm2 = await RequestHelper.SendRequestAsync<object, SimCardsVM>(
-                    URLs.SIMCARD_ID.Replace("{id}", item.SimCard2.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                SimCard2S = scvm2.PhoneNumber + " " + scvm2.InventoryNumber + " " + scvm2.SerialNumber;
+                try
+                {
+                    SimCardsVM scvm2 = await RequestHelper.SendRequestAsync<object, SimCardsVM>(
+                        URLs.SIMCARD_ID.Replace("{id}", item.SimCard2.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    SimCard2S = scvm2.PhoneNumber + " " + scvm2.InventoryNumber + " " + scvm2.SerialNumber;
+                }
+                catch
+                {
+                    SimCard2S = "Nieaktywna karta sim";
+                }
             }
+
 
         }
         private void getManufacturer(ManufacturerVM vm)

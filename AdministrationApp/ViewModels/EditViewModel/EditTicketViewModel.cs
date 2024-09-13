@@ -108,58 +108,94 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             if (item.User != null)
             {
-                UserVM uvm = await RequestHelper.SendRequestAsync<object, UserVM>(
-                    URLs.USER_ID.Replace("{id}", item.User.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                UserName = uvm.FirstName + " " + uvm.LastName + " " + uvm.InternalNumber + " " + uvm.Position;
+                try
+                {
+                    UserVM uvm = await RequestHelper.SendRequestAsync<object, UserVM>(
+                        URLs.USER_ID.Replace("{id}", item.User.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    UserName = uvm.FirstName + " " + uvm.LastName + " " + uvm.InternalNumber + " " + uvm.Position;
+                }
+                catch
+                {
+                    UserName = "Nieaktywny użytkownik";
+                }
             }
 
             if (item.StatusId != null)
             {
-                TicketStatusVM tsvm = await RequestHelper.SendRequestAsync<object, TicketStatusVM>(
-                    URLs.TICKETSTATUS_ID.Replace("{id}", item.StatusId.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                StatusName = tsvm.Name;
+                try
+                {
+                    TicketStatusVM tsvm = await RequestHelper.SendRequestAsync<object, TicketStatusVM>(
+                        URLs.TICKETSTATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    StatusName = tsvm.Name;
+                }
+                catch
+                {
+                    StatusName = "Nieaktywny status";
+                }
             }
 
             if (item.Category != null)
             {
-                TicketCategoryVM tcvm = await RequestHelper.SendRequestAsync<object, TicketCategoryVM>(
-                    URLs.TICKETCATEGORY_ID.Replace("{id}", item.Category.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                CategoryName = tcvm.Name;
+                try
+                {
+                    TicketCategoryVM tcvm = await RequestHelper.SendRequestAsync<object, TicketCategoryVM>(
+                        URLs.TICKETCATEGORY_ID.Replace("{id}", item.Category.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    CategoryName = tcvm.Name;
+                }
+                catch
+                {
+                    CategoryName = "Nieaktywna kategoria";
+                }
             }
 
             if (item.Type != null)
             {
-                TicketTypeVM ttvm = await RequestHelper.SendRequestAsync<object, TicketTypeVM>(
-                    URLs.TICKETTYPE_ID.Replace("{id}", item.Type.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                TicketTypeName = ttvm.Name;
+                try
+                {
+                    TicketTypeVM ttvm = await RequestHelper.SendRequestAsync<object, TicketTypeVM>(
+                        URLs.TICKETTYPE_ID.Replace("{id}", item.Type.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    TicketTypeName = ttvm.Name;
+                }
+                catch
+                {
+                    TicketTypeName = "Nieaktywny typ zgłoszenia";
+                }
             }
 
             if (item.Owner != null)
             {
-                TechnicianVM tvm = await RequestHelper.SendRequestAsync<object, TechnicianVM>(
-                    URLs.TECHNICIAN_ID.Replace("{id}", item.Owner.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                OwnerName = tvm.Users;
+                try
+                {
+                    TechnicianVM tvm = await RequestHelper.SendRequestAsync<object, TechnicianVM>(
+                        URLs.TECHNICIAN_ID.Replace("{id}", item.Owner.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    OwnerName = tvm.Users;
+                }
+                catch
+                {
+                    OwnerName = "Nieaktywny właściciel zgłoszenia";
+                }
             }
+
 
 
         }

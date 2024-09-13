@@ -119,69 +119,112 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             if (item.StatusId != null)
             {
-                StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
-                    URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                StatusName = statusvm.Name;
+                try
+                {
+                    StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                        URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    StatusName = statusvm.Name;
+                }
+                catch
+                {
+                    StatusName = "Nieaktywny status";
+                }
             }
 
             if (item.LocationId != null)
             {
-                LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
-                    URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                LokacjaName = locationVM.Name;
+                try
+                {
+                    LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
+                        URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    LokacjaName = locationVM.Name;
+                }
+                catch
+                {
+                    LokacjaName = "Nieaktywna lokalizacja";
+                }
             }
 
             if (item.Users != null)
             {
-                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
-                    URLs.USER_ID.Replace("{id}", item.Users.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+                try
+                {
+                    UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                        URLs.USER_ID.Replace("{id}", item.Users.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+                }
+                catch
+                {
+                    UserName = "Nieaktywny użytkownik";
+                }
             }
 
             if (item.CabinetType != null)
             {
-                RackCabinetTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, RackCabinetTypeVM>(
-                    URLs.RACKCABINETTYPE_ID.Replace("{id}", item.CabinetType.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                RackCabinetTypeName = ctypevm.Name;
+                try
+                {
+                    RackCabinetTypeVM ctypevm = await RequestHelper.SendRequestAsync<object, RackCabinetTypeVM>(
+                        URLs.RACKCABINETTYPE_ID.Replace("{id}", item.CabinetType.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    RackCabinetTypeName = ctypevm.Name;
+                }
+                catch
+                {
+                    RackCabinetTypeName = "Nieaktywny typ szafy Rack";
+                }
             }
 
             if (item.Model != null)
             {
-                RackCabinetModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, RackCabinetModelVM>(
-                    URLs.RACKCABINETMODEL_ID.Replace("{id}", item.Model.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                RackCabinetModelName = cmodelvm.Name;
+                try
+                {
+                    RackCabinetModelVM cmodelvm = await RequestHelper.SendRequestAsync<object, RackCabinetModelVM>(
+                        URLs.RACKCABINETMODEL_ID.Replace("{id}", item.Model.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    RackCabinetModelName = cmodelvm.Name;
+                }
+                catch
+                {
+                    RackCabinetModelName = "Nieaktywny model szafy Rack";
+                }
             }
 
             if (item.Manufacturer != null)
             {
-                ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
-                    URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                ManufacturerName = manufacturerVM.Name;
+                try
+                {
+                    ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                        URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    ManufacturerName = manufacturerVM.Name;
+                }
+                catch
+                {
+                    ManufacturerName = "Nieaktywny producent";
+                }
             }
+
 
         }
         private void getStatus(StatusVM vm)

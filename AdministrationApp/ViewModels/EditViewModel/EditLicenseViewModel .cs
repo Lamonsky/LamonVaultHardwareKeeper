@@ -106,39 +106,84 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             if(item.LocationId != null)
             {
-                LocationVM lvm = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-                LokacjaName = lvm.Name;
+                try
+                {
+                    LocationVM lvm = await RequestHelper.SendRequestAsync<object, LocationVM>(URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+                    LokacjaName = lvm.Name;
+                }
+                catch
+                {
+                    LokacjaName = "Nieaktywna lokalizacja";
+                }
+                
 
             }
             if (item.Users != null)
             {
-                UserVM ivm = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-                UserName = ivm.FirstName + " " + ivm.LastName + " " + ivm.InternalNumber + " " + ivm.Position;
+                try
+                {
+                    UserVM ivm = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", item.Users.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+                    UserName = ivm.FirstName + " " + ivm.LastName + " " + ivm.InternalNumber + " " + ivm.Position;
+                }
+                catch
+                {
+                    UserName = "Nieaktywny użytkownik";
+                }
+                
 
             }
             if (item.LicenseType != null)
             {
-                LicenseTypeVM ltvm = await RequestHelper.SendRequestAsync<object, LicenseTypeVM>(URLs.LICENSETYPE_ID.Replace("{id}", item.LicenseType.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-                LicenseTypeName = ltvm.Name;
+                try
+                {
+                    LicenseTypeVM ltvm = await RequestHelper.SendRequestAsync<object, LicenseTypeVM>(URLs.LICENSETYPE_ID.Replace("{id}", item.LicenseType.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+                    LicenseTypeName = ltvm.Name;
+                }
+                catch
+                {
+                    LicenseTypeName = "Nieaktywny typ licencji";
+                }
+                
 
             }
             if (item.Software != null)
             {
-                SoftwaresVM svm = await RequestHelper.SendRequestAsync<object, SoftwaresVM>(URLs.SOFTWARE_ID.Replace("{id}", item.Software.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-                SoftwareName = svm.Name;
+                try
+                {
+                    SoftwaresVM svm = await RequestHelper.SendRequestAsync<object, SoftwaresVM>(URLs.SOFTWARE_ID.Replace("{id}", item.Software.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+                    SoftwareName = svm.Name;
+                }
+                catch
+                {
+                    SoftwareName = "Nieaktywne oprogramowanie";
+                }
 
             }
             if (item.Publisher != null)
             {
-                ManufacturerVM mvm = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Publisher.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-                PublisherName = mvm.Name;
+                try
+                {
+                    ManufacturerVM mvm = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(URLs.MANUFACTURER_ID.Replace("{id}", item.Publisher.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+                    PublisherName = mvm.Name;
+                }
+                catch
+                {
+                    PublisherName = "Niekatywny producent";
+                }
+                
 
             }
             if (item.StatusId != null)
             {
-                StatusVM stvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
-                StatusName = stvm.Name;
-
+                try
+                {
+                    StatusVM stvm = await RequestHelper.SendRequestAsync<object, StatusVM>(URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+                    StatusName = stvm.Name;
+                }
+                catch
+                {
+                    StatusName = "Nieaktywny status";
+                }                
             }
 
         }

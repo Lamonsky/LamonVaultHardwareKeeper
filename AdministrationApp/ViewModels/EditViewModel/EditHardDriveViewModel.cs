@@ -83,46 +83,78 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             if (item.Server != null)
             {
-                ServerVM svm = await RequestHelper.SendRequestAsync<object, ServerVM>(
+                try
+                {
+                    ServerVM svm = await RequestHelper.SendRequestAsync<object, ServerVM>(
                     URLs.SERVER_ID.Replace("{id}", item.Server.ToString()),
                     HttpMethod.Get,
                     null,
                     GlobalData.AccessToken
                 );
-                ServerName = svm.Name;
+                    ServerName = svm.Name;
+                }
+                catch
+                {
+                    ServerName = "Nieaktywny serwer";
+                }
+                
             }
 
             if (item.Manufacturer != null)
             {
-                ManufacturerVM Mvm = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                try
+                {
+                    ManufacturerVM Mvm = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
                     URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
                     HttpMethod.Get,
                     null,
                     GlobalData.AccessToken
                 );
-                ManufacturerName = Mvm.Name;
+                    ManufacturerName = Mvm.Name;
+                }
+                catch
+                {
+                    ManufacturerName = "Nieaktywny producent";
+                }
+                
             }
 
             if (item.Status != null)
             {
-                StatusVM sTvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
-                    URLs.STATUS_ID.Replace("{id}", item.Status.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                StatusName = sTvm.Name;
+                try
+                {
+                    StatusVM sTvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                                        URLs.STATUS_ID.Replace("{id}", item.Status.ToString()),
+                                        HttpMethod.Get,
+                                        null,
+                                        GlobalData.AccessToken
+                                    );
+                    StatusName = sTvm.Name;
+                }
+                catch
+                {
+                    StatusName = "Nieaktywny status";
+                }
+                
             }
 
             if (item.Model != null)
             {
-                HardDriveModelVM hdmvm = await RequestHelper.SendRequestAsync<object, HardDriveModelVM>(
-                    URLs.HARDDRIVEMODEL_ID.Replace("{id}", item.Model.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                HardDriveModelName = hdmvm.Name;
+                try
+                {
+                    HardDriveModelVM hdmvm = await RequestHelper.SendRequestAsync<object, HardDriveModelVM>(
+                                        URLs.HARDDRIVEMODEL_ID.Replace("{id}", item.Model.ToString()),
+                                        HttpMethod.Get,
+                                        null,
+                                        GlobalData.AccessToken
+                                    );
+                    HardDriveModelName = hdmvm.Name;
+                }
+                catch
+                {
+                    HardDriveModelName = "Nieaktywny model";
+                }
+                
             }
 
         }

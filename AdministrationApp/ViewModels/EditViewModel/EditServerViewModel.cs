@@ -104,69 +104,112 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             if (item.OperatingSystem != null)
             {
-                OperatingSystemVM osvm = await RequestHelper.SendRequestAsync<object, OperatingSystemVM>(
-                    URLs.OPERATINGSYSTEM_ID.Replace("{id}", item.OperatingSystem.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                OperatingSystemName = osvm.Name;
+                try
+                {
+                    OperatingSystemVM osvm = await RequestHelper.SendRequestAsync<object, OperatingSystemVM>(
+                        URLs.OPERATINGSYSTEM_ID.Replace("{id}", item.OperatingSystem.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    OperatingSystemName = osvm.Name;
+                }
+                catch
+                {
+                    OperatingSystemName = "Nieaktywny system operacyjny";
+                }
             }
 
             if (item.Manufacturer != null)
             {
-                ManufacturerVM manufacturer = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
-                    URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                ManufacturerName = manufacturer.Name;
+                try
+                {
+                    ManufacturerVM manufacturer = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                        URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    ManufacturerName = manufacturer.Name;
+                }
+                catch
+                {
+                    ManufacturerName = "Nieaktywny producent";
+                }
             }
 
             if (item.StatusId != null)
             {
-                StatusVM statusVM = await RequestHelper.SendRequestAsync<object, StatusVM>(
-                    URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                StatusName = statusVM.Name;
+                try
+                {
+                    StatusVM statusVM = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                        URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    StatusName = statusVM.Name;
+                }
+                catch
+                {
+                    StatusName = "Nieaktywny status";
+                }
             }
 
             if (item.Model != null)
             {
-                ComputerModelVM computerModelVM = await RequestHelper.SendRequestAsync<object, ComputerModelVM>(
-                    URLs.COMPUTERMODEL_ID.Replace("{id}", item.Model.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                ServerModelName = computerModelVM.Name;
+                try
+                {
+                    ComputerModelVM computerModelVM = await RequestHelper.SendRequestAsync<object, ComputerModelVM>(
+                        URLs.COMPUTERMODEL_ID.Replace("{id}", item.Model.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    ServerModelName = computerModelVM.Name;
+                }
+                catch
+                {
+                    ServerModelName = "Nieaktywny model serwera";
+                }
             }
 
             if (item.LocationId != null)
             {
-                LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
-                    URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                LocationName = locationVM.Name;
+                try
+                {
+                    LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
+                        URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    LocationName = locationVM.Name;
+                }
+                catch
+                {
+                    LocationName = "Nieaktywna lokalizacja";
+                }
             }
 
             if (item.Users != null)
             {
-                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
-                    URLs.USER_ID.Replace("{id}", item.Users.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.Email;
+                try
+                {
+                    UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                        URLs.USER_ID.Replace("{id}", item.Users.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.Email;
+                }
+                catch
+                {
+                    UserName = "Nieaktywny użytkownik";
+                }
             }
+
 
         }
         public override async void Save()

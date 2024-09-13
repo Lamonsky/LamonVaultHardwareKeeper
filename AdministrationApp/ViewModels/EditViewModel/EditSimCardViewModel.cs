@@ -79,36 +79,58 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             if (item.StatusId != null)
             {
-                StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
-                    URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                StatusName = statusvm.Name;
+                try
+                {
+                    StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                        URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    StatusName = statusvm.Name;
+                }
+                catch
+                {
+                    StatusName = "Nieaktywny status";
+                }
             }
 
             if (item.Users != null)
             {
-                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
-                    URLs.USER_ID.Replace("{id}", item.Users.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+                try
+                {
+                    UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                        URLs.USER_ID.Replace("{id}", item.Users.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+                }
+                catch
+                {
+                    UserName = "Nieaktywny użytkownik";
+                }
             }
 
             if (item.Component != null)
             {
-                SimComponentVM comvm = await RequestHelper.SendRequestAsync<object, SimComponentVM>(
-                    URLs.SIMCOMPONENT_ID.Replace("{id}", item.Component.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                ComponentName = comvm.Name;
+                try
+                {
+                    SimComponentVM comvm = await RequestHelper.SendRequestAsync<object, SimComponentVM>(
+                        URLs.SIMCOMPONENT_ID.Replace("{id}", item.Component.ToString()),
+                        HttpMethod.Get,
+                        null,
+                        GlobalData.AccessToken
+                    );
+                    ComponentName = comvm.Name;
+                }
+                catch
+                {
+                    ComponentName = "Nieaktywny komponent";
+                }
             }
+
 
         }
         private void getChosenUser(UserVM vM)

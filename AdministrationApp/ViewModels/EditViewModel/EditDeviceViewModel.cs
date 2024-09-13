@@ -100,57 +100,97 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             if (item.StatusId != null)
             {
-                StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
+                try
+                {
+                    StatusVM statusvm = await RequestHelper.SendRequestAsync<object, StatusVM>(
                     URLs.STATUS_ID.Replace("{id}", item.StatusId.ToString()),
                     HttpMethod.Get,
                     null,
                     GlobalData.AccessToken
                 );
-                StatusName = statusvm.Name;
+                    StatusName = statusvm.Name;
+                }
+                catch
+                {
+                    StatusName = "Nieaktywny status";
+                }
+                
             }
 
             if (item.Users != null)
             {
-                UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
+                try
+                {
+                    UserVM userVM = await RequestHelper.SendRequestAsync<object, UserVM>(
                     URLs.USER_ID.Replace("{id}", item.Users.ToString()),
                     HttpMethod.Get,
                     null,
                     GlobalData.AccessToken
                 );
-                UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+                    UserName = userVM.FirstName + " " + userVM.LastName + " " + userVM.InternalNumber + " " + userVM.Position;
+                }
+                catch
+                {
+                    UserName = "Nieaktywny użytkownik";
+                }
+                
             }
 
             if (item.DeviceType != null)
             {
-                DeviceTypeVM typevm = await RequestHelper.SendRequestAsync<object, DeviceTypeVM>(
+                try
+                {
+                    DeviceTypeVM typevm = await RequestHelper.SendRequestAsync<object, DeviceTypeVM>(
                     URLs.DEVICETYPE_ID.Replace("{id}", item.DeviceType.ToString()),
                     HttpMethod.Get,
                     null,
                     GlobalData.AccessToken
                 );
-                DeviceTypeName = typevm.Name;
+                    DeviceTypeName = typevm.Name;
+                }
+                catch
+                {
+                    DeviceTypeName = "Nieaktywny typ urządzenia";
+                }
+                
             }
 
             if (item.Model != null)
             {
-                DeviceModelVM modelvm = await RequestHelper.SendRequestAsync<object, DeviceModelVM>(
-                    URLs.DEVICEMODEL_ID.Replace("{id}", item.Model.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                DeviceModelName = modelvm.Name;
+                try
+                {
+                    DeviceModelVM modelvm = await RequestHelper.SendRequestAsync<object, DeviceModelVM>(
+                                        URLs.DEVICEMODEL_ID.Replace("{id}", item.Model.ToString()),
+                                        HttpMethod.Get,
+                                        null,
+                                        GlobalData.AccessToken
+                                    );
+                    DeviceModelName = modelvm.Name;
+                }
+                catch
+                {
+                    DeviceModelName = "Nieaktywny model urządzenia";
+                }
+                
             }
 
             if (item.Manufacturer != null)
             {
-                ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
+                try
+                {
+                    ManufacturerVM manufacturerVM = await RequestHelper.SendRequestAsync<object, ManufacturerVM>(
                     URLs.MANUFACTURER_ID.Replace("{id}", item.Manufacturer.ToString()),
                     HttpMethod.Get,
                     null,
                     GlobalData.AccessToken
                 );
-                ManufacturerName = manufacturerVM.Name;
+                    ManufacturerName = manufacturerVM.Name;
+                }
+                catch
+                {
+                    ManufacturerName = "Nieaktywny producent";
+                }
+                
             }
 
         }

@@ -70,24 +70,40 @@ namespace AdministrationApp.ViewModels.EditViewModel
         {
             if (item.LocationId != null)
             {
-                LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
+                try
+                {
+                    LocationVM locationVM = await RequestHelper.SendRequestAsync<object, LocationVM>(
                     URLs.LOCATION_ID.Replace("{id}", item.LocationId.ToString()),
                     HttpMethod.Get,
                     null,
                     GlobalData.AccessToken
                 );
-                LokacjaName = locationVM.Name;
+                    LokacjaName = locationVM.Name;
+                }
+                catch
+                {
+                    LokacjaName = "Nieaktywna lokalizacja";
+                }
+                
             }
 
             if (item.Position != null)
             {
-                PositionVM positionVM = await RequestHelper.SendRequestAsync<object, PositionVM>(
-                    URLs.POSITION_ID.Replace("{id}", item.Position.ToString()),
-                    HttpMethod.Get,
-                    null,
-                    GlobalData.AccessToken
-                );
-                PositionName = positionVM.Name;
+                try
+                {
+                    PositionVM positionVM = await RequestHelper.SendRequestAsync<object, PositionVM>(
+                                        URLs.POSITION_ID.Replace("{id}", item.Position.ToString()),
+                                        HttpMethod.Get,
+                                        null,
+                                        GlobalData.AccessToken
+                                    );
+                    PositionName = positionVM.Name;
+                }
+                catch
+                {
+                    PositionName = "Nieaktywne stanowisko";
+                }
+                
             }
 
         }
