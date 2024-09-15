@@ -15,8 +15,14 @@ namespace Data
         public const string LOG_ID = "/log/{id}";
 
         public const string IDENTITY_CREATE_ROLE = "/identity_create_role";
-        public const string IDENTITY_ADD_USER_TO_ROLE = "/identity_add_user_to_role";
+        public const string IDENTITY_CHECK_USER_ROLE = "/identity_check_user_role";
+        public const string IDENTITY_ADD_USER_TO_ROLE = "/identity_add_user_to_role/{email}";
+        public const string IDENTITY_ADD_USER_TO_ADMIN_ROLE = "/identity_add_user_to_admin_role/{email}";
+        public const string IDENTITY_REMOVE_USER_FROM_ADMIN_ROLE = "/identity_remove_user_from_admin_role/{email}";
         public const string IDENTITY_CHECK_USER_ADMIN_ROLE = "/identity_check_user_admin_role/{email}";
+        public const string IDENTITY_CHECK_USER_SUPERADMIN_ROLE = "/identity_check_user_superadmin_role/{email}";
+        public const string USER_DEVICES = "/user_devices/{id}";
+        public const string USER_DEVICES_ALL = "/user_devices";
 
         public const string COMPUTERS = "/computers";
         public const string COMPUTERS_ID = "/computers/{id}";
@@ -198,6 +204,7 @@ namespace Data
 
         public const string TICKET = "/ticket";
         public const string CLOSEDTICKET = "/ticket/closed";
+        public const string NEWTICKETS = "/ticket/new";
         public const string TICKET_ID = "/ticket/{id}";
         public const string TICKET_OWNER_ID = "/ticket/owner/{id}";
         public const string TICKET_USER_ID = "/ticket/user/{id}";
@@ -205,6 +212,7 @@ namespace Data
 
         public const string TECHNICIAN = "/technician";
         public const string TECHNICIAN_ID = "/technician/{id}";
+        public const string TECHNICIAN_USER_ID = "/technician/user/{id}";
         public const string TECHNICIAN_CEVM_ID = "/technician/cevm/{id}";
 
 

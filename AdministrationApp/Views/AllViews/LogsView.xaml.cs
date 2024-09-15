@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace AdministrationApp.Views.AllViews
 {
-    public partial class LogsView : WszystkieViewBase
+    public partial class LogsView : LogiViewBase
     {
         public LogsView()
         {

@@ -67,6 +67,12 @@
     <Compile Update="Views\AllWindows\AllDictionaryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AllWindows\AllUserDevicesWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AllWindows\UsersRolesWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     <Page Update="Views\AllWindows\AllSimCardWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AllWindows\AllUserDevicesWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AllWindows\AllUsersWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -205,6 +214,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AllWindows\AllDictionaryWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AllWindows\UsersRolesWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\LoginWindow.xaml">

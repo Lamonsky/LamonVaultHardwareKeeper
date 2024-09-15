@@ -16,6 +16,8 @@ namespace Data.Computers.CreateEditVMs
 
         [JsonPropertyName("name")]
         public string? Name { get; set; }
+        [JsonPropertyName("device")]
+        public string? Device { get; set; }
 
         [JsonPropertyName("type")]
         public int? Type { get; set; }

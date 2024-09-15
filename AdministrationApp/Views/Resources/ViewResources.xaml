@@ -58,6 +58,9 @@
     <DataTemplate DataType="{x:Type vma:AllClosedTicketsViewModel}">
         <vwa:AllTicketsView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vma:AllNewTicketsViewModel}">
+        <vwa:AllTicketsView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type vma:AllServersViewModel}">
         <vwa:AllServersView/>
     </DataTemplate>
@@ -174,7 +177,6 @@
                 <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}"/>
             </Trigger>
         </Style.Triggers>
-        <Setter Property="Margin" Value="2,2,2,2"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
@@ -205,6 +207,7 @@
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle" BasedOn="{StaticResource MaterialDesignBody2TextBlock}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>

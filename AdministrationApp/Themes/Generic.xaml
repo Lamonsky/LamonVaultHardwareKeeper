@@ -64,10 +64,54 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
-    
-    
+
+    <Style TargetType="{x:Type local:LogiViewBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:LogiViewBase}">
+                    <Grid Margin="0,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Margin="0,2,0,2">
+                            <Grid IsEnabled="{Binding Path=IsLoading}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" Command="{Binding GenerateExcelCommand}" HorizontalAlignment="Right" Margin="5,0,5,0">
+                                    <materialDesign:PackIcon Kind="MicrosoftExcel"/>
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Filtrowanie: " Margin="5,0,5,0" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1" ItemsSource="{Binding FilterComboBoxListItems}" SelectedValue="{Binding Path=FilterField,Mode=TwoWay}" Margin="5,0,5,0"/>
+                                <TextBox Grid.Column="2" Text="{Binding FindTextBox}" Margin="5,0,5,0"/>
+                                <Button Grid.Column="3" Command="{Binding FilterCommand}" Margin="5,0,5,0">
+                                    <materialDesign:PackIcon Kind="Filter" />
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+                        <ContentPresenter Grid.Row="2" Margin="5,5,5,5"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <Style TargetType="{x:Type local:SummaryViewBase}">
         <Setter Property="Template">
             <Setter.Value>
@@ -171,7 +215,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:NewDictionaryViewBase}" >
-                    <Grid>
+                    <Grid Background="{StaticResource MainColorBrush}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>

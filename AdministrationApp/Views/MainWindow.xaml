@@ -36,6 +36,7 @@
                     <MenuItem Header="_System">
                         <MenuItem Header="Logi" Command="{Binding ShowLogsCommand}"/>
                         <MenuItem Header="Interfejs klienta" Command="{Binding ShowPageContentCommand}"/>
+                        <MenuItem Header="Zarządzanie rolami" Command="{Binding ShowUsersRolesCommand}"/>
                     </MenuItem>
                 </Menu>
                 <TextBlock Text="{Binding EMail}" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,10,0"/>
@@ -77,6 +78,7 @@
                     <Expander Header="Zgłoszenia" Grid.Row="2" IsExpanded="True" Margin="5,5,5,5" Background="{StaticResource MainColorBrush}">
                         <StackPanel>
                             <Button Content="Wszystkie zgłoszenia" Command="{Binding AllTicketsCommand}"/>
+                            <Button Content="Nowe zgłoszenia" Command="{Binding NewTicketsCommand}"/>
                             <Button Content="Moje zgłoszenia" Command="{Binding MyTicketsCommand}"/>
                             <Button Content="Zamknięte zgłoszenia" Command="{Binding ClosedTicketsCommand}"/>
                         </StackPanel>

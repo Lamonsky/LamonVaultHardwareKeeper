@@ -23,6 +23,8 @@ namespace WebInterface.Controllers
             List<TicketStatusVM> ticketStatusVMs = await RequestHelper.SendRequestAsync<object, List<TicketStatusVM>>(URLs.TICKETSTATUS, HttpMethod.Get, null, GlobalData.AccessToken);
             List<TicketTypeVM> ticketTypeVMs = await RequestHelper.SendRequestAsync<object, List<TicketTypeVM>>(URLs.TICKETTYPE, HttpMethod.Get, null, GlobalData.AccessToken);
             List<LocationVM> locationVMs = await RequestHelper.SendRequestAsync<object, List<LocationVM>>(URLs.LOCATION, HttpMethod.Get, null, GlobalData.AccessToken);
+            List<UserDevicesModel> devices = await RequestHelper.SendRequestAsync<object, List<UserDevicesModel>>(URLs.USER_DEVICES.Replace("{id}", GlobalData.Id.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            
             TicketCreateEditVM ticketCreateEditVM = new TicketCreateEditVM();
             TicketCreateNewViewModel model = new TicketCreateNewViewModel();
             model.TicketCategories = ticketCategoryVMs;
@@ -30,6 +32,11 @@ namespace WebInterface.Controllers
             model.TicketTypes = ticketTypeVMs;
             model.Ticket = ticketCreateEditVM;
             model.Location = locationVMs;
+            model.Devices = devices;
+
+
+
+
             return View(model);
         }
         [HttpPost]

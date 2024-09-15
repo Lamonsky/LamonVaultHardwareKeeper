@@ -18,7 +18,6 @@ namespace DatabaseRestApi.Controllers
         {
             DatabaseContext database = new();
             List<TicketVM> ticketVM = await database.Tickets
-                .Where(item => item.Status.CountToClosed == false)
                 .Where(item => item.StatusId != 99)
                 .OrderBy(item => item.StatusId)
                 .Select(item => new TicketVM
@@ -29,6 +28,36 @@ namespace DatabaseRestApi.Controllers
                     Category = item.CategoryNavigation.Name,
                     Status = item.Status.Name,
                     Location = item.Location.Name,
+                    Device = item.Device,
+                    User = item.UserNavigation.FirstName + " " + item.UserNavigation.LastName,
+                    Owner = item.OwnerNavigation.Users.FirstName + " " + item.OwnerNavigation.Users.LastName,
+                    Email = item.UserNavigation.Email,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).ToListAsync();
+            return Json(ticketVM);
+        }
+        [Authorize]
+        [Route(URLs.NEWTICKETS)]
+        [HttpGet]
+        public async Task<IActionResult> NewTickets()
+        {
+            DatabaseContext database = new();
+            List<TicketVM> ticketVM = await database.Tickets
+                .Where(item => item.Owner == null || item.Status.CountToNew == true)
+                .Where(item => item.StatusId != 99)
+                .OrderBy(item => item.StatusId)
+                .Select(item => new TicketVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Type = item.TypeNavigation.Name,
+                    Category = item.CategoryNavigation.Name,
+                    Status = item.Status.Name,
+                    Location = item.Location.Name,
+                    Device = item.Device,
                     User = item.UserNavigation.FirstName + " " + item.UserNavigation.LastName,
                     Owner = item.OwnerNavigation.Users.FirstName + " " + item.OwnerNavigation.Users.LastName,
                     Email = item.UserNavigation.Email,
@@ -57,6 +86,7 @@ namespace DatabaseRestApi.Controllers
                     Category = item.CategoryNavigation.Name,
                     Status = item.Status.Name,
                     Location = item.Location.Name,
+                    Device = item.Device,
                     User = item.UserNavigation.FirstName + " " + item.UserNavigation.LastName,
                     Owner = item.OwnerNavigation.Users.FirstName + " " + item.OwnerNavigation.Users.LastName,
                     Email = item.UserNavigation.Email,
@@ -83,6 +113,7 @@ namespace DatabaseRestApi.Controllers
                     Category = item.CategoryNavigation.Name,
                     Status = item.Status.Name,
                     Location = item.Location.Name,
+                    Device = item.Device,
                     User = item.UserNavigation.FirstName + " " + item.UserNavigation.LastName,
                     Owner = item.OwnerNavigation.Users.FirstName + " " + item.OwnerNavigation.Users.LastName,
                     CreatedAt = item.CreatedAt,
@@ -108,6 +139,7 @@ namespace DatabaseRestApi.Controllers
                     Category = item.CategoryNavigation.Name,
                     Status = item.Status.Name,
                     Location = item.Location.Name,
+                    Device = item.Device,
                     User = item.UserNavigation.FirstName + " " + item.UserNavigation.LastName,
                     Owner = item.OwnerNavigation.Users.FirstName + " " + item.OwnerNavigation.Users.LastName,
                     Email = item.UserNavigation.Email,
@@ -134,6 +166,7 @@ namespace DatabaseRestApi.Controllers
                     Category = item.CategoryNavigation.Name,
                     Status = item.Status.Name,
                     Location = item.Location.Name,
+                    Device = item.Device,
                     User = item.UserNavigation.FirstName + " " + item.UserNavigation.LastName,
                     Owner = item.OwnerNavigation.Users.FirstName + " " + item.OwnerNavigation.Users.LastName,
                     Email = item.UserNavigation.Email,
@@ -157,6 +190,7 @@ namespace DatabaseRestApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Type = item.Type,
+                    Device = item.Device,
                     Category = item.Category,
                     StatusId = item.StatusId,
                     LocationId = item.LocationId,
@@ -178,6 +212,7 @@ namespace DatabaseRestApi.Controllers
                 Type = ticketCreateEditVM.Type,
                 Category = ticketCreateEditVM.Category,
                 StatusId = ticketCreateEditVM.StatusId,
+                Device = ticketCreateEditVM.Device,
                 LocationId = ticketCreateEditVM.LocationId,
                 User = ticketCreateEditVM.User,
                 Owner = ticketCreateEditVM.Owner,
@@ -203,6 +238,7 @@ namespace DatabaseRestApi.Controllers
             ticket.Name = ticketCreateEditVM.Name;
             ticket.Type = ticketCreateEditVM.Type;
             ticket.Category = ticketCreateEditVM.Category;
+            ticket.Device = ticketCreateEditVM.Device;
             ticket.StatusId = ticketCreateEditVM.StatusId;
             ticket.LocationId = ticketCreateEditVM.LocationId;
             ticket.User = ticketCreateEditVM.User;

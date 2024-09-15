@@ -52,6 +52,27 @@ namespace DatabaseRestApi.Controllers
                 }).FirstAsync();
             return Json(technicianVMs);
         }
+        [Authorize]
+        [Route(URLs.TECHNICIAN_USER_ID)]
+        [HttpGet]
+        public async Task<IActionResult> GetUser(int id)
+        {
+            DatabaseContext database = new();
+            TechnicianVM technicianVMs = await database.Technicians
+                .Where(item => item.Status != 99)
+                .Where(item => item.UsersId == id)
+                .Select(item => new TechnicianVM
+                {
+                    Id = item.Id,
+                    Users = item.Users.FirstName + " " + item.Users.LastName + " " + item.Users.InternalNumber,
+                    Status = item.StatusNavigation.Name,
+                    CreatedAt = item.CreatedAt,
+                    CreatedBy = item.CreatedByNavigation.FirstName + " " + item.CreatedByNavigation.LastName + " " + item.CreatedByNavigation.Email,
+                    ModifiedAt = item.ModifiedAt,
+                    ModifiedBy = item.ModifiedByNavigation.FirstName + " " + item.ModifiedByNavigation.LastName + " " + item.ModifiedByNavigation.Email
+                }).FirstAsync();
+            return Json(technicianVMs);
+        }
         [Authorize(Roles = "Admin")]
         [Route(URLs.TECHNICIAN_CEVM_ID)]
         [HttpGet]

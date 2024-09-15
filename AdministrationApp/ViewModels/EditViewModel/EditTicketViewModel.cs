@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AdministrationApp.ViewModels.NewViewModel;
+using Data.Helpers;
 
 namespace AdministrationApp.ViewModels.EditViewModel
 {
@@ -23,7 +24,19 @@ namespace AdministrationApp.ViewModels.EditViewModel
         private BaseCommand _ChooseTypeCommand;
         private BaseCommand _ChooseCategoryCommand;
         private BaseCommand _ChooseOwnerCommand;
+        private BaseCommand _ChooseUserDeviceCommand;
 
+        public ICommand ChooseUserDeviceCommand
+        {
+            get
+            {
+                if (_ChooseUserDeviceCommand == null)
+                {
+                    _ChooseUserDeviceCommand = new BaseCommand(() => Messenger.Default.Send("ChooseUserDevice"));
+                }
+                return _ChooseUserDeviceCommand;
+            }
+        }
         public ICommand ChooseTypeCommand
         {
             get
@@ -102,6 +115,8 @@ namespace AdministrationApp.ViewModels.EditViewModel
             Messenger.Default.Register<TicketCategoryVM>(this, getTicketCategory);
             Messenger.Default.Register<TicketTypeVM>(this, getTicketType);
             Messenger.Default.Register<TechnicianVM>(this, getTechnichian);
+            Messenger.Default.Register<UserDevicesModel>(this, getUserDevices);
+
 
         }
         public async void setForeignKeys()
@@ -214,6 +229,10 @@ namespace AdministrationApp.ViewModels.EditViewModel
             item.StatusId = vm.Id;
             StatusName = vm.Name;
         }
+        private void getUserDevices(UserDevicesModel vm)
+        {
+            item.Device = vm.Name;
+        }
         private void getChosenUser(UserVM vM)
         {
             item.User = vM.Id;
@@ -261,7 +280,21 @@ namespace AdministrationApp.ViewModels.EditViewModel
                 }
             }
         }
-
+        public string? Device
+        {
+            get
+            {
+                return item.Device;
+            }
+            set
+            {
+                if (value != Device)
+                {
+                    item.Device = value;
+                    OnPropertyChanged(() => Device);
+                }
+            }
+        }
         public string? OwnerName
         {
             get

@@ -1,12 +1,14 @@
 ﻿using Data;
 using Data.Helpers;
 using DatabaseRestApi.Models.Contexts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatabaseRestApi.Helpers
 {
     public class MainWindowHelper : Controller
     {
+        [Authorize]
         [Route(URLs.MAINWINDOW)]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -30,6 +32,7 @@ namespace DatabaseRestApi.Helpers
             mainWindowModel.LocationCount = database.Locations.Where(item => item.Status != 99).Count();
             return Json(mainWindowModel);
         }
+        [Authorize]
         [Route(URLs.MAINWINDOW_ID)]
         [HttpGet]
         public async Task<IActionResult> Index(int id)

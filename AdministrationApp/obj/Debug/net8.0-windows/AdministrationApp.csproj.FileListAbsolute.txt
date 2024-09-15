@@ -367,3 +367,7 @@ C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\Administration
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\Windows\NewTicketStatusWindow.g.cs
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllTicketStatusWindow.baml
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\NewViews\Windows\NewTicketStatusWindow.baml
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllUserDevicesWindow.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\AllUserDevicesWindow.baml
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\UsersRolesWindow.g.cs
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\AdministrationApp\obj\Debug\net8.0-windows\Views\AllWindows\UsersRolesWindow.baml

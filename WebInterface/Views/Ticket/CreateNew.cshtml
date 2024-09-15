@@ -55,6 +55,15 @@
                         <option value="">-- Wybierz lokalizację --</option>
                     </select>
                     <span asp-validation-for="Ticket.LocationId" class="text-danger"></span>
+                </div> 
+                <div class="form-group">
+                    <label asp-for="Ticket.Device" class="control-label  ">
+                        @await Component.InvokeAsync("PageContentViewComponent", new { type = "CreateTicketDeviceHeader" })
+                    </label>
+                    <select asp-for="Ticket.Device" class="form-control " asp-items="@(new SelectList(Model.Devices, "Name", "Name"))">
+                        <option value="">-- Wybierz urządzenie --</option>
+                    </select>
+                    <span asp-validation-for="Ticket.Device" class="text-danger"></span>
                 </div>         
 
                 <!-- Name Field -->

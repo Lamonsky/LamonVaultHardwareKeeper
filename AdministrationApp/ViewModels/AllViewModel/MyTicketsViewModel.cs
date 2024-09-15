@@ -120,7 +120,8 @@ namespace AdministrationApp.ViewModels.AllViewModel
 
         public override async void load()
         {
-            List = await RequestHelper.SendRequestAsync<object, List<TicketVM>>(URLs.TICKET_OWNER_ID.Replace("{id}", GlobalData.UserId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            TechnicianVM technician = await RequestHelper.SendRequestAsync<object, TechnicianVM>(URLs.TECHNICIAN_USER_ID.Replace("{id}", GlobalData.UserId.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            List = await RequestHelper.SendRequestAsync<object, List<TicketVM>>(URLs.TICKET_OWNER_ID.Replace("{id}", technician.Id.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
         }
         public override void Edit()
         {

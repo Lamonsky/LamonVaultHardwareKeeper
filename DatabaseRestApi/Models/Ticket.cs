@@ -42,6 +42,10 @@ public partial class Ticket
 
     public int? User { get; set; }
 
+    [StringLength(255)]
+    [Unicode(false)]
+    public string? Device { get; set; }
+
     [ForeignKey("Category")]
     [InverseProperty("Tickets")]
     public virtual TicketCategory? CategoryNavigation { get; set; }

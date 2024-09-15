@@ -262,6 +262,7 @@ namespace AdministrationApp.ViewModels
                 { "StatusAdd", CreateStatusWindow },
                 { "ChooseTicketOwner", ShowTechnicianWindow },
                 { "ChooseTicketType", ShowTicketTypeWindow },
+                { "ChooseUserDevice", ShowUserDevicesWindow},
                 { "ChooseTicketCategory", ShowTicketCategoryWindow },
                 { "ChooseHardDriveModel", ShowHardDriveModelWindow },
                 { "TechnicianAdd", CreateTechnicianWindow },
@@ -345,6 +346,18 @@ namespace AdministrationApp.ViewModels
                     _ShowSummaryCommand = new BaseCommand(() => ShowSummary());
                 }
                 return _ShowSummaryCommand;
+            }
+        }
+        private BaseCommand _ShowUsersRolesCommand;
+        public ICommand ShowUsersRolesCommand
+        {
+            get
+            {
+                if (_ShowUsersRolesCommand == null)
+                {
+                    _ShowUsersRolesCommand = new BaseCommand(() => ShowUsersRolesWindow());
+                }
+                return _ShowUsersRolesCommand;
             }
         }
         private BaseCommand _ShowComputersCommand;
@@ -578,6 +591,19 @@ namespace AdministrationApp.ViewModels
                 return _ClosedTicketsCommand;
             }
         }
+        private BaseCommand _NewTicketsCommand;
+
+        public ICommand NewTicketsCommand
+        {
+            get
+            {
+                if (_NewTicketsCommand == null)
+                {
+                    _NewTicketsCommand = new BaseCommand(() => ShowNewTickets());
+                }
+                return _NewTicketsCommand;
+            }
+        }
         private BaseCommand _MyTicketsCommand;
 
         public ICommand MyTicketsCommand
@@ -724,6 +750,10 @@ namespace AdministrationApp.ViewModels
         {
             ShowAllWorkspace<AllClosedTicketsViewModel>();
         }
+        private void ShowNewTickets()
+        {
+            ShowAllWorkspace<AllNewTicketsViewModel>();
+        }
         private void ShowMyTickets()
         {
             ShowAllWorkspace<MyTicketsViewModel>();
@@ -789,6 +819,10 @@ namespace AdministrationApp.ViewModels
         private void ShowSimComponentTypeWindow()
         {
             CreateWindows<AllDictionaryWindow, AllSimComponentTypeViewModelWindow>(window => new AllSimComponentTypeViewModelWindow(window));
+        }
+        private void ShowUserDevicesWindow()
+        {
+            CreateWindows<AllUserDevicesWindow, AllUserDevicesViewModel>(window => new AllUserDevicesViewModel(window));
         }
         private void ShowSimComponentWindow()
         {
@@ -935,6 +969,27 @@ namespace AdministrationApp.ViewModels
         private void ShowComputerModelWindow()
         {
             CreateWindows<AllDictionaryWindow, AllComputerModelViewModelWindow>(window => new AllComputerModelViewModelWindow(window));
+        }
+        private async void ShowUsersRolesWindow()
+        {
+            try
+            {
+                UserInAdminRole thing = await RequestHelper.SendRequestAsync<object, UserInAdminRole>(URLs.IDENTITY_CHECK_USER_SUPERADMIN_ROLE.Replace("{email}", GlobalData.Email), HttpMethod.Get, null, GlobalData.AccessToken);
+                if (thing.IsInRole)
+                {
+                    CreateWindows<UsersRolesWindow, UsersRolesViewModel>(window => new UsersRolesViewModel(window));
+                }
+                else
+                {
+                    MessageBox.Show("Nie masz uprawnień do zalogowania. Skontaktuj się z administratorem");
+                }
+            }
+            catch
+            {
+
+            }
+
+            
         }
         private void ShowHardDriveModelWindow()
         {

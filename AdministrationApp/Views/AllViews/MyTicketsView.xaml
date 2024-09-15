@@ -13,6 +13,7 @@
             <DataGridTextColumn Header="Treść zgłoszenia" Binding="{Binding Name}"/>
             <DataGridTextColumn Header="Typ zgłoszenia" Binding="{Binding Type}"/>
             <DataGridTextColumn Header="Kategoria" Binding="{Binding Category}"/>
+            <DataGridTextColumn Header="Sprzęt użytkownika" Binding="{Binding Device}"/>
             <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
             <DataGridTextColumn Header="Lokalizacja" Binding="{Binding Location}"/>
             <DataGridTextColumn Header="Użytkownik" Binding="{Binding User}"/>

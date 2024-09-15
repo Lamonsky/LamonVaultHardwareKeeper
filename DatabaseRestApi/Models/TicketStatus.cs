@@ -37,6 +37,8 @@ public partial class TicketStatus
 
     public bool? CountToClosed { get; set; }
 
+    public bool? CountToNew { get; set; }
+
     [ForeignKey("CreatedBy")]
     [InverseProperty("TicketStatusCreatedByNavigations")]
     public virtual User? CreatedByNavigation { get; set; }

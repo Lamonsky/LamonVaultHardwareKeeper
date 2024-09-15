@@ -14,6 +14,7 @@
             <DataGridTextColumn Header="Typ zgłoszenia" Binding="{Binding Type}"/>
             <DataGridTextColumn Header="Kategoria" Binding="{Binding Category}"/>
             <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+            <DataGridTextColumn Header="Sprzęt użytkownika" Binding="{Binding Device}"/>
             <DataGridTextColumn Header="Lokalizacja" Binding="{Binding Location}"/>
             <DataGridTextColumn Header="Użytkownik" Binding="{Binding User}"/>
             <DataGridTextColumn Header="E-Mail" Binding="{Binding Email}"/>

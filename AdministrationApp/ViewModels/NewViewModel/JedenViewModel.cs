@@ -80,8 +80,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         private void SaveAndClose()
         {
             Save();
-            OnRequestClose();
-            RefreshToken();
+            OnRequestClose();            
 
         }
         private async void RefreshToken()

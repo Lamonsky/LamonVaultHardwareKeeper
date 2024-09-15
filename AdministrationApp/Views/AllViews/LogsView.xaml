@@ -1,4 +1,4 @@
-﻿<local:WszystkieViewBase x:Class="AdministrationApp.Views.AllViews.LogsView"
+﻿<local:LogiViewBase x:Class="AdministrationApp.Views.AllViews.LogsView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -23,4 +23,4 @@
             <DataGridTextColumn Header="Data utworzenia" Binding="{Binding CreatedAt}"/>
         </DataGrid.Columns>
     </DataGrid>
-</local:WszystkieViewBase>
+</local:LogiViewBase>

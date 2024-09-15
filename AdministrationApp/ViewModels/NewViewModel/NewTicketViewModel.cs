@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Data.Helpers;
 
 namespace AdministrationApp.ViewModels.NewViewModel
 {
@@ -22,6 +23,19 @@ namespace AdministrationApp.ViewModels.NewViewModel
         private BaseCommand _ChooseTypeCommand;
         private BaseCommand _ChooseCategoryCommand;
         private BaseCommand _ChooseOwnerCommand;
+        private BaseCommand _ChooseUserDeviceCommand;
+
+        public ICommand ChooseUserDeviceCommand
+        {
+            get
+            {
+                if (_ChooseUserDeviceCommand == null)
+                {
+                    _ChooseUserDeviceCommand = new BaseCommand(() => Messenger.Default.Send("ChooseUserDevice"));
+                }
+                return _ChooseUserDeviceCommand;
+            }
+        }
 
         public ICommand ChooseTypeCommand
         {
@@ -99,7 +113,8 @@ namespace AdministrationApp.ViewModels.NewViewModel
             Messenger.Default.Register<TicketCategoryVM>(this, getTicketCategory);
             Messenger.Default.Register<TicketTypeVM>(this, getTicketType);
             Messenger.Default.Register<TechnicianVM>(this, getTechnichian);
-
+            Messenger.Default.Register<UserDevicesModel>(this, getUserDevices);
+             
         }
         public override async void Save()
         {
@@ -115,6 +130,11 @@ namespace AdministrationApp.ViewModels.NewViewModel
         {
             item.StatusId = vm.Id;
             StatusName = vm.Name;
+        }
+        private void getUserDevices(UserDevicesModel vm)
+        {
+            item.Device = vm.Name;
+            DeviceName = vm.Name;
         }
         private void getChosenUser(UserVM vM)
         {
@@ -147,7 +167,23 @@ namespace AdministrationApp.ViewModels.NewViewModel
         private string _CategoryName;
         private string _UserName;
         private string _StatusName;
+        private string _DeviceName;
 
+        public string? DeviceName
+        {
+            get
+            {
+                return _DeviceName;
+            }
+            set
+            {
+                if (value != _DeviceName)
+                {
+                    _DeviceName = value;
+                    OnPropertyChanged(() => DeviceName);
+                }
+            }
+        }
         public string? LocationName
         {
             get
@@ -261,6 +297,20 @@ namespace AdministrationApp.ViewModels.NewViewModel
                 {
                     item.Name = value;
                     OnPropertyChanged(() => Name);
+                }
+            }
+        }
+        public string? Device {
+            get
+            {
+                return item.Device;
+            }
+            set
+            {
+                if(value != Device)
+                {
+                    item.Device = value;
+                    OnPropertyChanged(() => Device);
                 }
             }
         }
