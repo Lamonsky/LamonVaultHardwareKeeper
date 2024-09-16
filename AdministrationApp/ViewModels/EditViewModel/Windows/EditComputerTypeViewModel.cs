@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditComputerTypeViewModel(Window window, ComputerTypeCreateEditVM vm) : base("ComputerType")
+        public EditComputerTypeViewModel(Window window, ComputerTypeCreateEditVM vm) : base("Edycja rodzaju komputera")
         {
             item = vm;
             oldItem = vm;

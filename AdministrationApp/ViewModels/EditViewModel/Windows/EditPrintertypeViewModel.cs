@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditPrintertypeViewModel(Window window, PrinterTypeCreateEditVM vm) : base("Printertype")
+        public EditPrintertypeViewModel(Window window, PrinterTypeCreateEditVM vm) : base("Edycja rodzaju drukarki")
         {
             item = vm;
             oldItem = vm;

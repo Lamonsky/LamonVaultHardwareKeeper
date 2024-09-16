@@ -16,7 +16,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
     {
         private Window _window;
         #region Konstruktor
-        public EditStatusViewModel(Window window, StatusCreateEditVM vm) : base("Status")
+        public EditStatusViewModel(Window window, StatusCreateEditVM vm) : base("Edycja statusu")
         {
             item = vm;
             oldItem = vm;

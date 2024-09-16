@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewLocationViewModel(Window window) : base("Location")
+        public NewLocationViewModel(Window window) : base("Nowa lokalizacja")
         {
             item = new LocationCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

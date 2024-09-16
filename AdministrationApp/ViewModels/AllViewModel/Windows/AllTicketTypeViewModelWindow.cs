@@ -12,7 +12,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     {
         private Window _window;
 
-        public AllTicketTypeViewModelWindow(Window window) : base("TicketType")
+        public AllTicketTypeViewModelWindow(Window window) : base("Typ zg³oszenia")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

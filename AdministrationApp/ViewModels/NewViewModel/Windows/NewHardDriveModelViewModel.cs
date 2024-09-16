@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewHardDriveModelViewModel(Window window) : base("HardDriveModel")
+        public NewHardDriveModelViewModel(Window window) : base("Nowy model dysku twardego")
         {
             item = new HardDriveModelCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

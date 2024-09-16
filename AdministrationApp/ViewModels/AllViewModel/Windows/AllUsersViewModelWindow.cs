@@ -17,11 +17,11 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
     class AllUserViewModelWindow : WszystkieViewModel<UserVM>
     {
         private Window _window;
-        public AllUserViewModelWindow() : base("User")
+        public AllUserViewModelWindow() : base("Użytkownicy")
         {
             Messenger.Default.Register<string>(this, open);
         }
-        public AllUserViewModelWindow(Window window) : base("User")
+        public AllUserViewModelWindow(Window window) : base("Użytkownicy")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

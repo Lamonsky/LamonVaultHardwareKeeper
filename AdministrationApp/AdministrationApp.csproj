@@ -38,6 +38,9 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AllViews\AllTemplatesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AllViews\AllServersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -66,6 +69,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\NewViews\NewLicenseView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewViews\NewTemplateView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\NewViews\NewServerView.xaml.cs">

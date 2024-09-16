@@ -11,7 +11,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllNetworkDeviceTypeViewModelWindow : WszystkieViewModel<NetworkDeviceTypeVM>
     {
         private Window _window;
-        public AllNetworkDeviceTypeViewModelWindow(Window window) : base("NetworkDeviceType")
+        public AllNetworkDeviceTypeViewModelWindow(Window window) : base("Rodzaje urz¹dzeñ sieciowych")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

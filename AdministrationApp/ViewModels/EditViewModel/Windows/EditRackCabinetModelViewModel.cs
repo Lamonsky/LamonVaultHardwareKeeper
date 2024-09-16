@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditRackCabinetModelViewModel(Window window, RackCabinetModelCreateEditVM vm) : base("RackCabinetModel")
+        public EditRackCabinetModelViewModel(Window window, RackCabinetModelCreateEditVM vm) : base("Edycja modelu szafy RACK")
         {
             item = vm;
             oldItem = vm;

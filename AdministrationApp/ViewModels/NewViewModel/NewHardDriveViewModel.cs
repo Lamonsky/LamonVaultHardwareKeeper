@@ -66,7 +66,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         #endregion
         #region Konstruktor
-        public NewHardDriveViewModel() : base("NewHardDrive")
+        public NewHardDriveViewModel() : base("Nowy dysk twardy")
         {
             item = new HardDriveCreateEditVM();
             Messenger.Default.Register<ServerVM>(this, getServer);

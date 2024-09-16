@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewSimComponentTypeViewModel(Window window) : base("SimComponentType")
+        public NewSimComponentTypeViewModel(Window window) : base("Nowy rodzaj komponentu karty SIM")
         {
             item = new SimComponentTypeCreateEditVM();
             _window = window;

@@ -18,6 +18,7 @@ using AdministrationApp.Views.NewViews;
 using AdministrationApp.Views.NewViews.Windows;
 using Data;
 using Data.Computers.CreateEditVMs;
+using Data.Computers.SelectVMs;
 using Data.Helpers;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -100,11 +101,13 @@ namespace AdministrationApp.ViewModels
         }
         private void CreateWindows<W, VM>(Func<W, VM> viewModelFactory)
         where W : Window, new()
-        where VM : class
+        where VM : WorkspaceViewModel
         {
-            W window = new W();
+            W window = new W();            
 
             VM viewModel = viewModelFactory(window);
+
+            window.Title = viewModel.DisplayName;
 
             window.DataContext = viewModel;
 
@@ -177,35 +180,39 @@ namespace AdministrationApp.ViewModels
         {
             var actions = new Dictionary<string, Action>
             {
-                { "HardDriveModelAdd", CreateHardDriveModelWindow },
-                { "HardDrivesAdd", CreateHardDrive },
+                { "Modele dysków twardychAdd", CreateHardDriveModelWindow },
+                { "Dyski twardeAdd", CreateHardDrive },
                 { "ServerAdd", CreateServer },
-                { "LicenseTypeAdd", CreateLicenseTypeWindow },
+                { "Typy licencjiAdd", CreateLicenseTypeWindow },
                 { "ChooseLicenseType", ShowLicenseTypeWindow },
                 { "LicencjeAdd", CreateLicense },
-                { "LocationsAdd", CreateLocationsWindow },
-                { "ManufacturerAdd", CreateManufacturerWindow },
-                { "OperatingSystemAdd", CreateOperatingSystemWindow },
-                { "PositionAdd", CreatePositionWindow },
+                { "LokalizacjeAdd", CreateLocationsWindow },
+                { "ProducenciAdd", CreateManufacturerWindow },
+                { "System operacyjnyAdd", CreateOperatingSystemWindow },
+                { "StanowiskaAdd", CreatePositionWindow },
                 { "PrinterModelAdd", CreatePrinterModelWindow },
                 { "PrinterTypeAdd", CreatePrinterTypeWindow },
-                { "TicketCategoryAdd", CreateTicketCategoryWindow },
-                { "TicketStatuseAdd", CreateTicketStatusWindow },
+                { "Kategorie zgłoszeniaAdd", CreateTicketCategoryWindow },
+                { "Status zgłoszeniaAdd", CreateTicketStatusWindow },
                 { "ChooseTicketStatus", ShowTicketStatusWindow },
                 { "ChooseServer", ShowServersWindow },
-                { "TicketTypeAdd", CreateTicketTypeWindow },
-                { "TicketsAdd", CreateTicket },
+                { "Typ zgłoszeniaAdd", CreateTicketTypeWindow },
+                { "Nowe zgłoszeniaAdd", CreateTicket },
+                { "Moje zgłoszeniaAdd", CreateTicket },
+                { "Wszystkie zgłoszeniaAdd", CreateTicket },
+                { "Zamknięte zgłoszeniaAdd", CreateTicket },
 
                 { "KomputeryAdd", CreateComputer },
-                { "ComputerModelAdd", CreateComputerModelWindow },
-                { "ComputerTypeAdd", CreateComputerTypeWindow },
+                { "Modele komputerówAdd", CreateComputerModelWindow },
+                { "Rodzaje komputerówAdd", CreateComputerTypeWindow },
                 { "PageContentAdd", CreatePageContent },
+                { "SzablonyAdd", CreateTemplate },
                 { "ChooseComputerModel", ShowComputerModelWindow },
                 { "ChooseComputerType", ShowComputerTypeWindow },
 
                 { "MonitoryAdd", CreateMonitor },
-                { "MonitorModelAdd", CreateMonitorModelWindow },
-                { "MonitorTypeAdd", CreateMonitorTypeWindow },
+                { "Modele monitorówAdd", CreateMonitorModelWindow },
+                { "Rodzaje monitorówAdd", CreateMonitorTypeWindow },
                 { "ChooseMonitorModel", ShowMonitorModelWindow },
                 { "ChooseMonitorType", ShowMonitorTypeWindow },
 
@@ -215,14 +222,14 @@ namespace AdministrationApp.ViewModels
                 { "OprogramowanieAdd", CreateSoftware },
 
                 { "Urządzenia siecioweAdd", CreateNetworkDevice },
-                { "NetworkDeviceModelAdd", CreateNetworkDeviceModelWindow },
-                { "NetworkDeviceTypeAdd", CreateNetworkDeviceTypeWindow },
+                { "Modele urządzeń sieciowychAdd", CreateNetworkDeviceModelWindow },
+                { "Rodzaje urządzeń sieciowychAdd", CreateNetworkDeviceTypeWindow },
                 { "ChooseNetworkDeviceModel", ShowNetworkDeviceModelWindow },
                 { "ChooseNetworkDeviceType", ShowNetworkDeviceTypeWindow },
 
                 { "UrządzeniaAdd", CreateDevice },
-                { "DeviceModelAdd", CreateDeviceModelWindow },
-                { "DeviceTypeAdd", CreateDeviceTypeWindow },
+                { "Modele urządzeńAdd", CreateDeviceModelWindow },
+                { "Rodzaje urządzeńAdd", CreateDeviceTypeWindow },
                 { "ChooseDeviceModel", ShowDeviceModelWindow },
                 { "ChooseDeviceType", ShowDeviceTypeWindow },
 
@@ -233,21 +240,21 @@ namespace AdministrationApp.ViewModels
                 { "ChoosePrinterModel", ShowPrinterModelWindow },
 
                 { "TelefonyAdd", CreatePhone },
-                { "PhoneModelAdd", CreatePhoneModelWindow },
-                { "PhoneTypeAdd", CreatePhoneTypeWindow },
+                { "Modele telefonówAdd", CreatePhoneModelWindow },
+                { "Rodzaj telefonuAdd", CreatePhoneTypeWindow },
                 { "ChoosePhoneModel", ShowPhoneModelWindow },
                 { "ChoosePhoneType", ShowPhoneTypeWindow },
 
                 { "Szafy RackAdd", CreateRackCabinet },
-                { "RackCabinetModelAdd", CreateRackCabinetModelWindow },
-                { "RackCabinetTypeAdd", CreateRackCabinetTypeWindow },
+                { "Modele szafy RACKAdd", CreateRackCabinetModelWindow },
+                { "Rodzaje szafy RACKAdd", CreateRackCabinetTypeWindow },
                 { "ChooseRackCabinetModel", ShowRackCabinetModelWindow },
                 { "ChooseRackCabinetType", ShowRackCabinetTypeWindow },
                 { "ChooseRackCabinet", ShowRackCabinetWindow },
 
                 { "Karty SimAdd", CreateSimCard },
-                { "SimComponentTypeAdd", CreateSimComponentTypeWindow },
-                { "SimComponentAdd", CreateSimComponentWindow },
+                { "Rodzaje komponentu SIMAdd", CreateSimComponentTypeWindow },
+                { "Komponent SIMAdd", CreateSimComponentWindow },
                 { "ChooseSimCard", ShowSimCardWindow },
                 { "ChooseSimCard2", ShowSimCardWindow2 },
                 { "ChooseSimComponentType", ShowSimComponentTypeWindow },
@@ -265,52 +272,54 @@ namespace AdministrationApp.ViewModels
                 { "ChooseUserDevice", ShowUserDevicesWindow},
                 { "ChooseTicketCategory", ShowTicketCategoryWindow },
                 { "ChooseHardDriveModel", ShowHardDriveModelWindow },
-                { "TechnicianAdd", CreateTechnicianWindow },
+                { "TechnicyAdd", CreateTechnicianWindow },
                 { "ChooseSoftware", ShowSoftwareWindow }
             };
 
             var startsWithActions = new Dictionary<string, Action<string>>
             {
                 { "KomputeryEdit", EditComputer },
-                { "ComputerModelEdit", EditComputerModel },
+                { "Modele komputerówEdit", EditComputerModel },
                 { "PageContentEdit", EditPageContent },
                 { "MonitoryEdit", EditMonitor },
                 { "UżytkownicyEdit", EditUser },
-                { "TicketsEdit", EditTicket },
+                { "Nowe zgłoszeniaEdit", EditTicket },
+                { "Moje zgłoszeniaEdit", EditTicket },
+                { "Wszystkie zgłoszeniaEdit", EditTicket },
+                { "Zamknięte zgłoszeniaEdit", EditTicket },
                 { "OprogramowanieEdit", EditSoftware },
                 { "ServerEdit", EditServer },
-                { "HardDrivesEdit", EditHardDrive },
+                { "Dyski twardeEdit", EditHardDrive },
                 { "Urządzenia siecioweEdit", EditNetworkDevice },
                 { "UrządzeniaEdit", EditDevice },
-                { "LocationEdit", EditLocation },
+                { "LokalizacjeEdit", EditLocation },
                 { "DrukarkiEdit", EditPrinter },
                 { "TelefonyEdit", EditPhone },
-                { "PhoneModelEdit", EditPhoneModel },
-                { "ComputerTypeEdit", EditComputerType },
-                { "DeviceModelEdit", EditDeviceModel },
-                { "HardDriveModelEdit", EditHardDriveModel },
-                { "HardDriveEdit", EditHardDrive },
-                { "LicenseTypeEdit", EditLicenseType },
+                { "Modele telefonówEdit", EditPhoneModel },
+                { "Rodzaje komputerówEdit", EditComputerType },
+                { "Modele urządzeńEdit", EditDeviceModel },
+                { "Modele dysków twardychEdit", EditHardDriveModel },
+                { "Typy licencjiEdit", EditLicenseType },
                 { "LicencjeEdit", EditLicense },
-                { "ManufacturerEdit", EditManufacturer },
-                { "MonitorModelEdit", EditMonitorModel },
-                { "MonitorTypeEdit", EditMonitorType },
-                { "NetworkDeviceModelEdit", EditNetworkDevicemodel },
-                { "NetworkDeviceTypeEdit", EditNetworkDeviceType },
-                { "OperatingSystemEdit", EditOperatingSystem },
-                { "PhonemodelEdit", EditPhonemodel },
-                { "PhoneTypeEdit", EditPhoneType },
-                { "PositionEdit", EditPosition },
+                { "ProducenciEdit", EditManufacturer },
+                { "Modele monitorówEdit", EditMonitorModel },
+                { "Rodzaje monitorówEdit", EditMonitorType },
+                { "Modele urządzeń sieciowychEdit", EditNetworkDevicemodel },
+                { "Rodzaje urządzeń sieciowychEdit", EditNetworkDeviceType },
+                { "System operacyjnyEdit", EditOperatingSystem },
+                { "Rodzaj telefonuEdit", EditPhoneType },
+                { "StanowiskaEdit", EditPosition },
                 { "Rodzaje drukarekEdit", EditPrintertype },
-                { "RackCabinetModelEdit", EditRackCabinetModel },
-                { "RackCabinetTypeEdit", EditRackCabinetType },
-                { "SimComponentTypeEdit", EditSimComponentType },
-                { "SimComponentEdit", EditSimComponent },
+                { "Modele szafy RACKEdit", EditRackCabinetModel },
+                { "Rodzaje szafy RACKEdit", EditRackCabinetType },
+                { "Rodzaje komponentu SIMEdit", EditSimComponentType },
+                { "SzablonyEdit", EditTemplate},
+                { "Komponent SIMEdit", EditSimComponent },
                 { "StatusEdit", EditStatus },
-                { "TicketCategoryEdit", EditTicketCategory },
-                { "TicketStatuseEdit", EditTicketStatuse },
-                { "TicketTypeEdit", EditTicketType },
-                { "DeviceTypeEdit", EditDeviceType }
+                { "Kategorie zgłoszeniaEdit", EditTicketCategory },
+                { "Status zgłoszeniaEdit", EditTicketStatuse },
+                { "Typ zgłoszeniaEdit", EditTicketType },
+                { "Rodzaje urządzeńEdit", EditDeviceType }
             };
 
             if (actions.ContainsKey(name))
@@ -358,6 +367,18 @@ namespace AdministrationApp.ViewModels
                     _ShowUsersRolesCommand = new BaseCommand(() => ShowUsersRolesWindow());
                 }
                 return _ShowUsersRolesCommand;
+            }
+        }
+        private BaseCommand _ShowTemplatesCommand;
+        public ICommand ShowTemplatesCommand
+        {
+            get
+            {
+                if (_ShowTemplatesCommand == null)
+                {
+                    _ShowTemplatesCommand = new BaseCommand(() => ShowTemplates());
+                }
+                return _ShowTemplatesCommand;
             }
         }
         private BaseCommand _ShowComputersCommand;
@@ -698,6 +719,10 @@ namespace AdministrationApp.ViewModels
         {
             ShowAllWorkspace<LogsViewModel>();
         }
+        private void ShowTemplates()
+        {
+            ShowAllWorkspace<AllTemplatesViewModel>();
+        }
         private void ShowPageContent()
         {
             ShowAllWorkspace<AllPageContentViewModel>();
@@ -705,6 +730,10 @@ namespace AdministrationApp.ViewModels
         private void CreatePageContent()
         {
             CreateWorkspace<NewPageContentViewModel>();
+        }
+        private void CreateTemplate()
+        {
+            CreateWorkspace<NewTemplateViewModel>();
         }
         private void CreateLicense()
         {
@@ -1106,6 +1135,10 @@ namespace AdministrationApp.ViewModels
         {
             await EditItem<PageContentCreateEditVM, EditPageContentViewModel>(id, URLs.PAGECONTENT_CEVM_ID, vm => new EditPageContentViewModel(vm));
         }
+        private async void EditTemplate(string id)
+        {
+            await EditItem<TemplatesVM, EditTemplateViewModel>(id, URLs.TEMPLATE_ID, vm => new EditTemplateViewModel(vm));
+        }
 
         private async void EditMonitor(string id)
         {
@@ -1272,17 +1305,6 @@ namespace AdministrationApp.ViewModels
                 id,
                 URLs.OPERATINGSYSTEM_CEVM_ID,
                 (window, vm) => new EditOperatingSystemViewModel(window, vm)
-            );
-        }
-
-
-
-        private async void EditPhonemodel(string id)
-        {
-            await EditItemWindow<PhoneModelCreateEditVM, EditPhonemodelViewModel, NewDictionaryWindow>(
-                id,
-                URLs.PHONEMODEL_CEVM_ID,
-                (window, vm) => new EditPhonemodelViewModel(window, vm)
             );
         }
 

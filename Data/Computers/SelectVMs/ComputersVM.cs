@@ -50,6 +50,10 @@ namespace Data.Computers.SelectVMs
 
         [JsonPropertyName("modifiedBy")]
         public string? ModifiedBy { get; set; }
+        [JsonPropertyName("teamplate")]
+        public string? Template { get; set; }
+
+        
 
     }
 }

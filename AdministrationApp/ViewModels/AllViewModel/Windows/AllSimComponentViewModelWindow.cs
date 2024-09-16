@@ -12,7 +12,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     {
         private Window _window;
 
-        public AllSimComponentViewModelWindow(Window window) : base("SimComponent")
+        public AllSimComponentViewModelWindow(Window window) : base("Komponent SIM")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

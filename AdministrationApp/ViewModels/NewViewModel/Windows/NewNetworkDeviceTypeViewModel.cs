@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewNetworkDeviceTypeViewModel(Window window) : base("NetworkDeviceType")
+        public NewNetworkDeviceTypeViewModel(Window window) : base("Nowy rodzaj urz¹dzenia sieciowego")
         {
             item = new NetworkDeviceTypeCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

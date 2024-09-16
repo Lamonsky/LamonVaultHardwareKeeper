@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditTicketCategoryViewModel(Window window, TicketCategoryCreateEditVM vm) : base("TicketCategory")
+        public EditTicketCategoryViewModel(Window window, TicketCategoryCreateEditVM vm) : base("Edycja kategorii zg³oszenia")
         {
             item = vm;
             oldItem = vm;

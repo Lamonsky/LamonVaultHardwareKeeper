@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditTicketTypeViewModel(Window window, TicketTypeCreateEditVM vm) : base("TicketType")
+        public EditTicketTypeViewModel(Window window, TicketTypeCreateEditVM vm) : base("Edycja rodzaju zg³oszeñ")
         {
             item = vm;
             oldItem = vm;

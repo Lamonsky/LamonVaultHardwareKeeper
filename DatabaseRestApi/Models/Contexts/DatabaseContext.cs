@@ -104,6 +104,8 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<Technician> Technicians { get; set; }
 
+    public virtual DbSet<Template> Templates { get; set; }
+
     public virtual DbSet<Ticket> Tickets { get; set; }
 
     public virtual DbSet<TicketCategory> TicketCategories { get; set; }

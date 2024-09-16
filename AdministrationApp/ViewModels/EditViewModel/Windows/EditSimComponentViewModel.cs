@@ -53,7 +53,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
         #endregion
         private Window _window;
         #region Konstruktor
-        public EditSimComponentViewModel(Window window, SimComponentCreateEditVM vm) : base("SimComponent")
+        public EditSimComponentViewModel(Window window, SimComponentCreateEditVM vm) : base("Edycja komponentu karty SIM")
         {
             item = vm;
             oldItem = vm;

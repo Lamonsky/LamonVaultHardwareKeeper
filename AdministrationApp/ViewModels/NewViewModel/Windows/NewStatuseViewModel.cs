@@ -14,7 +14,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
     {
         private Window _window;
         #region Konstruktor
-        public NewStatuseViewModel(Window window) : base("Status")
+        public NewStatuseViewModel(Window window) : base("Nowy status")
         {
             item = new StatusCreateEditVM();
             _window = window;

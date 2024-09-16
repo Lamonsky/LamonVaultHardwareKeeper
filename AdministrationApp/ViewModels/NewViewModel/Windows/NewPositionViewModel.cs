@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewPositionViewModel(Window window) : base("Position")
+        public NewPositionViewModel(Window window) : base("Nowe stanowisko")
         {
             item = new PositionCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

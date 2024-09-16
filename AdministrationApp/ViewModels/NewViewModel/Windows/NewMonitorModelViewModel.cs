@@ -27,7 +27,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewMonitorModelViewModel(Window window) : base("MonitorModel")
+        public NewMonitorModelViewModel(Window window) : base("Nowy model monitora")
         {
             item = new MonitorModelCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

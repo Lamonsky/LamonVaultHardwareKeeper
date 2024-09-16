@@ -87,7 +87,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         #endregion
         #region Konstruktor
-        public EditServerViewModel(ServerCreateEditVM vm) : base("EditServer")
+        public EditServerViewModel(ServerCreateEditVM vm) : base("Edycja serwera")
         {
             item = vm;
             oldItem = vm;

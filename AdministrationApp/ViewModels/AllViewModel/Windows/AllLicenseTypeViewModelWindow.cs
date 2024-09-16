@@ -12,7 +12,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     {
         private Window _window;
 
-        public AllLicenseTypeViewModelWindow(Window window) : base("LicenseType")
+        public AllLicenseTypeViewModelWindow(Window window) : base("Typy licencji")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

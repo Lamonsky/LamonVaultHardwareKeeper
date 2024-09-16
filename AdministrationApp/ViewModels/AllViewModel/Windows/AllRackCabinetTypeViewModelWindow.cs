@@ -12,7 +12,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     {
         private Window _window;
 
-        public AllRackCabinetTypeViewModelWindow(Window window) : base("RackCabinetType")
+        public AllRackCabinetTypeViewModelWindow(Window window) : base("Rodzaje szafy RACK")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

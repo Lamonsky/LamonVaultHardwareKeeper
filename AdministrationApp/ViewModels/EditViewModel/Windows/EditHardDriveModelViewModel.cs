@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditHardDriveModelViewModel(Window window, HardDriveModelCreateEditVM vm) : base("HardDriveModel")
+        public EditHardDriveModelViewModel(Window window, HardDriveModelCreateEditVM vm) : base("Edycja modelu dysku twardego")
         {
             item = vm;
             oldItem = vm;

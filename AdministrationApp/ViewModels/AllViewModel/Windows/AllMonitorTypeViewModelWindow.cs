@@ -11,7 +11,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllMonitorTypeViewModelWindow : WszystkieViewModel<MonitorTypeVM>
     {
         private Window _window;
-        public AllMonitorTypeViewModelWindow(Window window) : base("MonitorType")
+        public AllMonitorTypeViewModelWindow(Window window) : base("Rodzaje monitorów")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

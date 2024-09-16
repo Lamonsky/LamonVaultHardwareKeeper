@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewTicketTypeViewModel(Window window) : base("TicketType")
+        public NewTicketTypeViewModel(Window window) : base("Nowy rodzaj zg³oszenia")
         {
             item = new TicketTypeCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

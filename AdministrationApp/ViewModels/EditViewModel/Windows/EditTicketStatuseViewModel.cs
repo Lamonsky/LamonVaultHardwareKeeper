@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditTicketStatuseViewModel(Window window, TicketStatusCreateEditVM vm) : base("TicketStatuse")
+        public EditTicketStatuseViewModel(Window window, TicketStatusCreateEditVM vm) : base("Edycja statusu zg³oszenia")
         {
             item = vm;
             oldItem = vm;

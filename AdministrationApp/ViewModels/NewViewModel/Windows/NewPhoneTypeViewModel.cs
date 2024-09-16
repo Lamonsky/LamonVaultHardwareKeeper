@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewPhoneTypeViewModel(Window window) : base("PhoneType")
+        public NewPhoneTypeViewModel(Window window) : base("Nowy rodzaj telefonu")
         {
             item = new PhoneTypeCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

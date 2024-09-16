@@ -93,7 +93,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         #endregion
         #region Konstruktor
-        public EditPrinterViewModel(PrintersCreateEditVM vm) : base("Nowa drukarka")
+        public EditPrinterViewModel(PrintersCreateEditVM vm) : base("Edycja drukarki")
         {
             item = vm;
             oldItem = vm;

@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditPhoneTypeViewModel(Window window, PhoneTypeCreateEditVM vm) : base("PhoneType")
+        public EditPhoneTypeViewModel(Window window, PhoneTypeCreateEditVM vm) : base("Edycja rodzaju telefonu")
         {
             item = vm;
             oldItem = vm;

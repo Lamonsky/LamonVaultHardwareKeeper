@@ -45,7 +45,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewTechnicianViewModelWindow(Window window) : base("Technician")
+        public NewTechnicianViewModelWindow(Window window) : base("Nowy technik")
         {
             item = new TechnicianCreateEditVM();
             Messenger.Default.Register<UserVM>(this, getChosenUser);

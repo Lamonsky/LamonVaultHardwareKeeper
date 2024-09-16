@@ -32,6 +32,7 @@ namespace Data.Computers.SelectVMs
 
         [JsonPropertyName("modifiedBy")]
         public string? ModifiedBy { get; set; }
+        public string Template { get; set; }
 
     }
 }

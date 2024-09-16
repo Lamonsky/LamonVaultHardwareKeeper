@@ -17,7 +17,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
     class AllLocationsViewModelWindow : WszystkieViewModel<LocationVM>
     {
         private Window _window;
-        public AllLocationsViewModelWindow(Window window) : base("Location")
+        public AllLocationsViewModelWindow(Window window) : base("Lokalizacje")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

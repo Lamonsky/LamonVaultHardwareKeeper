@@ -13,7 +13,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
 {
     public class AllTicketsViewModel : WszystkieViewModel<TicketVM>
     {
-        public AllTicketsViewModel() : base("Tickets")
+        public AllTicketsViewModel() : base("Wszystkie zgłoszenia")
         {
             Messenger.Default.Register<string>(this, open);
         }        

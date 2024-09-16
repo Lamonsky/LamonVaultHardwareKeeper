@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditMonitorTypeViewModel(Window window, MonitorTypeCreateEditVM vm) : base("MonitorType")
+        public EditMonitorTypeViewModel(Window window, MonitorTypeCreateEditVM vm) : base("Edycja rodzaju monitoru")
         {
             item = vm;
             oldItem = vm;

@@ -11,7 +11,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllComputerTypeViewModelWindow : WszystkieViewModel<ComputerTypeVM>
     {
         private Window _window;
-        public AllComputerTypeViewModelWindow(Window window) : base("ComputerType")
+        public AllComputerTypeViewModelWindow(Window window) : base("Rodzaje komputerów")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

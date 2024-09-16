@@ -11,7 +11,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllManufacturerViewModelWindow : WszystkieViewModel<ManufacturerVM>
     {
         private Window _window;
-        public AllManufacturerViewModelWindow(Window window) : base("Manufacturer")
+        public AllManufacturerViewModelWindow(Window window) : base("Producenci")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

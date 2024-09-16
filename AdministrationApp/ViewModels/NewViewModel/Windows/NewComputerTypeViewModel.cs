@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewComputerTypeViewModel(Window window) : base("ComputerType")
+        public NewComputerTypeViewModel(Window window) : base("Nowy rodzaj komputera")
         {
             item = new ComputerTypeCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

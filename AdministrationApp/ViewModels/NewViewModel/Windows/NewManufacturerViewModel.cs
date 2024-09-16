@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewManufacturerViewModel(Window window) : base("Manufacturer")
+        public NewManufacturerViewModel(Window window) : base("Nowy producent")
         {
             item = new ManufacturerCreateEditVM();
             _window = window;

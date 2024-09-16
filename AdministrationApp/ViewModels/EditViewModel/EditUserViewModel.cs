@@ -44,7 +44,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         #endregion
         #region Konstruktor
-        public EditUserViewModel(UserCreateEditVM vm) : base("Nowy użytkownik")
+        public EditUserViewModel(UserCreateEditVM vm) : base("Edycja użytkownika")
         {
             item = vm;
             oldItem = vm;

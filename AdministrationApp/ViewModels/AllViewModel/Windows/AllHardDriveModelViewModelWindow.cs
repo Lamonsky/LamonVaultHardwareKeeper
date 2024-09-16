@@ -11,7 +11,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllHardDriveModelViewModelWindow : WszystkieViewModel<HardDriveModelVM>
     {
         private Window _window;
-        public AllHardDriveModelViewModelWindow(Window window) : base("HardDriveModel")
+        public AllHardDriveModelViewModelWindow(Window window) : base("Modele dysków twardych")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

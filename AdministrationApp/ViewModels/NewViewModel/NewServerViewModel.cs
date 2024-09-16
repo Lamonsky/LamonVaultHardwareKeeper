@@ -85,7 +85,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         #endregion
         #region Konstruktor
-        public NewServerViewModel() : base("NewServer")
+        public NewServerViewModel() : base("Nowy serwer")
         {
             item = new ServerCreateEditVM();
             Messenger.Default.Register<OperatingSystemVM>(this, getOS);

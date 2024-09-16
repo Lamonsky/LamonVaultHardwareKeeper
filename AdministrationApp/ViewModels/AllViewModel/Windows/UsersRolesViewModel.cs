@@ -42,7 +42,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
         }
 
 
-        public UsersRolesViewModel(Window window) : base("UsersWithRoles")
+        public UsersRolesViewModel(Window window) : base("Role użytkowników")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

@@ -18,7 +18,7 @@ using AdministrationApp.Views;
 
 namespace AdministrationApp.ViewModels.NewViewModel
 {
-    internal class NewUserViewModel : JedenViewModel<UserCreateEditVM>
+    public class NewUserViewModel : JedenViewModel<UserCreateEditVM>
     {
         #region Commands
         private BaseCommand _ChooseLocationCommand;

@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditLicenseTypeViewModel(Window window, LicenseTypeCreateEditVM vm) : base("LicenseType")
+        public EditLicenseTypeViewModel(Window window, LicenseTypeCreateEditVM vm) : base("Edycja rodzaju licencji")
         {
             item = vm;
             oldItem = vm;

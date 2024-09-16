@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewLicenseTypeViewModel(Window window) : base("LicenseType")
+        public NewLicenseTypeViewModel(Window window) : base("Nowy rodzaj licencji")
         {
             item = new LicenseTypeCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

@@ -11,7 +11,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllDeviceTypeViewModelWindow : WszystkieViewModel<DeviceTypeVM>
     {
         private Window _window;
-        public AllDeviceTypeViewModelWindow(Window window) : base("DeviceType")
+        public AllDeviceTypeViewModelWindow(Window window) : base("Rodzaje urz¹dzeñ")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

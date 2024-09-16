@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditSimComponentTypeViewModel(Window window, SimComponentTypeCreateEditVM vm) : base("SimComponentType")
+        public EditSimComponentTypeViewModel(Window window, SimComponentTypeCreateEditVM vm) : base("Edycja rodzaju komponentu karty SIM")
         {
             item = vm;
             oldItem = vm;

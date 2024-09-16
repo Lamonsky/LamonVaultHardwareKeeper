@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditManufacturerViewModel(Window window, ManufacturerCreateEditVM vm) : base("Manufacturer")
+        public EditManufacturerViewModel(Window window, ManufacturerCreateEditVM vm) : base("Edycja producenta")
         {
             item = vm;
             oldItem = vm;

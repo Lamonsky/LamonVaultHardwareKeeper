@@ -105,7 +105,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         #endregion
         #region Konstruktor
-        public EditTicketViewModel(TicketCreateEditVM vm) : base("EditTicket")
+        public EditTicketViewModel(TicketCreateEditVM vm) : base("Edycja zgłoszenia")
         {
             item = vm;
             oldItem = vm;

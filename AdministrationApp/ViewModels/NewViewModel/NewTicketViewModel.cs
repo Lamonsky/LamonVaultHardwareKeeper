@@ -105,7 +105,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
         }
         #endregion
         #region Konstruktor
-        public NewTicketViewModel() : base("NewTicket")
+        public NewTicketViewModel() : base("Nowe zgłoszenie")
         {
             item = new TicketCreateEditVM();
             Messenger.Default.Register<UserVM>(this, getChosenUser);

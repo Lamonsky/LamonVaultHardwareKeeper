@@ -12,7 +12,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     {
         private Window _window;
 
-        public AllPhoneTypeViewModelWindow(Window window) : base("PhoneType")
+        public AllPhoneTypeViewModelWindow(Window window) : base("Rodzaj telefonu")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

@@ -68,7 +68,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
         }
         #endregion
         #region Konstruktor
-        public EditHardDriveViewModel(HardDriveCreateEditVM vm) : base("NewHardDrive")
+        public EditHardDriveViewModel(HardDriveCreateEditVM vm) : base("Edycja dysku twardego")
         {
             item = vm;
             oldItem = vm;

@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewDeviceModelViewModel(Window window) : base("DeviceModel")
+        public NewDeviceModelViewModel(Window window) : base("Nowy model urz¹dzenia")
         {
             item = new DeviceModelCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

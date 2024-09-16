@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewMonitorTypeViewModel(Window window) : base("MonitorType")
+        public NewMonitorTypeViewModel(Window window) : base("Nowy rodzaj monitora")
         {
             item = new MonitorTypeCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewRackCabinetModelViewModel(Window window) : base("RackCabinetModel")
+        public NewRackCabinetModelViewModel(Window window) : base("Nowy model szafy RACK")
         {
             item = new RackCabinetModelCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

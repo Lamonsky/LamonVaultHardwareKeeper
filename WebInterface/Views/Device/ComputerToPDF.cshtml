@@ -1,0 +1,51 @@
+﻿@model Data.Computers.SelectVMs.ComputersVM
+@using TinyMCE.Blazor
+@{
+    ViewData["Title"] = "PrintToPDF";
+}
+
+<h1>@await Component.InvokeAsync("PageContentViewComponent", new { type = "ComputerToPDFHeader" })</h1>
+
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form asp-action="PrintToPDF" method="post" asp-route-id="@ViewBag.Id">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+              
+
+                        <div>
+                          <textarea id="tiny" asp-for="@Model.Template">
+                              @Model.Name<br/>
+                              @Model.ComputerModel<br/>
+                              @Model.Status<br/>
+                              @Model.ManufacturerName<br/>
+                              @Model.ComputerType<br/>
+                              @Model.Processor<br/>
+                              @Model.OperatingSystem<br/>
+                          </textarea>
+                        </div>
+
+
+                    <div class="form-group mt-2">
+                    <input type="submit" value="@await Component.InvokeAsync("PageContentViewComponent", new { type = "PrintToPDFButtonHeader" })" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    tinymce.init({
+    selector: 'textarea#tiny',
+    plugins: [
+        'a11ychecker','advlist','advcode','advtable','autolink','checklist','markdown',
+        'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+        'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+    toolbar: 'undo redo | a11ycheck casechange blocks | bold italic backcolor | alignleft aligncenter alignright alignjustify |' +
+        'bullist numlist checklist outdent indent | removeformat | code table help',
+    language: 'pl',
+      })
+</script>

@@ -12,7 +12,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     {
         private Window _window;
 
-        public AllPositionViewModelWindow(Window window) : base("Position")
+        public AllPositionViewModelWindow(Window window) : base("Stanowiska")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

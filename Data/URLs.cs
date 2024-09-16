@@ -37,7 +37,10 @@ namespace Data
         public const string STATUS = "/status";
         public const string STATUS_ID = "/status/{id}";
         public const string STATUS_CEVM_ID = "/status/cevm/{id}";
-
+        
+        public const string TEMPLATE = "/template";
+        public const string TEMPLATE_ID = "/template/{id}";
+        
         public const string SOFTWARE = "/software";
         public const string SOFTWARE_USER_ID = "/software/user/{id}";
         public const string SOFTWARE_ID = "/software/{id}";

@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditOperatingSystemViewModel(Window window, OperatingSystemCreateEditVM vm) : base("OperatingSystem")
+        public EditOperatingSystemViewModel(Window window, OperatingSystemCreateEditVM vm) : base("Edycja systemu operacyjnego")
         {
             item = vm;
             oldItem = vm;

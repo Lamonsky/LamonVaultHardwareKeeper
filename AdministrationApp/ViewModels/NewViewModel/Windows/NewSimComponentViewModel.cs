@@ -52,7 +52,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
         #endregion
         private Window _window;
         #region Konstruktor
-        public NewSimComponentViewModel(Window window) : base("SimComponent")
+        public NewSimComponentViewModel(Window window) : base("Nowy komponent karty SIM")
         {
             item = new SimComponentCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

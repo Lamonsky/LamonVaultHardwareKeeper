@@ -18,7 +18,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
     {
         private Window _window;
 
-        public AllTechniciansViewModelWindow(Window window) : base("Technician")
+        public AllTechniciansViewModelWindow(Window window) : base("Technicy")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

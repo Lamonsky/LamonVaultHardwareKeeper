@@ -11,7 +11,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllPhoneModelViewModelWindow : WszystkieViewModel<PhoneModelVM>
     {
         private Window _window;
-        public AllPhoneModelViewModelWindow(Window window) : base("PhoneModel")
+        public AllPhoneModelViewModelWindow(Window window) : base("Modele telefonów")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

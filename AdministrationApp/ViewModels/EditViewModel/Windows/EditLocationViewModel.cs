@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditLocationViewModel(Window window, LocationCreateEditVM vm) : base("Location")
+        public EditLocationViewModel(Window window, LocationCreateEditVM vm) : base("Edycja lokalizacji")
         {
             item = vm;
             oldItem = vm;

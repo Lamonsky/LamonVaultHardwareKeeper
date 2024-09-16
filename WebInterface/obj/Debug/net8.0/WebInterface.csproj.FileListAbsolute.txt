@@ -271,3 +271,5 @@ C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\b
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\bin\Debug\net8.0\TinyMCE.Blazor.dll
+C:\Users\dlamonski\source\repos\Lamonsky\LamonVaultHardwareKeeper\WebInterface\bin\Debug\net8.0\DinkToPdf.dll

@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditNetworkDevicemodelViewModel(Window window, NetworkDeviceModelCreateEditVM vm) : base("NetworkDeviceModel")
+        public EditNetworkDevicemodelViewModel(Window window, NetworkDeviceModelCreateEditVM vm) : base("Edycja modelu urz¹dzenia sieciowego")
         {
             item = vm;
             oldItem = vm;

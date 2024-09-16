@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditPositionViewModel(Window window, PositionCreateEditVM vm) : base("Position")
+        public EditPositionViewModel(Window window, PositionCreateEditVM vm) : base("Edycja stanowiska")
         {
             item = vm;
             oldItem = vm;

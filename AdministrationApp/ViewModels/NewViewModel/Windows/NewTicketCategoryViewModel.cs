@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewTicketCategoryViewModel(Window window) : base("TicketCategory")
+        public NewTicketCategoryViewModel(Window window) : base("Nowa kategoria zg³oszenia")
         {
             item = new TicketCategoryCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

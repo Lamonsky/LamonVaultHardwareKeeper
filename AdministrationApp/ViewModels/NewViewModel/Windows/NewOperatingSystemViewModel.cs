@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #region Konstruktor
-        public NewOperatingSystemViewModel(Window window) : base("OperatingSystem")
+        public NewOperatingSystemViewModel(Window window) : base("Nowy system operacyjny")
         {
             item = new OperatingSystemCreateEditVM();
             Messenger.Default.Register<StatusVM>(this, getStatus);

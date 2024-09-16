@@ -11,7 +11,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
     class AllOperatingSystemViewModelWindow : WszystkieViewModel<OperatingSystemVM>
     {
         private Window _window;
-        public AllOperatingSystemViewModelWindow(Window window) : base("OperatingSystem")
+        public AllOperatingSystemViewModelWindow(Window window) : base("System operacyjny")
         {
             Messenger.Default.Register<string>(this, open);
             _window = window;

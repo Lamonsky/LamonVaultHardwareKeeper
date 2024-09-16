@@ -28,7 +28,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #region Konstruktor
-        public EditDeviceModelViewModel(Window window, DeviceModelCreateEditVM vm) : base("DeviceModel")
+        public EditDeviceModelViewModel(Window window, DeviceModelCreateEditVM vm) : base("Edycja modelu urz¹dzenia")
         {
             item = vm;
             oldItem = vm;
