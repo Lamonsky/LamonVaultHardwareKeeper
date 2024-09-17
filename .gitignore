@@ -1,2 +1,21 @@
+# Ignorowanie folderów bin i obj w całym projekcie
+
+# Ignorowanie folderów bin i obj w katalogu głównym projektu
+bin/
 obj/
 .vs/
+# Ignorowanie folderów bin i obj w katalogu Data
+Data/bin/
+Data/obj/
+
+# Ignorowanie folderów bin i obj w katalogu WebInterface
+WebInterface/bin/
+WebInterface/obj/
+
+# Ignorowanie folderów bin i obj w katalogu DatabaseRestApi
+DatabaseRestApi/bin/
+DatabaseRestApi/obj/
+
+# Ignorowanie folderów bin i obj w katalogu AdministrationApp
+AdministrationApp/bin/
+AdministrationApp/obj/

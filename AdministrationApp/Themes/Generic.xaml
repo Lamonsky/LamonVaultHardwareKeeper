@@ -150,7 +150,7 @@
                                 <Button Grid.Column="0" Command="{Binding SaveAndCloseCommand}" IsEnabled="{Binding Path=IsValid}" Margin="5,0,0,0">
                                     <materialDesign:PackIcon Kind="ContentSave" />
                                 </Button>
-                                <Button Grid.Column="1" Command="{Binding CancelCommand}" Margin="5,0,0,0">
+                                <Button Grid.Column="1" Command="{Binding CloseCommand}" Margin="5,0,0,0">
                                     <materialDesign:PackIcon Kind="CloseCircle" />
                                 </Button>
                             </Grid>
@@ -234,7 +234,7 @@
                                 <Button Grid.Column="0" Command="{Binding SaveAndCloseCommand}" Margin="5,0,0,0">
                                     <materialDesign:PackIcon Kind="ContentSave" />
                                 </Button>
-                                <Button Grid.Column="1" Command="{Binding CancelCommand}" Margin="5,0,0,0">
+                                <Button Grid.Column="1" Command="{Binding CloseCommand}" Margin="5,0,0,0">
                                     <materialDesign:PackIcon Kind="CloseCircle" />
                                 </Button>
                             </Grid>

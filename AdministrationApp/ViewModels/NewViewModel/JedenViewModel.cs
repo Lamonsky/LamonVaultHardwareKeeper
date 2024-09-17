@@ -27,6 +27,16 @@ namespace AdministrationApp.ViewModels.NewViewModel
                 return _SaveAndCloseCommand;
             }
         }
+        private BaseCommand _CloseCommand;
+        public ICommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                    _CloseCommand = new BaseCommand(OnRequestClose);
+                return _CloseCommand;
+            }
+        }
         #endregion
 
         #region Konstruktor
