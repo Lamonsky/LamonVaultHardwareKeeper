@@ -42,9 +42,15 @@
                                             <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "ComputerInventoryNumberName" })</strong> <br />
                                                     @item.InventoryNumber<br />
                                         </p>
-                                        <a class="navbar-brand" asp-area="" asp-controller="Computer" asp-action="ComputerToPDF" asp-route-id="@item.Id">
-                                            @await Component.InvokeAsync("PageContentViewComponent", new { type = "LogoButton" })
+<<<<<<< HEAD
+                                        <a class="navbar-brand" asp-area="" asp-controller="Computer" asp-action="PrintToPDF" asp-route-id="@item.Id">
+                            @await Component.InvokeAsync("PageContentViewComponent", new { type = "PrintToPDFButtonHeader" })
                                         </a>
+=======
+                                            <a class="navbar-brand" asp-area="" asp-controller="Computer" asp-action="PrintToPDF" asp-route-id="@item.Id">
+                            @await Component.InvokeAsync("PageContentViewComponent", new { type = "PrintToPDFButtonHeader" })
+                                            </a>
+>>>>>>> f4e4131 (DZIAŁA WYDRUK)
                                     </div>
                                 </div>
                             </div>

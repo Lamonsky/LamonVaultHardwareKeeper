@@ -1,5 +1,4 @@
 ﻿@model Data.Computers.SelectVMs.UserVM
-
 @{
     ViewData["Title"] = "Details";
 }
@@ -64,4 +63,7 @@
             @Html.DisplayFor(model => model.Position)
         </dd>
     </dl>
+    <a class="navbar-brand" asp-area="" asp-controller="User" asp-action="PrintToPDF">
+        @await Component.InvokeAsync("PageContentViewComponent", new { type = "PrintToPDFButtonHeader" })
+                                                    </a>
 </div>

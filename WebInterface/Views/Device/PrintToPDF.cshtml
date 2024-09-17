@@ -1,0 +1,29 @@
+﻿@model Data.Computers.SelectVMs.DevicesVM
+@using TinyMCE.Blazor
+@{
+    ViewData["Title"] = "PrintToPDF";
+}
+
+<h1>@await Component.InvokeAsync("PageContentViewComponent", new { type = "PrintToPDFHeader" })</h1>
+
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form asp-action="PrintToPDF" method="post" asp-route-id="@ViewBag.Id">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+              
+
+                        <div>
+                          <textarea id="tiny" asp-for="@Model.Template">
+                          </textarea>
+                        </div>
+
+
+                    <div class="form-group mt-2">
+                    <input type="submit" value="@await Component.InvokeAsync("PageContentViewComponent", new { type = "PrintToPDFButtonHeader" })" class="btn btn-primary" onclick="generatePDF()"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

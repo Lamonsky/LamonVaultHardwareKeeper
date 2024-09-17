@@ -36,7 +36,9 @@
                                                     <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "ServerInventoryNumberName" })</strong> <br />
                             @item.InventoryNumber<br />
                                                 </p>
-
+                                                        <a class="navbar-brand" asp-area="" asp-controller="Server" asp-action="PrintToPDF" asp-route-id="@item.Id">
+                            @await Component.InvokeAsync("PageContentViewComponent", new { type = "PrintToPDFButtonHeader" })
+                                                            </a>
                                             </div>
                                         </div>
                                     </div>

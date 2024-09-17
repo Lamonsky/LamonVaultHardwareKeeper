@@ -17,6 +17,24 @@ namespace WebInterface.Controllers
             List<TicketVM> model = await RequestHelper.SendRequestAsync<object, List<TicketVM>>(URLs.TICKET_USER_ID.Replace("{id}", GlobalData.Id.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
             return View(model);
         }
+        public async Task<IActionResult> PrintToPDF(int id)
+        {
+            ViewData["id"] = id;
+            TicketVM vm = await RequestHelper.SendRequestAsync<object, TicketVM>(URLs.TICKET_ID.Replace("{id}", id.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            List<TemplatesVM> templates = await RequestHelper.SendRequestAsync<object, List<TemplatesVM>>(URLs.TEMPLATE, HttpMethod.Get, null, GlobalData.AccessToken);
+            TemplatesVM tvm = templates.Where(item => item.Name == "Tickets").FirstOrDefault();
+            vm.Template = tvm.HTMLContent
+                .Replace("@Model.Name", vm.Name)
+                .Replace("@Model.Device", vm.Device)
+                .Replace("@Model.Type", vm.Type)
+                .Replace("@Model.Category", vm.Category)
+                .Replace("@Model.Status", vm.Status)
+                .Replace("@Model.Location", vm.Location)
+                .Replace("@Model.User", vm.User)
+                .Replace("@Model.Owner", vm.Owner)
+                .Replace("@Model.Email", vm.Email);                
+            return View(vm);
+        }
         public async Task<IActionResult> CreateNew()
         {
             List<TicketCategoryVM> ticketCategoryVMs = await RequestHelper.SendRequestAsync<object, List<TicketCategoryVM>>(URLs.TICKETCATEGORY, HttpMethod.Get, null, GlobalData.AccessToken);

@@ -14,6 +14,24 @@ namespace WebInterface.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> PrintToPDF()
+        {
+            ViewData["id"] = GlobalData.Id;
+            UserVM vm = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", GlobalData.Id.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
+            List<TemplatesVM> templates = await RequestHelper.SendRequestAsync<object, List<TemplatesVM>>(URLs.TEMPLATE, HttpMethod.Get, null, GlobalData.AccessToken);
+            TemplatesVM templatesVM = templates.Where(item => item.Name == "Users").FirstOrDefault();
+            vm.Template = templatesVM.HTMLContent
+                .Replace("@Model.Usersname", vm.Usersname)
+                .Replace("@Model.FirstName", vm.FirstName)
+                .Replace("@Model.LastName", vm.LastName)
+                .Replace("@Model.Location", vm.Location)
+                .Replace("@Model.Email", vm.Email)
+                .Replace("@Model.Phone1", vm.Phone1)
+                .Replace("@Model.Phone2", vm.Phone2)
+                .Replace("@Model.InternalNumber", vm.InternalNumber)
+                .Replace("@Model.Position", vm.Position);             
+            return View(vm);
+        }
         public async Task<IActionResult> Details()
         {
             UserVM model = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_ID.Replace("{id}", GlobalData.Id.ToString()), HttpMethod.Get, null, GlobalData.AccessToken);
