@@ -11,7 +11,7 @@ using AdministrationApp.ViewModels.NewViewModel;
 
 namespace AdministrationApp.ViewModels.EditViewModel.Windows
 {
-    public class EditSimComponentViewModel : JedenViewModel<SimComponentCreateEditVM>
+    public class EditSimComponentViewModel : JedenWindowViewModel<SimComponentCreateEditVM>
     {
         #region Commands
         private BaseCommand? _ChooseStatusCommand;
@@ -51,7 +51,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             }
         }
         #endregion
-        private Window _window;
+        
         #region Konstruktor
         public EditSimComponentViewModel(Window window, SimComponentCreateEditVM vm) : base("Edycja komponentu karty SIM")
         {
@@ -106,7 +106,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.SIMCOMPONENT_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("SimComponentRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

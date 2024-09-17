@@ -53,7 +53,7 @@ namespace AdministrationApp.Views.AllViews {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/AdministrationApp;V1.0.0.0;component/views/allviews/alldeviceview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/AdministrationApp;component/views/allviews/alldeviceview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\AllViews\AllDeviceView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

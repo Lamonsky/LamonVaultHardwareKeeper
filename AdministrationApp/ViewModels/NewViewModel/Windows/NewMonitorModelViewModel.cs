@@ -10,9 +10,9 @@ using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewMonitorModelViewModel : JedenViewModel<MonitorModelCreateEditVM>
+    public class NewMonitorModelViewModel : JedenWindowViewModel<MonitorModelCreateEditVM>
     {
-        private Window _window;
+        
 
         private BaseCommand _ChooseStatusCommand;
         public ICommand ChooseStatusCommand
@@ -40,7 +40,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.MONITORMODEL, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("MonitorModelRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

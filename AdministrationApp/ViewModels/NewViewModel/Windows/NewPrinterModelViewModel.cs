@@ -12,9 +12,9 @@ using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewPrinterModelViewModel : JedenViewModel<PrinterModelCreateEditVM>
+    public class NewPrinterModelViewModel : JedenWindowViewModel<PrinterModelCreateEditVM>
     {
-        private Window _window;
+        
         private BaseCommand _ChooseStatusCommand;
         public ICommand ChooseStatusCommand
         {
@@ -41,7 +41,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.PRINTERMODEL, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("PrinterModelRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

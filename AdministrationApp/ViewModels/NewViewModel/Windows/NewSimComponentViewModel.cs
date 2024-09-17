@@ -10,7 +10,7 @@ using Data.Computers.CreateEditVMs;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewSimComponentViewModel : JedenViewModel<SimComponentCreateEditVM>
+    public class NewSimComponentViewModel : JedenWindowViewModel<SimComponentCreateEditVM>
     {
         #region Commands
         private BaseCommand? _ChooseStatusCommand;
@@ -50,7 +50,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             }
         }
         #endregion
-        private Window _window;
+        
         #region Konstruktor
         public NewSimComponentViewModel(Window window) : base("Nowy komponent karty SIM")
         {
@@ -67,7 +67,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.SIMCOMPONENT, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("SimComponentRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

@@ -12,9 +12,9 @@ using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.EditViewModel.Windows
 {
-    public class EditMonitorTypeViewModel : JedenViewModel<MonitorTypeCreateEditVM>
+    public class EditMonitorTypeViewModel : JedenWindowViewModel<MonitorTypeCreateEditVM>
     {
-        private Window _window;
+        
         private BaseCommand _ChooseStatusCommand;
         public ICommand ChooseStatusCommand
         {
@@ -43,7 +43,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.MONITORTYPE_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("MonitorTypeRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

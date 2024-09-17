@@ -17,9 +17,9 @@ using AdministrationApp.Views.NewViews.Windows;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewTechnicianViewModelWindow : JedenViewModel<TechnicianCreateEditVM>
+    public class NewTechnicianViewModelWindow : JedenWindowViewModel<TechnicianCreateEditVM>
     {
-        private Window _window;
+        
         private BaseCommand _ChooseStatusCommand;
         public ICommand ChooseStatusCommand
         {
@@ -59,7 +59,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.TECHNICIAN, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("TechnicianRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

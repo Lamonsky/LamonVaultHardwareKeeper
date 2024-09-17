@@ -12,9 +12,9 @@ using AdministrationApp.ViewModels.NewViewModel;
 
 namespace AdministrationApp.ViewModels.EditViewModel.Windows
 {
-    public class EditLocationViewModel : JedenViewModel<LocationCreateEditVM>
+    public class EditLocationViewModel : JedenWindowViewModel<LocationCreateEditVM>
     {
-        private Window _window;
+        
         private BaseCommand? _ChooseStatusCommand;
         public ICommand ChooseStatusCommand
         {
@@ -51,7 +51,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.LOCATION_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("LocationRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

@@ -12,9 +12,9 @@ using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.EditViewModel.Windows
 {
-    public class EditOperatingSystemViewModel : JedenViewModel<OperatingSystemCreateEditVM>
+    public class EditOperatingSystemViewModel : JedenWindowViewModel<OperatingSystemCreateEditVM>
     {
-        private Window _window;
+        
         private BaseCommand _ChooseStatusCommand;
         public ICommand ChooseStatusCommand
         {
@@ -43,7 +43,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.OPERATINGSYSTEM_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("OperatingSystemRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

@@ -10,9 +10,8 @@ using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewComputerModelViewModel : JedenViewModel<ComputerModelCreateEditVM>
+    public class NewComputerModelViewModel : JedenWindowViewModel<ComputerModelCreateEditVM>
     {
-        private Window _window;
         private BaseCommand _ChooseStatusCommand;
         public ICommand ChooseStatusCommand
         {
@@ -39,7 +38,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.COMPUTERMODEL, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("ComputerModelRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

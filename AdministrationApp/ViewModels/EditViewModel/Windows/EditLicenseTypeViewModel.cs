@@ -12,9 +12,9 @@ using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.EditViewModel.Windows
 {
-    public class EditLicenseTypeViewModel : JedenViewModel<LicenseTypeCreateEditVM>
+    public class EditLicenseTypeViewModel : JedenWindowViewModel<LicenseTypeCreateEditVM>
     {
-        private Window _window;
+        
         private BaseCommand _ChooseStatusCommand;
         public ICommand ChooseStatusCommand
         {
@@ -43,7 +43,7 @@ namespace AdministrationApp.ViewModels.EditViewModel.Windows
             EditSaveLogs(oldItem, item);
             await RequestHelper.SendRequestAsync(URLs.LICENSETYPE_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("LicenseTypeRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

@@ -10,9 +10,9 @@ using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewStatuseViewModel : JedenViewModel<StatusCreateEditVM>
+    public class NewStatuseViewModel : JedenWindowViewModel<StatusCreateEditVM>
     {
-        private Window _window;
+        
         #region Konstruktor
         public NewStatuseViewModel(Window window) : base("Nowy status")
         {
@@ -26,7 +26,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.STATUS, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("StatusRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region Dane

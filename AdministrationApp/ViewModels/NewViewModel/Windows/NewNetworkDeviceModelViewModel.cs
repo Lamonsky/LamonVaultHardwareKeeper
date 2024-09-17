@@ -10,9 +10,9 @@ using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewNetworkDeviceModelViewModel : JedenViewModel<NetworkDeviceModelCreateEditVM>
+    public class NewNetworkDeviceModelViewModel : JedenWindowViewModel<NetworkDeviceModelCreateEditVM>
     {
-        private Window _window;
+        
         private BaseCommand _ChooseStatusCommand;
         public ICommand ChooseStatusCommand
         {
@@ -39,7 +39,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.NETWORKDEVICEMODEL, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("NetworkDeviceModelRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions

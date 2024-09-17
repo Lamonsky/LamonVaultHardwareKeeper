@@ -30,7 +30,7 @@
                                                     <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "DeviceInventoryNumberName" })</strong> <br />
                             @item.InventoryNumber<br />                                                    
                                                 </p>
-                                                        <a class="navbar-brand" asp-area="" asp-controller="Device" asp-action="PrintToPDF" asp-route-id="@item.Id">
+                                                        <a class="navbar-brand btn btn-primary" asp-area="" asp-controller="Device" asp-action="PrintToPDF" asp-route-id="@item.Id">
                             @await Component.InvokeAsync("PageContentViewComponent", new { type = "PrintToPDFButtonHeader" })
                                                     </a>
                                             </div>

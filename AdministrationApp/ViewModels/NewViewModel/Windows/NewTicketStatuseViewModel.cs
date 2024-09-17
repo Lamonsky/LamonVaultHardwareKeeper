@@ -10,9 +10,9 @@ using System.Windows.Input;
 
 namespace AdministrationApp.ViewModels.NewViewModel.Windows
 {
-    public class NewTicketStatuseViewModel : JedenViewModel<TicketStatusCreateEditVM>
+    public class NewTicketStatuseViewModel : JedenWindowViewModel<TicketStatusCreateEditVM>
     {
-        private Window _window;
+        
         private BaseCommand _ChooseStatusCommand;
         public ICommand ChooseStatusCommand
         {
@@ -39,7 +39,7 @@ namespace AdministrationApp.ViewModels.NewViewModel.Windows
             NewSaveLogs(item);
             await RequestHelper.SendRequestAsync(URLs.TICKETSTATUS, HttpMethod.Post, item, GlobalData.AccessToken);
             Messenger.Default.Send("TicketStatuseRefresh");
-            _window.Close();
+            
         }
         #endregion
         #region CommandsFunctions
