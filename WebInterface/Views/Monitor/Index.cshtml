@@ -15,6 +15,11 @@
                                     <div class="col-md mt-2">
                                         <div class="card">
                                             <div class="card-body">   
+                                                        <div class="container d-flex justify-content-end">
+                                                                    <a class="btn btn-primary" asp-area="" asp-controller="Monitor" asp-action="PrintToPDF" asp-route-id="@item.Id">
+                                                                <i class="bi bi-printer"></i>
+                                                             </a>
+                                                    </div>
                                                 <h5 class="card-title mb-2">@item.Name</h5>
                                                 <p class="card-text">
                                                     <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "MonitorLocationName" })</strong> <br />
@@ -32,9 +37,6 @@
                                                     <strong>@await Component.InvokeAsync("PageContentViewComponent", new { type = "MonitorInventoryNumberName" })</strong> <br />
                             @item.InventoryNumber<br />
                                                 </p>
-                                                        <a class="navbar-brand btn btn-primary" asp-area="" asp-controller="Monitor" asp-action="PrintToPDF" asp-route-id="@item.Id">
-                            @await Component.InvokeAsync("PageContentViewComponent", new { type = "PrintToPDFButtonHeader" })
-                                                            </a>
                                             </div>
                                         </div>
                                     </div>

@@ -41,11 +41,6 @@ namespace DatabaseRestApi.Controllers
             {
                 var roles = await UserManager.GetRolesAsync(user);
 
-                if (!roles.Any())
-                {
-                    roles.Add("member");
-                }
-
                 usersWithRoles.Add(new UsersWithRolesVM
                 {
                     Email = user.Email,

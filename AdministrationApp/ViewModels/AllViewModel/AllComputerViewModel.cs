@@ -156,8 +156,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         public override List<string> GetComboBoxFilterList()
         {            
             return new List<string>
-            {
-                
+            {                
                 "Nazwa",
                 "Producent",
                 "Lokalizacja",

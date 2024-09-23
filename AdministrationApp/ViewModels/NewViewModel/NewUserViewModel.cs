@@ -3,18 +3,10 @@ using Data.Computers.CreateEditVMs;
 using Data.Computers.SelectVMs;
 using Data;
 using GalaSoft.MvvmLight.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Data.Helpers;
 using System.Windows;
-using System.Runtime.CompilerServices;
-using System.ComponentModel;
-using AdministrationApp.Views;
 
 namespace AdministrationApp.ViewModels.NewViewModel
 {
