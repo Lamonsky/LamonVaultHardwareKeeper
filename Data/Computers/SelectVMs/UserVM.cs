@@ -24,7 +24,7 @@ namespace Data.Computers.SelectVMs
         [JsonPropertyName("location")]
         public string? Location { get; set; }
         [JsonPropertyName("locationid")]
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
         [JsonPropertyName("isactive")]
         public bool? IsActive { get; set; }
         [JsonPropertyName("email")]

@@ -139,6 +139,7 @@ namespace AdministrationApp.ViewModels.AllViewModel
         public override async void Remove()
         {
             if (ChosenItem != null) await RequestHelper.SendRequestAsync(URLs.USER_ID.Replace("{id}", ChosenItem.Id.ToString()), HttpMethod.Delete, ChosenItem, GlobalData.AccessToken);
+            load();
         }
 
         public override void send()

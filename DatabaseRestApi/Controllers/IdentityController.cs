@@ -55,9 +55,10 @@ namespace DatabaseRestApi.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route(URLs.IDENTITY_ADD_USER_TO_ROLE)]
-        public async Task<IActionResult> AddUserToRole(string email, string roleName)
+        [Route(URLs.IDENTITY_ADD_USER_TO_MEMBER_ROLE)]
+        public async Task<IActionResult> AddUserToMemberRole(string email)
         {
+            string roleName = "member";
             IdentityUser? identityUser = await UserManager.FindByEmailAsync(email);
             if(!await RoleManager.RoleExistsAsync(roleName))
             {
@@ -99,7 +100,7 @@ namespace DatabaseRestApi.Controllers
                 throw new Exception($"Invalid user email: {email}");
             }
             return Ok();
-        }
+        }        
         [HttpGet]
         [Route(URLs.IDENTITY_CHECK_USER_ADMIN_ROLE)]
         public async Task<IActionResult> CheckUserAdminRole(string email)

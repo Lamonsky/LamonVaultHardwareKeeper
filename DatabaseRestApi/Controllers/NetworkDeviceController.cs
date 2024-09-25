@@ -188,7 +188,7 @@ namespace DatabaseRestApi.Controllers
             {
                 return BadRequest("Nie ma komputera o podanym id {id}");
             }
-
+            networkdevice.StatusId = 99;
             networkdevice.ModifiedAt = DateTime.Now;
             await database.SaveChangesAsync();
             return Ok();

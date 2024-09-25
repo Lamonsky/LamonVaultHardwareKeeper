@@ -56,7 +56,7 @@ namespace AdministrationApp.ViewModels.AllViewModel.Windows
         }
         public override void send()
         {
-            Messenger.Default.Send(ChosenItem);
+            if(ChosenItem != null) Messenger.Default.Send(ChosenItem);
             _window.Close();
         }
     }

@@ -70,7 +70,7 @@ namespace AdministrationApp.ViewModels.EditViewModel
             item.ModifiedAt = DateTime.Now;
             item.ModifiedBy = GlobalData.UserId;
             EditSaveLogs(oldItem, item);
-            await RequestHelper.SendRequestAsync(URLs.SIMCARD_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Post, item, GlobalData.AccessToken);
+            await RequestHelper.SendRequestAsync(URLs.SIMCARD_ID.Replace("{id}", item.Id.ToString()), HttpMethod.Put, item, GlobalData.AccessToken);
             Messenger.Default.Send("SimCardRefresh");
         }
         #endregion

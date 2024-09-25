@@ -119,8 +119,7 @@ namespace AdministrationApp.ViewModels
                     GlobalData.AccessToken = user.AccessToken;
                     GlobalData.RefreshToken = user.RefreshToken;
                     GlobalData.Email = item.Email;
-                    List<UserVM> userVMs = await RequestHelper.SendRequestAsync<object, List<UserVM>>(URLs.USER, HttpMethod.Get, null, GlobalData.AccessToken);
-                    UserVM loggeduser = userVMs.Where(item => item.Email == GlobalData.Email).First();
+                    UserVM loggeduser = await RequestHelper.SendRequestAsync<object, UserVM>(URLs.USER_EMAIL_ID.Replace("{id}", GlobalData.Email), HttpMethod.Get, null, GlobalData.AccessToken);
                     GlobalData.UserId = loggeduser.Id;                    
                     MainWindow window = new MainWindow();
                     var viewModel = new MainWindowViewModel();

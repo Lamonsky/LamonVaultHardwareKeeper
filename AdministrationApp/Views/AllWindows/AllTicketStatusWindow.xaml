@@ -16,6 +16,7 @@
             <DataGridTextColumn Header="Opis" Binding="{Binding Path=Comment}"/>
             <DataGridTextColumn Header="Status" Binding="{Binding Path=Status}"/>
             <DataGridTextColumn Header="Zaliczać do zamkniętych" Binding="{Binding Path=CountToClosed}"/>
+            <DataGridTextColumn Header="Zaliczać do nowych" Binding="{Binding Path=CountToNew}"/>
             <DataGridTextColumn Header="Utworzone przez" Binding="{Binding CreatedBy}"/>
             <DataGridTextColumn Header="Data utworzenia" Binding="{Binding CreatedAt}"/>
             <DataGridTextColumn Header="Zmodyfikowane przez" Binding="{Binding ModifiedBy}"/>

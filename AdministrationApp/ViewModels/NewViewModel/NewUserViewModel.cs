@@ -75,6 +75,7 @@ namespace AdministrationApp.ViewModels.NewViewModel
             try
             {
                 await RequestHelper.SendRequestAsync(URLs.REGISTER, HttpMethod.Post, user, GlobalData.AccessToken);
+                await RequestHelper.SendRequestAsync<object>(URLs.IDENTITY_ADD_USER_TO_MEMBER_ROLE.Replace("{email}", user.Email), HttpMethod.Get, null, GlobalData.AccessToken);
                 await RequestHelper.SendRequestAsync(URLs.USER, HttpMethod.Post, item, GlobalData.AccessToken);
             }
             catch (Exception ex)
